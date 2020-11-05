@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gallery">
+	<!-- <select id="galleryList" resultType="map">
+		SELECT * FROM GALLERY ORDER BY galleryDate DESC
+	</select> -->
+	<select id="galleryList" resultType="gallery">
+		SELECT * FROM GALLERY ORDER BY galleryNo DESC
+	</select>
+	
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*) FROM GALLERY
+	</select>
+	
+	
+	<select id="mygalleryList" resultType="gallery">
+		SELECT * FROM GALLERY ORDER BY galleryNo DESC
+	</select>
+	
+	
+	<select id="selectGallery" parameterType="_int" resultType="gallery">
+		SELECT * FROM GALLERY WHERE GALLERYNO=#{no}
+	</select>
+	
+	
+	<delete id="galleryDelete">
+		DELETE GALLERY WHERE galleryNo=#{no}
+	</delete>
+	
+	
+	<resultMap id="galleryRecommend" type="gallery">
+		<result column="recommend" property="recommend" typeHandler="strArr"/>
+	</resultMap>
+	
+	<insert id="insertGallery" parameterType="gallery">
+		INSERT INTO GALLERY 
+			VALUES(SEQ_GALLERYNO.NEXTVAL,#{galleryTitle},
+				#{galleryWriter},#{galleryContent},default,
+				#{openStatus, typeHandler=strArr})
+	</insert>
+	
+	<insert id="insertGalleryFile" parameterType="galleryFile">
+		INSET INTO GALLERYFILE
+			VALUES(#{gfGalleryRef},
+			#{gfOriginalFileName},#{gfRenameFileName})
+		<selectKey keyProperty="gfGalleryRef" resultType="_int" order="BEFORE">
+			SELECT SEQ_galleryNo.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+</mapper>
