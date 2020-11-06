@@ -218,7 +218,7 @@
 					<li class="nav-item"><a href="" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="chef.html" class="nav-link">Location</a></li>
 					<li class="nav-item"><a href="menu.html" class="nav-link">Notice</a></li>
-					<li class="nav-item"><a href="reservation.html" class="nav-link">Gallery</a></li>
+					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link">Gallery</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Anniversary</a></li>
 					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a></li>
 				</ul>
