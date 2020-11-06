@@ -95,6 +95,7 @@
 	font-size:82px;
 	font-family:Dancing Script;
 	color:black;
+	transition:1s;
 	}
 	#login-close{
 		position:absolute;
@@ -174,13 +175,6 @@
 		transition:all ease 1s;
 		font-size:20px;
 	}
-	.enroll-btn{
-		width:70px;
-		height:50px;
-		margin:0;
-		margin-left:auto;
-		margin-right:auto;
-	}
 </style>
 
 <body>
@@ -220,7 +214,7 @@
 					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link">Notice</a></li>
 					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link">Gallery</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Anniversary</a></li>
-					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a></li>
+					<li class="nav-item"><a href="#" id="clickLogin" class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a></li>
 				</ul>
 			</div>
 		</div>
@@ -282,40 +276,73 @@
 	</div>
 
 	<div class="modal" id="enrollModal">
-		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-body" style="text-align:center;">
 					<br/>
 					<form action="{path}/member/memberEnroll.do" method="post">
-							<label class="login-title">Couplism Join</label>
+							<label id="sign-title" class="login-title">ID & Password</label>
 					
+							<img id="enroll-before" src="${path }/resources/images/move-left.png">
 						<div id="first-enroll">
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input"/ id="enroll-id" name="id"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-lock"></i></label>&nbsp;&nbsp;&nbsp; <input type="password" class="enroll-input" id="enroll-pw" name="password"/>
+							<label style="text-align:right; font-size:30px;"><i class="fas fa-user"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ id="enroll-id" name="id"></br>
+							<label style="text-align:right; font-size:30px;"><i class="fas fa-lock"></i></label>&nbsp;&nbsp;&nbsp; <input type="password" autocomplete="off" class="enroll-input" id="enroll-pw" name="password"/>
+							<!-- <i id="enroll-next" class="fas fa-arrow-circle-right"></i> -->
 						</br></br></br>
 						</div>
-						<div id="second-enroll">							
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user-circle"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input"/ name="nickname"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-heartbeat"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input" name="couple"/>
+						<div id="second-enroll">
+							
+							<label style="text-align:right; font-size:30px;"><i class="fas fa-user-circle"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="nickname"></br>
+							<label style="text-align:right; font-size:30px;"><i class="fas fa-heartbeat"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="couple"/>
+							
 						</br></br></br>
 						</div>
 						<div id="third-enroll">
-							<label id="icon-email" style="text-align:right; font-size:30px;"><i class="fas fa-envelope"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input"/ name="email">&nbsp;&nbsp;&nbsp;<br/>
-							<label id="icon-phone" style="text-align:right; font-size:30px;"><i class="fas fa-phone-square-alt"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input" name="phone"/><br/>
-							<label id="email-check" style="text-align:right; font-size:30px;"><i class="fas fa-envelope-open-text"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" class="enroll-input" id="email-check"/>
+							
+							<label id="icon-email" style="text-align:right; font-size:30px;"><i class="fas fa-envelope"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="email">&nbsp;&nbsp;&nbsp;<br/>
+							<label id="icon-phone" style="text-align:right; font-size:30px;"><i class="fas fa-phone-square-alt"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="phone"/><br/>
+							<!-- <label id="email-check" style="text-align:right; font-size:30px;"><i class="fas fa-envelope-open-text"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" id="email-check"/> -->
+							
 						</div>
+							<img id="enroll-next" src="${path }/resources/images/move-right.png">
 					
 					</form>
 				</div>
 				<div class="modal-footer" style="text-align:center;">
 					<button style="font-size:13px;" class="btn btn-outline-secondary enroll-btn" onclick="backLogin();" data-toggle="modal" data-target="#loginModal">Back</button>
-					<button style="font-size:13px;" id="enroll-before" type="button" class="btn btn-outline-primary enroll-btn">이전</button>
-					<button style="font-size:13px;" id="enroll-next" type="button" class="btn btn-outline-primary enroll-btn">다음</button>
 				</div>
 			</div>
 		</div>
 	</div>
 <style>
+	#enroll-before{
+		font-weight:bold;
+		font-size:46px;
+		position:absolute;
+		color:black;
+		top:45%;
+		left:0px;
+		margin:0;
+		padding:0;
+		cursor:pointer;
+		border:1px red solid;
+		width:50px;
+		height:80px;
+	}
+	#enroll-next{
+		font-weight:bold;
+		font-size:46px;
+		position:absolute;
+		color:black;
+		top:45%;
+		right:30px;
+		margin:0;
+		padding:0;
+		cursor:pointer;
+		border:1px blue solid;
+		width:50px;
+		height:80px;
+	}
 	#icon-phone{
 		margin-left:10px;
 	}
@@ -328,23 +355,25 @@
 	#first-enroll{
 		margin:0 auto;
 		padding:0;
-		width:100%;
+		width:500px;
 		height:auto;
 		transition:1s;
+		border:1px blue solid;
+		
 	}
 	#second-enroll{
 		top:222px;
-		left:470px;
+		left:1000px;
 		position:absolute;
 		margin:0 auto;
 		padding: 0;
-		width:100%;
+		width:500px;
 		height:auto;
 		transition:1s;
 	}
 	#third-enroll{
 		top:222px;
-		left:470px;
+		left:1000px;
 		position:absolute;
 		margin:0 auto;
 		padding: 0;
@@ -359,12 +388,16 @@
 	let secondLeft="left";
 	let secondRight="right";
 	let now=0;
+	$("#clickLogin").click(function(){
+		$(".modal-body").css("height","650px");
+	});
 	$("#enroll-next").click(function(){
 		if(now==0){//첫번쨰에서 두번쨰로 갈때
 			$("#first-enroll").css("opacity","0");
 			$("#second-enroll").css("opacity","1");
 			$("#second-enroll").css("top","221px");
 			$("#second-enroll").css("left","0px");
+			$("#sign-title").text("Nickname & Couple's ID");
 			now=1;
 			return;
 		}
@@ -372,11 +405,12 @@
 			//두번쨰
 			$("#second-enroll").css("opacity","0");
 			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","-470px");
+			$("#second-enroll").css("left","-1000px");
 			//세번쨰
 			$("#third-enroll").css("opacity","1");
 			$("#third-enroll").css("top","221px");
 			$("#third-enroll").css("left","0px");
+			$("#sign-title").text("Email & Phone");
 			now=2;
 			return;
 		}
@@ -385,20 +419,22 @@
 		if(now==1){//두번쨰에서 첫번쨰로 이동할때
 			$("#second-enroll").css("opacity","0");
 			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","470px");
+			$("#second-enroll").css("left","1000px");
 			$("#first-enroll").css("opacity","1");
 			$("#first-enroll").css("top","221px");
 			$("#first-enroll").css("left","0px");
+			$("#sign-title").text("ID & Password");
 			now=0;
 			return;
 		}
 		if(now==2){//세번쨰에서 두번째로 이동할때
 			$("#third-enroll").css("opacity","0");
 			$("#third-enroll").css("top","221px");
-			$("#third-enroll").css("left","470px");
+			$("#third-enroll").css("left","1000px");
 			$("#second-enroll").css("opacity","1");
 			$("#second-enroll").css("top","221px");
 			$("#second-enroll").css("left","0px");
+			$("#sign-title").text("Nickname & Couple's ID");
 			now=1;
 			return;
 		}
