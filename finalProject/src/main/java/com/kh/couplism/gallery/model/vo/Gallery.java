@@ -12,4 +12,6 @@ public class Gallery {
 	private String galleryContent;
 	private Date galleryDate;
 	private String[] openStatus;
+	
+	
 }

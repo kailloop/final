@@ -3,7 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kh.couplism.gallery.model.vo.Gallery" alias="gallery"/>
-		<typeAlias type="com.kh.couplism.gallery.model.vo.GalleryFile" alias="galleryFile"/>
 		<typeAlias type="com.kh.couplism.common.StringArrayTypeHandler" alias="strArr"/>
 	</typeAliases>
 </configuration>

@@ -54,7 +54,7 @@
 </style>
 
 <div id="logo">
-	<img src="${path }/resources/images/gallery3.jpg" alt="로고1">
+	<img src="${path }/resources/images/gallery/gallery3.jpg" alt="로고1">
 	<label id="labelOne">Gallery</label>
 	<label id="labelTwo"> <a href="${path }/gallery/mygalleryList.do" style="color:#A6A6A6;">> My Gallery</a>  </label>
 	
@@ -66,20 +66,15 @@
       		<c:forEach items="${list }" var="g">	
     			<div class="col-md-4 ftco-animate">
       			<div class="blog-entry" >
-        			<a href="${path}/gallery/galleryView.do?no=${g.galleryNo}" class="block-20" style="background-image: url('<c:out value="${g.galleryRenamedfilepath }"/>');"> <!-- 리네임이미지 --></a>
+        			<a href="${path}/gallery/galleryView.do?no=${g.galleryNo}" class="block-20" style="background-image: url('');"> <!-- 리네임이미지 --></a>
         		<div class="text px-4 pt-3 pb-4">
 	          		<div class="meta">
-	            	<%-- <div><a href="#"><c:out value="${g.galleryDate }"/></a></div> --%>
 	            		<div><c:out value="${g.galleryDate}"/></div>
 	          		</div>
-          <%--  <h3 class="heading"><a href="#"><c:out value="${g.galleryTitle }"/></a></h3>  --%>
-          		<%-- <h3 class="heading" style="display: inline;" ><c:out value="${g.galleryTitle }"/></h3>
-          		<h5 class="heading" style="display: inline; float: right;" ><c:out value="${g.galleryWriter }"/></h5> --%>
           		<h3 class="heading"><c:out value="${g.galleryTitle }"/></h3>
           		<h5 class="heading"><c:out value="${g.galleryWriter }"/></h5>
           <p class="clearfix" >
-            <!-- <a href="#" class="float-left read btn btn-primary">Read more</a> -->
-            <a href="#" class="float-right meta-chat"><i class="fas fa-heart"></i> <c:out value="${g.galleryRecommend }"/></a>
+            <a href="#" class="float-right meta-chat"><i class="fas fa-heart"></i> <c:out value=""/></a>
           </p> 
         		</div>
       			</div>
