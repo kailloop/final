@@ -20,7 +20,7 @@ public class GalleryController {
 	@RequestMapping("/gallery/galleryList.do")
 	public ModelAndView galleryList(ModelAndView mv,
 			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,
-			@RequestParam(value="numPerPage",required=false,defaultValue="6")int numPerPage){
+			@RequestParam(value="numPerPage",required=false,defaultValue="12")int numPerPage){
 		
 		List<Gallery> list=service.galleryList(cPage, numPerPage);
 		int totalData=service.selectCount();
