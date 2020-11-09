@@ -186,14 +186,6 @@
 				</div>
 				<div class="col-12 col-md d-flex justify-content-md-end">
 					<p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
-					<div class="social-media">
-						<p class="mb-0 d-flex">
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook" aria-hidden="true"><i class="sr-only">Facebook</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter" aria-hidden="true"><i class="sr-only">Twitter</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram" aria-hidden="true"><i class="sr-only">Instagram</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble" aria-hidden="true"><i class="sr-only">Dribbble</i></span></a>
-						</p>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -202,10 +194,6 @@
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.html">Coupli<span>sm</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
@@ -227,227 +215,58 @@
 			<div class="modal-content">
 		        <div class="modal-body">
 		          <!-- Default form login -->
-	<form class="text-center p-5" action="#!">
-	
-		<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
-	
-    <label class="login-title">Couplism</label>
-    
-    <br><br>
-    <!-- ID -->
-    <!-- Material input -->
-	<!-- Medium input -->
-	<div class="md-form">
-	  <label id="id-placeholder" for="id-input">Please Enter your ID</label>
-	  <input id="id-input" type="text" class="">
-	</div>
-	<br>
-    <!-- Password -->
-    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
-    <input id="pw-input" type="password" class="mb-6">
-    <br>
-    <div class="d-flex justify-content-around">
-        <div>
-            <!-- Forgot password -->
-            <a href="">Forgot id?</a>&nbsp;&nbsp;&nbsp;
-            <a href="">Forgot password?</a>
-        </div>
-        
-    </div>
-
-    <!-- Sign in button -->
-    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
-
-    <!-- Register -->
-    <p>회원이 아니십니까?
-        <a href="#" id="enrollMember" data-toggle="modal" data-target="#enrollModal">회원가입</a>
-    </p>
-
-    <!-- Social login -->
-    <a href="#" class="mx-2" role="button"><button>1</button></a>
-    <a href="#" class="mx-2" role="button"><button>2</button></a>
-    <a href="#" class="mx-2" role="button"><button>3</button></a>
-    <a href="#" class="mx-2" role="button"><button>4</button></a>
-
-</form>
+						<form class="text-center p-5" action="#!">
+						
+							<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
+						
+					    <label class="login-title">Couplism</label>
+					    
+					    <br><br>
+					    <!-- ID -->
+					    <!-- Material input -->
+						<!-- Medium input -->
+						<div class="md-form">
+						  <label id="id-placeholder" for="id-input">Please Enter your ID</label>
+						  <input id="id-input" type="text" class="">
+						</div>
+						<br>
+					    <!-- Password -->
+					    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
+					    <input id="pw-input" type="password" class="mb-6">
+					    <br>
+					    <div class="d-flex justify-content-around">
+					        <div>
+					            <!-- Forgot password -->
+					            <a href="">Forgot id?</a>&nbsp;&nbsp;&nbsp;
+					            <a href="">Forgot password?</a>
+					        </div>
+					        
+					    </div>
+					
+					    <!-- Sign in button -->
+					    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
+					
+					    <!-- Register -->
+					    <p>회원이 아니십니까?
+					        <a href="#" id="enrollMember" data-toggle="modal" data-target="#enrollModal">회원가입</a>
+					    </p>
+					
+					    <!-- Social login -->
+					    <a href="#" class="mx-2" role="button"><button>1</button></a>
+					    <a href="#" class="mx-2" role="button"><button>2</button></a>
+					    <a href="#" class="mx-2" role="button"><button>3</button></a>
+					    <a href="#" class="mx-2" role="button"><button>4</button></a>
+					
+					</form>
 		        </div>        
 			</div>
 		</div>
 	</div>
 
-	<div class="modal" id="enrollModal">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
-			<div class="modal-content">
-				<div class="modal-body" style="text-align:center;">
-					<br/>
-					<form action="{path}/member/memberEnroll.do" method="post">
-							<label id="sign-title" class="login-title">ID & Password</label>
-					
-							<img id="enroll-before" src="${path }/resources/images/move-left.png">
-						<div id="first-enroll">
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ id="enroll-id" name="id"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-lock"></i></label>&nbsp;&nbsp;&nbsp; <input type="password" autocomplete="off" class="enroll-input" id="enroll-pw" name="password"/>
-							<!-- <i id="enroll-next" class="fas fa-arrow-circle-right"></i> -->
-						</br></br></br>
-						</div>
-						<div id="second-enroll">
-							
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user-circle"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="nickname"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-heartbeat"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="couple"/>
-							
-						</br></br></br>
-						</div>
-						<div id="third-enroll">
-							
-							<label id="icon-email" style="text-align:right; font-size:30px;"><i class="fas fa-envelope"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="email">&nbsp;&nbsp;&nbsp;<br/>
-							<label id="icon-phone" style="text-align:right; font-size:30px;"><i class="fas fa-phone-square-alt"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="phone"/><br/>
-							<!-- <label id="email-check" style="text-align:right; font-size:30px;"><i class="fas fa-envelope-open-text"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" id="email-check"/> -->
-							
-						</div>
-							<img id="enroll-next" src="${path }/resources/images/move-right.png">
-					
-					</form>
-				</div>
-				<div class="modal-footer" style="text-align:center;">
-					<button style="font-size:13px;" class="btn btn-outline-secondary enroll-btn" onclick="backLogin();" data-toggle="modal" data-target="#loginModal">Back</button>
-				</div>
-			</div>
-		</div>
-	</div>
-<style>
-	#enroll-before{
-		font-weight:bold;
-		font-size:46px;
-		position:absolute;
-		color:black;
-		top:45%;
-		left:0px;
-		margin:0;
-		padding:0;
-		cursor:pointer;
-		border:1px red solid;
-		width:50px;
-		height:80px;
-	}
-	#enroll-next{
-		font-weight:bold;
-		font-size:46px;
-		position:absolute;
-		color:black;
-		top:45%;
-		right:30px;
-		margin:0;
-		padding:0;
-		cursor:pointer;
-		border:1px blue solid;
-		width:50px;
-		height:80px;
-	}
-	#icon-phone{
-		margin-left:10px;
-	}
-	#icon-email{
-		margin-left:20px;
-	}
-	#email-check{
-		margin-left:2px;
-	}
-	#first-enroll{
-		margin:0 auto;
-		padding:0;
-		width:500px;
-		height:auto;
-		transition:1s;
-		border:1px blue solid;
-		
-	}
-	#second-enroll{
-		top:222px;
-		left:1000px;
-		position:absolute;
-		margin:0 auto;
-		padding: 0;
-		width:500px;
-		height:auto;
-		transition:1s;
-	}
-	#third-enroll{
-		top:222px;
-		left:1000px;
-		position:absolute;
-		margin:0 auto;
-		padding: 0;
-		width:100%;
-		height:auto;
-		transition:1s;
-	}
-</style>
+	
 
 
 <script>
-	let secondLeft="left";
-	let secondRight="right";
-	let now=0;
-	$("#clickLogin").click(function(){
-		$(".modal-body").css("height","650px");
-	});
-	$("#enroll-next").click(function(){
-		if(now==0){//첫번쨰에서 두번쨰로 갈때
-			$("#first-enroll").css("opacity","0");
-			$("#second-enroll").css("opacity","1");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","0px");
-			$("#sign-title").text("Nickname & Couple's ID");
-			now=1;
-			return;
-		}
-		if(now==1){//두번쨰에서 세번쨰로 갈때
-			//두번쨰
-			$("#second-enroll").css("opacity","0");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","-1000px");
-			//세번쨰
-			$("#third-enroll").css("opacity","1");
-			$("#third-enroll").css("top","221px");
-			$("#third-enroll").css("left","0px");
-			$("#sign-title").text("Email & Phone");
-			now=2;
-			return;
-		}
-	});
-	$("#enroll-before").click(function(){
-		if(now==1){//두번쨰에서 첫번쨰로 이동할때
-			$("#second-enroll").css("opacity","0");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","1000px");
-			$("#first-enroll").css("opacity","1");
-			$("#first-enroll").css("top","221px");
-			$("#first-enroll").css("left","0px");
-			$("#sign-title").text("ID & Password");
-			now=0;
-			return;
-		}
-		if(now==2){//세번쨰에서 두번째로 이동할때
-			$("#third-enroll").css("opacity","0");
-			$("#third-enroll").css("top","221px");
-			$("#third-enroll").css("left","1000px");
-			$("#second-enroll").css("opacity","1");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","0px");
-			$("#sign-title").text("Nickname & Couple's ID");
-			now=1;
-			return;
-		}
-	});
-	function backLogin(){
-		$("#enrollModal").modal("hide");
-		$(".modal-body").css("height","650px");
-	};
-	$("#enrollMember").click(function(){
-		$("#loginModal").modal("hide");
-		$(".modal-body").css("height","450px");
-	});
-	
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
 	});
@@ -481,12 +300,6 @@
 		$("#pw-placeholder").css("top","354px");
 		$("#pw-placeholder").css("font-size","20px");
 		}
-	});
-	$(".enroll-input").focus(function(e){
-		$(e.target).css("border-bottom","1px #66ff33 solid");
-	});
-	$(".enroll-input").blur(function(e){
-		$(e.target).css("border-bottom","1px black solid");
 	});
 	
 </script>
