@@ -5,19 +5,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <style>
 	#logo{
-		height:900px;
+		height:1000px;
 		width:100%;
-		
 	    position: relative;
 	    z-index: 0;
 	    overflow: hidden;
 	}
 	#logo img{
-		filter: grayscale(65%);
 		background-size: cover;
 	    background-repeat: no-repeat;
 	    background-position: center center;
@@ -25,21 +23,63 @@
 		height:100%;
 		z-index:-1;
 	}
-	#logo label{
-		position:absolute;
-		left:27%;
-		top:35%;
-		font-size:120px;
+	.main-label-eng{
+		position:relative;
+		font-size:75px;
 		z-index:0;
 		cursor:pointer;
-		font-family:Dancing Script;
-		color:black;
+		font-family: 'Montserrat', sans-serif;
+		color:#F6F6F6;
+		top:-620px;
+		font-weight:lighter;
+		transition:1s;
+		opacity:0;
+	}
+	.main-label-han{
+		position:relative;
+		font-size:26px;
+		z-index:0;
+		cursor:pointer;
+		font-family:Nanum Gothic Coding;
+		color:#F6F6F6;
+		top:-570px;
+		transition:1s;
+		opacity:0;
+	}
+	#border-bottom{
+		font-size:20px;
+		border-bottom:3px white solid;
+		position:relative;
+		z-index:0;
+		cursor:pointer;
+		font-family:Nanum Gothic Coding;
+		color:#F6F6F6;
+		top:-670px;
+		transition:1s;
+		opacity:0;
 	}
 	
+	
 </style>
-	<div id="logo">
-		<img src="${path }/resources/images/logo3.jpg" alt="로고1">
-		<label>Couplism Main Event</label> 
+<script>
+	$(function(){
+		$(".main-label-eng").css("top","-650px");
+		$(".main-label-han").css("top","-600px");
+		$("#border-bottom").css("top","-700px");
+		$(".main-label-eng").css("opacity","1");
+		$(".main-label-han").css("opacity","1");
+		$("#border-bottom").css("opacity","1");
+	});
+</script>
+	<div id="logo" style="text-align:center;">
+		<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
+		<label class="main-label-han">실시간으로 짜는 다양한 데이트</label><br/>
+		<label class="main-label-eng">Make your lism</label><br/>
+		<label id="border-bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	</div>
 	
 	

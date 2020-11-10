@@ -7,20 +7,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
+	<title>연인과 함께 만들어가는 커플리즘</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- 폰트어썸 -->
 	<script src="https://kit.fontawesome.com/d41f04266a.js" crossorigin="anonymous"></script>
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
 	<!-- Material 폰트 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -172,6 +171,9 @@
 		top:-10px;
 		cursor:pointer;
 	}
+	.nav-color{
+		color:black;
+	}
 </style>
 
 <body>
@@ -194,17 +196,20 @@
 	</div>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Coupli<span>sm</span></a>
+		<div class="container" style="background:white;">
+			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class="oi oi-menu"></span> Menu
+         	</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-link">Location</a></li>
-					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-link">lism</a></li>
-					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link">Gallery</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Anniversary</a></li>
-					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link">Notice</a></li>
+					<li class="nav-item active"><a href="/couplism/" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="" class="nav-color nav-link">About</a></li>
+					<li class="nav-item"><a href="chef.html" class="nav-color nav-link">Location</a></li>
+					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-color nav-link">lism</a></li>
+					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link nav-color">Gallery</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
+					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
 				</ul>
 			</div>
 		</div>
@@ -250,7 +255,7 @@
 					
 					    <!-- Register -->
 					    <p>회원이 아니십니까?
-					        <a href="#" id="enrollMember">회원가입</a>
+					        <a href="${path }/enrollMember.do" id="enrollMember">회원가입</a>
 					    </p>
 					
 					    <!-- Social login -->
