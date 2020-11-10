@@ -8,9 +8,6 @@
 	<jsp:param name="title" value="갤러리" />
 </jsp:include>
 
-<link rel="stylesheet" href="${path }/resources/css/animate.css">  
-<link rel="stylesheet" href="${path }/resources/css/style.css">
-
 <link rel="stylesheet" href="${path }/resources/css/main.css" />
 
 <style>
@@ -62,7 +59,7 @@
 	
 </div>
 
-<section class="container" id="main">
+<section class="container" id="main" style="margin-top: 90px;">
 	<section class="thumbnails">
 		<c:forEach items="${list }" var="g">
 			<div>
@@ -84,11 +81,8 @@
 </section>
 
 
-
 <script src="${path }/resources/js/jquery.min.js"></script>
-<script src="${path }/resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="${path }/resources/js/jquery.waypoints.min.js"></script>
-<script src="${path }/resources/js/jquery.stellar.min.js"></script>
-<script src="${path }/resources/js/owl.carousel.min.js"></script>
-<script src="${path }/resources/js/scrollax.min.js"></script>
-<script src="${path }/resources/js/main.js"></script>	
+<script src="${path }/resources/js/jquery.poptrox.min.js"></script>
+<script src="${path }/resources/js/skel.min.js"></script>
+<script src="${path }/resources/js/main.js"></script>
+

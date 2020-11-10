@@ -1408,12 +1408,12 @@
 
 	}
 
-	body {
+	/* body {
 		background-color: #000;
 		background-image: url("../../images/bg.jpg");
 		background-size: cover;
 		background-position: top center;
-	}
+	} */
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
 			-moz-animation: none !important;
@@ -1428,7 +1428,7 @@
 
 /* Type */
 
-	body, input, select, textarea {
+	/* body, input, select, textarea {
 		color: rgba(255, 255, 255, 0.65);
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 13pt;
@@ -1603,7 +1603,7 @@
 
 	.align-right {
 		text-align: right;
-	}
+	} */
 
 /* Section/Article */
 
@@ -1695,7 +1695,7 @@
 		position: relative;
 	}
 
-		.select-wrapper:before {
+		/* .select-wrapper:before {
 			content: "";
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
@@ -1703,7 +1703,7 @@
 			font-style: normal;
 			font-weight: normal;
 			text-transform: none !important;
-		}
+		} */
 
 		.select-wrapper:before {
 			color: rgba(255, 255, 255, 0.25);
@@ -1760,7 +1760,7 @@
 			position: relative;
 		}
 
-			input[type="checkbox"] + label:before,
+			/* input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
@@ -1768,7 +1768,7 @@
 				font-style: normal;
 				font-weight: normal;
 				text-transform: none !important;
-			}
+			} */
 
 			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
@@ -1862,14 +1862,14 @@
 		position: relative;
 	}
 
-		.icon:before {
+		/* .icon:before {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
 			font-family: FontAwesome;
 			font-style: normal;
 			font-weight: normal;
 			text-transform: none !important;
-		}
+		} */
 
 		.icon > .label {
 			display: none;
@@ -2520,7 +2520,7 @@
 			display: block;
 		}
 
-			.poptrox-popup .closer:before {
+			/* .poptrox-popup .closer:before {
 				content: "";
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
@@ -2528,7 +2528,7 @@
 				font-style: normal;
 				font-weight: normal;
 				text-transform: none !important;
-			}
+			} */
 
 			.poptrox-popup .closer:before {
 				display: block;
@@ -2582,7 +2582,7 @@
 
 /* Header */
 
-	#header {
+	/* #header {
 		text-align: center;
 		padding: 6em 0 4em 0;
 	}
@@ -2612,10 +2612,10 @@
 				padding: 4em 0 2em 0;
 			}
 
-		}
+		} */
 
 /* Footer */
-
+/* 
 	#footer {
 		text-align: center;
 		padding: 4em 0 4em 0;
@@ -2635,4 +2635,4 @@
 				padding: 2em 0 2em 0;
 			}
 
-		}
+		} */

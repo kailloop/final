@@ -33,4 +33,9 @@ public class GalleryController {
 		return mv;
 	}
 	
+
+	@RequestMapping("/gallery/galleryWrite.do")
+	public String galleryWrite() {
+		return "/gallery/galleryWrite";
+	}
 }
