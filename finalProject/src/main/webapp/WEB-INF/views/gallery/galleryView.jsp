@@ -41,8 +41,8 @@
 
 
 <div id="logo">
-	<img src="${path }/resources/images/gallery6.jpg" alt="로고1">
-	<!-- <label>Gallery Write</label>  -->
+	<img src="${path }/resources/images/gallery/gallery6.jpg" alt="로고1">
+	
 </div>
 
 <style>
