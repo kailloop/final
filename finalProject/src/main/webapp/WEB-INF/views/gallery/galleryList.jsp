@@ -7,9 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="갤러리" />
 </jsp:include>
-
-<link rel="stylesheet" href="${path }/resources/css/main.css" />
-
+<%-- <link rel="stylesheet" href="${path }/resources/css/main.css" /> --%>
 <style>
 	#logo{
 		height:600px;
@@ -64,8 +62,8 @@
 		<c:forEach items="${list }" var="g">
 			<div>
 				<a href="">
-				<img src="${path }/resources/images/gallery/gallery3.jpg" alt="" />
-				<h3><c:out value="${g.galleryTitle }"/></h3>
+					<img src="${path }/resources/images/gallery/gallery3.jpg" alt="" />
+					<h3><c:out value="${g.galleryTitle }"/></h3>
 				</a>
 			</div>
 		</c:forEach>			
@@ -81,8 +79,5 @@
 </section>
 
 
-<script src="${path }/resources/js/jquery.min.js"></script>
-<script src="${path }/resources/js/jquery.poptrox.min.js"></script>
-<script src="${path }/resources/js/skel.min.js"></script>
-<script src="${path }/resources/js/main.js"></script>
+
 

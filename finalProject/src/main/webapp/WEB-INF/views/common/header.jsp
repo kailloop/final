@@ -7,20 +7,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
+	<title>연인과 함께 만들어가는 커플리즘</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- 폰트어썸 -->
 	<script src="https://kit.fontawesome.com/d41f04266a.js" crossorigin="anonymous"></script>
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
 	<!-- Material 폰트 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -32,50 +31,6 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
-<style>
-	#login-title{
-	text-align:center;
-	font-size:64px;
-	font-family:Dancing Script;
-	color:black;
-	}
-	#login-close{
-		position:absolute;
-		margin:0;
-		padding:0;
-		top:30px;
-		right:40px;
-		cursor:pointer;
-		width:auto;
-		height:auto;
-		font-size:38px;
-		transition: all ease 1s;
-	}
-	#login-close:hover{
-		transform:rotate(360deg);
-	}
-	#id-placeholder{
-		position:absolute;
-		cursor:text;
-		color:gray;
-		font-size:20px;
-		margin:0;
-		padding:0;
-		z-index:0;
-		transition:all ease 0.5s;
-		left:70px;
-		top:240px;
-		
-	}
-	#id-input{
-		z-index:1;
-		transition:all ease 0.5s;
-		border:none;
-		border-bottom:1px black solid;
-	}
-	
-
-</style>
 </head>
 <style>
 	.modal-content{
@@ -175,6 +130,50 @@
 		transition:all ease 1s;
 		font-size:20px;
 	}
+	#clickLogin{
+		position:relative;
+		margin:0;
+		padding:0;
+		font-size:20px;
+		cursor:pointer;
+		width:25px;
+		height:25px;
+		top:-10px;
+		color:#F0F0F0;
+		left:3px;
+	}
+	#myPage{
+		position:relative;
+		font-size:20px;
+		cursor:pointer;
+		margin-right:15px;
+	}
+	#login{
+		position:relative;
+		width:90px;
+		height:22px;
+		top:10px;
+		right:20px;
+		transition:1s;
+		cursor:pointer;
+		z-index:100;
+		overflow:hidden;
+		cursor:pointer;
+	}
+	#login-font{	
+		position:relative;
+		font-size:20px;
+		width:20px;
+		height:20px;
+		margin:0;
+		padding:0;
+		color:#F0F0F0;
+		top:-10px;
+		cursor:pointer;
+	}
+	.nav-color{
+		color:black;
+	}
 </style>
 
 <body>
@@ -182,28 +181,35 @@
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col-12 col-md d-flex align-items-center">
-					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">+00 1234 567</a> or <span class="mailus">email us:</span> <a href="#">emailsample@email.com</a></p>
+					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">010-8902-0975</a> or <span class="mailus">email us:</span> <a href="#">kailloop@daum.net</a></p>
 				</div>
-				<div class="col-12 col-md d-flex justify-content-md-end">
-					<p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
+				<div id="login" data-toggle="modal" data-target="#loginModal">
+					<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGIN</label>
 				</div>
+				
+				<div id="mypage" class="circle">
+					<p id="myPage" class="mb-0"><i class="fas fa-address-card" onclick="moveMyPage();"></i></p>
+				</div>
+				
 			</div>
 		</div>
 	</div>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Coupli<span>sm</span></a>
+		<div class="container" style="background:white;">
+			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class="oi oi-menu"></span> Menu
+         	</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-link">Location</a></li>
-					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-link">lism</a></li>
-					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link">Gallery</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Anniversary</a></li>
-					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link">Notice</a></li>
-					<li class="nav-item"><a href="#" id="clickLogin" class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a></li>
+					<li class="nav-item active"><a href="/couplism/" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="" class="nav-color nav-link">About</a></li>
+					<li class="nav-item"><a href="chef.html" class="nav-color nav-link">Location</a></li>
+					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-color nav-link">lism</a></li>
+					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link nav-color">Gallery</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
+					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
 				</ul>
 			</div>
 		</div>
@@ -249,7 +255,7 @@
 					
 					    <!-- Register -->
 					    <p>회원이 아니십니까?
-					        <a href="#" id="enrollMember" data-toggle="modal" data-target="#enrollModal">회원가입</a>
+					        <a href="${path }/enrollMember.do" id="enrollMember">회원가입</a>
 					    </p>
 					
 					    <!-- Social login -->
