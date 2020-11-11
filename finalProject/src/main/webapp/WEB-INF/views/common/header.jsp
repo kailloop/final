@@ -7,20 +7,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
+	<title>연인과 함께 만들어가는 커플리즘</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- 폰트어썸 -->
 	<script src="https://kit.fontawesome.com/d41f04266a.js" crossorigin="anonymous"></script>
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
 	<!-- Material 폰트 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -32,50 +31,6 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
-<style>
-	#login-title{
-	text-align:center;
-	font-size:64px;
-	font-family:Dancing Script;
-	color:black;
-	}
-	#login-close{
-		position:absolute;
-		margin:0;
-		padding:0;
-		top:30px;
-		right:40px;
-		cursor:pointer;
-		width:auto;
-		height:auto;
-		font-size:38px;
-		transition: all ease 1s;
-	}
-	#login-close:hover{
-		transform:rotate(360deg);
-	}
-	#id-placeholder{
-		position:absolute;
-		cursor:text;
-		color:gray;
-		font-size:20px;
-		margin:0;
-		padding:0;
-		z-index:0;
-		transition:all ease 0.5s;
-		left:70px;
-		top:240px;
-		
-	}
-	#id-input{
-		z-index:1;
-		transition:all ease 0.5s;
-		border:none;
-		border-bottom:1px black solid;
-	}
-	
-
-</style>
 </head>
 <style>
 	.modal-content{
@@ -175,6 +130,50 @@
 		transition:all ease 1s;
 		font-size:20px;
 	}
+	#clickLogin{
+		position:relative;
+		margin:0;
+		padding:0;
+		font-size:20px;
+		cursor:pointer;
+		width:25px;
+		height:25px;
+		top:-10px;
+		color:#F0F0F0;
+		left:3px;
+	}
+	#myPage{
+		position:relative;
+		font-size:20px;
+		cursor:pointer;
+		margin-right:15px;
+	}
+	#login{
+		position:relative;
+		width:90px;
+		height:22px;
+		top:10px;
+		right:20px;
+		transition:1s;
+		cursor:pointer;
+		z-index:100;
+		overflow:hidden;
+		cursor:pointer;
+	}
+	#login-font{	
+		position:relative;
+		font-size:20px;
+		width:20px;
+		height:20px;
+		margin:0;
+		padding:0;
+		color:#F0F0F0;
+		top:-10px;
+		cursor:pointer;
+	}
+	.nav-color{
+		color:black;
+	}
 </style>
 
 <body>
@@ -182,39 +181,35 @@
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col-12 col-md d-flex align-items-center">
-					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">+00 1234 567</a> or <span class="mailus">email us:</span> <a href="#">emailsample@email.com</a></p>
+					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">010-8902-0975</a> or <span class="mailus">email us:</span> <a href="#">kailloop@daum.net</a></p>
 				</div>
-				<div class="col-12 col-md d-flex justify-content-md-end">
-					<p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
-					<div class="social-media">
-						<p class="mb-0 d-flex">
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook" aria-hidden="true"><i class="sr-only">Facebook</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter" aria-hidden="true"><i class="sr-only">Twitter</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram" aria-hidden="true"><i class="sr-only">Instagram</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble" aria-hidden="true"><i class="sr-only">Dribbble</i></span></a>
-						</p>
-					</div>
+				<div id="login" data-toggle="modal" data-target="#loginModal">
+					<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGIN</label>
 				</div>
+				
+				<div id="mypage" class="circle">
+					<p id="myPage" class="mb-0"><i class="fas fa-address-card" onclick="moveMyPage();"></i></p>
+				</div>
+				
 			</div>
 		</div>
 	</div>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Coupli<span>sm</span></a>
+		<div class="container" style="background:white;">
+			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
+            	<span class="oi oi-menu"></span> Menu
+         	</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-link">Location</a></li>
-					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link">Notice</a></li>
-					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link">Gallery</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Anniversary</a></li>
-					<li class="nav-item"><a href="#" id="clickLogin" class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a></li>
+					<li class="nav-item active"><a href="/couplism/" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="" class="nav-color nav-link">About</a></li>
+					<li class="nav-item"><a href="chef.html" class="nav-color nav-link">Location</a></li>
+					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-color nav-link">lism</a></li>
+					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link nav-color">Gallery</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
+					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
 				</ul>
 			</div>
 		</div>
@@ -227,227 +222,58 @@
 			<div class="modal-content">
 		        <div class="modal-body">
 		          <!-- Default form login -->
-	<form class="text-center p-5" action="#!">
-	
-		<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
-	
-    <label class="login-title">Couplism</label>
-    
-    <br><br>
-    <!-- ID -->
-    <!-- Material input -->
-	<!-- Medium input -->
-	<div class="md-form">
-	  <label id="id-placeholder" for="id-input">Please Enter your ID</label>
-	  <input id="id-input" type="text" class="">
-	</div>
-	<br>
-    <!-- Password -->
-    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
-    <input id="pw-input" type="password" class="mb-6">
-    <br>
-    <div class="d-flex justify-content-around">
-        <div>
-            <!-- Forgot password -->
-            <a href="">Forgot id?</a>&nbsp;&nbsp;&nbsp;
-            <a href="">Forgot password?</a>
-        </div>
-        
-    </div>
-
-    <!-- Sign in button -->
-    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
-
-    <!-- Register -->
-    <p>회원이 아니십니까?
-        <a href="#" id="enrollMember" data-toggle="modal" data-target="#enrollModal">회원가입</a>
-    </p>
-
-    <!-- Social login -->
-    <a href="#" class="mx-2" role="button"><button>1</button></a>
-    <a href="#" class="mx-2" role="button"><button>2</button></a>
-    <a href="#" class="mx-2" role="button"><button>3</button></a>
-    <a href="#" class="mx-2" role="button"><button>4</button></a>
-
-</form>
+						<form class="text-center p-5" action="#!">
+						
+							<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
+						
+					    <label class="login-title">Couplism</label>
+					    
+					    <br><br>
+					    <!-- ID -->
+					    <!-- Material input -->
+						<!-- Medium input -->
+						<div class="md-form">
+						  <label id="id-placeholder" for="id-input">Please Enter your ID</label>
+						  <input id="id-input" type="text" class="">
+						</div>
+						<br>
+					    <!-- Password -->
+					    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
+					    <input id="pw-input" type="password" class="mb-6">
+					    <br>
+					    <div class="d-flex justify-content-around">
+					        <div>
+					            <!-- Forgot password -->
+					            <a href="">Forgot id?</a>&nbsp;&nbsp;&nbsp;
+					            <a href="">Forgot password?</a>
+					        </div>
+					        
+					    </div>
+					
+					    <!-- Sign in button -->
+					    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
+					
+					    <!-- Register -->
+					    <p>회원이 아니십니까?
+					        <a href="${path }/enrollMember.do" id="enrollMember">회원가입</a>
+					    </p>
+					
+					    <!-- Social login -->
+					    <a href="#" class="mx-2" role="button"><button>1</button></a>
+					    <a href="#" class="mx-2" role="button"><button>2</button></a>
+					    <a href="#" class="mx-2" role="button"><button>3</button></a>
+					    <a href="#" class="mx-2" role="button"><button>4</button></a>
+					
+					</form>
 		        </div>        
 			</div>
 		</div>
 	</div>
 
-	<div class="modal" id="enrollModal">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
-			<div class="modal-content">
-				<div class="modal-body" style="text-align:center;">
-					<br/>
-					<form action="{path}/member/memberEnroll.do" method="post">
-							<label id="sign-title" class="login-title">ID & Password</label>
-					
-							<img id="enroll-before" src="${path }/resources/images/move-left.png">
-						<div id="first-enroll">
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ id="enroll-id" name="id"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-lock"></i></label>&nbsp;&nbsp;&nbsp; <input type="password" autocomplete="off" class="enroll-input" id="enroll-pw" name="password"/>
-							<!-- <i id="enroll-next" class="fas fa-arrow-circle-right"></i> -->
-						</br></br></br>
-						</div>
-						<div id="second-enroll">
-							
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-user-circle"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="nickname"></br>
-							<label style="text-align:right; font-size:30px;"><i class="fas fa-heartbeat"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="couple"/>
-							
-						</br></br></br>
-						</div>
-						<div id="third-enroll">
-							
-							<label id="icon-email" style="text-align:right; font-size:30px;"><i class="fas fa-envelope"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input"/ name="email">&nbsp;&nbsp;&nbsp;<br/>
-							<label id="icon-phone" style="text-align:right; font-size:30px;"><i class="fas fa-phone-square-alt"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" name="phone"/><br/>
-							<!-- <label id="email-check" style="text-align:right; font-size:30px;"><i class="fas fa-envelope-open-text"></i></label>&nbsp;&nbsp;&nbsp; <input type="text" autocomplete="off" class="enroll-input" id="email-check"/> -->
-							
-						</div>
-							<img id="enroll-next" src="${path }/resources/images/move-right.png">
-					
-					</form>
-				</div>
-				<div class="modal-footer" style="text-align:center;">
-					<button style="font-size:13px;" class="btn btn-outline-secondary enroll-btn" onclick="backLogin();" data-toggle="modal" data-target="#loginModal">Back</button>
-				</div>
-			</div>
-		</div>
-	</div>
-<style>
-	#enroll-before{
-		font-weight:bold;
-		font-size:46px;
-		position:absolute;
-		color:black;
-		top:45%;
-		left:0px;
-		margin:0;
-		padding:0;
-		cursor:pointer;
-		border:1px red solid;
-		width:50px;
-		height:80px;
-	}
-	#enroll-next{
-		font-weight:bold;
-		font-size:46px;
-		position:absolute;
-		color:black;
-		top:45%;
-		right:30px;
-		margin:0;
-		padding:0;
-		cursor:pointer;
-		border:1px blue solid;
-		width:50px;
-		height:80px;
-	}
-	#icon-phone{
-		margin-left:10px;
-	}
-	#icon-email{
-		margin-left:20px;
-	}
-	#email-check{
-		margin-left:2px;
-	}
-	#first-enroll{
-		margin:0 auto;
-		padding:0;
-		width:500px;
-		height:auto;
-		transition:1s;
-		border:1px blue solid;
-		
-	}
-	#second-enroll{
-		top:222px;
-		left:1000px;
-		position:absolute;
-		margin:0 auto;
-		padding: 0;
-		width:500px;
-		height:auto;
-		transition:1s;
-	}
-	#third-enroll{
-		top:222px;
-		left:1000px;
-		position:absolute;
-		margin:0 auto;
-		padding: 0;
-		width:100%;
-		height:auto;
-		transition:1s;
-	}
-</style>
+	
 
 
 <script>
-	let secondLeft="left";
-	let secondRight="right";
-	let now=0;
-	$("#clickLogin").click(function(){
-		$(".modal-body").css("height","650px");
-	});
-	$("#enroll-next").click(function(){
-		if(now==0){//첫번쨰에서 두번쨰로 갈때
-			$("#first-enroll").css("opacity","0");
-			$("#second-enroll").css("opacity","1");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","0px");
-			$("#sign-title").text("Nickname & Couple's ID");
-			now=1;
-			return;
-		}
-		if(now==1){//두번쨰에서 세번쨰로 갈때
-			//두번쨰
-			$("#second-enroll").css("opacity","0");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","-1000px");
-			//세번쨰
-			$("#third-enroll").css("opacity","1");
-			$("#third-enroll").css("top","221px");
-			$("#third-enroll").css("left","0px");
-			$("#sign-title").text("Email & Phone");
-			now=2;
-			return;
-		}
-	});
-	$("#enroll-before").click(function(){
-		if(now==1){//두번쨰에서 첫번쨰로 이동할때
-			$("#second-enroll").css("opacity","0");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","1000px");
-			$("#first-enroll").css("opacity","1");
-			$("#first-enroll").css("top","221px");
-			$("#first-enroll").css("left","0px");
-			$("#sign-title").text("ID & Password");
-			now=0;
-			return;
-		}
-		if(now==2){//세번쨰에서 두번째로 이동할때
-			$("#third-enroll").css("opacity","0");
-			$("#third-enroll").css("top","221px");
-			$("#third-enroll").css("left","1000px");
-			$("#second-enroll").css("opacity","1");
-			$("#second-enroll").css("top","221px");
-			$("#second-enroll").css("left","0px");
-			$("#sign-title").text("Nickname & Couple's ID");
-			now=1;
-			return;
-		}
-	});
-	function backLogin(){
-		$("#enrollModal").modal("hide");
-		$(".modal-body").css("height","650px");
-	};
-	$("#enrollMember").click(function(){
-		$("#loginModal").modal("hide");
-		$(".modal-body").css("height","450px");
-	});
-	
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
 	});
@@ -481,12 +307,6 @@
 		$("#pw-placeholder").css("top","354px");
 		$("#pw-placeholder").css("font-size","20px");
 		}
-	});
-	$(".enroll-input").focus(function(e){
-		$(e.target).css("border-bottom","1px #66ff33 solid");
-	});
-	$(".enroll-input").blur(function(e){
-		$(e.target).css("border-bottom","1px black solid");
 	});
 	
 </script>
