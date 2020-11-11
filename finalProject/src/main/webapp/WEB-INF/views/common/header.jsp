@@ -29,8 +29,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
+	
+	
 </head>
 <style>
 	.modal-content{
@@ -207,7 +210,7 @@
 					<li class="nav-item"><a href="" class="nav-color nav-link">About</a></li>
 					<li class="nav-item"><a href="chef.html" class="nav-color nav-link">Location</a></li>
 					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-color nav-link">lism</a></li>
-					<li class="nav-item"><a href="${path }/gallery/galleryList.do" class="nav-link nav-color">Gallery</a></li>
+					<li class="nav-item"><a href="${path }/faq/faqList.do" class="nav-link nav-color">FAQ</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
 					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
 				</ul>
