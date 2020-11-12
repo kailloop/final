@@ -3549,7 +3549,8 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem; }
+  padding: 0.5rem 1rem;
+  }
   .nav-link:hover, .nav-link:focus {
     text-decoration: none; }
   .nav-link.disabled {
@@ -9912,3 +9913,4 @@ textarea.form-control {
       font-style: italic; }
     .categories li:hover, .sidelink li:hover {
       border-bottom: 1px dashed black; }
+      /* ftco-nav 370 nav-community 400 */
