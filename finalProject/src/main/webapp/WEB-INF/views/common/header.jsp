@@ -152,7 +152,7 @@
 		position:relative;
 		font-size:20px;
 		cursor:pointer;
-		margin-right:15px;
+		margin-right:10px;
 	}
 	#login{
 		position:relative;
@@ -218,7 +218,9 @@
 				</div>
 				
 				<div id="mypage" class="circle">
-					<p id="myPage" class="mb-0"><i class="fas fa-address-card" onclick="moveMyPage();"></i></p>
+					<!-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="moveMyPage();">   <small>○○○</small> 님</i></p> -->
+					<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">   <small>○○○</small> 님</i></p>
+					
 				</div>
 				
 			</div>
