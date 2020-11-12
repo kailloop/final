@@ -3,11 +3,9 @@ package com.kh.couplism.notice.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.couplism.notice.model.service.NoticeService;
 import com.kh.couplism.notice.model.vo.Notice;
+import com.kh.couplism.notice.model.vo.NoticeComment;
 import com.kh.couplism.notice.model.vo.NoticeFile;
 
 @Controller
@@ -178,76 +177,49 @@ public class NoticeController {
 	public ModelAndView noticeView(ModelAndView mv, int noticeNo) {
 		Notice notice = service.getNotice(noticeNo);
 		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);
+		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
 		logger.debug("notice : "+notice);
 		logger.debug("noticFile : "+noticeFile);
+		logger.debug("noticeComment : "+noticeComment);
 		mv.addObject("notice", notice);
 		mv.addObject("noticeFile", noticeFile);
+		mv.addObject("noticeComment", noticeComment);
 		mv.setViewName("/notice/noticeView");
 		return mv;
 	}
 	
 	
-	@RequestMapping(value="/notice/fileDownload")
-	public void fileDownload(HttpServletResponse response, HttpServletRequest request, @RequestParam Map<String, String> paramMap) {
+	@RequestMapping("/notice/fileDownload")
+	public void fileDownload(HttpServletResponse response, HttpServletRequest request, @RequestParam String fileName) throws IOException {
 	 
-		String path = request.getServletContext().getRealPath("/resources/upload/notice")+paramMap.get("renameName");
+		String path = request.getServletContext().getRealPath("/resources/upload/notice")+"/"+fileName;
 	    
-	    String fileName = paramMap.get("renameName"); //파일명
-	 
-	    File file = new File(path);
-	 
-	    FileInputStream fileInputStream = null;
-	    ServletOutputStream servletOutputStream = null;
-	 
-	    try{
-	        String downName = null;
-	        String browser = request.getHeader("User-Agent");
-	        //파일 인코딩
-	        if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")){//브라우저 확인 파일명 encode  
-	            
-	            downName = URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+", "%20");
-	            
-	        }else{
-	            
-	            downName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
-	            
-	        }
-	        
-	        response.setHeader("Content-Disposition","attachment;filename=\"" + downName+"\"");             
-	        response.setContentType("application/octer-stream");
-	        response.setHeader("Content-Transfer-Encoding", "binary;");
-	 
-	        fileInputStream = new FileInputStream(file);
-	        servletOutputStream = response.getOutputStream();
-	 
-	        byte b [] = new byte[1024];
-	        int data = 0;
-	 
-	        while((data=(fileInputStream.read(b, 0, b.length))) != -1){
-	            
-	            servletOutputStream.write(b, 0, data);
-	            
-	        }
-	 
-	        servletOutputStream.flush();//출력
-	        
-	    }catch (Exception e) {
-	        e.printStackTrace();
-	    }finally{
-	        if(servletOutputStream!=null){
-	            try{
-	                servletOutputStream.close();
-	            }catch (IOException e){
-	                e.printStackTrace();
-	            }
-	        }
-	        if(fileInputStream!=null){
-	            try{
-	                fileInputStream.close();
-	            }catch (IOException e){
-	                e.printStackTrace();
-	            }
-	        }
-	    }
+		File file = new File(path);
+		
+		String mimeType= request.getServletContext().getMimeType(file.toString());
+		if(mimeType==null) {
+			response.setContentType("application/octet-stream");
+		}
+		String downloadName = null;
+		if(request.getHeader("user-agent").indexOf("MSIE") == -1) {
+			downloadName = new String(fileName.getBytes("UTF-8"),"8859_1");
+		}else {
+			downloadName = new String(fileName.getBytes("EUC-KR"),"8859_1");
+		}
+		
+		response.setHeader("Content-Disposition", "attachment;filename=\""+downloadName+"\";");
+		FileInputStream fis = new FileInputStream(file);
+		ServletOutputStream sos = response.getOutputStream();
+		
+		byte b[] = new byte[1024];
+		int data = 0;
+		
+		while ((data = (fis.read(b, 0, b.length))) != -1) {
+			sos.write(b, 0, data);
+		}
+		sos.flush();
+		sos.close();
+		fis.close();
+		
 	}
 }

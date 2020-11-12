@@ -1,6 +1,5 @@
 package com.kh.couplism.notice.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.couplism.notice.model.dao.NoticeDao;
 import com.kh.couplism.notice.model.vo.Notice;
+import com.kh.couplism.notice.model.vo.NoticeComment;
 import com.kh.couplism.notice.model.vo.NoticeFile;
 
 @Service
@@ -50,6 +50,12 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeFile> getNoticeFile(int noticeNo) {
 		return dao.getNoticeFile(noticeNo, session);
 	}
+
+	@Override
+	public List<NoticeComment> getNoticeComment(int noticeNo) {
+		return dao.getNoticeComment(noticeNo, session);
+	}
+	
 	
 	
 }

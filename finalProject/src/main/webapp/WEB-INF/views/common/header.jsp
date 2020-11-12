@@ -241,7 +241,7 @@
 				</div>
 				<div id="nav-sub">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color">공지사항</a></li>
+						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
