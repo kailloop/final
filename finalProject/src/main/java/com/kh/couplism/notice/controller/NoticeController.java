@@ -1,13 +1,17 @@
 package com.kh.couplism.notice.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -15,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -179,5 +184,70 @@ public class NoticeController {
 		mv.addObject("noticeFile", noticeFile);
 		mv.setViewName("/notice/noticeView");
 		return mv;
+	}
+	
+	
+	@RequestMapping(value="/notice/fileDownload")
+	public void fileDownload(HttpServletResponse response, HttpServletRequest request, @RequestParam Map<String, String> paramMap) {
+	 
+		String path = request.getServletContext().getRealPath("/resources/upload/notice")+paramMap.get("renameName");
+	    
+	    String fileName = paramMap.get("renameName"); //파일명
+	 
+	    File file = new File(path);
+	 
+	    FileInputStream fileInputStream = null;
+	    ServletOutputStream servletOutputStream = null;
+	 
+	    try{
+	        String downName = null;
+	        String browser = request.getHeader("User-Agent");
+	        //파일 인코딩
+	        if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")){//브라우저 확인 파일명 encode  
+	            
+	            downName = URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+", "%20");
+	            
+	        }else{
+	            
+	            downName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+	            
+	        }
+	        
+	        response.setHeader("Content-Disposition","attachment;filename=\"" + downName+"\"");             
+	        response.setContentType("application/octer-stream");
+	        response.setHeader("Content-Transfer-Encoding", "binary;");
+	 
+	        fileInputStream = new FileInputStream(file);
+	        servletOutputStream = response.getOutputStream();
+	 
+	        byte b [] = new byte[1024];
+	        int data = 0;
+	 
+	        while((data=(fileInputStream.read(b, 0, b.length))) != -1){
+	            
+	            servletOutputStream.write(b, 0, data);
+	            
+	        }
+	 
+	        servletOutputStream.flush();//출력
+	        
+	    }catch (Exception e) {
+	        e.printStackTrace();
+	    }finally{
+	        if(servletOutputStream!=null){
+	            try{
+	                servletOutputStream.close();
+	            }catch (IOException e){
+	                e.printStackTrace();
+	            }
+	        }
+	        if(fileInputStream!=null){
+	            try{
+	                fileInputStream.close();
+	            }catch (IOException e){
+	                e.printStackTrace();
+	            }
+	        }
+	    }
 	}
 }
