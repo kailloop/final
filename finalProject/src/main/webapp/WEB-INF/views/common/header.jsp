@@ -32,8 +32,10 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
-	
-	
+
+	<!-- 폰트 -->
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 </head>
 <style>
 	.modal-content{
@@ -134,14 +136,15 @@
 		font-size:20px;
 	}
 	#clickLogin{
-		position:relative;
+		position:absolute;
 		margin:0;
 		padding:0;
-		font-size:20px;
+		font-size:15px;
 		cursor:pointer;
-		width:25px;
-		height:25px;
-		top:-10px;
+		width:15px;
+		height:15px;
+		top:auto;
+		bottom:auto;
 		color:#F0F0F0;
 		left:3px;
 	}
@@ -160,22 +163,46 @@
 		transition:1s;
 		cursor:pointer;
 		z-index:100;
-		overflow:hidden;
 		cursor:pointer;
 	}
 	#login-font{	
-		position:relative;
-		font-size:20px;
-		width:20px;
-		height:20px;
+		position:absolute;
+		font-size:15px;
+		width:auto;
+		height:auto;
 		margin:0;
 		padding:0;
 		color:#F0F0F0;
-		top:-10px;
+		top:-7px;
 		cursor:pointer;
+		left:20px;
+		font-family:Roboto;
 	}
 	.nav-color{
 		color:black;
+	}
+	#nav-main{
+		position:relative;
+		transition:0.5s;
+		left:0px;
+		font-size:30px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#nav-sub{
+		position:relative;
+		transition:1s;
+		left:600px;
+		font-size:30px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	.nav-community{
+		display:none;
+	}
+	.nav-travel{
+		display:none;
+	}
+	.nav-anniversary{
+		display:none;
 	}
 </style>
 
@@ -199,11 +226,13 @@
 	</div>
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container" style="background:white;">
+		<div class="container" style="background:white;
+										overflow:hidden;">
 			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="oi oi-menu"></span> Menu
          	</button>
+<<<<<<< HEAD
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="/couplism/" class="nav-link">Home</a></li>
@@ -214,7 +243,35 @@
 					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
 					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
 				</ul>
+=======
+			<div class="collapse navbar-collapse" id="ftco-nav" style="overflow:hidden;">
+				<div id="nav-main">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a href="" class="nav-color nav-link">회사소개</a></li>
+						<li class="nav-item"><a id="travel" class="nav-color nav-link" style="cursor:pointer;">여행지</a></li>
+						<li class="nav-item"><a class="nav-color nav-link">리즘</a></li>
+						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;">기념일</a></li>
+						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;">커뮤니티</a></li>
+					</ul>
+				</div>
+				<div id="nav-sub">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item nav-community"><a href="" class="nav-link nav-color">공지사항</a></li>
+						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >FAQ</a></li>
+						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li>
+						<li class="nav-item nav-anniversary"><a href="" class="nav-link nav-color" >기념일 설정</a></li>
+						<li class="nav-item nav-anniversary"><a href="" class="nav-link nav-color" >기념 여행지</a></li>
+						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
+					</ul>
+				</div>
+>>>>>>> branch 'kbs' of https://github.com/kailloop/final.git
 			</div>
+					
+				
 		</div>
 	</nav>
 	<!-- END nav -->
@@ -277,6 +334,62 @@
 
 
 <script>
+	let nav=0;
+	//1=여행지, 2=커뮤니티
+	//3=기념일
+	$("#anniversary").click(function(){
+		$("#nav-main").css("transition","0.5s");
+		$("#nav-sub").css("transition","1s");
+		$("#nav-main").css("left","-600px");
+		$("#nav-sub").css("left","-400px");
+		$(".nav-anniversary").css("display","inline");
+		nav=3;
+	});
+	$("#community").click(function(){
+		$("#nav-main").css("transition","0.5s");
+		$("#nav-sub").css("transition","1s");
+		$("#nav-main").css("left","-600px");
+		$("#nav-sub").css("left","-400px");
+		$(".nav-community").css("display","inline");
+		nav=2;
+	});
+	$("#travel").click(function(){
+		$("#nav-main").css("transition","0.5s");
+		$("#nav-sub").css("transition","1s");
+		$("#nav-main").css("left","-600px");
+		$("#nav-sub").css("left","-400px");
+		$(".nav-travel").css("display","inline");
+		nav=1;
+	});
+	$(".nav-back").click(function(){
+		$("#nav-main").css("transition","1s");
+		$("#nav-sub").css("transition","0.7s");
+		$("#nav-main").css("left","0px");
+		$("#nav-sub").css("left","600px");
+		if(nav==1){//여행지
+			$(".nav-travel").css("display","none");
+			nav=0;
+			return;
+			
+		}else if(nav==2){//커뮤니티
+			$(".nav-community").css("display","none");
+			nav=0;
+			return;
+		}else if(nav==3){//기념일
+			$(".nav-anniversary").css("display","none");
+			nav=0;
+			return;
+		}
+	});
+	$("#login").hover(function(){
+		$("#login-font").text("로그인");
+		$("#login-font").css("font-family","Montserrat");
+		$("#login-font").css("left","25px");
+	},function(){
+		$("#login-font").text("LOGIN");
+		$("#login-font").css("font-family","Roboto");
+		$("#login-font").css("left","25px");
+	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
 	});
