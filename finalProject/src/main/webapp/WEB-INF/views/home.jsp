@@ -63,13 +63,15 @@
 </style>
 <script>
 	$(function(){
-		$(".main-label-eng").css("top","-650px");
 		$(".main-label-han").css("top","-600px");
-		$("#border-bottom").css("top","-700px");
-		$(".main-label-eng").css("opacity","1");
-		$(".main-label-han").css("opacity","1");
-		$("#border-bottom").css("opacity","1");
+		$(".main-label-han").delay(1000).css("opacity","1");
 	});
+	setTimeout(function() {
+		$(".main-label-eng").css("top","-650px");
+		$(".main-label-eng").css("opacity","1");
+		$("#border-bottom").css("top","-700px");
+		$("#border-bottom").delay(1000).css("opacity","1");// 1초 후 실행
+	}, 1000);
 </script>
 	<div id="logo" style="text-align:center;">
 		<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
