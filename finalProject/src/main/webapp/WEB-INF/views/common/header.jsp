@@ -232,18 +232,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="oi oi-menu"></span> Menu
          	</button>
-<<<<<<< HEAD
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="/couplism/" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="" class="nav-color nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-color nav-link">Location</a></li>
-					<li class="nav-item"><a href="${path }/lism/lism.do" class="nav-color nav-link">lism</a></li>
-					<li class="nav-item"><a href="${path }/faq/faqList.do" class="nav-link nav-color">FAQ</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link nav-color">Anniversary</a></li>
-					<li class="nav-item"><a href="${path}/notice/noticeList" class="nav-link nav-color">Notice</a></li>
-				</ul>
-=======
+
 			<div class="collapse navbar-collapse" id="ftco-nav" style="overflow:hidden;">
 				<div id="nav-main">
 					<ul class="navbar-nav ml-auto">
@@ -257,7 +246,7 @@
 				<div id="nav-sub">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color">공지사항</a></li>
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >FAQ</a></li>
+						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
@@ -268,7 +257,6 @@
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
 					</ul>
 				</div>
->>>>>>> branch 'kbs' of https://github.com/kailloop/final.git
 			</div>
 					
 				

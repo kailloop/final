@@ -64,7 +64,7 @@
 <!--상단 제목  -->
 <div class="page-header" >
     <p style="font-size: 50px; text-align: center; font-weight: bold;">FAQ</p>
-    <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; border-radius: 20px;">
+    <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; ">
     <strong style="color:#DD2D4A;  font-size: 18px; ">"FAQ를 통해서 원하시는 답변을 쉽고 빠르게 찾아보세요"</strong>
     <p style="color:#DD2D4A;  font-size: 15px; text-align: center; ">질문 빈도수가 높은 질문들을 모아, 친절한 답변과 함께 재공해드리고 있습니다.</p>
     
@@ -72,7 +72,6 @@
     
     
 </div>
-
 <style>
 	.menuatag{
 		text-decoration:none; color:#000000;
@@ -108,14 +107,14 @@
 	</ul>
 </div> -->
 
-<nav>
-        <ul id="navul">
-            <li class="navli"><a href="${path }/faq/faqList.do" class="menuatag menuatagcolor">ALL</a></li>
+<nav>        
+         <ul id="navul">
+            <li class="navli"><a href="${path }/faq/faqList.do" class="menuatag">ALL</a></li>
             <li class="navli"><a href="${path }/faq/faqLocation.do" class="menuatag">LOCATION</a></li>
             <li class="navli"><a href="${path }/faq/faqLism.do" class="menuatag">LISM</a></li>
             <li class="navli"><a href="${path }/faq/faqAnniversary.do" class="menuatag">ANNIVERSARY</a></li>
-            <li class="navli"><a href="${path }/faq/faqEtc.do" class="menuatag">ETC</a></li>
-        </ul>   
+            <li class="navli"><a href="${path }/faq/faqEtc.do" class="menuatag menuatagcolor">ETC</a></li>
+        </ul>  
     </nav>   
 
 
@@ -206,27 +205,6 @@
 <!--faq내용들  -->
 <div class="faq-content">
 
-  <div class="faq-question">
-    <input id="q1" type="checkbox" class="panel">
-    <div class="plus">+</div>
-    <label for="q1" class="panel-title">Q. LOCATION 예약내용을 확인하고 싶어요.</label>
-    <div class="panel-content"><p><em>마이페이지 > 예약내역</em> 에서 확인가능합니다.</p></div>
-  </div>
-  
-  <div class="faq-question">
-    <input id="q2" type="checkbox" class="panel">
-    <div class="plus">+</div>
-    <label for="q2" class="panel-title">Q. LOCATION 예약을 취소하고 싶어요.</label>
-    <div class="panel-content"><p><em>정해지면써야지</em>~~</div>
-  </div>
-  
-  <div class="faq-question">
-    <input id="q3" type="checkbox" class="panel">
-    <div class="plus">+</div>
-    <label for="q3" class="panel-title">Q. LISM이 무엇인가요? 정해지면바꿔야지</label>
-    <div class="panel-content"><p>답</p></div>
-  </div>
-  
   <div class="faq-question">
     <input id="q4" type="checkbox" class="panel">
     <div class="plus">+</div>
