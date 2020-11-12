@@ -64,7 +64,7 @@
 <!--상단 제목  -->
 <div class="page-header" >
     <p style="font-size: 50px; text-align: center; font-weight: bold;">FAQ</p>
-    <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; ">
+    <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; border-radius: 20px;">
     <strong style="color:#DD2D4A;  font-size: 18px; ">"FAQ를 통해서 원하시는 답변을 쉽고 빠르게 찾아보세요"</strong>
     <p style="color:#DD2D4A;  font-size: 15px; text-align: center; ">질문 빈도수가 높은 질문들을 모아, 친절한 답변과 함께 재공해드리고 있습니다.</p>
     
