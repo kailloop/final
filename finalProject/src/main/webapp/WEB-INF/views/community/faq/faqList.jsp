@@ -9,14 +9,13 @@
 </jsp:include>
 <style>
 	#logo{
-		height:600px;
-		width:100%;	
+		height:1000px;
+		width:100%;
 	    position: relative;
 	    z-index: 0;
 	    overflow: hidden;
 	}
 	#logo img{
-		filter: grayscale(65%);
 		background-size: cover;
 	    background-repeat: no-repeat;
 	    background-position: center center;
@@ -24,37 +23,63 @@
 		height:100%;
 		z-index:-1;
 	}
-	#labelOne{
-		position:absolute;
-		left:40%;
-		top:50%;
-		font-size:120px;
-		z-index:0;
-		cursor:Default;
-		font-family:Dancing Script;
-		color:#D5D5D5;
-	}
-	#labelTwo{
-		position:absolute;
-		left:45%;
-		top:85%;
-		font-size:30px;
+	.main-label-eng{
+		position:relative;
+		font-size:75px;
 		z-index:0;
 		cursor:pointer;
-		font-family:Roboto;
-		color:#A6A6A6;
+		font-family: 'Montserrat', sans-serif;
+		color:#F6F6F6;
+		top:-620px;
+		font-weight:lighter;
+		transition:1s;
+		opacity:0;
 	}
-	#labelTwo a:hover {
-        color:red;
+	.main-label-han{
+		position:relative;
+		font-size:26px;
+		z-index:0;
+		cursor:pointer;
+		font-family:Nanum Gothic Coding;
+		color:#F6F6F6;
+		top:-570px;
+		transition:1s;
+		opacity:0;
 	}
-</style>
-
-<div id="logo">
-	<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
-	<!-- <label id="labelOne">FAQ</label> -->
-	<%-- <label id="labelTwo"> <a href="${path }/gallery/mygalleryList.do" style="color:#A6A6A6;">> My Gallery</a>  </label> --%>
+	#border-bottom{
+		font-size:20px;
+		border-bottom:3px white solid;
+		position:relative;
+		z-index:0;
+		cursor:pointer;
+		font-family:Nanum Gothic Coding;
+		color:#F6F6F6;
+		top:-670px;
+		transition:1s;
+		opacity:0;
+	}
 	
-</div>
+	
+</style>
+<script>
+	$(function(){
+		$(".main-label-han").css("top","-600px");
+		$(".main-label-han").delay(1000).css("opacity","1");
+	});
+	setTimeout(function() {
+		$(".main-label-eng").css("top","-650px");
+		$(".main-label-eng").css("opacity","1");
+		$("#border-bottom").css("top","-700px");
+		$("#border-bottom").delay(1000).css("opacity","1");// 1초 후 실행
+	}, 1000);
+</script>
+	<div id="logo" style="text-align:center;">
+		<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
+		<label class="main-label-eng">FAQ</label><br/>
+		<label id="border-bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;</label>
+	</div>
+	
 
 
 

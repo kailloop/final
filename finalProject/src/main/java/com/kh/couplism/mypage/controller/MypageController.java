@@ -11,4 +11,13 @@ public class MypageController {
 		return "/mypage/userMypage";
 	}
 	
+	@RequestMapping("/mypage/partnerMypage.do")
+	public String partnerpage() {
+		return "/mypage/partnerMypage";
+	}
+	
+	@RequestMapping("/mypage/adminMypage.do")
+	public String adminMypage() {
+		return "/mypage/adminMypage";
+	}
 }
