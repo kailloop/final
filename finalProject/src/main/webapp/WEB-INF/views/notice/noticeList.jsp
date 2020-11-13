@@ -8,12 +8,39 @@
 	<jsp:param value="" name="title" />
 </jsp:include>
 <style>
-#content {
-	position: relative;
-	margin-top: 500px;
-}
+	#logo{
+		height:900px;
+		width:100%;
+		
+	    position: relative;
+	    z-index: 0;
+	    overflow: hidden;
+	}
+	#logo img{
+		filter: grayscale(65%);
+		background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+		width:100%;
+		height:100%;
+		z-index:-1;
+	}
+	#logo label{
+		position:absolute;
+		left:27%;
+		top:35%;
+		font-size:120px;
+		z-index:0;
+		cursor:pointer;
+		font-family:Dancing Script;
+		color:black;
+	}
 </style>
-<section id="content">
+	<div id="logo">
+		<img src="${path }/resources/images/notice.jpg" alt="notice"/>
+		<label>Notice</label> 
+	</div>
+<section>
 	<div id="tableContainer" class="container">
 		<table class="table table-hover">
 			<thead class="thead-dark">
@@ -37,10 +64,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
-		<div id="jh-pageBar">
-			<c:out value="${pageBar }" escapeXml="false" />
-		</div>
+		<nav aria-label="Page navigation example" style="margin-bottom: 20px;">
+                <ul id="pageNavUl" class="pagination justify-content-center">
+                    <c:out value="${pageBar }" escapeXml="false" />
+                </ul>
+            </nav>
 		<button type="button" onclick="noticeWrite()">글쓰기</button>
 	</div>
 </section>
