@@ -1,13 +1,15 @@
 package com.kh.couplism.notice.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -15,11 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.couplism.notice.model.service.NoticeService;
 import com.kh.couplism.notice.model.vo.Notice;
+import com.kh.couplism.notice.model.vo.NoticeComment;
 import com.kh.couplism.notice.model.vo.NoticeFile;
 
 @Controller
@@ -173,11 +177,70 @@ public class NoticeController {
 	public ModelAndView noticeView(ModelAndView mv, int noticeNo) {
 		Notice notice = service.getNotice(noticeNo);
 		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);
+		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
 		logger.debug("notice : "+notice);
 		logger.debug("noticFile : "+noticeFile);
+		logger.debug("noticeComment : "+noticeComment);
 		mv.addObject("notice", notice);
 		mv.addObject("noticeFile", noticeFile);
+		mv.addObject("noticeComment", noticeComment);
 		mv.setViewName("/notice/noticeView");
 		return mv;
+	}
+	
+	
+	@RequestMapping("/notice/fileDownload")
+	public void fileDownload(HttpServletResponse response, HttpServletRequest request, @RequestParam String fileName) throws IOException {
+	 
+		String path = request.getServletContext().getRealPath("/resources/upload/notice")+"/"+fileName;
+	    
+		File file = new File(path);
+		
+		String mimeType= request.getServletContext().getMimeType(file.toString());
+		if(mimeType==null) {
+			response.setContentType("application/octet-stream");
+		}
+		String downloadName = null;
+		if(request.getHeader("user-agent").indexOf("MSIE") == -1) {
+			downloadName = new String(fileName.getBytes("UTF-8"),"8859_1");
+		}else {
+			downloadName = new String(fileName.getBytes("EUC-KR"),"8859_1");
+		}
+		
+		response.setHeader("Content-Disposition", "attachment;filename=\""+downloadName+"\";");
+		FileInputStream fis = new FileInputStream(file);
+		ServletOutputStream sos = response.getOutputStream();
+		
+		byte b[] = new byte[1024];
+		int data = 0;
+		
+		while ((data = (fis.read(b, 0, b.length))) != -1) {
+			sos.write(b, 0, data);
+		}
+		sos.flush();
+		sos.close();
+		fis.close();
+		
+	}
+	@RequestMapping("/notice/addComment")
+	public void noticAddComment(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
+								@RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
+								@RequestParam String commentContent,
+								int noticeNo, HttpServletResponse rs, HttpServletRequest rq) throws IOException {
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		logger.debug("noticeNo : "+noticeNo);
+		logger.debug("commentContent : "+commentContent);
+		logger.debug("commentPosition : "+commentPosition);
+		logger.debug("replyPosition : "+replyPosition);
+		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		
+		
+		int result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		logger.debug("result : "+result);
+		if(result>0) {
+			logger.debug("등록성공 !!");
+		}
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		rs.sendRedirect("/couplism/notice/noticeView?noticeNo="+noticeNo);
 	}
 }

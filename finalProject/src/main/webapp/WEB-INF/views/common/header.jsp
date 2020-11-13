@@ -26,10 +26,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
 
@@ -152,7 +148,7 @@
 		position:relative;
 		font-size:20px;
 		cursor:pointer;
-		margin-right:10px;
+		margin-right:15px;
 	}
 	#login{
 		position:relative;
@@ -218,10 +214,7 @@
 				</div>
 				
 				<div id="mypage" class="circle">
-					<!-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="moveMyPage();">   <small>○○○</small> 님</i></p> -->
-					 <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">   <small>고객</small> 님</i></p> --%> 
-					 <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p>  --%>
-					  <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> 
+					<p id="myPage" class="mb-0"><i class="fas fa-address-card" onclick="moveMyPage();"></i></p>
 				</div>
 				
 			</div>
@@ -248,8 +241,8 @@
 				</div>
 				<div id="nav-sub">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color">공지사항</a></li>
-						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
+						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
+						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>

@@ -35,6 +35,7 @@
     border: 0;
     outline: none;
     position: relative;
+    width:auto;
 }
 #btn {
     top: 0;
