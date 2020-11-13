@@ -29,10 +29,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
+
 	<!-- 폰트 -->
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 </head>
 <style>
 	.modal-content{
@@ -229,6 +232,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="oi oi-menu"></span> Menu
          	</button>
+
 			<div class="collapse navbar-collapse" id="ftco-nav" style="overflow:hidden;">
 				<div id="nav-main">
 					<ul class="navbar-nav ml-auto">
