@@ -18,4 +18,5 @@ public interface NoticeDao {
 	public Notice getNotice(int noticeNo, SqlSessionTemplate session);
 	public List<NoticeFile> getNoticeFile(int noticeNo, SqlSessionTemplate session);
 	public List<NoticeComment> getNoticeComment(int noticeNo, SqlSessionTemplate session);
+	public int addComment(NoticeComment nc, SqlSessionTemplate session);
 }

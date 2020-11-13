@@ -47,6 +47,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<NoticeComment> getNoticeComment(int noticeNo, SqlSessionTemplate session) {
 		return session.selectList("notice.getNoticeComment", noticeNo);
 	}
+
+	@Override
+	public int addComment(NoticeComment nc, SqlSessionTemplate session) {
+		return session.insert("notice.addComment", nc);
+	}
 	
 	
 }

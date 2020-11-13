@@ -55,6 +55,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeComment> getNoticeComment(int noticeNo) {
 		return dao.getNoticeComment(noticeNo, session);
 	}
+
+	@Override
+	public int addComment(NoticeComment nc) {
+		return dao.addComment(nc, session);
+	}
 	
 	
 	

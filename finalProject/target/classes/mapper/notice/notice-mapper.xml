@@ -63,4 +63,8 @@
 		WHERE NOTICE_NO LIKE #{noticeNo}
 		ORDER BY COMMENT_POSITION ASC, REPLY_POSITION ASC
 	</select>
+	
+	<insert id="addComment" parameterType="com.kh.couplism.notice.model.vo.NoticeComment">
+		INSERT INTO NOTICE_COMMENT VALUES(#{noticeNo}, #{userId}, #{commentContent}, #{commentPosition}, #{replyPosition}, SYSDATE)
+	</insert>
 </mapper>

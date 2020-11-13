@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="title" />
 </jsp:include>
+<% int cp = 10; %>
 <style>
 #logo {
 	height: 900px;
@@ -69,25 +70,27 @@
 				<c:forEach var="comment" items="${noticeComment}">
 					<c:if test="${comment.replyPosition eq 0}">
 						<c:if test="${noticeComment[0].commentPosition eq comment.commentPosition }">
-							<div id="commentDiv">
+							<div class="commentDiv">
 						</c:if>
 						<c:if test="${noticeComment[0].commentPosition ne comment.commentPosition }">
 							</div>
-							<div id="commentDiv">
+							<div class="commentDiv">
 						</c:if>
 						<hr>
 						<div id="inCommentDiv">
 							<c:out value="${comment.userId }" />
-							<c:out value="${comment.commentContent }" />
+							<textarea rows="" cols="" disabled readonly><c:out value="${comment.commentContent }"/></textarea>
 							<c:out value="${comment.commentPosition }" />
 							<c:out value="${comment.replyPosition }" />
 							<c:out value="${comment.writeDate }" />
+							<%cp++; %>
 						</div>
 					</c:if>
 					<c:if test="${comment.replyPosition ne 0}">
-						<div id="replyDiv">
+						<div id="replyDiv" style="margin-left:50px;">
+							<hr>
 							<c:out value="${comment.userId }" />
-							<c:out value="${comment.commentContent }" />
+							<textarea rows="" cols="" disabled readonly><c:out value="${comment.commentContent }"/></textarea>
 							<c:out value="${comment.commentPosition }" />
 							<c:out value="${comment.replyPosition }" />
 							<c:out value="${comment.writeDate }" />
@@ -100,7 +103,10 @@
 	</c:if>
 	<form id="formAddComment" action="${path }/notice/addComment">
 		<div class="row">
-			<textarea id="textaread" name="comment" class="form-control"
+			<input type="hidden" name="userId" value="admin"/>
+			<input type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
+			<input type="hidden" name="commentPosition" value="<%=cp%>"/>
+			<textarea id="textaread" name="commentContent" class="form-control"
 				style="width: 89%; resize: none; margin-left: 15px;" rows="4"></textarea>
 			<button onclick="addComment();" style="margin-left: 5px;"
 				type="button" class="col-sm-1 btn btn-outline-secondary float-right">댓글작성</button>
@@ -111,5 +117,10 @@
 	function addComment() {
 		$("#formAddComment").submit();
 	}
+	$(".commentDiv").hover(function(event) {
+		  console.log(event.target);
+		}, function(){
+			console.log("마우스 나감");
+		});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

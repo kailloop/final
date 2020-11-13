@@ -222,4 +222,25 @@ public class NoticeController {
 		fis.close();
 		
 	}
+	@RequestMapping("/notice/addComment")
+	public void noticAddComment(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
+								@RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
+								@RequestParam String commentContent,
+								int noticeNo, HttpServletResponse rs, HttpServletRequest rq) throws IOException {
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		logger.debug("noticeNo : "+noticeNo);
+		logger.debug("commentContent : "+commentContent);
+		logger.debug("commentPosition : "+commentPosition);
+		logger.debug("replyPosition : "+replyPosition);
+		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		
+		
+		int result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		logger.debug("result : "+result);
+		if(result>0) {
+			logger.debug("등록성공 !!");
+		}
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		rs.sendRedirect("/couplism/notice/noticeView?noticeNo="+noticeNo);
+	}
 }
