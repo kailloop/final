@@ -58,7 +58,30 @@
 		transition:1s;
 		opacity:0;
 	}
-	
+	section{
+		width:100%;
+		height:1300px;
+		background-color:white;
+		z-index:0;
+		position:relative;
+		border:1px purple solid;
+	}
+	.img{
+		position:relative;
+		width:600px;
+		height:800px;
+		transition:1.75s;
+	}
+	.one{
+		left:800px;
+		top:200px;
+		z-index:1;
+	}
+	.two{
+		left:300px;
+		top:950px;
+		z-index:2;
+	}
 	
 </style>
 <script>
@@ -72,6 +95,24 @@
 		$("#border-bottom").css("top","-700px");
 		$("#border-bottom").delay(1000).css("opacity","1");// 1초 후 실행
 	}, 1000);
+	$(window).scroll(function (){
+		var height=$(document).scrollTop();
+		console.log(height);
+		if(height<300){
+			$(".one").css("top","200px");
+			$(".two").css("top","950px");
+		}
+		if(height>=300){
+			$(".one").css("top","80px");
+			$(".two").css("top","840px");
+		}
+		if(height>=900){
+			$(".two").css("top","700px");
+		}
+		if(height>=1365){
+			$(".two").css("top","580px");
+		}
+	});
 </script>
 	<div id="logo" style="text-align:center;">
 		<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
@@ -83,6 +124,11 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	</div>
+	<section>
+		<img class="img one" src="${path }/resources/images/home-logo2.jpg" alt="로고2">
+		<img class="img two" src="${path }/resources/images/home-logo3.jpg" alt="로고3">
+		
+	</section>
 	
 	
 	
