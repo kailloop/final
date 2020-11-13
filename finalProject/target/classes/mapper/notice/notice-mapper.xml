@@ -16,6 +16,15 @@
 		<result property="renameName" column="RENAME_NAME"/>
 	</resultMap>
 
+	<resultMap type="com.kh.couplism.notice.model.vo.NoticeComment" id="noticeComment">
+		<result property="noticeNo" column="NOTICE_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="commentPosition" column="COMMENT_POSITION"/>
+		<result property="replyPosition" column="REPLY_POSITION"/>
+		<result property="writeDate" column="WRITE_DATE"/>
+	</resultMap>
+	
 	<select id="noticeList" parameterType="string" resultMap="notice">
 		SELECT *
 		FROM NOTICE
@@ -47,4 +56,15 @@
 		FROM NOTICE_FILE
 		WHERE NOTICE_NO LIKE #{noticeNo}
 	</select>
+	
+	<select id="getNoticeComment" parameterType="_int" resultMap="noticeComment">
+		SELECT * 
+		FROM NOTICE_COMMENT
+		WHERE NOTICE_NO LIKE #{noticeNo}
+		ORDER BY COMMENT_POSITION ASC, REPLY_POSITION ASC
+	</select>
+	
+	<insert id="addComment" parameterType="com.kh.couplism.notice.model.vo.NoticeComment">
+		INSERT INTO NOTICE_COMMENT VALUES(#{noticeNo}, #{userId}, #{commentContent}, #{commentPosition}, #{replyPosition}, SYSDATE)
+	</insert>
 </mapper>
