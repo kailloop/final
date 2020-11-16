@@ -2,6 +2,7 @@ package com.kh.couplism.mypage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MypageController {
@@ -17,7 +18,16 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mypage/adminMypage.do")
-	public String adminMypage() {
-		return "/mypage/adminMypage";
+	public ModelAndView adminMypage(ModelAndView mv) {
+		
+		//사진
+		mv.addObject("logoPath","/resources/images/home-logo3.jpg");
+		//한글 타이틀
+		mv.addObject("titleHan","한글 타이틀");
+		//영어 타이틀
+		mv.addObject("titleEng","English Title");
+		mv.setViewName("mypage/adminMypage");
+		
+		return mv;
 	}
 }
