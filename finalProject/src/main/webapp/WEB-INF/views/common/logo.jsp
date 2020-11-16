@@ -261,10 +261,10 @@
 		$("#border-bottom").css("top","-700px");
 		$("#border-bottom").delay(1000).css("opacity","1");// 1초 후 실행
 	}, 1000);
-	$(window).scroll(function (){
+	/* $(window).scroll(function (){
 		var height=$(document).scrollTop();
 		console.log(height);
-	});
+	}); */
 </script>
 
 	<div id="logo" style="text-align:center;">
@@ -272,13 +272,7 @@
 		<%-- <img id="logo-img" src="${path }/resources/images/home-logo.jpg" alt="로고1"> --%>
 		<label class="main-label-han">${titleHan }</label><br/>
 		<label class="main-label-eng">${titleEng }</label><br/>
-		<label id="border-bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		</label>
+		<label id="border-bottom">${borderSize }</label>
 		<br/>
 		<div id="down-scroll" style="text-align:center;">
 			<label id="down-arrow">↓</label>
