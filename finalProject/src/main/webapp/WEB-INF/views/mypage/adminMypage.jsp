@@ -179,9 +179,8 @@
             }
       }
 </style>
-</style>
-				<div class="inner" style="text-align:center; ;">
-					</br>
+				<div class="inner" style="text-align:center;">
+					<br>
 					<h2>MY PAGE</h2>
 					<br><br><br>
 					<div class="features" >
@@ -209,6 +208,5 @@
 
 <script src="${path }/resources/js/skel.min.js"></script>
 <script src="${path }/resources/js/util.js"></script>
-<script src="${path }/resources/js/main.js"></script>
 
 
