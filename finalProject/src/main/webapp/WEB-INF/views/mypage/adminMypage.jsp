@@ -180,12 +180,12 @@
       }
 </style>
 </style>
-				<div class="inner" style="text-align:center;">
+				<div class="inner" style="text-align:center; ;">
 					</br>
 					<h2>MY PAGE</h2>
 					<br><br><br>
 					<div class="features" >
-						<div class="feature" style="background: red;">	
+						<div class="feature">	
 							<i class="fas fa-users-cog"></i>
 							<h3>회원관리</h3>
 							<p>회원들의 정보를 관리할 수 있습니다.</p>
