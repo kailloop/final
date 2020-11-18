@@ -19,9 +19,8 @@
     <p style="font-size: 50px; text-align: center; font-weight: bold;">FAQ</p>
     <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; border-radius: 20px;">
     <strong style="color:#DD2D4A;  font-size: 18px; ">"FAQ를 통해서 원하시는 답변을 쉽고 빠르게 찾아보세요"</strong>
-    <p style="color:#DD2D4A;  font-size: 15px; text-align: center; ">질문 빈도수가 높은 질문들을 모아, 친절한 답변과 함께 재공해드리고 있습니다.</p>
-    
-    </div>
+    <p style="color:#DD2D4A;  font-size: 15px; text-align: center; ">질문 빈도수가 높은 질문들을 모아, 친절한 답변과 함께 재공해드리고 있습니다.</p>    
+</div>
     
     
 </div>
@@ -54,7 +53,7 @@
 </style>
 
 
-<nav>
+<nav style="margin-left: 160px;">
 	<ul id="navul">
     	<li class="navli menuall menuatag" style="color:#F26A8D">ALL</li>
         <li class="navli menulocation menuatag">LOCATION</li>
@@ -119,7 +118,9 @@
 	  margin-left: 20px;
 	  margin-top: 9px;
 	  z-index: 5;
-	  font-size: 42px;
+	  font-weight:bold;
+	  color:#DD2D4A;
+	  font-size: 38px;
 	  line-height: 100%;
 	  -webkit-user-select: none;    
 	  -moz-user-select: none;
@@ -148,21 +149,21 @@
 </style>
 
 <!--faq내용들  -->
-<div class="faq-content">
+<div class="faq-content" style="margin-left: 160px; margin-right: 160px;">
 
 	<div id="faqLocation">
 		<div class="faq-question">
 	    	<input id="q1" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q1" class="panel-title">Q. LOCATION 예약내용을 확인하고 싶어요.</label>
+	    	<label for="q1" class="panel-title">&nbsp;Q. LOCATION 예약내용을 확인하고 싶어요.</label>
 	    	<div class="panel-content"><p><em>마이페이지 > 예약내역</em> 에서 확인가능합니다.</p></div>
 		</div>
 	  
 		<div class="faq-question">
 	    	<input id="q2" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q2" class="panel-title">Q. LOCATION 예약을 취소하고 싶어요.</label>
-	    	<div class="panel-content"><p><em>정해지면써야지</em>~~</div>
+	    	<label for="q2" class="panel-title">&nbsp; Q. LOCATION 예약을 취소하고 싶어요.</label>
+	    	<div class="panel-content"><p><em>마이페이지 > 예약내역 > 예약취소</em> 에서 가능합니다.</div>
 	  	</div>
 	</div>
 	
@@ -170,7 +171,7 @@
 		<div class="faq-question">
 	    	<input id="q3" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q3" class="panel-title">Q. LISM이 무엇인가요? 정해지면바꿔야지</label>
+	    	<label for="q3" class="panel-title">&nbsp; Q. LISM이 무엇인가요? 정해지면바꿔야지</label>
 	    	<div class="panel-content"><p>답</p></div>
 	  	</div>
 	</div>
@@ -182,28 +183,28 @@
 		<div class="faq-question">
 	    	<input id="q4" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q4" class="panel-title">Q. 회원탈퇴는 어디서 하나요?</label>
+	    	<label for="q4" class="panel-title">&nbsp; Q. 회원탈퇴는 어디서 하나요?</label>
 	    	<div class="panel-content"><p><em>마이페이지 > 회원정보수정</em> 에서 회원탈퇴가 가능합니다. </p></div>
 	  	</div>
 	  
 	  	<div class="faq-question">
 	    	<input id="q5" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q5" class="panel-title">Q. 쿠폰사용은 어떻게 하나요?</label>
+	    	<label for="q5" class="panel-title">&nbsp; Q. 쿠폰사용은 어떻게 하나요?</label>
 	    	<div class="panel-content"><p><em>마이페이지 > 쿠폰</em> 에서 쿠폰을 등록 후, <em>LOCATION 결제하실 때 쿠폰 사용</em> 을 누르시면 됩니다.</div>
 	  	</div>
 	  
 		<div class="faq-question">
 	    	<input id="q6" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q6" class="panel-title">Q. 아이디가 기억나지 않아요.</label>
+	    	<label for="q6" class="panel-title">&nbsp; Q. 아이디가 기억나지 않아요.</label>
 	    	<div class="panel-content"><p><em>[아이디 찾기]</em> 를 통해 가입 시 등록한 정보로 조회할 수 있습니다.</p></div>
 	  	</div>
 	  
 	    <div class="faq-question">
 	    	<input id="q7" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q7" class="panel-title">Q. 비밀번호가 기억나지 않아요.</label>
+	    	<label for="q7" class="panel-title">&nbsp; Q. 비밀번호가 기억나지 않아요.</label>
 	    	<div class="panel-content"><p><em>[비밀번호 찾기]</em> 를 통해 비밀번호를 재설정 할 수 있습니다.</p></div>
 	  	</div>
 	</div>
