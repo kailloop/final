@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.couplism.notice.model.service.NoticeService;
 import com.kh.couplism.notice.model.vo.Notice;
 import com.kh.couplism.notice.model.vo.NoticeComment;
@@ -178,12 +183,46 @@ public class NoticeController {
 		Notice notice = service.getNotice(noticeNo);
 		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);
 		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
+		int cp = 0;
+		String html = "";
+		int commentSize = noticeComment.size();
+		for(NoticeComment nc : noticeComment) {
+			if(nc.getReplyPosition()==0) {//나누어야 할경우의수 1.댓글일때 2.답글일때 
+				if(cp!=0) {
+					html += "</div>";
+				}
+				html += "<div class='commentDiv'>"
+				+"<hr>"
+				+"<p>"+nc.getUserId()+"</p>"
+				+"<p>"+nc.getWriteDate()+"</p>"
+				+"<input id='userId' type='hidden' value='"+nc.getUserId()+"'>"
+				+"<input id='commentP' type='hidden' value='"+nc.getCommentPosition()+"'>"
+				+"<input id='replyP' type='hidden' value='"+nc.getReplyPosition()+"'>"
+				+"<textarea rows='' cols='' disabled readonly>"+nc.getCommentContent()+"</textarea>"
+				+"<div id='hiddened'></div>";
+				cp++;
+			}else {
+				html += "<div id='replyDiv' style='margin-left:50px;'>"
+				+"<hr>"
+				+"<p>"+nc.getUserId()+"</p>"
+				+"<p>"+nc.getWriteDate()+"</p>"
+				+"<textarea rows='' cols='' disabled readonly>"+nc.getCommentContent()+"</textarea>"
+				+"<input id='replyP' type='hidden' value='"+nc.getReplyPosition()+"'>"
+				+"</div>";
+			}
+		}
+		html += "<hr>"+"</div>";
+		
+		
+		
 		logger.debug("notice : "+notice);
 		logger.debug("noticFile : "+noticeFile);
 		logger.debug("noticeComment : "+noticeComment);
 		mv.addObject("notice", notice);
 		mv.addObject("noticeFile", noticeFile);
 		mv.addObject("noticeComment", noticeComment);
+		mv.addObject("cp", cp+1);
+		mv.addObject("html", html);
 		mv.setViewName("/notice/noticeView");
 		return mv;
 	}
@@ -243,4 +282,108 @@ public class NoticeController {
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
 		rs.sendRedirect("/couplism/notice/noticeView?noticeNo="+noticeNo);
 	}
+	
+//	@RequestMapping("/notice/addCommentAjax")
+//	@ResponseBody
+//	public String noticeAddCommentAjax(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
+//									   @RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
+//									   @RequestParam(value="commentContent") String commentContent,
+//									   int noticeNo, HttpServletResponse rs, HttpServletRequest rq ){
+//		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+//		logger.debug("noticeNo : "+noticeNo);
+//		logger.debug("commentContent : "+commentContent);
+//		logger.debug("commentPosition : "+commentPosition);
+//		logger.debug("replyPosition : "+replyPosition);
+//		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+//		int result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+//		logger.debug("result : "+result);
+//		if(result>0) {
+//			logger.debug("등록성공 !!");
+//		}
+//		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+//		
+//		
+//		//이제 댓글 테이블의 데이터를 가져와서 String으로 변환
+//		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
+//		
+//		for(NoticeComment nc : noticeComment) {
+//			
+//		}
+//		
+//	
+//		return"ajax성공";
+//	}
+	@RequestMapping("/notice/addCommentAjax")
+	@ResponseBody
+	public void noticeAddCommentAjax(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
+			   @RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
+			   @RequestParam(value="commentContent") String commentContent,
+			   int noticeNo, HttpServletRequest rq, HttpServletResponse resp) throws JsonIOException, IOException{
+		
+		resp.setCharacterEncoding("utf-8");
+
+		Map mp = new HashMap();
+		int cp = 0;
+//		logger.debug("noticeNo : "+(String)data.get("noticeNo"));
+//		logger.debug("commentContent : "+(String)data.get("commentContent"));
+//		logger.debug("commentPosition : "+(String)data.get("commentPosition"));
+//		logger.debug("replyPosition : "+(String)data.get("replyPosition"));
+//		String check = (String) data.get("noticeNo");
+
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		logger.debug("noticeNo : "+noticeNo);
+		logger.debug("commentContent : "+commentContent);
+		logger.debug("commentPosition : "+commentPosition);
+		logger.debug("replyPosition : "+replyPosition);
+		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		int result = 0;
+		if(replyPosition>0) {//답글
+			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+		}else {
+			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		}
+		logger.debug("result : "+result);
+		if(result>0) {
+			logger.debug("등록성공 !!");
+		}
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		
+		
+		//이제 댓글 테이블의 데이터를 가져와서 String으로 변환
+		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
+		String html = "";
+		int commentSize = noticeComment.size();
+		for(NoticeComment nc : noticeComment) {
+			if(nc.getReplyPosition()==0) {//나누어야 할경우의수 1.댓글일때 2.답글일때 
+				if(cp!=0) {
+					html += "</div>";
+				}
+				html += "<div class='commentDiv'>"
+				+"<hr>"
+				+"<p>"+nc.getUserId()+"</p>"
+				+"<p>"+nc.getWriteDate()+"</p>"
+				+"<input id='userId' type='hidden' value='"+nc.getUserId()+"'>"
+				+"<input id='commentP' type='hidden' value='"+nc.getCommentPosition()+"'>"
+				+"<input id='replyP' type='hidden' value='"+nc.getReplyPosition()+"'>"
+				+"<textarea rows='' cols='' disabled readonly>"+nc.getCommentContent()+"</textarea>"
+				+"<div id='hiddened'></div>";
+				cp++;
+			}else {
+				html += "<div id='replyDiv' style='margin-left:50px;'>"
+				+"<hr>"
+				+"<p>"+nc.getUserId()+"</p>"
+				+"<p>"+nc.getWriteDate()+"</p>"
+				+"<textarea rows='' cols='' disabled readonly>"+nc.getCommentContent()+"</textarea>"
+				+"<input id='replyP' type='hidden' value='"+nc.getReplyPosition()+"'>"
+				+"</div>";
+			}
+		}
+		html += "<hr>"+"</div>"+"<h1>"+cp+":"+commentSize+"</h1>";
+		logger.debug("cp : "+cp+1);
+		mp.put("cp",cp+1);
+		mp.put("result", result);
+		mp.put("html",html);
+		new Gson().toJson(mp,resp.getWriter());
+	}
+	
 }
