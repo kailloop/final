@@ -108,141 +108,42 @@
 		
 		<!-- 이름검색 -->
 		<div id="name_search">
-		<br><br><br><br><br><br>
-			<input type="text" id="search_input">
-			<button type="button" id="search_btn" class="btn btn-outline-danger">Search</button>
-			<br>
-			<a href="#" style="color: #4374D9; pointer-events:none; cursor:default;">인기검색어 : </a>
-			&nbsp;
-			<a href="#" style="color: #4374D9;"># 크리스마스</a>
-			&emsp;
-			<a href="#" style="color: #4374D9;"># 100일</a>
-			&emsp;
-			<a href="#" style="color: #4374D9;"># 발렌타인데이</a>
-			&emsp;
-			&emsp;&emsp;&emsp;&emsp;&emsp;
+			<div class="search_view">
+				<input type="text" id="search_input">
+				<button type="button" id="search_btn" class="btn btn-outline-danger">Search</button>
+				<br>
+				<a href="#" style="color: #4374D9; pointer-events:none; cursor:default;">인기검색어 : </a>
+				&nbsp;
+				<a href="#" style="color: #4374D9;"># 크리스마스</a>
+				&emsp;
+				<a href="#" style="color: #4374D9;"># 100일</a>
+				&emsp;
+				<a href="#" style="color: #4374D9;"># 발렌타인데이</a>
+				&emsp;
+				&emsp;&emsp;&emsp;&emsp;&emsp;
+				
+				<hr style="margin-right: 100px; margin-left:100px;">
+			</div>
+			
+			<div class="list_view">
+			</div>
 		</div>
-		
 		
 		
 		
 <style>
 /* 데이터피커디자인 */
-	.wrapper {
-		max-width: 18rem;
-		padding: 0 0.5rem;
+	.search_view {
 		margin-left: auto;
 		margin-right: auto;
-		padding-top: 4rem;
+		padding-top: 50px;
 	}
-	#datepicker {
-		font-size: 0.75rem;
-		font-weight: 400;
-		display: block;
-		margin-bottom: 0.5rem;
-		color: #B0BEC5;
-		border: 1px solid #ECEFF1;
-		padding: 0.5rem 0.75rem;
-		border-radius: 0.5rem;
-	}
-	#datepicker_input {
-		font-family: 'Roboto', sans-serif;
-		display:block;
-		border: none;
-		border-radius: 0.25rem;
-		border: 1px solid transparent;
-		line-height: 1.5rem;
-		padding: 0;
-		font-size: 1rem;
-		color: #607D8B;
-		width: 100%;
-		margin-top: 0.5rem;
-	}
-	#datepicker_input:focus {outline: none;}
-	#ui-datepicker-div {
-		display: none;
-		background-color: #fff;
-		box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
-		margin-top: 0.25rem;
-		border-radius: 0.5rem;
-		padding: 0.5rem;
-	}
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-	.ui-datepicker-calendar thead th {
-		padding: 0.25rem 0;
-		text-align: center;
-		font-size: 0.75rem;
-		font-weight: 400;
-		color: #78909C;
-	}
-	.ui-datepicker-calendar tbody td {
-		width: 2.5rem;
-		text-align: center;
-		padding: 0;
-	}
-	.ui-datepicker-calendar tbody td a {
-		display: block;
-		border-radius: 0.25rem;
-		line-height: 2rem;
-		transition: 0.3s all;
-		color: #546E7A;
-		font-size: 0.875rem;
-		text-decoration: none;
-	}
-	.ui-datepicker-calendar tbody td a:hover {
-		background-color: #E0F2F1;
-	}
-	.ui-datepicker-calendar tbody td a.ui-state-active {
-		background-color: #009688;
-		color: white;
-	}
-	.ui-datepicker-header a.ui-corner-all {
-		cursor: pointer;
-		position: absolute;
-		top: 0;
-		width: 2rem;
-		height: 2rem;
-		margin: 0.5rem;
-		border-radius: 0.25rem;
-		transition: 0.3s all;
-	}
-	.ui-datepicker-header a.ui-corner-all:hover {
-		background-color: #ECEFF1;
-	}
-	.ui-datepicker-header a.ui-datepicker-prev {
-		left: 0;
-		background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==");
-		background-repeat: no-repeat;
-		background-size: 0.5rem;
-		background-position: 50%;
-		transform: rotate(180deg);
-	}
-	.ui-datepicker-header a.ui-datepicker-next {
-		right: 0;
-		background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==');
-		background-repeat: no-repeat;
-		background-size: 10px;
-		background-position: 50%;
-	}
-	.ui-datepicker-header a>span {
-		display: none;
-	}
+	
+	/*달력위에날짜나오는곳*/
 	.ui-datepicker-title {
-		text-align: center;
-		line-height: 2rem;
-		margin-bottom: 0.25rem;
-		font-size: 0.875rem;
 		font-weight: 500;
-		padding-bottom: 0.25rem;
 	}
-	.ui-datepicker-week-col {
-		color: #78909C;
-		font-weight: 400;
-		font-size: 0.75rem;
-	}
+	
 	
 	/* 주말색바꾸기
 	.ui-datepicker-week-end{color:red;}
@@ -252,17 +153,22 @@
 	.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color:blue; }
     /*일요일색 */
     .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color:red; }
+    
     </style>
 		
 		<!-- 날짜검색 -->
 		<div id="day_search" style="display: none;">
-		<br><br><br><br><br><br>
-			<div class="wrapper">
-			<input type="text" id="test_input">
-		        <label id="datepicker">날짜를 선택해주세요
-		        	<input type="text" id="datepicker_input" autocomplete="off">
-		        </label>
-	        </div>
+			<div class="search_view">
+				<input type="text" id="test_input">
+		        
+				<!-- 달력부분 -->
+		        <div class='datepicker'></div>
+	       		
+	       		<hr style="margin-right: 100px; margin-left:100px;">
+			</div>
+			
+			<div class="list_view">
+			</div>
 		</div>
 		
 		
@@ -288,13 +194,35 @@
 			});
 
 			
-			$( "#datepicker_input" ).datepicker({
+			$( ".datepicker" ).datepicker({
 				dateFormat: "yy-mm-dd",
 				duration: "fast",
 			 	nextText: '다음 달',
 	        	prevText: '이전 달',
 	        	//input text안에 값넣어주는거
-	        	altField:"#test_input"
+	        	altField:"#test_input",
+	        	//최소선택날짜
+	        	minDate:"today",
+	        	//최대선택날짜
+	        	maxDate:"+1Y",
+	        	//년도나오고 월나오게
+	        	showMonthAfterYear:true,
+	        	//달력위에 년도 뒤에붙는 글자
+	        	yearSuffix:"년",
+	        	//달력의 월 부분 텍스트
+	        	monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'], 
+	        	//달력의 월 부분 Tooltip 텍스트
+	        	monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	        	//달력의 요일 부분 텍스트
+	            dayNamesMin:['일','월','화','수','목','금','토'], 
+	          	//달력의 요일 부분 Tooltip 텍스트
+	            dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+	            
+	        	//콤보박스
+	        	/* changeYear:true,
+	        	changeMonth:true */
+	        	
+	        	
 			});
 			
 		});
