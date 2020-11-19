@@ -2,34 +2,22 @@ package com.kh.couplism.community.faq.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FaqController {
 
 
+
 	@RequestMapping("/faq/faqList.do")
-	public String faqList() {
-		return "/community/faq/faqList";
+	public ModelAndView userMypage(ModelAndView mv) {
+		mv.addObject("logoPath","/resources/images/home-logo.jpg");
+		mv.addObject("titleHan","한글 타이틀");
+		mv.addObject("titleEng","FAQ");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				);
+		mv.setViewName("community/faq/faqList");
+		return mv;
 	}
-	
-	@RequestMapping("/faq/faqLocation.do")
-    public String faqLocation() {
-    	return "/community/faq/faqLocation";
-    }
-    
-    @RequestMapping("/faq/faqLism.do")
-    public String faqLism() {
-    	return "/community/faq/faqLism";
-    }
-    
-    @RequestMapping("/faq/faqAnniversary.do")
-    public String faqAnniversary() {
-    	return "/community/faq/faqAnniversary";
-    }
-    
-    @RequestMapping("/faq/faqEtc.do")
-    public String faqEtc() {
-    	return "/community/faq/faqEtc";
-    }
     
 }

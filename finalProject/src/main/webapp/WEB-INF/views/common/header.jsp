@@ -214,10 +214,11 @@
 				</div>
 				
 				<div id="mypage" class="circle">
-               	<!-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="moveMyPage();">   <small>○○○</small> 님</i></p> -->
-                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">   <small>고객</small> 님</i></p> --%> 
-                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p>  --%>
-                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> 
+
+                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">   <small>회원</small> 님</i></p> 
+                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
+                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
+
             	</div>
 				
 			</div>
@@ -245,14 +246,14 @@
 				<div id="nav-sub">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >FAQ</a></li>
+						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li>
 						<li class="nav-item nav-anniversary"><a href="" class="nav-link nav-color" >기념일 설정</a></li>
-						<li class="nav-item nav-anniversary"><a href="" class="nav-link nav-color" >기념 여행지</a></li>
+						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li>
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
 					</ul>
 				</div>
