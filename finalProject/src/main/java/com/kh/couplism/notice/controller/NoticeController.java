@@ -335,12 +335,12 @@ public class NoticeController {
 		logger.debug("commentContent : "+commentContent);
 		logger.debug("commentPosition : "+commentPosition);
 		logger.debug("replyPosition : "+replyPosition);
-		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
 		int result = 0;
 		if(replyPosition>0) {//답글
 			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
 		}else {
-			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition+1,replyPosition,""));
+			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
 		}
 		logger.debug("result : "+result);
 		if(result>0) {
@@ -379,7 +379,7 @@ public class NoticeController {
 			}
 		}
 		html += "<hr>"+"</div>"+"<h1>"+cp+":"+commentSize+"</h1>";
-		logger.debug("cp : "+cp+1);
+		logger.debug("cp : "+(cp+1));
 		mp.put("cp",cp+1);
 		mp.put("result", result);
 		mp.put("html",html);
