@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="갤러리" />
+	<jsp:param name="title" value="마이페이지" />
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <style>
@@ -179,13 +179,12 @@
             }
       }
 </style>
-</style>
 				<div class="inner" style="text-align:center;">
-					</br>
+					<br>
 					<h2>MY PAGE</h2>
 					<br><br><br>
 					<div class="features" >
-						<div class="feature" style="background: red;">	
+						<div class="feature">	
 							<i class="fas fa-users-cog"></i>
 							<h3>회원관리</h3>
 							<p>회원들의 정보를 관리할 수 있습니다.</p>
@@ -209,6 +208,5 @@
 
 <script src="${path }/resources/js/skel.min.js"></script>
 <script src="${path }/resources/js/util.js"></script>
-<script src="${path }/resources/js/main.js"></script>
 
 
