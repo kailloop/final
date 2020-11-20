@@ -156,17 +156,26 @@
 		var commentP = $(event.target).parent().parent().parent().children("input[id=commentP]").val();
 		var writerId =  $(event.target).parent().parent().parent().children("input[id=userId]").val();
 		var replyP = "";
+		
+		
+		console.log()
+		
+		
+		
 		if($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()>0){
 			replyP=parseInt($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val())+1;
 /* 			console.log(replyP);
 			console.log(parseInt(replyP)+1);
-			console.log("이프");
+			*/console.log("이프");/*
 			console.log($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()); */
+			console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val());
 		}else{
 			replyP = parseInt($(event.target).parent().parent().parent().children("input[id=replyP]").val())+1;
 		/* 	console.log(replyP);
 			console.log(parseInt(replyP)+1);
-			console.log("엘스"); */
+			*/console.log("엘스"); 
+			console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val());
+			console.log($(event.target).parent().parent().parent().children("input[id=replyP]"));
 		}
 		/* $(form).children("#jh-commentPosition").val(commentP);
 		$(form).children("#jh-replyPosition").val(replyP); */
