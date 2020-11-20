@@ -66,8 +66,10 @@ public class MemberController {
 //		String encodePw=encoder.encode(member.getPassword());
 //		
 //		member.setPassword(encodePw);
+		System.out.println("memberEnrollEnd들어와짐 ");
+		System.out.println(member);
 		int result=service.enrollMember(member);
-		
+		System.out.println(result);
 		String msg="";
 		String loc="";
 		
@@ -80,7 +82,7 @@ public class MemberController {
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("loc",loc);
-		
+		System.out.println("마지막줄");
 		return "common/msg";
 	}
 	@RequestMapping("/member/checkEmail")

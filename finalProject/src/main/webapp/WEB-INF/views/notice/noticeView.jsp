@@ -158,32 +158,34 @@
 		var replyP = "";
 		
 		
-		console.log()
-		
-		
-		
+		/* console.log($(event.target));
+		console.log($(event.target).parent());
+		console.log($(event.target).parent().parent());
+		console.log($(event.target).parent().parent().parent());
+		console.log($(event.target).parent().parent().parent().children().last());
+		console.log(); */
 		if($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()>0){
 			replyP=parseInt($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val())+1;
 /* 			console.log(replyP);
 			console.log(parseInt(replyP)+1);
-			*/console.log("이프");/*
+			*//* console.log("이프"); *//*
 			console.log($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()); */
-			console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val());
+			/* console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()); */
 		}else{
 			replyP = parseInt($(event.target).parent().parent().parent().children("input[id=replyP]").val())+1;
 		/* 	console.log(replyP);
 			console.log(parseInt(replyP)+1);
-			*/console.log("엘스"); 
+			*//* console.log("엘스"); 
 			console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val());
-			console.log($(event.target).parent().parent().parent().children("input[id=replyP]"));
+			console.log($(event.target).parent().parent().parent().children("input[id=replyP]")); */
 		}
 		/* $(form).children("#jh-commentPosition").val(commentP);
 		$(form).children("#jh-replyPosition").val(replyP); */
 		$("form input[id=jh-commentPosition]").val(commentP);
 		$("form input[id=jh-replyPosition]").val(replyP);
-		console.log("commentP : "+commentP);
+		/* console.log("commentP : "+commentP);
 		console.log("writerId : "+writerId);
-		console.log("replyP : "+replyP);
+		console.log("replyP : "+replyP); */
 		$("form div[id=replyStatus]").html(writerId+"님에게 답글작성중입니다."+"<button  onclick='rollbackForm();' type='button'>취소</button>");
 		
 	}

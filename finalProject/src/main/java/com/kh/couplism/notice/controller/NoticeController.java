@@ -211,7 +211,7 @@ public class NoticeController {
 				+"</div>";
 			}
 		}
-		html += "<hr>"+"</div>";
+		html += "</div>"+"<hr>";
 		
 		
 		
@@ -378,7 +378,7 @@ public class NoticeController {
 				+"</div>";
 			}
 		}
-		html += "<hr>"+"</div>"+"<h1>"+cp+":"+commentSize+"</h1>";
+		html += "</div>"+"<hr>"+"<h1>"+cp+":"+commentSize+"</h1>";
 		logger.debug("cp : "+(cp+1));
 		mp.put("cp",cp+1);
 		mp.put("result", result);
