@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="title" />
 </jsp:include>
-<% int cp = 10; %>
+<% int cp = 0; %>
 <style>
 #logo {
 	height: 900px;
@@ -65,9 +65,9 @@
 	<br>
 		<textarea rows="30" class="form-control" style="resize: none;" disabled readonly><c:out value="${notice.noticeTitle }"/></textarea>
 	<br>
-	<c:if test="${noticeComment != null}">
+<%-- 	<c:if test="${noticeComment != null}"> --%>
 		<div id="allCommentDiv">
-				<c:forEach var="comment" items="${noticeComment}">
+				<%-- <c:forEach var="comment" items="${noticeComment}">
 					<c:if test="${comment.replyPosition eq 0}">
 						<c:if test="${noticeComment[0].commentPosition eq comment.commentPosition }">
 							<div class="commentDiv">
@@ -100,27 +100,155 @@
 			</div>
 		</div>
 		<hr>
-	</c:if>
-	<form id="formAddComment" action="${path }/notice/addComment">
+	</c:if> --%>
+		${html }
+		<h1><c:out value="${cp }"/></h1>
+		
+	</div>
+	<form name="commentForm" id="formAddComment" action="${path }/notice/addComment">
 		<div class="row">
-			<input type="hidden" name="userId" value="admin"/>
-			<input type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
-			<input type="hidden" name="commentPosition" value="<%=cp%>"/>
-			<textarea id="textaread" name="commentContent" class="form-control"
+			<div id="replyStatus"></div>
+			<input id="jh-userId" type="hidden" name="userId" value="admin"/>
+			<input id="jh-noticNo"type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
+			<input id="jh-replyPosition" type="hidden" name="replyPosition" value=""/>
+			<input id="jh-commentPosition"type="hidden" name="commentPosition" value="${cp }"/>
+			<textarea id="jh-commentContent" name="commentContent" class="form-control"
 				style="width: 89%; resize: none; margin-left: 15px;" rows="4"></textarea>
 			<button onclick="addComment();" style="margin-left: 5px;"
 				type="button" class="col-sm-1 btn btn-outline-secondary float-right">댓글작성</button>
+			<button onclick="ajaxComment();" style="margin-left: 5px;"
+				type="button" class="col-sm-1 btn btn-outline-secondary float-right">ajax</button>
 		</div>
+		<h1 id="cpH1"></h1>
 	</form>
 </section>
 <script>
+﻿/* 	setInterval(function(){
+		ajaxComment();	
+	}, 1000); */
 	function addComment() {
 		$("#formAddComment").submit();
 	}
-	$(".commentDiv").hover(function(event) {
-		  console.log(event.target);
-		}, function(){
-			console.log("마우스 나감");
+	function rollbackForm(){
+		$("form div[id=replyStatus]").html("");
+		$("form input[id=jh-commentPosition]").val("${cp}");
+		$("form input[id=jh-replyPosition]").val("0");
+	}
+
+	$(function addbutton(){
+		$("div[class=commentDiv]").on("mouseenter",function(){
+			let hiddened = "<div style='height: 30px;'><button id='clicke' type='button' onclick='replywrite(event);' class='btn btn-outline-secondary float-right'>답글 작성</button></div>"
+				$(this).children("#hiddened").html(hiddened);
+			el = this;
+			console.log(el);
+
 		});
+		$("div[class=commentDiv]").on("mouseleave",function(){
+			let hiddeneds = "";
+			$(this).children("#hiddened").html(hiddeneds);
+		});
+	});
+	
+	function replywrite(event){
+		var form = document.commentForm;
+		var commentP = $(event.target).parent().parent().parent().children("input[id=commentP]").val();
+		var writerId =  $(event.target).parent().parent().parent().children("input[id=userId]").val();
+		console.log($(event.target).parent().parent().parent().children("input[id=userId]").val());
+		replyP = "";
+		if($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()>0){
+			replyP=parseInt($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val())+1;
+			console.log(parseInt(replyP)+1);
+		}else{
+			replyP = parseInt($(event.target).parent().parent().parent().children("input[id=replyP]").val())+1;
+			console.log(parseInt(replyP)+1);
+		}
+		/* $(form).children("#jh-commentPosition").val(commentP);
+		$(form).children("#jh-replyPosition").val(replyP); */
+		$("form input[id=jh-commentPosition]").val(commentP);
+		$("form input[id=jh-replyPosition]").val(replyP);
+		console.log(writerId);
+		$("form div[id=replyStatus]").html(writerId+"님에게 답글작성중입니다."+"<button onclick=rollbackForm() type='button'>취소</button>");
+	}
+	
+	function ajaxComment(){
+		
+		var form = document.commentForm;
+		var userId = form.userId.value;
+		var noticeNo = form.noticeNo.value;
+		var commentPosition = form.commentPosition.value;
+		var commentContent = form.commentContent.value;
+		var replyPosition = form.replyPosition.value;
+		var jhData = {
+				userId:userId,
+				noticeNo:noticeNo,
+				commentPosition:commentPosition,
+				commentContent:commentContent,
+				replyPosition:replyPosition
+		};
+		if(commentContent==""){
+			alert("내용을입력해주세요.");
+			return;
+		}
+		/* console.log(form);
+		console.log(userId);
+		console.log(noticeNo);
+		console.log(commentPosition);
+		console.log(commentContent); */
+		
+		
+		/* $.post(
+				"/couplism/notice/addCommentAjax",
+				jhData,
+				function(data){
+					console.log(data);
+					$("#allCommentDiv").html(data);
+				},
+				"html"
+		); */
+	 	/*  $.ajax({
+			type : "post",
+			url : "${path}/notice/addCommentAjax",
+			data : jhData,
+			dataType : "json"
+		}).done(function(req){
+			$("#allCommentDiv").html(req);
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});  */
+		
+		$.ajax({
+			url:"${path}/notice/addCommentAjax",
+			data:jhData,
+			success:data => {
+				var jsonData = JSON.parse(data);
+				$("#allCommentDiv").html(jsonData.html);
+				console.log("성공");
+				console.log(jsonData.html);
+				console.log(jsonData.cp);
+				$("#jh-commentContent").val("");
+				$(document.commentForm.commentPosition).val(jsonData.cp);
+				$("#cpH1").html(jsonData.cp);
+				$(function addbutton(){
+					$("div[class=commentDiv]").on("mouseenter",function(){
+						let hiddened = "<div style='height: 30px;'><button id='clicke' type='button' onclick='replywrite(event);' class='btn btn-outline-secondary float-right'>답글 작성</button></div>"
+							$(this).children("#hiddened").html(hiddened);
+						el = this;
+						console.log(el);
+
+					});
+					$("div[class=commentDiv]").on("mouseleave",function(){
+						let hiddeneds = "";
+						$(this).children("#hiddened").html(hiddeneds);
+					});
+				});
+				rollbackForm();
+				
+			},
+			fail:error =>{
+				alert(JSON.stringify(error));
+			}  
+		});
+		
+	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
