@@ -72,19 +72,19 @@ public class MemberController {
 	@RequestMapping(value="/member/memberEnrollEnd",method=RequestMethod.POST)
 	public String memberEnrollEnd(Member member,Model m) {
 		
-<<<<<<< HEAD
+
 		String encodePw=encoder.encode(member.getPassword());
 		
 		member.setPassword(encodePw);
-=======
+
 //		String encodePw=encoder.encode(member.getPassword());
 //		
 //		member.setPassword(encodePw);
 		System.out.println("memberEnrollEnd들어와짐 ");
 		System.out.println(member);
->>>>>>> branch 'JH' of https://github.com/kailloop/final.git
+
 		int result=service.enrollMember(member);
-		System.out.println(result);
+		
 		String msg="";
 		String loc="";
 		
@@ -97,7 +97,6 @@ public class MemberController {
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("loc",loc);
-		System.out.println("마지막줄");
 		return "common/msg";
 	}
 	@RequestMapping("/member/checkEmail")
