@@ -87,23 +87,23 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- security -->
-		<!-- <dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-web</artifactId>
-		    <version>4.2.4.RELEASE</version>
-		</dependency>
-		          
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>4.2.4.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
-		          
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
-		    <version>4.2.4.RELEASE</version>
-		</dependency> -->
+		    <version>${org.springframework-version}</version>
+		</dependency>
 
 
 		<!-- @Inject -->
