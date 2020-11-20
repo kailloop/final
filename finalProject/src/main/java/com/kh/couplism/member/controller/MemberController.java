@@ -13,6 +13,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +35,15 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-//	@Autowired
-//	private BCryptPasswordEncoder encoder;
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder()
+	{
+	  return new BCryptPasswordEncoder();
+	}
+
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@RequestMapping("/enrollMember.do")
 	public ModelAndView enrollMember(ModelAndView mv) {
@@ -63,9 +72,9 @@ public class MemberController {
 	@RequestMapping(value="/member/memberEnrollEnd",method=RequestMethod.POST)
 	public String memberEnrollEnd(Member member,Model m) {
 		
-//		String encodePw=encoder.encode(member.getPassword());
-//		
-//		member.setPassword(encodePw);
+		String encodePw=encoder.encode(member.getPassword());
+		
+		member.setPassword(encodePw);
 		int result=service.enrollMember(member);
 		
 		String msg="";
