@@ -68,6 +68,7 @@
 		margin-left:auto;
 		margin-right:auto;
 		background:white;
+		overflow:hidden;
 	}
 	#down-scroll{
 		position:relative;
@@ -159,28 +160,6 @@
 		font-family:Nanum Gothic Coding;
 		font-weight:bolder;
 		font-size:64px;
-	}
-	.enrollUser{
-		position:relative;
-		margin-left:auto;
-		margin-right:auto;
-		cursor:pointer;
-		color:black;
-		border:1px blue solid;
-		width:200px;
-		max-width:200px;
-	}
-	.enrollPartner{
-		position:relative;
-		margin-left:auto;
-		margin-right:auto;
-		cursor:pointer;
-		border:1px red solid;
-		width:200px;
-		max-width:200px;
-	}
-	td > label{
-		cursor:pointer;
 	}
 </style>
 <script>
