@@ -16,4 +16,14 @@ public class AnniversaryController {
 		mv.setViewName("anniversary/anniversarySearch");
 		return mv;
 	}
+	
+	@RequestMapping("/anniversary/myCalendar.do")
+	public ModelAndView myCalendar(ModelAndView mv) {
+		mv.addObject("logoPath","/resources/images/home-logo.jpg");
+		mv.addObject("titleHan","한글 타이틀");
+		mv.addObject("titleEng","MY CALENDAR");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		mv.setViewName("anniversary/myCalendar");
+		return mv;
+	}
 }

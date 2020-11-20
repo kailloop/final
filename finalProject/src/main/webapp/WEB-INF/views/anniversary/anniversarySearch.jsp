@@ -32,9 +32,7 @@
 		border-radius: 10px;
 	}
 	
-	#search_btn{
-		width: 100px;	
-	}
+	
 	tr{
 		text-align: center;
 		cursor: pointer;
@@ -89,11 +87,11 @@
 		
 		
 		<div id="menu_div">
-			<table style="width: 60%; margin-left: auto; margin-right: auto;">
-				<tr style="cursor: pointer; text-align: center;">
+			<table style="width: 60%; margin-left: auto; margin-right: auto; ">
+				<tr>
 					<td class="search">
 						<label style="font-size: 100%;">이름검색</label>
-						<!-- <a href="#" style="font-size:100%;">이름검색</a> -->	
+						
 					</td>
 					<td style="width:5%;">
 						<label> ㅣ </label>
@@ -110,7 +108,7 @@
 		<div id="name_search">
 			<div class="search_view">
 				<input type="text" id="search_input">
-				<button type="button" id="search_btn" class="btn btn-outline-danger">Search</button>
+				<button type="button" id="search_btn" class="btn btn-outline-danger" width="100px;">Search</button>
 				<br>
 				<a href="#" style="color: #4374D9; pointer-events:none; cursor:default;">인기검색어 : </a>
 				&nbsp;
@@ -159,11 +157,16 @@
 		<!-- 날짜검색 -->
 		<div id="day_search" style="display: none;">
 			<div class="search_view">
-				<input type="text" id="test_input">
 		        
 				<!-- 달력부분 -->
 		        <div class='datepicker'></div>
 	       		
+				<input type="text" id="test_input"> 
+				<button id="inputBtn">확인</button>
+				
+				<br>
+				
+				<input type="text" id="result_input">
 	       		<hr style="margin-right: 100px; margin-left:100px;">
 			</div>
 			
@@ -224,6 +227,17 @@
 	        	
 	        	
 			});
+			
+			
+			
+			$("#inputBtn").click(function() {
+				
+				var a=$("#test_input").val();
+				
+				alert("값 : "+a);
+			})
+			
+			
 			
 		});
 		
