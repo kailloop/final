@@ -252,7 +252,7 @@
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li>
-						<li class="nav-item nav-anniversary"><a href="" class="nav-link nav-color" >기념일 설정</a></li>
+						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/myCalendar.do"  class="nav-link nav-color" >기념일 설정</a></li>
 						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li>
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
 					</ul>
