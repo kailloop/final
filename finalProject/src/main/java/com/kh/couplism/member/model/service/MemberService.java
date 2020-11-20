@@ -1,8 +1,9 @@
 package com.kh.couplism.member.model.service;
 
-import org.springframework.stereotype.Service;
+import com.kh.couplism.member.model.vo.Member;
 
-@Service
-public class MemberService {
+public interface MemberService {
+	
+	int enrollMember(Member m);
 
 }

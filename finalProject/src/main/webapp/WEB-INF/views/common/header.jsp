@@ -225,7 +225,7 @@
 		</div>
 	</div>
 	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	<nav class="navbar navbar-expand-xl navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container" style="background:white;
 										overflow:hidden;">
 			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
