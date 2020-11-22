@@ -98,11 +98,11 @@
 	$(window).scroll(function (){
 		var height=$(document).scrollTop();
 		console.log(height);
-		if(height<300){
+		if(height<400){
 			$(".one").css("top","200px");
 			$(".two").css("top","950px");
 		}
-		if(height>=300){
+		if(height>=400){
 			$(".one").css("top","80px");
 			$(".two").css("top","840px");
 		}
