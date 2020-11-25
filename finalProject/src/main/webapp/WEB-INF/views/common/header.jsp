@@ -31,7 +31,8 @@
 
 	<!-- 폰트 -->
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <style>
 	.modal-content{
@@ -209,16 +210,23 @@
 				<div class="col-12 col-md d-flex align-items-center">
 					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">010-8902-0975</a> or <span class="mailus">email us:</span> <a href="#">kailloop@daum.net</a></p>
 				</div>
-				<div id="login" data-toggle="modal" data-target="#loginModal">
-					<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGIN</label>
-				</div>
+				<c:if test="${logginedMember==null }">
+					<div id="login" data-toggle="modal" data-target="#loginModal">
+						<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGIN</label>
+					</div>
+				</c:if>
+				<c:if test="${logginedMember!=null }">
+					<div id="login">
+						<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGOUT</label>
+					</div>
+				</c:if>
 				
 				<div id="mypage" class="circle">
-
-                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">   <small>회원</small> 님</i></p> 
-                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
-                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
-
+				<c:if test="${logginedMember==null }">
+	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">${logginMember.nickname }님</i></p> 
+	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
+	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
+				</c:if>
             	</div>
 				
 			</div>
@@ -265,6 +273,7 @@
 	<!-- END nav -->
 	
 	<!-- 로그인 Modal -->
+	<c:if test="${logginedMember==null }">
 	<div class="modal" id="loginModal" style="display: none;" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -317,6 +326,7 @@
 			</div>
 		</div>
 	</div>
+	</c:if>
 
 	
 
@@ -370,13 +380,25 @@
 		}
 	});
 	$("#login").hover(function(){
-		$("#login-font").text("로그인");
-		$("#login-font").css("font-family","Montserrat");
-		$("#login-font").css("left","25px");
+		if(${loginnedMember!=null}){
+			$("#login-font").text("로그인");
+			$("#login-font").css("font-family","Montserrat");
+			$("#login-font").css("left","25px");
+		}else{
+			$("#login-font").text("로그아웃");
+			$("#login-font").css("font-family","Montserrat");
+			$("#login-font").css("left","25px");
+		}
 	},function(){
-		$("#login-font").text("LOGIN");
-		$("#login-font").css("font-family","Roboto");
-		$("#login-font").css("left","25px");
+		if(${loginnedMember!=null}){
+			$("#login-font").text("LOGIN");
+			$("#login-font").css("font-family","Roboto");
+			$("#login-font").css("left","25px");
+		}else{
+			$("#login-font").text("LOGOUT");
+			$("#login-font").css("font-family","Roboto");
+			$("#login-font").css("left","25px");
+		}
 	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");

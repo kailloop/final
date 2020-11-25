@@ -4,4 +4,11 @@
 	<insert id="enrollMember" parameterType="member">
 		INSERT INTO MEMBER VALUES(#{id},#{password},#{nickname},#{couple},#{email},#{phone},#{gender},#{birthday},#{location},sysdate)
 	</insert>
+	<select id="duplicateId" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<select id="selectOneMember" parameterType="map" resultType="member">
+		SELECT * FROM MEMBER WHERE ID=#{id}
+	</select>
 </mapper>
