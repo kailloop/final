@@ -52,6 +52,21 @@ public class NoticeDaoImpl implements NoticeDao {
 	public int addComment(NoticeComment nc, SqlSessionTemplate session) {
 		return session.insert("notice.addComment", nc);
 	}
+
+	@Override
+	public int deleteNoticeFile(int noticeNo, SqlSessionTemplate session) {
+		return session.delete("notice.deleteNoticeFile",noticeNo);
+	}
+
+	@Override
+	public int deleteNoticeComment(int noticeNo, SqlSessionTemplate session) {
+		return session.delete("notice.deleteNoticeComment",noticeNo);
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo, SqlSessionTemplate session) {
+		return session.delete("notice.deleteNotice",noticeNo);
+	}
 	
 	
 }
