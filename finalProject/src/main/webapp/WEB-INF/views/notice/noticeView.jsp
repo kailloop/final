@@ -276,8 +276,7 @@
 						$(this).children("#hiddened").html(hiddeneds);
 					});
 				});
-				rollbackForm(ajaxCp);
-				
+				rollbackForm(ajaxCp);				
 			},
 			fail:error =>{
 				alert(JSON.stringify(error));
