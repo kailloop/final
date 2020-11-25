@@ -56,7 +56,7 @@ public class MemberController {
 		String path="";
 		if(user!=null) {
 			//id체크
-			if(encoder.matches((String)param.get("password"),user.getPassword())){
+			if(encoder.matches((String)param.get("pw-input"),user.getPassword())){
 				path="redirect:/";
 				m.addAttribute("logginedMember",user);
 				//session.setAttribute("logginedMember", user);
@@ -73,6 +73,7 @@ public class MemberController {
 			path="common/msg";
 		}
 		m.addAttribute("msg",msg);
+		System.out.println(user);
 		return path;
 	}
 	

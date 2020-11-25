@@ -9,6 +9,6 @@
 	</select>
 	
 	<select id="selectOneMember" parameterType="map" resultType="member">
-		SELECT * FROM MEMBER WHERE ID=#{id}
+		SELECT * FROM MEMBER WHERE ID=#{id-input}
 	</select>
 </mapper>

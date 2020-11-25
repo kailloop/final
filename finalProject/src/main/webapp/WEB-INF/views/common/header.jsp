@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:set var="logginedMember" value="${logginedMember }"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +163,31 @@
 		z-index:100;
 		cursor:pointer;
 	}
+	#logout{
+		position:relative;
+		width:90px;
+		height:22px;
+		top:10px;
+		right:20px;
+		transition:1s;
+		cursor:pointer;
+		z-index:100;
+		cursor:pointer;
+	}
 	#login-font{	
+		position:absolute;
+		font-size:15px;
+		width:auto;
+		height:auto;
+		margin:0;
+		padding:0;
+		color:#F0F0F0;
+		top:-7px;
+		cursor:pointer;
+		left:20px;
+		font-family:Roboto;
+	}
+	#logout-font{
 		position:absolute;
 		font-size:15px;
 		width:auto;
@@ -216,14 +241,14 @@
 					</div>
 				</c:if>
 				<c:if test="${logginedMember!=null }">
-					<div id="login">
-						<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="login" id="login-font">&nbsp;LOGOUT</label>
+					<div id="logout">
+						<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
 					</div>
 				</c:if>
 				
 				<div id="mypage" class="circle">
-				<c:if test="${logginedMember==null }">
-	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">${logginMember.nickname }님</i></p> 
+				<c:if test="${logginedMember!=null }">
+	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">${logginedMember.nickname }님</i></p> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
@@ -279,7 +304,7 @@
 			<div class="modal-content">
 		        <div class="modal-body">
 		          <!-- Default form login -->
-						<form class="text-center p-5" action="#!">
+					<form action="${path }/member/memberLogin" method="post">						
 						
 							<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
 						
@@ -291,13 +316,18 @@
 						<!-- Medium input -->
 						<div class="md-form">
 						  <label id="id-placeholder" for="id-input">Please Enter your ID</label>
-						  <input id="id-input" type="text" class="">
+						  <input id="id-input" name="id-input" type="text" class="">
+						 
 						</div>
 						<br>
 					    <!-- Password -->
 					    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
-					    <input id="pw-input" type="password" class="mb-6">
+					    <input id="pw-input" name="pw-input" type="password" class="mb-6">
 					    <br>
+					    
+					    
+					    
+					    
 					    <div class="d-flex justify-content-around">
 					        <div>
 					            <!-- Forgot password -->
@@ -306,9 +336,12 @@
 					        </div>
 					        
 					    </div>
-					
 					    <!-- Sign in button -->
 					    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
+					    
+					
+					    
+					    
 					
 					    <!-- Register -->
 					    <p>회원이 아니십니까?
@@ -322,13 +355,20 @@
 					    <a href="#" class="mx-2" role="button"><button>4</button></a>
 					
 					</form>
-		        </div>        
+		        </div>
 			</div>
 		</div>
 	</div>
 	</c:if>
 
-	
+<script>
+	function login(){
+		console.log("작동");
+		var id=$("#id-input").val();
+		var pw=$("#pw-input").val();
+		location.replace('/member/memberLogin?id-input='+id+',pw-input='+pw);
+	}
+</script>
 
 
 <script>
@@ -380,25 +420,22 @@
 		}
 	});
 	$("#login").hover(function(){
-		if(${loginnedMember!=null}){
-			$("#login-font").text("로그인");
-			$("#login-font").css("font-family","Montserrat");
-			$("#login-font").css("left","25px");
-		}else{
-			$("#login-font").text("로그아웃");
-			$("#login-font").css("font-family","Montserrat");
-			$("#login-font").css("left","25px");
-		}
+		$("#login-font").text("로그인");
+		$("#login-font").css("font-family","Montserrat");
+		$("#login-font").css("left","25px");
 	},function(){
-		if(${loginnedMember!=null}){
-			$("#login-font").text("LOGIN");
-			$("#login-font").css("font-family","Roboto");
-			$("#login-font").css("left","25px");
-		}else{
-			$("#login-font").text("LOGOUT");
-			$("#login-font").css("font-family","Roboto");
-			$("#login-font").css("left","25px");
-		}
+		$("#login-font").text("LOGIN");
+		$("#login-font").css("font-family","Roboto");
+		$("#login-font").css("left","25px");
+	});
+	$("#logout").hover(function(){
+		$("#logout-font").text("로그아웃");
+		$("#logout-font").css("font-family","Montserrat");
+		$("#logout-font").css("left","25px");
+	},function(){
+		$("#logout-font").text("LOGOUT");
+		$("#logout-font").css("font-family","Roboto");
+		$("#logout-font").css("left","25px");
 	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
