@@ -194,8 +194,4 @@ public class MemberController {
 			return "none";
 		}
 	}
-	
-	
-	
-	
 }
