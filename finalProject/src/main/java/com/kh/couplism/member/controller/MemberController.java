@@ -1,6 +1,7 @@
 package com.kh.couplism.member.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -11,8 +12,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +37,45 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-//	@Autowired
-//	private BCryptPasswordEncoder encoder;
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder()
+	{
+	  return new BCryptPasswordEncoder();
+	}
+
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	@RequestMapping("/member/memberLogin")
+	public String memberLogin(@RequestParam Map param,Model m,HttpSession session){
+		Member user=service.selectOneMember(param);
+		
+		String msg="";
+		String loc="";
+		String path="";
+		if(user!=null) {
+			//id체크
+			if(encoder.matches((String)param.get("pw-input"),user.getPassword())){
+				path="redirect:/";
+				m.addAttribute("logginedMember",user);
+				//session.setAttribute("logginedMember", user);
+			}else {
+				//비밀번호 다름
+				msg="아이디나 패스워드가 일치하지 않습니다.";
+				loc="/";
+				path="common/msg";
+			}
+		}else {
+			//아이디가없음
+			msg="아이디나 패스워드가 일치하지 않습니다.";
+			loc="/";
+			path="common/msg";
+		}
+		m.addAttribute("msg",msg);
+		System.out.println(user);
+		return path;
+	}
 	
 	@RequestMapping("/enrollMember.do")
 	public ModelAndView enrollMember(ModelAndView mv) {
@@ -63,13 +104,11 @@ public class MemberController {
 	@RequestMapping(value="/member/memberEnrollEnd",method=RequestMethod.POST)
 	public String memberEnrollEnd(Member member,Model m) {
 		
-//		String encodePw=encoder.encode(member.getPassword());
-//		
-//		member.setPassword(encodePw);
-		System.out.println("memberEnrollEnd들어와짐 ");
-		System.out.println(member);
+		String encodePw=encoder.encode(member.getPassword());
+		
+		member.setPassword(encodePw);
 		int result=service.enrollMember(member);
-		System.out.println(result);
+		
 		String msg="";
 		String loc="";
 		
@@ -82,7 +121,7 @@ public class MemberController {
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("loc",loc);
-		System.out.println("마지막줄");
+		
 		return "common/msg";
 	}
 	@RequestMapping("/member/checkEmail")
@@ -136,5 +175,23 @@ public class MemberController {
 		System.out.println(emailNumber);
 		
 		return emailNumber;
+	}
+	
+	@RequestMapping("/member/duplicateId")
+	@ResponseBody
+	public String duplicateId(@RequestParam(value="id",required=false,defaultValue="") String id,HttpServletRequest request) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		
+		int result=service.duplicateId(id);
+		
+		if(result>0) {
+			//아이디 중복
+			
+			return "exist"; 
+		}else {
+			//아이디 중복 안됌
+			
+			return "none";
+		}
 	}
 }

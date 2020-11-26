@@ -126,6 +126,24 @@
 		transition:1s;
 		outline:none;
 	}
+	#check-id{
+		position:relative;
+		left:165px;
+		top:-37px;
+		font-size:24px;
+		opacity:0;
+		color:black;
+		transition:0.5s;
+	}
+	#check-pw{
+		position:relative;
+		left:165px;
+		top:-37px;
+		font-size:24px;
+		opacity:0;
+		color:black;
+		transition:0.5s;
+	}
 </style>
 <script>
 	function sample6_execDaumPostcode() {
@@ -199,7 +217,7 @@
 					<tr>
 						<td class="enroll-title-param"><label for="id">아이디</label></td>
 					<tr>
-						<td class="enroll-title-value"><input class="enroll-input" type="text" id="id" name="id" autocomplete="off"></td>
+						<td class="enroll-title-value"><input class="enroll-input" type="text" id="id" name="id" maxlength="30" autocomplete="off"><i id="check-id" class="fas fa-check"></i></td>
 					</tr>
 					<!-- 비밀번호 -->
 					<tr>
@@ -213,7 +231,10 @@
 						<td class="enroll-title-param"><label for="pwck">비밀번호 확인</label></td>
 					</tr>
 					<tr>
-						<td class="enroll-title-value"><input class="enroll-input" type="password" id="pwck" name="pwck"></td>
+						<td class="enroll-title-value">
+							<input class="enroll-input" type="password" id="pwck" name="pwck">
+							<i id="check-pw" class="fas fa-check"></i>
+						</td>
 					</tr>
 					<!-- 닉네임 -->
 					<tr>
@@ -324,12 +345,52 @@
 	
 	</section>
 	<script>
-	
+	var id="";
+	var pw="";
 	var tel = /^\d{3}-\d{3,4}-\d{4}$/;
 	var birth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	var password = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 	var email=0;
 	$(function(){
+		$("#pwck").keyup(function(){
+			if($("#pwck").val()==""){
+				$("#check-pw").css("color","black");
+				$("#check-pw").css("opacity","0");
+				return;
+			}
+			if($("#pwck").val()==$("#password").val()){
+				$("#check-pw").css("color","#41FF3A");
+				$("#check-pw").css("opacity","1");
+				return;
+			}
+			if($("#pwck").val()!=$("#password").val()){
+				$("#check-pw").css("color","red");
+				$("#check-pw").css("opacity","1");
+				return;
+			}
+		});
+		$("#id").keyup(function(){
+			if($("#id").val()==""){
+				$("#check-id").css("color","black");
+				$("#check-id").css("opacity","0");
+			}else{
+				$.ajax({
+					url:"${path }/member/duplicateId",
+					data:{"id":$("#id").val()},
+					dataType:"html",
+					success:data=>{
+						if(data=="exist"){
+							$("#check-id").css("color","red");
+							$("#check-id").css("opacity","1");
+						}else{
+							$("#check-id").css("color","#41FF3A");
+							$("#check-id").css("opacity","1");
+						}
+						
+					}
+				});	
+			}
+		});
 		$("#check-email").click(function(){
 			if(email==0){//인증번호 발송
 				alert("해당 이메일에 인증번호를 발송하였습니다. 인증번호를 입력하고 인증번호 확인 버튼을 눌러주세요.");
@@ -354,11 +415,11 @@
 				}
 			}
 		});
-		$("#enroll-join").click(function(){
+		$("#enroll-join").click(function(){//가입하기 버튼
 			if(email==2){
 				var address="";
 				var birthday="";
-				var offset;
+				var offset;				
 				address+=$("#sample6_address").val();//주소 셋팅
 				address+=" ";
 				address+=$("#sample6_detailAddress").val();
@@ -368,11 +429,27 @@
 				birthday+=$("#month").val();
 				birthday+=$("#day").val();
 				$("#birthday").val(birthday);
+				if($("input[id='id']").val()==""){
+					alert("아이디를 적어주세요");
+					offset = $("input[id='id']").offset();
+					$('html, body').animate({scrollTop: offset.top},1000);
+					return;
+				}
+				if($("#pwck").val()==$("#password").val()){
+					alert("비밀번호 확인에 다른 비밀번호가 들어가있습니다. 확인하여 다시 적어주세요.");
+					$("#pwck").val("");
+					$("#password").val("");
+				}
 				if(!password.test($("input[id='password']").val())){
 					alert("특수문자 / 문자 / 숫자 포함 형태의 8~15자리 비밀번호를 입력해주세요");
 					offset = $("input[id='password']").offset();
 					$('html, body').animate({scrollTop: offset.top},1000);
 					return;
+				}
+				if($("#nickname").val()==""){
+					alert("닉네임을 적어주세요");
+					offset = $("#nickname").offset();
+					$('html, body').animate({scrollTop: offset.top},1000);
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");
