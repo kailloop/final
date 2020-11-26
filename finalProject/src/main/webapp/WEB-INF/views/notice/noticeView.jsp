@@ -277,7 +277,6 @@
 					});
 				});
 				rollbackForm(ajaxCp);				
->>>>>>> branch 'master' of https://github.com/kailloop/final.git
 			},
 			fail:error =>{
 				alert(JSON.stringify(error));

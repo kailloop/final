@@ -97,4 +97,3 @@
   });
 
 </script>
->>>>>>> branch 'master' of https://github.com/kailloop/final.git

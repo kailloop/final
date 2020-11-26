@@ -436,7 +436,6 @@
 		$("#logout-font").text("LOGOUT");
 		$("#logout-font").css("font-family","Roboto");
 		$("#logout-font").css("left","25px");
->>>>>>> branch 'master' of https://github.com/kailloop/final.git
 	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
