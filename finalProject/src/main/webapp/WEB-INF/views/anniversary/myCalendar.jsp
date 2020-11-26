@@ -42,6 +42,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: 'prev,next today',
@@ -52,30 +53,44 @@
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-      showNonCurrentDates:false
-      select: function(arg) {
+       select: function(arg) {
         var title = prompt('일정 추가:');
         if (title) {
+
           calendar.addEvent({
             title: title,
             start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
+            end: arg.end
+            
           })
+        location.reload();
         }
         calendar.unselect()
-      },
+      }, 
       eventClick: function(arg) {
-        if (confirm('일정을 삭제하시겠습니까? 삭제하시면 다시 복구하실 수 없습니다.')) {
+    	 if (confirm('일정을 삭제하시겠습니까? 삭제하시면 다시 복구하실 수 없습니다.')) {
           arg.event.remove()
-        }
+        } 
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-      	url:"/calendar/calendarList.do",
-      	method:"POST";
-      ]
+      
+      events: {
+    	    url: '/calendarValue',
+    	    method: 'POST',
+    	    extraParams: {
+    	    	title: 'Long Event',
+    	        start: '2020-09-07',
+    	        end: '2020-09-10'
+    	    },
+    	    failure: function() {
+    	      alert('캘린더 목록 불러오기실패');
+    	    },
+    	    color: 'yellow',  
+    	    textColor: 'black'
+    	  }
+      
+      
     });
 
     calendar.render();
