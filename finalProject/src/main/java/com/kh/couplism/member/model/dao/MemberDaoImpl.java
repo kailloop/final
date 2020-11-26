@@ -1,5 +1,7 @@
 package com.kh.couplism.member.model.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +16,16 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.insert("member.enrollMember",m);
 	}
+	
+	@Override
+	public int duplicateId(SqlSession session,String id) {
+		
+		return session.selectOne("member.duplicateId",id);
+	}
 
+	@Override
+	public Member selectOneMember(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("member.selectOneMember",param);
+	}
 }

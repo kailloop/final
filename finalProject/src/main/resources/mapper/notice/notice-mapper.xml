@@ -67,4 +67,16 @@
 	<insert id="addComment" parameterType="com.kh.couplism.notice.model.vo.NoticeComment">
 		INSERT INTO NOTICE_COMMENT VALUES(#{noticeNo}, #{userId}, #{commentContent}, #{commentPosition}, #{replyPosition}, SYSDATE)
 	</insert>
+	<delete id="deleteNoticeFile" parameterType="_int">
+		DELETE FROM NOTICE_FILE
+		WHERE NOTICE_NO LIKE #{noticeNo}
+	</delete>
+	<delete id="deleteNoticeComment" parameterType="_int">
+		DELETE FROM NOTICE_COMMENT
+		WHERE NOTICE_NO LIKE #{noticeNo}
+	</delete>
+	<delete id="deleteNotice" parameterType="_int">
+		DELETE FROM NOTICE
+		WHERE NOTICE_NO LIKE #{noticeNo}
+	</delete>
 </mapper>

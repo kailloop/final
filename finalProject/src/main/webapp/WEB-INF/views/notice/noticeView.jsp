@@ -111,27 +111,33 @@
 			<input id="jh-userId" type="hidden" name="userId" value="admin"/>
 			<input id="jh-noticNo"type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
 			<input id="jh-replyPosition" type="hidden" name="replyPosition" value=""/>
-			<input id="jh-commentPosition"type="hidden" name="commentPosition" value="${cp }"/>
+			<input id="jh-commentPosition"type="hidden" name="commentPosition" value="${cp}"/>
 			<textarea id="jh-commentContent" name="commentContent" class="form-control"
 				style="width: 89%; resize: none; margin-left: 15px;" rows="4"></textarea>
-			<button onclick="addComment();" style="margin-left: 5px;"
-				type="button" class="col-sm-1 btn btn-outline-secondary float-right">댓글작성</button>
 			<button onclick="ajaxComment();" style="margin-left: 5px;"
-				type="button" class="col-sm-1 btn btn-outline-secondary float-right">ajax</button>
+				type="button" class="col-sm-1 btn btn-outline-secondary float-right">댓글작성</button>
 		</div>
 		<h1 id="cpH1"></h1>
 	</form>
+	<button type="button" onclick="deleteNotice();">삭제</button>
 </section>
 <script>
+
+	function deleteNotice(){
+		location.href = "${path}/notice/deleteNotice?noticeNo=${notice.noticeNo}";
+	}
+
 ﻿/* 	setInterval(function(){
 		ajaxComment();	
 	}, 1000); */
 	function addComment() {
 		$("#formAddComment").submit();
 	}
-	function rollbackForm(){
+	function rollbackForm(ajaxCp){
+		console.log("rollbackForm들어옴");
+		console.log("jsonData.cp : "+ajaxCp);
 		$("form div[id=replyStatus]").html("");
-		$("form input[id=jh-commentPosition]").val("${cp}");
+		$("form input[id=jh-commentPosition]").val(ajaxCp);
 		$("form input[id=jh-replyPosition]").val("0");
 	}
 
@@ -140,8 +146,10 @@
 			let hiddened = "<div style='height: 30px;'><button id='clicke' type='button' onclick='replywrite(event);' class='btn btn-outline-secondary float-right'>답글 작성</button></div>"
 				$(this).children("#hiddened").html(hiddened);
 			el = this;
-			console.log(el);
-
+			$("#clicke").click(function(){//스크롤 내려야함
+		        var offset = $("#formAddComment").offset();
+		        $('html, body').animate({scrollTop : offset.top}, 1000);
+				});
 		});
 		$("div[class=commentDiv]").on("mouseleave",function(){
 			let hiddeneds = "";
@@ -153,21 +161,39 @@
 		var form = document.commentForm;
 		var commentP = $(event.target).parent().parent().parent().children("input[id=commentP]").val();
 		var writerId =  $(event.target).parent().parent().parent().children("input[id=userId]").val();
-		console.log($(event.target).parent().parent().parent().children("input[id=userId]").val());
-		replyP = "";
+		var replyP = "";
+		
+		
+		/* console.log($(event.target));
+		console.log($(event.target).parent());
+		console.log($(event.target).parent().parent());
+		console.log($(event.target).parent().parent().parent());
+		console.log($(event.target).parent().parent().parent().children().last());
+		console.log(); */
 		if($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()>0){
 			replyP=parseInt($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val())+1;
+/* 			console.log(replyP);
 			console.log(parseInt(replyP)+1);
+			*//* console.log("이프"); *//*
+			console.log($(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()); */
+			/* console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val()); */
 		}else{
 			replyP = parseInt($(event.target).parent().parent().parent().children("input[id=replyP]").val())+1;
+		/* 	console.log(replyP);
 			console.log(parseInt(replyP)+1);
+			*//* console.log("엘스"); 
+			console.log("조건문 : "+$(event.target).parent().parent().parent().children().last().children("input[id=replyP]").val());
+			console.log($(event.target).parent().parent().parent().children("input[id=replyP]")); */
 		}
 		/* $(form).children("#jh-commentPosition").val(commentP);
 		$(form).children("#jh-replyPosition").val(replyP); */
 		$("form input[id=jh-commentPosition]").val(commentP);
 		$("form input[id=jh-replyPosition]").val(replyP);
-		console.log(writerId);
-		$("form div[id=replyStatus]").html(writerId+"님에게 답글작성중입니다."+"<button onclick=rollbackForm() type='button'>취소</button>");
+		/* console.log("commentP : "+commentP);
+		console.log("writerId : "+writerId);
+		console.log("replyP : "+replyP); */
+		$("form div[id=replyStatus]").html(writerId+"님에게 답글작성중입니다."+"<button  onclick='rollbackForm();' type='button'>취소</button>");
+		
 	}
 	
 	function ajaxComment(){
@@ -222,27 +248,36 @@
 			success:data => {
 				var jsonData = JSON.parse(data);
 				$("#allCommentDiv").html(jsonData.html);
-				console.log("성공");
+				/* console.log("성공");
 				console.log(jsonData.html);
+				console.log(jsonData.cp); */
 				console.log(jsonData.cp);
+				console.log(data.cp);
+				var ajaxCp = jsonData.cp;
+				console.log(ajaxCp);
+				/* $("form input[id=jh-commentPosition]").attr("value",jsonData.cp); */
+				$("#jh-commentPosition").val(jsonData.cp);
 				$("#jh-commentContent").val("");
-				$(document.commentForm.commentPosition).val(jsonData.cp);
+				console.log($("form input[id=jh-commentPosition]"));
+				/* $("form input[id=jh-commentPosition]").val(ajaxCp); */
 				$("#cpH1").html(jsonData.cp);
 				$(function addbutton(){
 					$("div[class=commentDiv]").on("mouseenter",function(){
 						let hiddened = "<div style='height: 30px;'><button id='clicke' type='button' onclick='replywrite(event);' class='btn btn-outline-secondary float-right'>답글 작성</button></div>"
 							$(this).children("#hiddened").html(hiddened);
 						el = this;
-						console.log(el);
-
+						$("#clicke").click(function(){//스크롤 내려야함
+					        var offset = $("#formAddComment").offset();
+					        $('html, body').animate({scrollTop : offset.top}, 1000);
+							});
 					});
 					$("div[class=commentDiv]").on("mouseleave",function(){
 						let hiddeneds = "";
 						$(this).children("#hiddened").html(hiddeneds);
 					});
 				});
-				rollbackForm();
-				
+				rollbackForm(ajaxCp);				
+>>>>>>> branch 'master' of https://github.com/kailloop/final.git
 			},
 			fail:error =>{
 				alert(JSON.stringify(error));

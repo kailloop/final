@@ -18,4 +18,7 @@ public interface NoticeService {
 	public List<NoticeFile> getNoticeFile(int noticeNo);
 	public List<NoticeComment> getNoticeComment(int noticeNo);
 	public int addComment(NoticeComment nc);
+	public int deleteNoticeFile(int noticeNo);
+	public int deleteNoticeComment(int noticeNo);
+	public int deleteNotice(int noticeNo);
 }
