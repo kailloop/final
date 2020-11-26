@@ -386,4 +386,45 @@ public class NoticeController {
 		new Gson().toJson(mp,resp.getWriter());
 	}
 	
+	@RequestMapping("/notice/deleteNotice")
+	public void deleteNotice(HttpServletRequest request, HttpServletResponse rs, int noticeNo) throws IOException {
+		logger.debug("--------------------------------------------------deleteNotice--------------------------------------------------------");
+		logger.debug("noticeNo = "+noticeNo);//삭제 순서 1.noticeFile 2.noticeComment 3.Notice 이렇게 삭제 
+		
+		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);//프로젝트에 있는 파일도 삭제하기 위해 먼저 해당 파일의 리스트를 가져옴
+		
+		logger.debug("noticeFile 삭제");
+		
+		int noticeFileResult = service.deleteNoticeFile(noticeNo);
+		logger.debug("DB삭제 결과"+noticeFileResult+"개 삭제 완료");
+		logger.debug("프로젝트에 있는 파일 삭제 살행");
+		logger.debug("파일 총갯수  : "+noticeFile.size()+"개");
+		for(NoticeFile nf : noticeFile) {
+			File file = new File(request.getServletContext().getRealPath("/resources/upload/notice/"+nf.getRenameName()));
+			logger.debug(request.getServletContext().getRealPath("/resources/upload/notice/"+nf.getRenameName()));
+			if(file.exists()) {
+				logger.debug(nf.getRenameName()+" 접근 완료");
+				boolean deleteResult =file.delete();
+				logger.debug("처리결과  : "+deleteResult);
+			}else {
+				logger.debug(request.getServletContext().getRealPath("/resources/upload/notice/"+nf.getRenameName())+"를 찾을수 없습니다.");
+			}
+		}
+		
+		logger.debug("noticeFile 삭제완료.");
+		logger.debug("noticeComment 삭제");
+		
+		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
+		logger.debug("총 댓글 갯수 : "+noticeComment.size()+"개");
+		logger.debug("NoticeComment 삭제 실행");
+		int noticeCommentResult = service.deleteNoticeComment(noticeNo);
+		logger.debug(noticeCommentResult+"개 삭제 완료");
+		
+		logger.debug("Notice 삭제 실행");
+		service.deleteNotice(noticeNo);
+		logger.debug("Notice 삭제 완료.");
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		rs.sendRedirect(request.getContextPath()+"/notice/noticeList");
+	}
+	
 }
