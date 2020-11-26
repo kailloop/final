@@ -119,8 +119,14 @@
 		</div>
 		<h1 id="cpH1"></h1>
 	</form>
+	<button type="button" onclick="deleteNotice();">삭제</button>
 </section>
 <script>
+
+	function deleteNotice(){
+		location.href = "${path}/notice/deleteNotice?noticeNo=${notice.noticeNo}";
+	}
+
 ﻿/* 	setInterval(function(){
 		ajaxComment();	
 	}, 1000); */
@@ -270,8 +276,7 @@
 						$(this).children("#hiddened").html(hiddeneds);
 					});
 				});
-				rollbackForm(ajaxCp);
-				
+				rollbackForm(ajaxCp);				
 			},
 			fail:error =>{
 				alert(JSON.stringify(error));

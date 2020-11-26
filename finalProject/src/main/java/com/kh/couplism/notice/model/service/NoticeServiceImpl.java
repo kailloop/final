@@ -60,7 +60,21 @@ public class NoticeServiceImpl implements NoticeService {
 	public int addComment(NoticeComment nc) {
 		return dao.addComment(nc, session);
 	}
+
+	@Override
+	public int deleteNoticeFile(int noticeNo) {
+		return dao.deleteNoticeFile(noticeNo, session);
+	}
+
+	@Override
+	public int deleteNoticeComment(int noticeNo) {
+		return dao.deleteNoticeComment(noticeNo, session);
+	}
 	
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return dao.deleteNotice(noticeNo, session);
+	}
 	
 	
 }
