@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.couplism.email.MailAuth;
@@ -194,4 +195,18 @@ public class MemberController {
 			return "none";
 		}
 	}
+	
+	@RequestMapping(value="/member/memberLogout")
+	public String memberLogout(SessionStatus status,Model m) {
+		String msg="";
+		if(!status.isComplete()) {
+			status.setComplete();//세션삭제
+			msg="커플리즘 사이트에서 로그아웃  되셨습니다.";
+		}else {
+			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요.";
+		}
+		m.addAttribute("msg",msg);
+		return "common/msg";
+	}
+	
 }
