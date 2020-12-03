@@ -241,8 +241,8 @@
 					</div>
 				</c:if>
 				<c:if test="${logginedMember!=null }">
-					<div id="logout">
-						<i id="clickLogin" class="fas fa-sign-in-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
+					<div id="logout" onclick="logout();">
+						<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
 					</div>
 				</c:if>
 				
@@ -362,6 +362,9 @@
 	</c:if>
 
 <script>
+	function logout(){
+		location.replace('${path}/member/memberLogout');
+	}
 	function login(){
 		console.log("작동");
 		var id=$("#id-input").val();
