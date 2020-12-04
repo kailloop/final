@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.kh.couplism.member.model.vo.Member;
 import com.kh.couplism.notice.model.service.NoticeService;
 import com.kh.couplism.notice.model.vo.Notice;
 import com.kh.couplism.notice.model.vo.NoticeComment;
@@ -113,7 +115,7 @@ public class NoticeController {
 	
 	
 	@RequestMapping("notice/writeEnd")
-	public ModelAndView noticeWriteEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice, HttpServletRequest request) {
+	public ModelAndView noticeWriteEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice, HttpServletRequest request, HttpSession session) {
 		
 		logger.debug("========================== NoticeWriet ==========================");
 		
@@ -124,9 +126,8 @@ public class NoticeController {
 		 * logger.debug("제목 : "+notice.getNoticeTitle());
 		 * logger.debug("내용 : "+notice.getNoticeContent());
 		 */
-		
-		notice.setUserId("admin");//로인완료시 처리를 해줘야함 !로그인 한사람을 Session에서 불러와서 입력해준다
-		
+		//notice.setUserId("admin");//로인완료시 처리를 해줘야함 !로그인 한사람을 Session에서 불러와서 입력해준다
+		logger.debug("Notiec : "+notice);
 		int result = service.insertNotice(notice);
 		
 		logger.debug("result : "+result);
@@ -317,7 +318,7 @@ public class NoticeController {
 	@ResponseBody
 	public void noticeAddCommentAjax(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
 			   @RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
-			   @RequestParam(value="commentContent") String commentContent,
+			   @RequestParam(value="commentContent") String commentContent, String userId,
 			   int noticeNo, HttpServletRequest rq, HttpServletResponse resp) throws JsonIOException, IOException{
 		
 		resp.setCharacterEncoding("utf-8");
@@ -332,15 +333,16 @@ public class NoticeController {
 
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
 		logger.debug("noticeNo : "+noticeNo);
+		logger.debug("userId : "+userId);
 		logger.debug("commentContent : "+commentContent);
 		logger.debug("commentPosition : "+commentPosition);
 		logger.debug("replyPosition : "+replyPosition);
-		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+		logger.debug(""+new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		int result = 0;
 		if(replyPosition>0) {//답글
-			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+			result = service.addComment(new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		}else {
-			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+			result = service.addComment(new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		}
 		logger.debug("result : "+result);
 		if(result>0) {
@@ -425,6 +427,45 @@ public class NoticeController {
 		logger.debug("Notice 삭제 완료.");
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
 		rs.sendRedirect(request.getContextPath()+"/notice/noticeList");
+	}
+	
+	@RequestMapping("/notice/checkMember")//로그인 되어있는 사용자 가져옴
+	public void checkMember(HttpSession session) {
+		Member m = (Member)session.getAttribute("logginedMember");
+		logger.debug(""+m);
+	}
+	
+	@RequestMapping("/notice/modifyNotice")
+	public ModelAndView modifyNotice(int noticeNo, ModelAndView mv) {
+		logger.debug("--------------------------------------------------modifyNotice--------------------------------------------------------");
+		logger.debug("noticeNo : "+noticeNo);
+		Notice n = service.getNotice(noticeNo);
+		logger.debug("notice가져옴");
+		logger.debug("Notice : "+n);
+		List<NoticeFile> nf = service.getNoticeFile(noticeNo);
+		logger.debug("NoticeFile : "+nf);
+		mv.addObject("noticeFile", nf);
+		mv.addObject("notice",n);
+		mv.setViewName("/notice/modifyNotice");
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		return mv;
+	}
+	@RequestMapping("/notice/modifyNoticeEnd")
+	public ModelAndView modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice,String fileRenameName, HttpServletRequest request, HttpSession session){
+		logger.debug("--------------------------------------------------modifyNoticeEnd--------------------------------------------------------");
+		logger.debug("Notiec : "+notice);
+		logger.debug("NoticeFile : "+noticeFile);
+		String[]renamedFiles = fileRenameName.split(",");
+		List<NoticeFile> nf = service.getNoticeFile(notice.getNoticeNo());
+		for(NoticeFile nff : nf) {//비교하는 로직 작성 !
+			for(String rf : renamedFiles) {
+				if(rf != nff.getRenameName()) {
+					logger.debug("사용하지 않을 이전 파일 :"+nff);
+				}
+			}
+		}
+		logger.debug("-------------------------------------------------------------------------------------------------------------------------");
+		return mv;
 	}
 	
 }

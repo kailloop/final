@@ -68,13 +68,22 @@
                 <ul id="pageNavUl" class="pagination justify-content-center">
                     <c:out value="${pageBar }" escapeXml="false" />
                 </ul>
-            </nav>
-		<button type="button" onclick="noticeWrite()">글쓰기</button>
+            </nav><button type="button" onclick="noticeWrite()">글쓰기</button>
+		<c:if test="${logginedMember!=null }"><c:if test="${logginedMember.id eq 'cccc'}"></c:if></c:if>
 	</div>
 </section>
 <script>
 	function noticeWrite() {
-		location.replace("${path}/notice/write");
+		console.log("${logginedMember.id eq 'cccc'}");
+		if(${logginedMember!=null}){
+			if(${logginedMember.id eq 'cccc'}){
+				location.replace("${path}/notice/write");
+			}else{
+				alert("공지사항은 관리자만 작성이 가능합니다.");
+			}
+		}else{
+			alert("공지사항은 관리자만 작성이 가능합니다.");
+		}
 	}
 	$(function(){
 		$(".jh_tr").click(e => {

@@ -31,6 +31,7 @@
 			</div>
 			<textarea name="noticeContent" class="form-control" style="resize: none;"
 				rows="30"></textarea>
+			<input type="hidden" name="userId" value="${logginedMember.id}">
 			<button class="float-right" type="submit">작성</button>
 		</form>
 	</div>
