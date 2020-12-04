@@ -104,7 +104,10 @@ public class NoticeController {
 		}
 		m.addAttribute("list",list);
 		m.addAttribute("pageBar",pageBar);
-		
+		m.addAttribute("titleHan","공지사항");
+		m.addAttribute("titleEng","Notice");
+		m.addAttribute("logoPath","resources/images/notice.jpg");
+		m.addAttribute("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		return"/notice/noticeList";
 	}
 	
@@ -175,7 +178,10 @@ public class NoticeController {
 		
 		logger.debug("=================================================================");
 		mv.setViewName("redirect:/notice/noticeList");
-		
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		return mv;
 	}
 	
@@ -224,6 +230,10 @@ public class NoticeController {
 		mv.addObject("noticeComment", noticeComment);
 		mv.addObject("cp", cp+1);
 		mv.addObject("html", html);
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		mv.setViewName("/notice/noticeView");
 		return mv;
 	}
@@ -426,7 +436,7 @@ public class NoticeController {
 		service.deleteNotice(noticeNo);
 		logger.debug("Notice 삭제 완료.");
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
-		rs.sendRedirect(request.getContextPath()+"/notice/noticeList");
+		rs.sendRedirect(request.getContextPath()+"/notice/noticeList?");
 	}
 	
 	@RequestMapping("/notice/checkMember")//로그인 되어있는 사용자 가져옴
@@ -447,6 +457,10 @@ public class NoticeController {
 		mv.addObject("noticeFile", nf);
 		mv.addObject("notice",n);
 		mv.setViewName("/notice/modifyNotice");
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
 		return mv;
 	}
@@ -464,6 +478,11 @@ public class NoticeController {
 				}
 			}
 		}
+		mv.setViewName("/notice/noticeList");
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		logger.debug("-------------------------------------------------------------------------------------------------------------------------");
 		return mv;
 	}
