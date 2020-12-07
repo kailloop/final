@@ -10,7 +10,6 @@
 		<result property="locationPhone" column="LOCATIONPHONE"/>
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
-		<result property="locationPrice" column="LOCATIONPRICE"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
@@ -41,6 +40,26 @@
 		<result property="reviewNo" column="REVIEWNUM"/>
 		<result property="originalName" column="REVIEWORIGINAL"/>
 		<result property="renameName" column="REVIEWRENAMED"/>
+	</resultMap>
+	
+	<resultMap id="locationPrice" type="com.kh.couplism.location.model.vo.LocationPrice">
+		<result property="locationNo" column="LOCATION_NO"/>
+		<result property="priceTime" column="PRICE_TIME"/>
+		<result property="priceDay" column="PRICE_DAY"/>
+		<result property="price" column="PRICE"/>
+		<result property="pricePeople" column="PRICE_PEOPLE"/>
+	</resultMap>
+	
+	<resultMap type="locationReservation" id="com.kh.couplism.location.model.vo.LocationReservation">
+		<result property="reservationNo" column="RESERVATION_NO"/>
+		<result property="locationNo" column="LOCATION_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="reservationPeopleCount" column="RESERVATION_PEOPLE_COUNT"/>
+		<result property="reservationTime" column="RESERVATION_TIME"/>
+		<result property="reservationDay" column="RESERVATION_DAY"/>
+		<result property="reservationPrice" column="RESERVATION_PRICE"/>
+		<result property="paymentDate" column="PAYMENT_DATE"/>
+		<result property="reservationDate" column="RESERVATION_DATE"/>
 	</resultMap>
 	
 	<select id="locationList" parameterType="map" resultType="com.kh.couplism.location.model.vo.Location">
