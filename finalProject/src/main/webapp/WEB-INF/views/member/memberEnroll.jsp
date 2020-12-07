@@ -64,7 +64,7 @@
 		border-radius:100px;
 	}
 	section{
-		height:2100px;
+		height:1700px;
 		background-color:#F8F8F8;
 	}
 	body{
@@ -502,10 +502,4 @@
 		});	
 	});
 	</script>
-	<footer>
-		
-	</footer>
-	
-	
-</body>
-</html>
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

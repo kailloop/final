@@ -270,7 +270,7 @@
 				<div id="nav-main">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a href="" class="nav-color nav-link">회사소개</a></li>
-						<li class="nav-item"><a id="travel" class="nav-color nav-link" style="cursor:pointer;">여행지</a></li>
+						<li class="nav-item"><a id="travel" class="nav-color nav-link" onclick="travel();" style="cursor:pointer;">여행지</a></li>
 						<li class="nav-item"><a class="nav-color nav-link">리즘</a></li>
 						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;">기념일</a></li>
 						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;">커뮤니티</a></li>
@@ -281,10 +281,10 @@
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
-						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
+						<!-- <li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
-						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li> -->
 						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/myCalendar.do"  class="nav-link nav-color" >기념일 설정</a></li>
 						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li>
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
@@ -362,6 +362,9 @@
 	</c:if>
 
 <script>
+	function travel(){
+		location.replace('${path}/moveLocation');
+	}
 	function logout(){
 		location.replace('${path}/member/memberLogout');
 	}
@@ -393,14 +396,6 @@
 		$("#nav-sub").css("left","-400px");
 		$(".nav-community").css("display","inline");
 		nav=2;
-	});
-	$("#travel").click(function(){
-		$("#nav-main").css("transition","0.5s");
-		$("#nav-sub").css("transition","1s");
-		$("#nav-main").css("left","-600px");
-		$("#nav-sub").css("left","-400px");
-		$(".nav-travel").css("display","inline");
-		nav=1;
 	});
 	$(".nav-back").click(function(){
 		$("#nav-main").css("transition","1s");
