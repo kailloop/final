@@ -9,309 +9,284 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 
+
+
+
+
+<div>
+<!--상단 제목  -->
+<div class="page-header" >
+    <p style="font-size: 50px; text-align: center; font-weight: bold;">FAQ</p>
+    <div style="background:#FFD9EC; width: 900px; margin-left: auto; margin-right: auto;text-align: center; border-radius: 20px;">
+    <strong style="color:#DD2D4A;  font-size: 18px; ">"FAQ를 통해서 원하시는 답변을 쉽고 빠르게 찾아보세요"</strong>
+    <p style="color:#DD2D4A;  font-size: 15px; text-align: center; ">질문 빈도수가 높은 질문들을 모아, 친절한 답변과 함께 재공해드리고 있습니다.</p>    
+</div>
+    
+    
+</div>
+
 <style>
-	section{
-		max-height: auto;
+	.menuatag{
+		text-decoration:none; color:#000000;
+	}         
+    .menuatag:hover{
+    	color:#f26A8D;
+    }                    
+    #navul{ 
+    	padding-top:10px;
+    	margin-top: 30px;
+    }
+    .navli{
+        display:inline;                       
+        border-left:1px solid #999;      
+        font-size:13px;
+        font-weight:bold;            
+        padding:0 10px;
+    }
+    .navli:first-child{border-left:none;}
+    .menuatagcolor{
+    	color:#f26a8d;
+    } 
+    li{
+    	cursor: pointer;
+    }
+</style>
+
+
+<nav style="margin-left: 160px;">
+	<ul id="navul">
+    	<li class="navli menuall menuatag" style="color:#F26A8D">ALL</li>
+        <li class="navli menulocation menuatag">LOCATION</li>
+        <li class="navli menulism menuatag">LISM</li>
+        <li class="navli menuanniversary menuatag">ANNIVERSARY</li>
+        <li class="navli menuetc menuatag">ETC</li>
+    </ul>   
+</nav>   
+
+
+
+<style>
+	body {
+	  color: #333;
+	  background: #fcfcfc;
+	  font-family: 'Raleway', sans-serif;
+	  overflow-x: hidden;
 	}
-        #icontable i{
-            font-size:100px;
-            text-shadow: 3px 3px 4px rgb(170, 170, 170);
-        }
-        td{
-            width: 200px;
-            text-align: center;  
-        }
-        td label:hover{
-           color:#DD2D4A;
-        }
-        #icontable p{
-            font-weight: bold;
-        }
-        label{
-            cursor: pointer;
-        }
-        #detaildiv{
-            padding-top: 50px;
-            text-align: left;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        a{
-            font-size: 20px;
-            text-decoration: none;
-            color: #4C4C4C;
-        }
-        div div p{
-            color:#D9418C;
-            font-weight: bold;
-        }
-        table{
-            margin-left: auto; margin-right: auto;
-        }
-        #detaildiv table{
-              border-collapse: separate;
-            border-spacing: 60px;
-            width: 650px;
-        }
-        #detaildiv i{
-            font-size: 80px;
-        }
-        .aname{
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .hovertr td i:hover{
-            color:#DD2D4A;
-        }
-        .hovertr td a:hover{
-            color:#DD2D4A;
-        }
-        section{
-            max-height: auto;
-        }
-        
-        
-    </style>
+	
+	.faq-content {
+	  margin: 40px auto;
+	}
+	
+	.faq-question {
+	  padding: 20px 0;
+	  border-bottom: 1px dotted #ccc;
+	}
+	
+	.panel-title {
+	  font-size: 20px;
+	  width: 100%;
+	  position: relative;
+	  margin: 0;
+	  padding: 10px 10px 0 48px;
+	  display: block;
+	  cursor: pointer;
+	}
+	
+	.panel-content {
+	  font-size: 16px;
+	  padding: 0px 14px;
+	  margin: 0 40px;
+	  height: 0;
+	  overflow: hidden;
+	  z-index: -1;
+	  position: relative;
+	  opacity: 0;
+	  -webkit-transition: .4s ease;
+	  -moz-transition: .4s ease;
+	  -o-transition: .4s ease;
+	  transition: .4s ease;
+	}
+	
+	.panel:checked ~ .panel-content{
+	  height: auto;
+	  opacity: 1;
+	  padding: 14px;
+	}
+	
+	.plus {
+	  position: absolute;
+	  margin-left: 20px;
+	  margin-top: 9px;
+	  z-index: 5;
+	  font-weight:bold;
+	  color:#DD2D4A;
+	  font-size: 38px;
+	  line-height: 100%;
+	  -webkit-user-select: none;    
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  -o-user-select: none;
+	  user-select: none;
+	  -webkit-transition: .2s ease;
+	  -moz-transition: .2s ease;
+	  -o-transition: .2s ease;
+	  transition: .2s ease;
+	}
+	
+	.panel:checked ~ .plus {
+	  -webkit-transform: rotate(45deg);
+	  -moz-transform: rotate(45deg);
+	  -o-transform: rotate(45deg);
+	  transform: rotate(45deg);
+	}
+	
+	.panel {
+	  display: none;
+	}
+	p>em{
+		color:#DD2D4A;
+	}
+</style>
 
-    <div id="btndiv" style="text-align: center; margin-top: 150px;">
-    	<button  type="button" class="btn btn-outline-danger">날짜 다시선택하기</button>
-    </div>
-    
-<div id="icondiv" style="margin-top: 200px;">
-        <table id="icontable">
-            <tr>
-                <td>
-                    <label id="stayicon">
-                        <i class="fas fa-bed"></i>
-                        <p>숙박</p>
-                    </label>
-                </td>
-                <td>
-                    <label id="areaicon"> 
-                        <i class="fas fa-place-of-worship"></i>
-                        <p>명소</p>
-                    </label>
-                </td>
-                <td>
-                    <label id="resticon">
-                        <i class="fas fa-utensils"></i>
-                        <p>음식</p>
-                    </label>
-                </td>
-                <td>
-                    <label id="actiicon">
-                        <i class="fas fa-running"></i>
-                        <p>액티비티</p>
-                    </label>
-                </td>
-                <td>
-                    <label id="allicon">
-                        <i class="fas fa-plus"></i>
-                        <p>전체보기</p>
-                    </label>
-                </td>
+<!--faq내용들  -->
+<div class="faq-content" style="margin-left: 160px; margin-right: 160px;">
 
-                
-            </tr>
-        </table>
+	<div id="faqLocation">
+		<div class="faq-question">
+	    	<input id="q1" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q1" class="panel-title">&nbsp;Q. LOCATION 예약내용을 확인하고 싶어요.</label>
+	    	<div class="panel-content"><p><em>마이페이지 > 예약내역</em> 에서 확인가능합니다.</p></div>
+		</div>
+	  
+		<div class="faq-question">
+	    	<input id="q2" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q2" class="panel-title">&nbsp; Q. LOCATION 예약을 취소하고 싶어요.</label>
+	    	<div class="panel-content"><p><em>마이페이지 > 예약내역 > 예약취소</em> 에서 가능합니다.</div>
+	  	</div>
+	</div>
+	
+	<div id="faqLism">
+		<div class="faq-question">
+	    	<input id="q3" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q3" class="panel-title">&nbsp; Q. LISM이 무엇인가요? 정해지면바꿔야지</label>
+	    	<div class="panel-content"><p>답</p></div>
+	  	</div>
+	</div>
+	
+	<div id="faqAnniversary">
+	</div>
+	
+	<div id="faqEtc">  
+		<div class="faq-question">
+	    	<input id="q4" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q4" class="panel-title">&nbsp; Q. 회원탈퇴는 어디서 하나요?</label>
+	    	<div class="panel-content"><p><em>마이페이지 > 회원정보수정</em> 에서 회원탈퇴가 가능합니다. </p></div>
+	  	</div>
+	  
+	  	<div class="faq-question">
+	    	<input id="q5" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q5" class="panel-title">&nbsp; Q. 쿠폰사용은 어떻게 하나요?</label>
+	    	<div class="panel-content"><p><em>마이페이지 > 쿠폰</em> 에서 쿠폰을 등록 후, <em>LOCATION 결제하실 때 쿠폰 사용</em> 을 누르시면 됩니다.</div>
+	  	</div>
+	  
+		<div class="faq-question">
+	    	<input id="q6" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q6" class="panel-title">&nbsp; Q. 아이디가 기억나지 않아요.</label>
+	    	<div class="panel-content"><p><em>[아이디 찾기]</em> 를 통해 가입 시 등록한 정보로 조회할 수 있습니다.</p></div>
+	  	</div>
+	  
+	    <div class="faq-question">
+	    	<input id="q7" type="checkbox" class="panel">
+	    	<div class="plus">+</div>
+	    	<label for="q7" class="panel-title">&nbsp; Q. 비밀번호가 기억나지 않아요.</label>
+	    	<div class="panel-content"><p><em>[비밀번호 찾기]</em> 를 통해 비밀번호를 재설정 할 수 있습니다.</p></div>
+	  	</div>
+	</div>
 
-    </div>
-
-    <div id="detaildiv">
-        <table id="staylist" style="display: none;">
-            <tr>
-                <td>
-                    <p class="aname"><i class="fas fa-bed" style="font-size: 15px;"></i> 숙박</p>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-hotel"></i> <br>호텔</a>
-                </td>
-                <td>
-                    
-                    <a href="#"><i class="fas fa-home"></i> <br>펜션</a>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    
-                    <a href="#"><i class="fas fa-campground"></i> <br>글램핑/캠핑</a>
-                </td>
-                <td>
-                    
-                    <a href="#"><i class="fas fa-house-user"></i> <br>게스트하우스</a>
-                </td>
-                <td class="backtd">
-                    <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
-                </td>
-            </tr>
-        </table>
-
-
-        <table id="arealist" style="display: none; ">
-            <tr>
-                <td>
-                    <p class="aname"><i class="fas fa-place-of-worship" style="font-size: 15px;"></i> 명소</p>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-certificate"></i><br>랜드마크</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-tree"></i><br>자연/공원</a><br>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"><i class="fas fa-horse"></i><br>놀이동산</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-swimming-pool"></i><br>워터파크</a>
-                </td>
-                <td class="backtd">
-                    <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
-                </td>
-            </tr>
-        </table>
-
-        <table id="restlist" style="display: none;">
-            <tr>
-                <td>
-                    <p class="aname"><i class="fas fa-utensils" style="font-size: 15px;"></i> 음식</p>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-concierge-bell"></i><br>식당</a>
-                </td>
-                <td>
-                    
-                    <a href="#"><i class="fas fa-coffee"></i><br>카페</a>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td class="backtd">
-                    <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
-                </td>
-            </tr>
-        </table>
+  
+</div>
 
 
 
-        <table id="actilist" style="display: none; ">
-            <tr>
-                <td>
-                    <p class="aname"><i class="fas fa-running"style="font-size: 15px;"></i> 액티비티</p>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-snowboarding"></i><br>스키/썰매</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-fish"></i><br>낚시</a>
-                </td>
-            </tr>
-            <tr class="hovertr">
-                <td>
-                    <a href="#"><i class="fas fa-tint"></i><br>수상레저</a>
-                </td>
-                <td>
-                    <a href="#"><i class="fas fa-motorcycle"></i><br>바이크</a>
-                </td>
-                <td class="backtd">
-                    <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
-                </td>
-            </tr>
-        </table>
-       
 
-     
-   
-
-
-        
-        
-    </div>
-    
-    
-    
-
-
+</div>
 </section>
 
 <script>
-        $(function(){
-        	$("#stayicon").click(function(){
-        		$("#icondiv").slideUp(800); 
-        		$("#btndiv").slideUp(800); 
-                $("#staylist").show();
-                $("#arealist").hide();
-                $("#restlist").hide();
-                $("#actilist").hide();
-            });
-
-            $("#areaicon").click(function(){
-            	$("#icondiv").slideUp(800); 
-            	$("#btndiv").slideUp(800); 
-                $("#staylist").hide();
-                $("#arealist").show();
-                $("#restlist").hide();
-                $("#actilist").hide();
-            });
-
-            $("#resticon").click(function(){
-            	$("#icondiv").slideUp(800);
-            	$("#btndiv").slideUp(800); 
-                $("#staylist").hide();
-                $("#arealist").hide();
-                $("#restlist").show();
-                $("#actilist").hide();
-            });
-
-            $("#actiicon").click(function(){
-            	$("#icondiv").slideUp(800); 
-            	$("#btndiv").slideUp(800); 
-                $("#staylist").hide();
-                $("#arealist").hide();
-                $("#restlist").hide();
-                $("#actilist").show();
-            });
-
-            $("#allicon").click(function(){
-            	$("#icondiv").slideUp(800); 
-            	$("#btndiv").slideUp(800); 
-                $("#staylist").show();
-                $("#arealist").show();
-                $("#restlist").show();
-                $("#actilist").show();
-            });
-           
-            
-            $(".backtd").click(function(){
-            	$("#icondiv").slideDown(800);
-            	$("#btndiv").slideDown(800);
-            	 $("#staylist").hide();
-                 $("#arealist").hide();
-                 $("#restlist").hide();
-                 $("#actilist").hide();
-                return false;
-    		});	
-        });
-    </script>
-    
-    <jsp:include page='/WEB-INF/views/common/footer.jsp'/>
+		$(function() {
+			$(".menuall").click(function(){
+				$("#faqLocation").show();
+				$("#faqLism").show();
+				$("#faqAnniversary").show();
+				$("#faqEtc").show();
+				
+				$(".menuall").css("color","#F26A8D");
+				$(".menulocation").css("color","black");
+				$(".menulism").css("color","black");
+				$(".menuanniversary").css("color","black");
+				$(".menuetc").css("color","black");
+			});
+			
+			$(".menulocation").click(function(){
+				$("#faqLocation").show();
+				$("#faqLism").hide();
+				$("#faqAnniversary").hide();
+				$("#faqEtc").hide();
+				
+				$(".menuall").css("color","black");
+				$(".menulocation").css("color","#F26A8D");
+				$(".menulism").css("color","black");
+				$(".menuanniversary").css("color","black");
+				$(".menuetc").css("color","black");
+			});
+			
+			$(".menulism").click(function(){
+				$("#faqLocation").hide();
+				$("#faqLism").show();
+				$("#faqAnniversary").hide();
+				$("#faqEtc").hide();
+				
+				$(".menuall").css("color","black");
+				$(".menulocation").css("color","black");
+				$(".menulism").css("color","#F26A8D");
+				$(".menuanniversary").css("color","black");
+				$(".menuetc").css("color","black");
+			});
+			
+			$(".menuanniversary").click(function(){
+				$("#faqLocation").hide();
+				$("#faqLism").hide();
+				$("#faqAnniversary").show();
+				$("#faqEtc").hide();
+				
+				$(".menuall").css("color","black");
+				$(".menulocation").css("color","black");
+				$(".menulism").css("color","black");
+				$(".menuanniversary").css("color","#F26A8D");
+				$(".menuetc").css("color","black");
+			});
+			
+			$(".menuetc").click(function(){
+				$("#faqLocation").hide();
+				$("#faqLism").hide();
+				$("#faqAnniversary").hide();
+				$("#faqEtc").show();
+				
+				$(".menuall").css("color","black");
+				$(".menulocation").css("color","black");
+				$(".menulism").css("color","black");
+				$(".menuanniversary").css("color","black");
+				$(".menuetc").css("color","#F26A8D");
+			});
+			
+		});
+		
+	</script>
+	
+	<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

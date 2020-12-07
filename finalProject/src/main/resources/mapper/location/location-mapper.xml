@@ -10,7 +10,6 @@
 		<result property="locationPhone" column="LOCATIONPHONE"/>
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
-		<result property="locationPrice" column="LOCATIONPRICE"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">

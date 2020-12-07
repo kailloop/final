@@ -27,6 +27,7 @@ public class LocationController {
 	@Autowired
 	private LocationService service;
 	
+	
 	@RequestMapping("/location")//로케이션 리스트 목록을 보여주는곳
 	public ModelAndView location(@RequestParam(value="locationType", defaultValue="", required=false) String locationType,
 						 @RequestParam(value="locationAddress", defaultValue="", required=false) String locationAddress,
@@ -120,4 +121,3 @@ public class LocationController {
 	}
 	
 }
->>>>>>> branch 'JH' of https://github.com/kailloop/final.git
