@@ -1,5 +1,7 @@
 package com.kh.couplism.location.controller;
 
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,5 +108,15 @@ public class LocationController {
 		return "/location/check";
 	}
 	
+	@RequestMapping("checkDate")
+	public void checkDate() {
+		int result = service.checkDate(new Date());
+		System.out.println(result);
+		
+		List<Date> dateList = service.getDate();
+		for(Date d : dateList) {
+			System.out.println(d);
+		}
+	}
 	
 }

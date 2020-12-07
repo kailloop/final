@@ -10,6 +10,7 @@
 		<result property="locationPhone" column="LOCATIONPHONE"/>
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
+		<result property="locationPrice" column="LOCATIONPRICE"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
@@ -51,10 +52,19 @@
 		ORDER BY LOCATIONNO DESC
 	</select>
 	
+	
 	<select id="locationCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM LOCATION 
 		WHERE LOCATIONTITLE LIKE #{keyword}
 		AND LOCATIONTYPE LIKE #{locationType}
 		AND LOCATIONADDRESS LIKE #{locationAddress}
+	</select>
+	
+	<insert id="checkDate" parameterType="date">
+		INSERT INTO CHECKDATE VALUES(#{checkDate})
+	</insert>
+	
+	<select id="getDate" resultType="date">
+		SELECT * FROM CHECKDATE
 	</select>
 </mapper>

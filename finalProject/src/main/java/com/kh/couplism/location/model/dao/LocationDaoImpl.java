@@ -1,5 +1,6 @@
 package com.kh.couplism.location.model.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,19 @@ public class LocationDaoImpl implements LocationDao {
 	public int locationCount(Map<String, String> types, SqlSessionTemplate session) {
 		return session.selectOne("location.locationCount", types);
 	}
+
+	@Override
+	public int checkDate(Date checkDate, SqlSessionTemplate session) {
+		return session.insert("location.checkDate", checkDate);
+	}
+
+	@Override
+	public List<Date> getDate(SqlSessionTemplate session) {
+		return session.selectList("location.getDate");
+	}
+	
+	
+	
 
 	
 }

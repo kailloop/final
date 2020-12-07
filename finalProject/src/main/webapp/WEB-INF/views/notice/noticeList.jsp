@@ -56,15 +56,16 @@ section{
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 #tablejh{
-  background: -webkit-linear-gradient(left, #f26a8d, #FFD8D8);
-  background: linear-gradient(to right, #f26a8d, #FFD8D8);
+  text-align : center;
+  background: -webkit-linear-gradient(left, #8B4513, #F5D08A);
+  background: linear-gradient(to right, #8B4513, #F5D08A);
   font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100%;
 }
 body{
-background: -webkit-linear-gradient(left, #f26a8d, #FFD8D8);
-  background: linear-gradient(to right, #f26a8d, #FFD8D8);
+background: -webkit-linear-gradient(left, #8B4513, #F5D08A);
+  background: linear-gradient(to right, #8B4513, #F5D08A);
   font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100%;
@@ -114,44 +115,45 @@ td{
 	cursor: pointer;
 }
 
+
 </style>
 <jsp:include page="/WEB-INF/views/common/logo.jsp" />
 </section>
 <div id="tablejh"><h1>Notice</h1>
-<div class="container" >
+<div style="margin-left:50px; margin-right:50px;">
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0" border="0" class="text-center">
       <thead>
         <tr>
-					<th>No</th>
-					<th>작성자</th>
-					<th>제목</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th class="text-center">No</th>
+					<th class="text-center">작성자</th>
+					<th class="text-center">제목</th>
+					<th class="text-center">작성일</th>
+					<th class="text-center">조회수</th>
 				<tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table class="table-hover" cellpadding="0" cellspacing="0" border="0">
+    <table class="table-hover text-center" cellpadding="0" cellspacing="0" border="0">
      <c:forEach items="${list }" var="l">
 					<tr class="jh_tr">
-						<td><c:out value="${l.noticeNo }" /></td>
-						<td><c:out value="${l.userId }" /></td>
-						<td><c:out value="${l.noticeTitle }" /></td>
-						<td><c:out value="${l.writeDate }" /></td>
-						<td><c:out value="${l.viewCount }" /></td>
+						<td class="text-center"><c:out value="${l.noticeNo }" /></td>
+						<td class="text-center"><c:out value="${l.userId }" /></td>
+						<td class="text-center"><c:out value="${l.noticeTitle }" /></td>
+						<td class="text-center"><c:out value="${l.writeDate }" /></td>
+						<td class="text-center"><c:out value="${l.viewCount }" /></td>
 					</tr>
 				</c:forEach>
     </tbody>
     </table>
-    </div>
+    </div><br>
 		<nav aria-label="Page navigation example" style="margin-bottom: 20px;">
                 <ul id="pageNavUl" class="pagination justify-content-center">
                     <c:out value="${pageBar }" escapeXml="false" />
                 </ul>
-            </nav><button type="button" onclick="noticeWrite()">글쓰기</button>
-		<c:if test="${logginedMember!=null }"><c:if test="${logginedMember.id eq 'cccc'}"></c:if></c:if>
+            </nav>
+		<c:if test="${logginedMember!=null }"><c:if test="${logginedMember.id eq 'cccc'}"><button type="button" onclick="noticeWrite()">글쓰기</button></c:if></c:if>
 		</div>
 		</div>
 <script>

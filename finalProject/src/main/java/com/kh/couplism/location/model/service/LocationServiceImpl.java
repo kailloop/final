@@ -1,5 +1,6 @@
 package com.kh.couplism.location.model.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,17 @@ public class LocationServiceImpl implements LocationService {
 	public int locationCount(Map<String, String> types) {
 		return dao.locationCount(types,session);
 	}
+
+	@Override
+	public int checkDate(Date checkDate) {
+		return dao.checkDate(checkDate, session);
+	}
+
+	@Override
+	public List<Date> getDate() {
+		return dao.getDate(session);
+	}
+	
 	
 	
 	

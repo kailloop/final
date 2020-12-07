@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,7 +108,7 @@ public class NoticeController {
 		m.addAttribute("pageBar",pageBar);
 		m.addAttribute("titleHan","공지사항");
 		m.addAttribute("titleEng","Notice");
-		m.addAttribute("logoPath","resources/images/notice.jpg");
+		m.addAttribute("logoPath","resources/images/notice1.jpg");
 		m.addAttribute("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		return"/notice/noticeList";
 	}
@@ -186,8 +188,32 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/noticeView")
-	public ModelAndView noticeView(ModelAndView mv, int noticeNo) {
+	public ModelAndView noticeView(ModelAndView mv, int noticeNo, HttpServletRequest request, HttpServletResponse response) {
+		
 		Notice notice = service.getNotice(noticeNo);
+		boolean check = false;
+		Cookie[] cookieCheck = request.getCookies();
+		for(Cookie c : cookieCheck) {
+			if(c.getValue().equals(String.valueOf(noticeNo))){
+				check = true;
+			}
+		}
+		logger.debug("쿠키 존재여부 : "+check);
+		if(check == false) {
+			logger.debug("if문 들어옴 ");
+			int viewCount =  notice.getViewCount();
+			viewCount++;
+			notice.setViewCount(viewCount);
+			int result = service.upViewCount(notice);
+			if(result == 1) {
+				logger.debug("조회수 증가완료 !");
+			}
+			Cookie addCookie = new Cookie("couplism_Notice_"+noticeNo, String.valueOf(noticeNo));
+			addCookie.setMaxAge(60*60*3);//3시간 동안 안오름
+			response.addCookie(addCookie);
+			logger.debug("Cookie추가 완료!");
+		}
+		
 		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);
 		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
 		int cp = 0;
@@ -219,8 +245,6 @@ public class NoticeController {
 			}
 		}
 		html += "</div>"+"<hr>";
-		
-		
 		
 		logger.debug("notice : "+notice);
 		logger.debug("noticFile : "+noticeFile);

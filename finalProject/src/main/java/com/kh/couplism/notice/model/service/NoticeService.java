@@ -1,6 +1,7 @@
 package com.kh.couplism.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -21,4 +22,5 @@ public interface NoticeService {
 	public int deleteNoticeFile(int noticeNo);
 	public int deleteNoticeComment(int noticeNo);
 	public int deleteNotice(int noticeNo);
+	public int upViewCount(Notice notice);
 }
