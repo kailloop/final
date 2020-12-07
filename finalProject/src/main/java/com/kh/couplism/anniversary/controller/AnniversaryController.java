@@ -68,7 +68,4 @@ public class AnniversaryController {
 	 * 
 	 * return mv; }
 	 */
-	
-	
-	
 }

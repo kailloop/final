@@ -64,7 +64,7 @@
 		border-radius:100px;
 	}
 	section{
-		height:2100px;
+		height:1700px;
 		background-color:#F8F8F8;
 	}
 	body{
@@ -435,10 +435,11 @@
 					$('html, body').animate({scrollTop: offset.top},1000);
 					return;
 				}
-				if($("#pwck").val()==$("#password").val()){
+				if($("#pwck").val()!=$("#password").val()){
 					alert("비밀번호 확인에 다른 비밀번호가 들어가있습니다. 확인하여 다시 적어주세요.");
 					$("#pwck").val("");
 					$("#password").val("");
+					return;
 				}
 				if(!password.test($("input[id='password']").val())){
 					alert("특수문자 / 문자 / 숫자 포함 형태의 8~15자리 비밀번호를 입력해주세요");
@@ -450,6 +451,7 @@
 					alert("닉네임을 적어주세요");
 					offset = $("#nickname").offset();
 					$('html, body').animate({scrollTop: offset.top},1000);
+					return;
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");
@@ -470,6 +472,7 @@
 				alert("이메일 인증을 해주시기 바랍니다.");
 				offset = $("input[id='email']").offset();
 				$('html, body').animate({scrollTop: offset.top},1000);
+				return;
 			}
 		});
 		$(".enroll-title-value > input[type=button]").hover(function(e){
@@ -499,10 +502,4 @@
 		});	
 	});
 	</script>
-	<footer>
-		
-	</footer>
-	
-	
-</body>
-</html>
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

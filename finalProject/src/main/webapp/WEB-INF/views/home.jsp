@@ -9,18 +9,21 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <style>
 	#logo{
-		height:1000px;
+		height:1100px;
 		width:100%;
 	    position: relative;
 	    z-index: 0;
 	    overflow: hidden;
 	}
-	#logo img{
+	video{
+		position:relative;
 		background-size: cover;
 	    background-repeat: no-repeat;
 	    background-position: center center;
-		width:100%;
-		height:100%;
+	    left:-50px;
+	    top:-50px;
+		width:2010px;
+		height:1200px;
 		z-index:-1;
 	}
 	.main-label-eng{
@@ -30,7 +33,7 @@
 		cursor:pointer;
 		font-family: 'Montserrat', sans-serif;
 		color:#F6F6F6;
-		top:-620px;
+		top:-870px;
 		font-weight:lighter;
 		transition:1s;
 		opacity:0;
@@ -42,7 +45,7 @@
 		cursor:pointer;
 		font-family:Nanum Gothic Coding;
 		color:#F6F6F6;
-		top:-570px;
+		top:-820px;
 		transition:1s;
 		opacity:0;
 	}
@@ -54,7 +57,7 @@
 		cursor:pointer;
 		font-family:Nanum Gothic Coding;
 		color:#F6F6F6;
-		top:-670px;
+		top:-920px;
 		transition:1s;
 		opacity:0;
 	}
@@ -86,13 +89,13 @@
 </style>
 <script>
 	$(function(){
-		$(".main-label-han").css("top","-600px");
+		$(".main-label-han").css("top","-850px");
 		$(".main-label-han").delay(1000).css("opacity","1");
 	});
 	setTimeout(function() {
-		$(".main-label-eng").css("top","-650px");
+		$(".main-label-eng").css("top","-900px");
 		$(".main-label-eng").css("opacity","1");
-		$("#border-bottom").css("top","-700px");
+		$("#border-bottom").css("top","-950px");
 		$("#border-bottom").delay(1000).css("opacity","1");// 1초 후 실행
 	}, 1000);
 	$(window).scroll(function (){
@@ -115,7 +118,7 @@
 	});
 </script>
 	<div id="logo" style="text-align:center;">
-		<img src="${path }/resources/images/home-logo.jpg" alt="로고1">
+		<video src="${path }/resources/videos/home-logo.mp4" loop="loop" autoplay="autoplay" muted="muted"></video>
 		<label class="main-label-han">실시간으로 짜는 다양한 데이트</label><br/>
 		<label class="main-label-eng">Make your lism</label><br/>
 		<label id="border-bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -128,9 +131,7 @@
 		<img class="img one" src="${path }/resources/images/home-logo2.jpg" alt="로고2">
 		<img class="img two" src="${path }/resources/images/home-logo3.jpg" alt="로고3">
 		
+		
+		
 	</section>
-	
-	
-	
-</body>
-</html>
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>
