@@ -27,6 +27,24 @@ public class LocationController {
 	@Autowired
 	private LocationService service;
 	
+	@RequestMapping("/moveLocation")
+	   public ModelAndView moveLocation(ModelAndView mv) {
+	      
+	      mv.addObject("logoPath","/resources/images/location-Address.jpg");
+	      
+	      mv.addObject("titleHan","지역선택");
+	      mv.addObject("titleEng","Select Your Harmony");
+	      mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+	      
+	      mv.setViewName("location/address");
+	      
+	      return mv;
+	   }
 	
 	@RequestMapping("/location")//로케이션 리스트 목록을 보여주는곳
 	public ModelAndView location(@RequestParam(value="locationType", defaultValue="", required=false) String locationType,
