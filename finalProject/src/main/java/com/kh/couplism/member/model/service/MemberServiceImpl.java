@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 package com.kh.couplism.member.model.service;
 
+=======
+package com.kh.couplism.member.model.service;
+>>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;

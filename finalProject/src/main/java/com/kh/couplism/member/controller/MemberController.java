@@ -195,6 +195,7 @@ public class MemberController {
 			return "none";
 		}
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping(value="/member/memberLogout")
 	public String memberLogout(SessionStatus status,Model m) {
@@ -210,3 +211,6 @@ public class MemberController {
 	}
 	
 }
+=======
+}
+>>>>>>> branch 'JH' of https://github.com/kailloop/final.git

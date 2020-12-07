@@ -124,8 +124,13 @@
 		width:130px;
 		background:white;
 		transition:1s;
+<<<<<<< HEAD
 		outline:none;
 	}
+=======
+		outline:none;
+	}
+>>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 	#check-id{
 		position:relative;
 		left:165px;
@@ -451,7 +456,10 @@
 					alert("닉네임을 적어주세요");
 					offset = $("#nickname").offset();
 					$('html, body').animate({scrollTop: offset.top},1000);
+<<<<<<< HEAD
 					return;
+=======
+>>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");

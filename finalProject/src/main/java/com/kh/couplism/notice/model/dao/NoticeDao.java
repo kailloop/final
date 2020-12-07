@@ -1,6 +1,7 @@
 package com.kh.couplism.notice.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,4 +23,5 @@ public interface NoticeDao {
 	public int deleteNoticeFile(int noticeNo, SqlSessionTemplate session);
 	public int deleteNoticeComment(int noticeNo, SqlSessionTemplate session);
 	public int deleteNotice(int noticeNo, SqlSessionTemplate session);
+	public int upViewCount(Notice notice, SqlSessionTemplate session);
 }

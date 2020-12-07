@@ -1,6 +1,7 @@
 package com.kh.couplism.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -74,6 +75,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int deleteNotice(int noticeNo) {
 		return dao.deleteNotice(noticeNo, session);
+	}
+
+	@Override
+	public int upViewCount(Notice notice) {
+		return dao.upViewCount(notice, session);
 	}
 	
 	

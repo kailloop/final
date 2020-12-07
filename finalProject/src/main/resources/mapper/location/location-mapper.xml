@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="location">
+	<resultMap id="location" type="com.kh.couplism.location.model.vo.Location">
+		<result property="locationNo" column="LOCATIONNO"/>
+		<result property="locationType" column="LOCATIONTYPE"/>
+		<result property="locationTitle" column="LOCATIONTITLE"/>
+		<result property="locationCreator" column="LOCATIONCREATOR"/>
+		<result property="locationContent" column="LOCATIONCONTENT"/>
+		<result property="locationPhone" column="LOCATIONPHONE"/>
+		<result property="locationAddress" column="LOCATIONADDRESS"/>
+		<result property="locationStatus" column="LOCATIONSTATUS"/>
+		<result property="locationPrice" column="LOCATIONPRICE"/>
+	</resultMap>
+	
+	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
+		<result property="locationNo" column="LOCATIONNO"/>
+		<result property="originalName" column="LOCATIONFILEORIGINAL"/>
+		<result property="renameName" column="LOCATIONFILERENAMED"/>
+	</resultMap>
+	
+	<resultMap id="locationMain" type="com.kh.couplism.location.model.vo.LocationMain">
+		<result property="locationNo" column="LOCATIONNO"/>
+		<result property="originalName" column="LOCATIONORIGINAL"/>
+		<result property="renameName" column="LOCATIONRENAMED"/>
+	</resultMap>
+	
+	<resultMap id="review" type="com.kh.couplism.location.model.vo.Review">
+		<result property="reviewNo" column="REVIEWNO"/>
+		<result property="locationNo" column="LOCATIONNO"/>
+		<result property="reviewLevel" column="REVIEWLEVEL"/>
+		<result property="reviewId" column="REVIEWID"/>
+		<result property="reviewContent" column="REVIEWCONTENT"/>
+		<result property="reviewGrade" column="REVIEWGRADE"/>
+		<result property="ReviewDate" column="REVIEWDATE"/>
+		<result property="reviewPosition" column="REVIEWPOSITION"/>
+	</resultMap>
+	
+	<resultMap id="reviewFile" type="com.kh.couplism.location.model.vo.ReviewFile">
+		<result property="locationNo" column="LOCATIONNO"/>
+		<result property="reviewNo" column="REVIEWNUM"/>
+		<result property="originalName" column="REVIEWORIGINAL"/>
+		<result property="renameName" column="REVIEWRENAMED"/>
+	</resultMap>
+	
+	<select id="locationList" parameterType="map" resultType="com.kh.couplism.location.model.vo.Location">
+		SELECT *
+		FROM LOCATION
+		WHERE LOCATIONTITLE LIKE #{keyword}
+		AND LOCATIONTYPE LIKE #{locationType}
+		AND LOCATIONADDRESS LIKE #{locationAddress}
+		ORDER BY LOCATIONNO DESC
+	</select>
+	
+	
+	<select id="locationCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM LOCATION 
+		WHERE LOCATIONTITLE LIKE #{keyword}
+		AND LOCATIONTYPE LIKE #{locationType}
+		AND LOCATIONADDRESS LIKE #{locationAddress}
+	</select>
+	
+	<insert id="checkDate" parameterType="date">
+		INSERT INTO CHECKDATE VALUES(#{checkDate})
+	</insert>
+	
+	<select id="getDate" resultType="date">
+		SELECT * FROM CHECKDATE
+	</select>
+</mapper>
