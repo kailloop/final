@@ -183,8 +183,8 @@
 					<br>
 					<h2>MY PAGE</h2>
 					<br><br><br>
-					<div class="features" >
-						<div class="feature">	
+					<div class="features">
+						<div class="feature" onclick="location.replace('${path }/faq/faqLocation.do');">	
 							<i class="fas fa-user-cog"></i>
 							<h3>회원정보수정</h3>
 							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
