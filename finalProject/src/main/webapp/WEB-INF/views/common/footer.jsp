@@ -10,7 +10,7 @@
 		width:100%;
 		height:400px;
 		position:relative;
-		bottom:0;
+		bottom:0px;
 		margin:0;
 		padding:0;
 		background-color:#3E4550;

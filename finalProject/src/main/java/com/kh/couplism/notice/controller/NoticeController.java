@@ -260,6 +260,7 @@ public class NoticeController {
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		mv.setViewName("/notice/noticeView");
 		logger.debug("========================================================================================================");
+		
 		return mv;
 	}
 	
