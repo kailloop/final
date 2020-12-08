@@ -1,5 +1,4 @@
 package com.kh.couplism.member.controller;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.couplism.email.MailAuth;
