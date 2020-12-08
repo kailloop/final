@@ -1,6 +1,5 @@
 package com.kh.couplism.member.model.service;
 
-<<<<<<< HEAD
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;

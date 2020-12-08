@@ -50,7 +50,6 @@
 		<result property="pricePeople" column="PRICE_PEOPLE"/>
 	</resultMap>
 	
-
 	<resultMap id="locationReservation" type="com.kh.couplism.location.model.vo.LocationReservation">
 		<result property="reservationNo" column="RESERVATION_NO"/>
 		<result property="locationNo" column="LOCATION_NO"/>
@@ -60,8 +59,8 @@
 		<result property="reservationDay" column="RESERVATION_DAY"/>
 		<result property="reservationPrice" column="RESERVATION_PRICE"/>
 		<result property="paymentDate" column="PAYMENT_DATE"/>
-		<result property="ReservationDate" column="RESERVATION_DATE"/>
-	</resultMap> -->
+		<result property="reservationDate" column="RESERVATION_DATE"/>
+	</resultMap>
 	
 	<select id="locationList" parameterType="map" resultType="com.kh.couplism.location.model.vo.Location">
 		SELECT *
