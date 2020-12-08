@@ -53,6 +53,24 @@ public class LocationController {
 	      return mv;
 	   }
 	
+	@RequestMapping("/enrollLocation")
+	public ModelAndView enrollLocation(ModelAndView mv) {
+		
+		mv.addObject("logoPath","/resources/images/enroll-location.jpg");
+		
+		mv.addObject("titleHan","상점 등록");
+		mv.addObject("titleEng","Create Your Shop");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		mv.setViewName("location/enrollLocation");
+		
+		return mv;
+	}
+	
 	@RequestMapping("/location")//로케이션 리스트 목록을 보여주는곳
 	public ModelAndView location(@RequestParam(value="locationType", defaultValue="", required=false) String locationType,
 						 @RequestParam(value="locationAddress", defaultValue="", required=false) String locationAddress,
