@@ -204,7 +204,7 @@
 							<h3>결제내역</h3>
 							<p>결제하신 내역을<br>확인하실 수 있습니다.</p>
 						</div>
-						<div class="feature">
+						<div class="feature" onclick="location.replace('${path}/reservation')">
 							<i class="fas fa-history"></i>
 							<h3>예약내역</h3>
 							<p>예약내역을 확인하실 수 있습니다.</p>
