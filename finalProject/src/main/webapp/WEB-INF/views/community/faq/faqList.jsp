@@ -171,8 +171,8 @@
 		<div class="faq-question">
 	    	<input id="q3" type="checkbox" class="panel">
 	    	<div class="plus">+</div>
-	    	<label for="q3" class="panel-title">&nbsp; Q. LISM이 무엇인가요? 정해지면바꿔야지</label>
-	    	<div class="panel-content"><p>답</p></div>
+	    	<label for="q3" class="panel-title">&nbsp; Q. LISM이 무엇인가요?</label>
+	    	<div class="panel-content"><p>하루동안 방문했던 코스를 기록, 공유할 수 있는 카테고리 입니다.</p></div>
 	  	</div>
 	</div>
 	

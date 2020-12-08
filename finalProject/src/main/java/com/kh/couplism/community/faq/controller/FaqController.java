@@ -11,8 +11,8 @@ public class FaqController {
 
 	@RequestMapping("/faq/faqList.do")
 	public ModelAndView userMypage(ModelAndView mv) {
-		mv.addObject("logoPath","/resources/images/home-logo.jpg");
-		mv.addObject("titleHan","한글 타이틀");
+		mv.addObject("logoPath","/resources/images/faq.jpg");
+		mv.addObject("titleHan","편리한 홈페이지 이용을위해 자주하는 질문을 알려드립니다");
 		mv.addObject("titleEng","FAQ");
 		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				);

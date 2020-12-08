@@ -74,7 +74,7 @@
     </style>
 
     <div id="btndiv" style="text-align: center; margin-top: 150px;">
-    	<button  type="button" class="btn btn-outline-danger">날짜 다시선택하기</button>
+    	<button  type="button" class="btn btn-outline-danger">지역 다시선택하기</button>
     </div>
     
 <div id="icondiv" style="margin-top: 200px;">
@@ -102,6 +102,12 @@
                     <label id="actiicon">
                         <i class="fas fa-running"></i>
                         <p>액티비티</p>
+                    </label>
+                </td>
+                <td>
+                    <label id="storeicon">
+                        <i class="fas fa-store"></i>
+                        <p>가게</p> 
                     </label>
                 </td>
                 <td>
@@ -239,9 +245,36 @@
             </tr>
         </table>
        
-
+		<table id="storelist" style="display: none; ">
+            <tr>
+                <td>
+                    <p class="aname"><i class="fas fa-store" style="font-size:15px;"></i> 가게</p>
+                </td>
+            </tr>
+            <tr class="hovertr">
+                <td>
+                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                </td>
+                <td>
+                    <a href="#"><i class="fas fa-flag"></i><br>특산품가게</a>
+                </td>
+                <td>
+                    <a href="#"><i class="fas fa-gift"></i><br>기념품가게</a>
+                </td>
+            </tr>
+            <tr class="hovertr">
+                <td>
+                    <a href="#"><i class="fas fa-tshirt"></i><br>의류가게</a>
+                </td>
+                <td>
+                    <a href="#"><i class="fas fa-futbol"></i><br>스포츠가게</a>
+                </td>
+                <td class="backtd">
+                    <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
+                </td>
+            </tr>
+        </table>
      
-   
 
 
         
@@ -263,6 +296,7 @@
                 $("#arealist").hide();
                 $("#restlist").hide();
                 $("#actilist").hide();
+                $("#storelist").hide();
             });
 
             $("#areaicon").click(function(){
@@ -272,6 +306,7 @@
                 $("#arealist").show();
                 $("#restlist").hide();
                 $("#actilist").hide();
+                $("#storelist").hide();
             });
 
             $("#resticon").click(function(){
@@ -281,6 +316,7 @@
                 $("#arealist").hide();
                 $("#restlist").show();
                 $("#actilist").hide();
+                $("#storelist").hide();
             });
 
             $("#actiicon").click(function(){
@@ -290,6 +326,17 @@
                 $("#arealist").hide();
                 $("#restlist").hide();
                 $("#actilist").show();
+                $("#storelist").hide();
+            });
+            
+            $("#storeicon").click(function(){
+            	$("#icondiv").slideUp(800); 
+            	$("#btndiv").slideUp(800); 
+                $("#staylist").hide();
+                $("#arealist").hide();
+                $("#restlist").hide();
+                $("#actilist").hide();
+                $("#storelist").show();
             });
 
             $("#allicon").click(function(){
@@ -299,6 +346,7 @@
                 $("#arealist").show();
                 $("#restlist").show();
                 $("#actilist").show();
+                $("#storelist").show();
             });
            
             
@@ -309,6 +357,7 @@
                  $("#arealist").hide();
                  $("#restlist").hide();
                  $("#actilist").hide();
+                 $("#storelist").hide();
                 return false;
     		});	
         });
