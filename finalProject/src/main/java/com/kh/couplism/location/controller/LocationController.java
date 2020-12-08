@@ -32,6 +32,8 @@ public class LocationController {
 	@Autowired
 	private LocationService service;
 	
+	
+	
 	@RequestMapping("/moveLocation")
 	   public ModelAndView moveLocation(ModelAndView mv) {
 	      
