@@ -38,7 +38,7 @@
 <style>
 	.modal-content{
 		/* background-color:purple; */
-		background-image:url(/couplism/resources/images/login-logo.jpg);
+		/* background-image:url(/couplism/resources/images/login-logo.jpg); */
 		
 	}
 	.modal-body{
@@ -68,6 +68,21 @@
 		transition: all ease 1s;
 	}
 	#login-close:hover{
+		transform:rotate(360deg);
+	}
+	#location-close{
+		position:absolute;
+		margin:0;
+		padding:0;
+		top:30px;
+		right:40px;
+		cursor:pointer;
+		width:auto;
+		height:auto;
+		font-size:38px;
+		transition: all ease 1s;
+	}
+	#location-close:hover{
 		transform:rotate(360deg);
 	}
 	#id-placeholder{
@@ -245,6 +260,7 @@
 						<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
 					</div>
 				</c:if>
+				<button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button>
 				
 				<div id="mypage" class="circle">
 				<c:if test="${logginedMember!=null }">
@@ -303,10 +319,10 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 		        <div class="modal-body">
-		          <!-- Default form login -->
+		          <!-- Default form login -->c:
 					<form action="${path }/member/memberLogin" method="post">						
 						
-							<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
+						<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
 						
 					    <label class="login-title">Couplism</label>
 					    
@@ -360,7 +376,34 @@
 		</div>
 	</div>
 	</c:if>
-
+	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<i id="location-close" class="fas fa-times" aria-hidden="true"></i>
+					<label id="location-modal-title">지역 선택</label>
+					<label class="location-label">찾아보고자 하시는 지역을 선택해주세요</label><br/>
+					<label id="location-first-demo"></label>
+					<br/>
+					<table id="location-select-table">
+						<tr class="location-tr tr-one">
+						</tr>
+						<tr class="location-tr tr-two">							
+						</tr>
+						<tr class="location-tr tr-three">
+						</tr>
+						<tr class="location-tr tr-four">
+						</tr>
+						<tr class="location-tr tr-five">
+						</tr>
+						<tr class="location-tr tr-six">
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 <script>
 	function travel(){
 		location.replace('${path}/moveLocation');
@@ -437,6 +480,10 @@
 	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
+	});
+	$("#location-close").click(function(){
+		$("#locationModal").modal("hide");
+		$('td').remove('.location-select-font');
 	});
 	
 	$("#id-input").focus(function(){

@@ -10,7 +10,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <style>
 	section{
-		height:3400px;
+		height:3900px;
 	}
 	#map{
 		top:150px;
@@ -22,7 +22,7 @@
 		margin-left:auto;
 		margin-right:auto;
 		width:3px;
-		height:2800px;
+		height:3300px;
 		background-color:gray;
 		border-radius:20px;
 	}
@@ -114,6 +114,15 @@
 		background-color:gray;
 		transition:1s;
 		top:-1330px;
+		left:0px;
+	}
+	#chungcheong{
+		position:relative;
+		width:0px;
+		height:3px;
+		background-color:gray;
+		transition:1s;
+		top:-1333px;
 		left:0px;
 	}
 	#seoul-img{
@@ -285,6 +294,23 @@
 		-webkit-filter: grayscale(100%);
 		filter: gray;
 	}
+	#chungcheong-img{
+		position:relative;
+		background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    z-index:-1;
+		width:0px;
+		height:500px;
+		transition:1s;
+		left:-120px;
+		top:-1580px;
+		border-radius:50px;
+		box-shadow:3px 5px 5px gray;
+		cursor:pointer;
+		-webkit-filter: grayscale(100%);
+		filter: gray;
+	}
 	.seoul-eng{
 		font-family: 'Montserrat', sans-serif;
 		position:relative;
@@ -396,6 +422,17 @@
 		cursor:pointer;
 		text-align:center;
 	}
+	.chungcheong-eng{
+		font-family: 'Montserrat', sans-serif;
+		position:relative;
+		font-size:120px;
+		color:white;
+		font-weight:bolder;
+		top:-180px;
+		left:-450px;
+		cursor:pointer;
+		text-align:center;
+	}
 	#gyeongsang-label-two{
 		font-family: 'Montserrat', sans-serif;
 		position:relative;
@@ -404,6 +441,17 @@
 		font-weight:bolder;
 		top:-120px;
 		left:80px;
+		cursor:pointer;
+		text-align:center;
+	}
+	#chungcheong-label-two{
+		font-family: 'Montserrat', sans-serif;
+		position:relative;
+		font-size:120px;
+		color:white;
+		font-weight:bolder;
+		top:-120px;
+		left:-35px;
 		cursor:pointer;
 		text-align:center;
 	}
@@ -559,73 +607,121 @@
 		text-shadow:1px 3px 3px lightgray;
 		font-family:Nanum Gothic Coding;
 	}
+	#chungcheong-label{
+		transition:0.5s;
+	}
+	#chungcheong-label-two{
+		transition:0.5s;
+	}
+	#chungcheong-label-han{
+		font-size:80px;
+		transition:0.5s;
+		color:white;
+		position:relative;
+		top:-455px;
+		width:500px;
+		left:-75px;
+		opacity:0;
+		text-shadow:1px 3px 3px lightgray;
+		font-family:Nanum Gothic Coding;
+	}
+	#location-modal-title{
+		font-size:42px;
+		font-weight:bolder;
+		color:black;
+		font-family:Nanum Gothic Coding;
+	}
+	#location-select-table{
+		width:100%;
+		height:auto;
+		border:1px red solid;
+		margin:0;
+		padding:0;
+		border-collapse: collapse;
+	}
+	.location-tr{
+		position:relative;
+		margin:0;
+		padding:0;
+		width:100%;
+		height:50px;
+		color:black;
+		cursor:pointer;
+	}
+	.location-select-font{
+		color:black;
+		font-family:Nanum Gothic Coding;
+		border:1px black solid;
+		position:relative;
+		width:50%;
+	}
 </style>
-	<br/><br/>
+	<br/><br/><br/><br/><br/><br/>
 	<div id="title-line">
-		<div id="seoul">
+		<div id="seoul" data-toggle="modal" data-target="#locationModal">
 			<div class="seoul-eng seoul">
 				<label id="seoul-label" style="cursor:pointer;user-select: none;">Seoul</label>
 				<label id="seoul-label-han" style="cursor:pointer;user-select:none;">서울특별시</label>
 			</div>
 		</div>
 		<img id="seoul-img" class="seoul" src="${path }/resources/images/seoul.jpg" alt="서울">
-		<div id="kyungki">
+		<div id="kyungki" data-toggle="modal" data-target="#locationModal">
 			<div class="kyungki-eng kyungki">
 				<label id="kyungki-label" style="cursor:pointer;user-select:none;">Kyungki</label>
 				<label id="kyungki-label-han" style="cursor:pointer;user-select:none;">경기도</label>
 			</div>
 		</div>
 		<img id="kyungki-img" class="kyungki" src="${path }/resources/images/Kyungki.jpg" alt="경기도">
-		<div id="incheon">
+		<div id="incheon" data-toggle="modal" data-target="#locationModal">
 			<div class="incheon-eng incheon">
 				<label id="incheon-label" style="cursor:pointer;user-select:none;">InCheon</label>
 				<label id="incheon-label-han" style="cursor:pointer;user-select:none;">인천광역시</label>
 			</div>
 		</div>
 		<img id="incheon-img" class="incheon" src="${path }/resources/images/incheon.png" alt="인천">
-		<div id="kangwon">
+		<div id="kangwon" data-toggle="modal" data-target="#locationModal">
 			<div class="kangwon-eng kangwon">
 				<label id="kangwon-label" style="cursor:pointer;user-select:none;">KangWon</label>
 				<label id="kangwon-label-han" style="cursor:pointer;user-select:none;">강원도</label>
 			</div>
 		</div>
 		<img id="kangwon-img" class="jeju" src="${path }/resources/images/kangwon.jpg" alt="강원도">
-		<div id="jeju">
+		<div id="jeju" data-toggle="modal" data-target="#locationModal">
 			<div class="jeju-eng jeju">
 				<label id="jeju-label" style="cursor:pointer;user-select:none;">JejuDo</label>
 				<label id="jeju-label-han" style="cursor:pointer;user-select:none;">제주도</label>
 			</div>
 		</div>
 		<img id="jeju-img" class="jeju" src="${path }/resources/images/jeju.jpg" alt="제주도">
-		<div id="daejeon">
+		<div id="daejeon" data-toggle="modal" data-target="#locationModal">
 			<div class="daejeon-eng daejeon">
 				<label id="daejeon-label" style="cursor:pointer;user-select:none;">DaeJeon</label>
 				<label id="daejeon-label-han" style="cursor:pointer;user-select:none;">대전광역시</label>
 			</div>
 		</div>
 		<img id="daejeon-img" class="daejeon" src="${path }/resources/images/daejeon.jpg" alt="대전광역시">
-		<div id="busan">
+		<div id="busan" data-toggle="modal" data-target="#locationModal">
 			<div class="busan-eng busan">
 				<label id="busan-label" style="cursor:pointer;user-select:none;">Busan</label>
 				<label id="busan-label-han" style="cursor:pointer;user-select:none;">부산광역시</label>
 			</div>
 		</div>
 		<img id="busan-img" class="busan" src="${path }/resources/images/busan.jpg" alt="부산광역시">
-		<div id="daegu">
+		<div id="daegu" data-toggle="modal" data-target="#locationModal">
 			<div class="daegu-eng daegu">
 				<label id="daegu-label" style="cursor:pointer;user-select:none;">DaeGu</label>
 				<label id="daegu-label-han" style="cursor:pointer;user-select:none;">대구광역시</label>
 			</div>
 		</div>
 		<img id="daegu-img" class="daegu" src="${path }/resources/images/daegu.jpg" alt="대구광역시">
-		<div id="jeolla">
+		<div id="jeolla" data-toggle="modal" data-target="#locationModal">
 			<div class="jeolla-eng jeolla">
 				<label id="jeolla-label" style="cursor:pointer;user-select:none;">JeolLa</label>
 				<label id="jeolla-label-han" style="cursor:pointer;user-select:none;">전라북/남도</label>
 			</div>
 		</div>
 		<img id="jeolla-img" class="jeolla" src="${path }/resources/images/jeolla.jpg" alt="전라도">
-		<div id="gyeongsang">
+		<div id="gyeongsang" data-toggle="modal" data-target="#locationModal">
 			<div class="gyeongsang-eng gyeongsang">
 				<label id="gyeongsang-label" style="cursor:pointer;user-select:none;">Gyeong</label>
 				<label id="gyeongsang-label-two" style="cursor:pointer;user-select:none;">Sang</label>
@@ -634,7 +730,17 @@
 			</div>
 		</div>
 		<img id="gyeongsang-img" class="gyeongsang" src="${path }/resources/images/gyeongsang.jpg" alt="경상도">
+		<div id="chungcheong" data-toggle="modal" data-target="#locationModal">
+			<div class="chungcheong-eng chungcheong">
+				<label id="chungcheong-label" style="cursor:pointer;user-select:none;">Chung</label>
+				<label id="chungcheong-label-two" style="cursor:pointer;user-select:none;">Cheong</label>
+				
+				<label id="chungcheong-label-han" style="cursor:pointer;user-select:none;">충청북/남도</label>
+			</div>
+		</div>
+		<img id="chungcheong-img" class="chungcheong" src="${path }/resources/images/chungcheong.jpg" alt="충청도">
 	</div>
+	<input type="hidden" name="location-first" id="location-first" value="">
 <script>
 	$(window).scroll(function (){
 		var height=$(document).scrollTop();
@@ -746,7 +852,7 @@
 				},1000);
 			},1200)
 		}
-		if(height>=2850){//대구가지
+		if(height>=2850){//경상가지
 			$("#gyeongsang").css("width","200px");
 			setInterval(function(){//이미지
 				$("#gyeongsang-img").css("width","600px");
@@ -757,13 +863,95 @@
 				},1000);
 			},1200)
 		}
+		if(height>=3520){//충청가지
+			$("#chungcheong").css("width","100px");
+			$("#chungcheong").css("left","-100px");
+			setInterval(function(){//이미지
+				$("#chungcheong-img").css("width","500px");
+				$("#chungcheong-img").css("left","-620px");
+				setInterval(function(){//글자
+					$("#chungcheong").css("color","#F6F6F6");
+					$("#chungcheong").css("opacity","1");
+					$("#chungcheong-label").css("text-shadow","1px 3px 3px lightgray");	
+				},1000);
+			},1200)
+		}
+		
 	});
 	$(function(){
+		let location="";
 		$(".seoul").click(function(){
-			console.log("확인");
+			location=$("#location-first").val("서울특별시");
+			$("#location-first-demo").text("서울특별시");
+			$(".tr-one").append("<td class='location-select-font'>서울 전체</td>");
+			$(".tr-one").append("<td class='location-select-font'>도봉구/강북구/노원구</td>");
+			$(".tr-two").append("<td class='location-select-font'>동대문구/중랑구/성북구</td>");
+			$(".tr-two").append("<td class='location-select-font'>강동구/송파구</td>");
+			$(".tr-three").append("<td class='location-select-font'>광진구/성동구</td>");
+			$(".tr-three").append("<td class='location-select-font'>종로구/중구/용산구</td>");
+			$(".tr-four").append("<td class='location-select-font'>은평구/서대문구/마포구</td>");
+			$(".tr-four").append("<td class='location-select-font'>강남구/서초구</td>");
+			$(".tr-five").append("<td class='location-select-font'>동작구/관악구/금천구</td>");
+			$(".tr-five").append("<td class='location-select-font'>영등포구/구로구</td>");
+			$(".tr-six").append("<td class='location-select-font'>양천구/강서구</td>");
 		});
 		$(".kyungki").click(function(){
-			console.log("경기도");
+			location=$("#location-first").val("경기도");
+			$("#location-first-demo").text("경기도");
+			$(".tr-one").append("<td class='location-select-font'>경기 전체</td>");
+			$(".tr-one").append("<td class='location-select-font'>가평/청평/양평</td>");
+			$(".tr-two").append("<td class='location-select-font'>수원/화성</td>");
+			$(".tr-two").append("<td class='location-select-font'>고양/파주/김포</td>");
+			$(".tr-three").append("<td class='location-select-font'>의정부/포천/동두천/연천</td>");
+			$(".tr-three").append("<td class='location-select-font'>용인/동탄</td>");
+			$(".tr-four").append("<td class='location-select-font'>오산/평택</td>");
+			$(".tr-four").append("<td class='location-select-font'>남양주/구리/성남/분당</td>");
+			$(".tr-five").append("<td class='location-select-font'>이천/광주/여주/하남</td>");
+			$(".tr-five").append("<td class='location-select-font'>부천/광명/시흥/안산</td>");
+			$(".tr-six").append("<td class='location-select-font'>안양/의왕/군포</td>");
+		});
+		$(".incheon").click(function(){
+			location=$("#location-first").val("인천광역시");
+			$("#location-first-demo").text("인천광역시");
+			$(".tr-one").append("<td class='location-select-font'>인천 전체</td>");
+			$(".tr-one").append("<td class='location-select-font'>송도/소래포구</td>");
+			$(".tr-two").append("<td class='location-select-font'>인천국제공항/강화</td>");
+			$(".tr-two").append("<td class='location-select-font'>을왕리/영종</td>");
+			$(".tr-three").append("<td class='location-select-font'>구읍뱃터/월미도</td>");
+			$(".tr-three").append("<td class='location-select-font'>주안/간석/인천시청</td>");
+			$(".tr-four").append("<td class='location-select-font'>청라/계양/부평</td>");
+		});
+		$(".kangwon").click(function(){
+			location=$("#location-first").val("강원도");
+			$("#location-first-demo").text("강원도");
+		});
+		$(".jeju").click(function(){
+			location=$("#location-first").val("제주특별자치도");
+			$("#location-first-demo").text("제주특별자치도");
+		});
+		$(".daejeon").click(function(){
+			location=$("#location-first").val("대전광역시");
+			$("#location-first-demo").text("대전광역시");
+		});
+		$(".busan").click(function(){
+			location=$("#location-first").val("부산광역시");
+			$("#location-first-demo").text("부산광역시");
+		});
+		$(".daegu").click(function(){
+			location=$("#location-first").val("대구광역시");
+			$("#location-first-demo").text("대구광역시");
+		});
+		$(".jeolla").click(function(){
+			location=$("#location-first").val("전라도");
+			$("#location-first-demo").text("전라도");
+		});
+		$(".gyeongsang").click(function(){
+			location=$("#location-first").val("경상도");
+			$("#location-first-demo").text("경상도");
+		});
+		$(".chungcheong").click(function(){
+			location=$("#location-first").val("충청도");
+			$("#location-first-demo").text("충청도");
 		});
 		$(".seoul").hover(function(){
 			$("#seoul-img").css("box-shadow","5px 10px 10px gray");
@@ -917,6 +1105,25 @@
 			$("#gyeongsang-label-two").css("opacity","1");
 			$("#gyeongsang-label-han").css("opacity","0");
 		});
+		$(".chungcheong").hover(function(){
+			$("#chungcheong-img").css("box-shadow","5px 10px 10px gray");
+			$("#chungcheong-img").css("transform","scale(1.05)");
+			$("#chungcheong-img").css("-webkit-filter","grayscale(0%)");
+			$("#chungcheong-img").css("filter","none");
+			$("#chungcheong-label").css("opacity","0");
+			$("#chungcheong-label-two").css("opacity","0");
+			$("#chungcheong-label-han").css("opacity","1");
+		},function(){
+			$("#chungcheong-img").css("box-shadow","3px 5px 5px gray");
+			$("#chungcheong-img").css("transform","scale(1.0)");
+			$("#chungcheong-img").css("-webkit-filter","grayscale(100%)");
+			$("#chungcheong-img").css("filter","gray");
+			$("#chungcheong-label").css("opacity","1");
+			$("#chungcheong-label-two").css("opacity","1");
+			$("#chungcheong-label-han").css("opacity","0");
+		});
+
+		
 		
 		
 	});
