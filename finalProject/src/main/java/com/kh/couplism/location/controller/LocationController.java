@@ -30,6 +30,23 @@ public class LocationController {
 		
 		return mv;
 	}
+	@RequestMapping("/enrollLocation")
+	public ModelAndView enrollLocation(ModelAndView mv) {
+		
+		mv.addObject("logoPath","/resources/images/enroll-location.jpg");
+		
+		mv.addObject("titleHan","상점 등록");
+		mv.addObject("titleEng","Create Your Shop");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		mv.setViewName("location/enrollLocation");
+		
+		return mv;
+	}
 	
 	
 	
