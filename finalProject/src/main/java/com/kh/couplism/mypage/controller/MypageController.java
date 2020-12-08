@@ -72,12 +72,11 @@ public class MypageController {
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				+ "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				);
-		mv.setViewName("mypage/reservationList");
 		
 		List<LocationReservation> list=service.selectList();
 		
 		mv.addObject("list",list);
-		mv.setViewName("mypage/adminMypage");
+		mv.setViewName("mypage/reservationList");
 		
 		return mv;
 	}

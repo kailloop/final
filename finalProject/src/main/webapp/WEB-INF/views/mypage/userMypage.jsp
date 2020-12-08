@@ -211,6 +211,8 @@
 						</div>
 					</div>
 				</div>
+				
+				<h3>로그인값 : <c:out value="${logginedMember.id }"/></h3>
 </section>
 </body>
 </html>
