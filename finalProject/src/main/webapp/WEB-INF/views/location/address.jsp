@@ -1279,10 +1279,6 @@
 			$("#chungcheong-label-two").css("opacity","1");
 			$("#chungcheong-label-han").css("opacity","0");
 		});
-
-		
-		
-		
 	});
 </script>
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>
