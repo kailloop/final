@@ -644,7 +644,7 @@
 		margin:0;
 		padding:0;
 		width:100%;
-		height:50px;
+		height:60px;
 		color:black;
 		cursor:pointer;
 	}
@@ -654,6 +654,7 @@
 		border:1px black solid;
 		position:relative;
 		width:50%;
+		font-size:12px;
 	}
 </style>
 	<br/><br/><br/><br/><br/><br/>
@@ -664,63 +665,63 @@
 				<label id="seoul-label-han" style="cursor:pointer;user-select:none;">서울특별시</label>
 			</div>
 		</div>
-		<img id="seoul-img" class="seoul" src="${path }/resources/images/seoul.jpg" alt="서울">
+		<img id="seoul-img" class="seoul" data-toggle="modal" data-target="#locationModal" src="${path }/resources/images/seoul.jpg" alt="서울">
 		<div id="kyungki" data-toggle="modal" data-target="#locationModal">
 			<div class="kyungki-eng kyungki">
 				<label id="kyungki-label" style="cursor:pointer;user-select:none;">Kyungki</label>
 				<label id="kyungki-label-han" style="cursor:pointer;user-select:none;">경기도</label>
 			</div>
 		</div>
-		<img id="kyungki-img" class="kyungki" src="${path }/resources/images/Kyungki.jpg" alt="경기도">
+		<img id="kyungki-img" data-toggle="modal" data-target="#locationModal" class="kyungki" src="${path }/resources/images/Kyungki.jpg" alt="경기도">
 		<div id="incheon" data-toggle="modal" data-target="#locationModal">
 			<div class="incheon-eng incheon">
 				<label id="incheon-label" style="cursor:pointer;user-select:none;">InCheon</label>
 				<label id="incheon-label-han" style="cursor:pointer;user-select:none;">인천광역시</label>
 			</div>
 		</div>
-		<img id="incheon-img" class="incheon" src="${path }/resources/images/incheon.png" alt="인천">
+		<img id="incheon-img" data-toggle="modal" data-target="#locationModal" class="incheon" src="${path }/resources/images/incheon.png" alt="인천">
 		<div id="kangwon" data-toggle="modal" data-target="#locationModal">
 			<div class="kangwon-eng kangwon">
 				<label id="kangwon-label" style="cursor:pointer;user-select:none;">KangWon</label>
 				<label id="kangwon-label-han" style="cursor:pointer;user-select:none;">강원도</label>
 			</div>
 		</div>
-		<img id="kangwon-img" class="jeju" src="${path }/resources/images/kangwon.jpg" alt="강원도">
+		<img id="kangwon-img" data-toggle="modal" data-target="#locationModal" class="jeju" src="${path }/resources/images/kangwon.jpg" alt="강원도">
 		<div id="jeju" data-toggle="modal" data-target="#locationModal">
 			<div class="jeju-eng jeju">
 				<label id="jeju-label" style="cursor:pointer;user-select:none;">JejuDo</label>
 				<label id="jeju-label-han" style="cursor:pointer;user-select:none;">제주도</label>
 			</div>
 		</div>
-		<img id="jeju-img" class="jeju" src="${path }/resources/images/jeju.jpg" alt="제주도">
+		<img id="jeju-img" data-toggle="modal" data-target="#locationModal" class="jeju" src="${path }/resources/images/jeju.jpg" alt="제주도">
 		<div id="daejeon" data-toggle="modal" data-target="#locationModal">
 			<div class="daejeon-eng daejeon">
 				<label id="daejeon-label" style="cursor:pointer;user-select:none;">DaeJeon</label>
 				<label id="daejeon-label-han" style="cursor:pointer;user-select:none;">대전광역시</label>
 			</div>
 		</div>
-		<img id="daejeon-img" class="daejeon" src="${path }/resources/images/daejeon.jpg" alt="대전광역시">
+		<img id="daejeon-img" data-toggle="modal" data-target="#locationModal" class="daejeon" src="${path }/resources/images/daejeon.jpg" alt="대전광역시">
 		<div id="busan" data-toggle="modal" data-target="#locationModal">
 			<div class="busan-eng busan">
 				<label id="busan-label" style="cursor:pointer;user-select:none;">Busan</label>
 				<label id="busan-label-han" style="cursor:pointer;user-select:none;">부산광역시</label>
 			</div>
 		</div>
-		<img id="busan-img" class="busan" src="${path }/resources/images/busan.jpg" alt="부산광역시">
+		<img id="busan-img" data-toggle="modal" data-target="#locationModal" class="busan" src="${path }/resources/images/busan.jpg" alt="부산광역시">
 		<div id="daegu" data-toggle="modal" data-target="#locationModal">
 			<div class="daegu-eng daegu">
 				<label id="daegu-label" style="cursor:pointer;user-select:none;">DaeGu</label>
 				<label id="daegu-label-han" style="cursor:pointer;user-select:none;">대구광역시</label>
 			</div>
 		</div>
-		<img id="daegu-img" class="daegu" src="${path }/resources/images/daegu.jpg" alt="대구광역시">
+		<img id="daegu-img" data-toggle="modal" data-target="#locationModal" class="daegu" src="${path }/resources/images/daegu.jpg" alt="대구광역시">
 		<div id="jeolla" data-toggle="modal" data-target="#locationModal">
 			<div class="jeolla-eng jeolla">
 				<label id="jeolla-label" style="cursor:pointer;user-select:none;">JeolLa</label>
 				<label id="jeolla-label-han" style="cursor:pointer;user-select:none;">전라북/남도</label>
 			</div>
 		</div>
-		<img id="jeolla-img" class="jeolla" src="${path }/resources/images/jeolla.jpg" alt="전라도">
+		<img id="jeolla-img" data-toggle="modal" data-target="#locationModal" class="jeolla" src="${path }/resources/images/jeolla.jpg" alt="전라도">
 		<div id="gyeongsang" data-toggle="modal" data-target="#locationModal">
 			<div class="gyeongsang-eng gyeongsang">
 				<label id="gyeongsang-label" style="cursor:pointer;user-select:none;">Gyeong</label>
@@ -729,7 +730,7 @@
 				<label id="gyeongsang-label-han" style="cursor:pointer;user-select:none;">경상북/남도</label>
 			</div>
 		</div>
-		<img id="gyeongsang-img" class="gyeongsang" src="${path }/resources/images/gyeongsang.jpg" alt="경상도">
+		<img id="gyeongsang-img" data-toggle="modal" data-target="#locationModal" class="gyeongsang" src="${path }/resources/images/gyeongsang.jpg" alt="경상도">
 		<div id="chungcheong" data-toggle="modal" data-target="#locationModal">
 			<div class="chungcheong-eng chungcheong">
 				<label id="chungcheong-label" style="cursor:pointer;user-select:none;">Chung</label>
@@ -738,7 +739,7 @@
 				<label id="chungcheong-label-han" style="cursor:pointer;user-select:none;">충청북/남도</label>
 			</div>
 		</div>
-		<img id="chungcheong-img" class="chungcheong" src="${path }/resources/images/chungcheong.jpg" alt="충청도">
+		<img id="chungcheong-img" data-toggle="modal" data-target="#locationModal" class="chungcheong" src="${path }/resources/images/chungcheong.jpg" alt="충청도">
 	</div>
 	<input type="hidden" name="location-first" id="location-first" value="">
 <script>
@@ -894,6 +895,8 @@
 			$(".tr-five").append("<td class='location-select-font'>동작구/관악구/금천구</td>");
 			$(".tr-five").append("<td class='location-select-font'>영등포구/구로구</td>");
 			$(".tr-six").append("<td class='location-select-font'>양천구/강서구</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".kyungki").click(function(){
 			location=$("#location-first").val("경기도");
@@ -909,6 +912,8 @@
 			$(".tr-five").append("<td class='location-select-font'>이천/광주/여주/하남</td>");
 			$(".tr-five").append("<td class='location-select-font'>부천/광명/시흥/안산</td>");
 			$(".tr-six").append("<td class='location-select-font'>안양/의왕/군포</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".incheon").click(function(){
 			location=$("#location-first").val("인천광역시");
@@ -920,38 +925,190 @@
 			$(".tr-three").append("<td class='location-select-font'>구읍뱃터/월미도</td>");
 			$(".tr-three").append("<td class='location-select-font'>주안/간석/인천시청</td>");
 			$(".tr-four").append("<td class='location-select-font'>청라/계양/부평</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".kangwon").click(function(){
 			location=$("#location-first").val("강원도");
 			$("#location-first-demo").text("강원도");
+			$(".tr-one").append("<td class='location-select-font'>강원 전체</td>");
+			$(".tr-one").append("<td class='location-select-font'>춘천/강촌</td>");
+			$(".tr-two").append("<td class='location-select-font'>원주</td>");
+			$(".tr-two").append("<td class='location-select-font'>경포대/사천/주문진/정동진</td>");
+			$(".tr-three").append("<td class='location-select-font'>강릉역/교동/옥계</td>");
+			$(".tr-three").append("<td class='location-select-font'>영월/정선</td>");
+			$(".tr-four").append("<td class='location-select-font'>속초/양양/고성</td>");
+			$(".tr-four").append("<td class='location-select-font'>동해/삼척/태백</td>");
+			$(".tr-five").append("<td class='location-select-font'>평창</td>");
+			$(".tr-five").append("<td class='location-select-font'>홍천/황성</td>");
+			$(".tr-six").append("<td class='location-select-font'>화천/철원/인제/양구</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".jeju").click(function(){
 			location=$("#location-first").val("제주특별자치도");
 			$("#location-first-demo").text("제주특별자치도");
+			$(".tr-one").append("<td class='location-select-font'>제주시</td>");
+			$(".tr-one").append("<td class='location-select-font'>서귀포시</td>");
+			$(".tr-two").append("<td class='location-select-font'>하귀/애월/한림/협재</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".daejeon").click(function(){
 			location=$("#location-first").val("대전광역시");
 			$("#location-first-demo").text("대전광역시");
+			$(".tr-one").append("<td class='location-select-font'>유성구</td>");
+			$(".tr-one").append("<td class='location-select-font'>중구(은행/대흥/선화/유천)</td>");
+			$(".tr-two").append("<td class='location-select-font'>동구(용전/복합터미널)</td>");
+			$(".tr-two").append("<td class='location-select-font'>서구(둔산/용문/월평)</td>");
+			$(".tr-three").append("<td class='location-select-font'>대덕구(중리/신탄진)</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".busan").click(function(){
 			location=$("#location-first").val("부산광역시");
 			$("#location-first-demo").text("부산광역시");
+			$(".tr-one").append("<td class='location-select-font'>해운대/센텀시티/재송</td>");
+			$(".tr-one").append("<td class='location-select-font'>송정/기장/정관</td>");
+			$(".tr-two").append("<td class='location-select-font'>광안리/수영</td>");
+			$(".tr-two").append("<td class='location-select-font'>경성대/대연/용호동/문현</td>");
+			$(".tr-three").append("<td class='location-select-font'>서면/양정/초읍/부산시민공원</td>");
+			$(".tr-three").append("<td class='location-select-font'>남포동/중앙동<br/>태종대/송도/영도</td>");
+			$(".tr-four").append("<td class='location-select-font'>부산역/범일동/부산진역</td>");
+			$(".tr-four").append("<td class='location-select-font'>연산/토곡</td>");
+			$(".tr-five").append("<td class='location-select-font'>동래/사직/온천장/부산대/구서</td>");
+			$(".tr-five").append("<td class='location-select-font'>사상(경전철)/엄궁/학장</td>");
+			$(".tr-six").append("<td class='location-select-font'>덕천/만덕<br/>화명/구포(구포역/KTX역)</td>");
+			$(".tr-six").append("<td class='location-select-font'>하단/명지/김해공항/다대포<br/>강서/신호/괴정/지사</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".daegu").click(function(){
 			location=$("#location-first").val("대구광역시");
 			$("#location-first-demo").text("대구광역시");
+			$(".tr-one").append("<td class='location-select-font'>동성로/서문시장<br/>대구시청/삼덕동/교동/종로</td>");
+			$(".tr-one").append("<td class='location-select-font'>대구역/칠성시장/경북대/엑스코<br/>칠곡지구/태전동/금호지구</td>");
+			$(".tr-two").append("<td class='location-select-font'>동대구역/고속버스터미널/신천동/신암동</td>");
+			$(".tr-two").append("<td class='location-select-font'>대구공항/혁신도시/동촌유원지/팔공산</td>");
+			$(".tr-three").append("<td class='location-select-font'>수성못/들안길/황금/두산/범어/시지<br/>라이온즈파크/월드컵경기장</td>");
+			$(".tr-three").append("<td class='location-select-font'>북부정류장/이현공단/평리동<br/>내당동/비산동/원대동</td>");
+			$(".tr-four").append("<td class='location-select-font'>두류공원/앞산공원/안지랑<br/>성당동/이천동/대명/봉덕</td>");
+			$(".tr-four").append("<td class='location-select-font'>서부정류장/광장코아/본리/죽전/장기동</td>");
+			$(".tr-five").append("<td class='location-select-font'>성서/계명대/성서공단/상인동<br/>달성군/가창/현풍/논공</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
 		});
 		$(".jeolla").click(function(){
 			location=$("#location-first").val("전라도");
 			$("#location-first-demo").text("전라도");
+			$(".tr-one").append("<td class='location-select-font'>전주/완주</td>");
+			$(".tr-one").append("<td class='location-select-font'>군산</td>");
+			$(".tr-two").append("<td class='location-select-font'>익산</td>");
+			$(".tr-two").append("<td class='location-select-font'>남원/임실/순창/무주/진안/장수</td>");
+			$(".tr-three").append("<td class='location-select-font'>정읍/부안/김제/고창</td>");
+			$(".tr-three").append("<td class='location-select-font'>여수</td>");
+			$(".tr-four").append("<td class='location-select-font'>순천</td>");
+			$(".tr-four").append("<td class='location-select-font'>광양</td>");
+			$(".tr-five").append("<td class='location-select-font'>나주/함평/영광/장성</td>");
+			$(".tr-five").append("<td class='location-select-font'>목포/무안/영암/신안</td>");
+			$(".tr-six").append("<td class='location-select-font'>담양/곡성/화순/구례</td>");
+			$(".tr-six").append("<td class='location-select-font'>해남/완도/진도/강진/장흥/보성/고흥</td>");
+			$(".tr-seven").css("height","60px");
+			$(".tr-eight").css("height","60px");
+			$(".tr-seven").append("<td class='location-select-font'>광주(상무지구/금호지구/유스퀘어/서구)</td>");
+			$(".tr-seven").append("<td class='location-select-font'>광주(첨단지구/하남지구/송정역/광산구)</td>");
+			$(".tr-eight").append("<td class='location-select-font'>광주(충장로/대인시장/국립아시아문화전당/동구/남구)</td>");
+			$(".tr-eight").append("<td class='location-select-font'>광주(광주역/기아챔피언스필드/전대사거리/북구)</td>");
+			$(".modal-body").css("height","auto");
 		});
 		$(".gyeongsang").click(function(){
 			location=$("#location-first").val("경상도");
-			$("#location-first-demo").text("경상도");
+			$("#location-first-demo").text("경상북도");
+			$("#location-first-demo").css("cursor","pointer");
+			$("#location-space").css("display","inline-block");
+			$(".tr-one").append("<td class='location-select-font'>포항/남구(시청/시외버스터미널/구룡포/쌍사/문덕/오천)</td>");
+			$(".tr-one").append("<td class='location-select-font'>포항/북구(영일대/죽도시장/여객터미널/송도)</td>");
+			$(".tr-two").append("<td class='location-select-font'>경주(보문단지/황리단길/불국사/양남/감포/안강)</td>");
+			$(".tr-two").append("<td class='location-select-font'>구미</td>");
+			$(".tr-three").append("<td class='location-select-font'>경산(영남대/대구대/갓바위/하양/진량/자인)</td>");
+			$(".tr-three").append("<td class='location-select-font'>안동(경북도청/하회마을)</td>");
+			$(".tr-four").append("<td class='location-select-font'>영천/청도</td>");
+			$(".tr-four").append("<td class='location-select-font'>김천/칠곡/성주</td>");
+			$(".tr-five").append("<td class='location-select-font'>문경/상주/영주/예천/군위/의성/봉화</td>");
+			$(".tr-five").append("<td class='location-select-font'>울진/영덕/청송</td>");
+			$(".tr-six").append("<td class='location-select-font'>울릉도</td>");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
+			$("#location-second-demo").text("경상남도")
+			$("#location-second-demo").css("cursor","pointer");
+			$("#location-first-demo").click(function(){
+				$('td').remove('.location-select-font');
+				$(".tr-one").append("<td class='location-select-font'>포항/남구(시청/시외버스터미널/구룡포/쌍사/문덕/오천)</td>");
+				$(".tr-one").append("<td class='location-select-font'>포항/북구(영일대/죽도시장/여객터미널/송도)</td>");
+				$(".tr-two").append("<td class='location-select-font'>경주(보문단지/황리단길/불국사/양남/감포/안강)</td>");
+				$(".tr-two").append("<td class='location-select-font'>구미</td>");
+				$(".tr-three").append("<td class='location-select-font'>경산(영남대/대구대/갓바위/하양/진량/자인)</td>");
+				$(".tr-three").append("<td class='location-select-font'>안동(경북도청/하회마을)</td>");
+				$(".tr-four").append("<td class='location-select-font'>영천/청도</td>");
+				$(".tr-four").append("<td class='location-select-font'>김천/칠곡/성주</td>");
+				$(".tr-five").append("<td class='location-select-font'>문경/상주/영주/예천/군위/의성/봉화</td>");
+				$(".tr-five").append("<td class='location-select-font'>울진/영덕/청송</td>");
+				$(".tr-six").append("<td class='location-select-font'>울릉도</td>");
+			});
+			$("#location-second-demo").click(function(){
+				$('td').remove('.location-select-font');
+				$(".tr-one").append("<td class='location-select-font'>창원 상남동/용호동/중앙동/창원시청</td>");
+				$(".tr-one").append("<td class='location-select-font'>창원 명서동/봉곡동/팔용동/북면온천/창원종합버스터미널</td>");
+				$(".tr-two").append("<td class='location-select-font'>마산/진해</td>");
+				$(".tr-two").append("<td class='location-select-font'>김해/장유</td>");
+				$(".tr-three").append("<td class='location-select-font'>양산/밀양</td>");
+				$(".tr-three").append("<td class='location-select-font'>진주</td>");
+				$(".tr-four").append("<td class='location-select-font'>거제/통영/고성</td>");
+				$(".tr-four").append("<td class='location-select-font'>사천/남해</td>");
+				$(".tr-five").append("<td class='location-select-font'>하동/산청/함양</td>");
+				$(".tr-five").append("<td class='location-select-font'>거창/함안/창녕/합천/의령</td>");
+			});
 		});
+		
+		
 		$(".chungcheong").click(function(){
 			location=$("#location-first").val("충청도");
-			$("#location-first-demo").text("충청도");
+			$("#location-first-demo").text("충청북도");
+			$("#location-first-demo").css("cursor","pointer");
+			$("#location-space").css("display","inline-block");
+			$(".tr-one").append("<td class='location-select-font'>청주 흥덕구/서원구 (청주 터미널)</td>");
+			$(".tr-one").append("<td class='location-select-font'>청주 상당구/청원구 (청주국제공항)</td>");
+			$(".tr-two").append("<td class='location-select-font'>충주/수안보</td>");
+			$(".tr-two").append("<td class='location-select-font'>제천/진천/음성/단양</td>");
+			$(".tr-three").append("<td class='location-select-font'>보은/옥천/괴산/증평/영동</td>");
+			$(".modal-body").css("height","auto");
+			$(".tr-seven").css("height","0px");
+			$(".tr-eight").css("height","0px");
+			$("#location-second-demo").text("충청남도")
+			$("#location-second-demo").css("cursor","pointer");
+			$("#location-first-demo").click(function(){
+				$('td').remove('.location-select-font');
+				$(".tr-one").append("<td class='location-select-font'>청주 흥덕구/서원구 (청주 터미널)</td>");
+				$(".tr-one").append("<td class='location-select-font'>청주 상당구/청원구 (청주국제공항)</td>");
+				$(".tr-two").append("<td class='location-select-font'>충주/수안보</td>");
+				$(".tr-two").append("<td class='location-select-font'>제천/진천/음성/단양</td>");
+				$(".tr-three").append("<td class='location-select-font'>보은/옥천/괴산/증평/영동</td>");
+				$(".modal-body").css("height","auto");
+			});
+			$("#location-second-demo").click(function(){
+				$('td').remove('.location-select-font');
+				$(".tr-one").append("<td class='location-select-font'>천안 서북구</td>");
+				$(".tr-one").append("<td class='location-select-font'>천안 동남구</td>");
+				$(".tr-two").append("<td class='location-select-font'>아산</td>");
+				$(".tr-two").append("<td class='location-select-font'>공주/동학사/세종</td>");
+				$(".tr-three").append("<td class='location-select-font'>계룡/금산/논산/청양</td>");
+				$(".tr-three").append("<td class='location-select-font'>예산/홍성</td>");
+				$(".tr-four").append("<td class='location-select-font'>태안/안면도/서산</td>");
+				$(".tr-four").append("<td class='location-select-font'>당진</td>");
+				$(".tr-five").append("<td class='location-select-font'>보령/대천해수욕장</td>");
+				$(".tr-five").append("<td class='location-select-font'>서천/부여</td>");
+				$(".modal-body").css("height","auto");
+			});
 		});
 		$(".seoul").hover(function(){
 			$("#seoul-img").css("box-shadow","5px 10px 10px gray");
