@@ -9,8 +9,8 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 
-<div>
-	<table>
+<div style="background: red;">
+	<table border="1" width="700px;" style="margin-top:50px; margin-left: auto; margin-right: auto; ">
 		<tr>
 			<td>장소이름</td>
 			<td>인원</td>
@@ -22,14 +22,18 @@
 		</tr>
 		<c:forEach items="${list }" var="r">
 		<tr>
+			<td>안녕</td>
 			<td> <c:out value="${r.reservationPeopleCount}"/> </td>
-			<td><c:out value=""/></td>
-			<td><c:out value=""/></td>
-			<td><c:out value=""/></td>
-			<td><c:out value=""/></td>
-			<td><c:out value=""/></td>
+			<td><c:out value="${r.reservationPrice }"/></td>
+			<td><c:out value="${r.paymentDate }"/></td>
+			<td><c:out value="${r.ReservationDate }"/></td>
+			<td><c:out value="${r.reservationDay }"/></td>
+			<td><c:out value="${r.reservationTime }"/></td>
 		</tr>
 		</c:forEach>
+		<tr>
+			<td>d</td>
+		</tr>
 	</table>
 </div>
 

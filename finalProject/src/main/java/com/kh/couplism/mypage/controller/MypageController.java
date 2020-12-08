@@ -75,6 +75,7 @@ public class MypageController {
 		
 		List<LocationReservation> list=service.selectList();
 		
+		System.out.println(list);
 		mv.addObject("list",list);
 		mv.setViewName("mypage/reservationList");
 		
