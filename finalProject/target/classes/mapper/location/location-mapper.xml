@@ -50,7 +50,7 @@
 		<result property="pricePeople" column="PRICE_PEOPLE"/>
 	</resultMap>
 	
-	<resultMap type="locationReservation" id="com.kh.couplism.location.model.vo.LocationReservation">
+	<resultMap id="locationReservation" type="com.kh.couplism.location.model.vo.LocationReservation">
 		<result property="reservationNo" column="RESERVATION_NO"/>
 		<result property="locationNo" column="LOCATION_NO"/>
 		<result property="userId" column="USER_ID"/>
@@ -86,4 +86,19 @@
 	<select id="getDate" resultType="date">
 		SELECT * FROM CHECKDATE
 	</select>
+	
+	<insert id="insertLocation" parameterType="com.kh.couplism.location.model.vo.Location">
+		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus})
+		<selectKey keyProperty="locationNo" resultType="_int">
+			SELECT SEQ_LOCATIONNO.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertLocationMain" parameterType="com.kh.couplism.location.model.vo.LocationMain">
+		INSERT INTO LOCATIONMAIN VALUES(#{locationNo},#{originalName},#{renameName})
+	</insert>
+	
+	<insert id="insertLocationFile" parameterType="com.kh.couplism.location.model.vo.LocationFile">
+		INSERT INTO LOCATIONFILE VALUES(#{locationNo},#{originalName},#{renameName})
+	</insert>
 </mapper>
