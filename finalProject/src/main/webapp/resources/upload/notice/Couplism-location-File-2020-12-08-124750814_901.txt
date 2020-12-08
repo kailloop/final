@@ -1,0 +1,44 @@
+CREATE table options (
+    No number primary key ,
+    o_name varchar2(30) not null
+);
+
+create table option_check(
+    No number not null,
+    age number not null
+);
+ALTER TABLE option_check ADD CONSTRAINT o_FK_No FOREIGN KEY(No) REFERENCES options (No);
+
+create table ohit(
+    No number not null,
+    hit number not null
+);
+ALTER TABLE ohit ADD CONSTRAINT oh_FK_No FOREIGN KEY(No) REFERENCES options (No);
+
+INSERT INTO options Values(7,'g');
+
+select * FRom options;
+
+INSERT INTO option_check Values(7,50);
+select * FRom option_check;
+
+INSERT INTO ohit Values(7,70);
+select * FRom ohit;
+
+select * from option_check where age=10;--10대 추천 종합
+
+select option_check.no, options.o_name, option_check.age ,ohit.hit from option_check inner join ohit on option_check.no = ohit.no inner join options on option_check.no=options.no where age=10 order by hit desc ;
+
+select * from((select ROW_NUMBER() OVER(order by hit desc  ) as rnum ,option_check.no, options.o_name, option_check.age ,ohit.hit 
+from option_check inner join ohit on option_check.no=ohit.no inner join options on option_check.no=options.no where age=10)A)where rnum between 1 and 2;
+
+
+
+<완성본>
+select * from(select ROW_NUMBER() OVER(order by hit desc  ) as rnum, a.* from(select distinct option_check.no ,ohit.hit
+from option_check inner join ohit on option_check.no=ohit.no inner join options on option_check.no=options.no where age=50 or age=10 order by ohit.hit desc) a) where RNUM BETWEEN 1 AND 2;
+
+<최종>
+select d.*,options.o_name from(select ROW_NUMBER() OVER(order by hit desc  ) as rnum, a.* 
+from(select distinct c.no ,ohit.hit as hit from option_check c inner join ohit on c.no = ohit.no  where c.age=10 or c.age=50) a) d inner join options on d.no = options.no 
+where rnum between 1 and 2;
