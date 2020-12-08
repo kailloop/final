@@ -23,7 +23,6 @@ import com.kh.couplism.location.model.service.LocationService;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
-import com.kh.couplism.notice.model.vo.NoticeFile;
 
 @Controller
 public class LocationController {
@@ -147,7 +146,6 @@ public class LocationController {
 		int locationFileResult = 0;
 		if (locationResult > 0) {// 정상적으로 location이 DB에 등록이 되었을때
 			String saveDirMain = request.getServletContext().getRealPath("/resources/upload/locationMain");
-			logger.debug("mainFile.isEmpty : " + mainFile.isEmpty());
 			logger.debug("locationMain file명 : " + mainFile.getOriginalFilename());
 			logger.debug("locationMain file Size : " + mainFile.getSize());
 			String originalFileName = mainFile.getOriginalFilename();
@@ -173,17 +171,18 @@ public class LocationController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String saveDirFile = request.getServletContext().getRealPath("/resources/upload/notice");
+			logger.debug("locationFile Size : "+locationFile.size());
+			String saveDirFile = request.getServletContext().getRealPath("/resources/upload/location");
 			for (MultipartFile mf : locationFile) {
 				if (!mf.isEmpty()) {// mf.isEmpty()
 					logger.debug("file명 : " + mf.getOriginalFilename());
 					logger.debug("file Size : " + mf.getSize());
 					String mforiginalFileName = mf.getOriginalFilename();
-					String mfext = originalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
+					String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
 					SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
 					int mfrandomNum = (int) (Math.random() * 1000);
 					String mfrenamedFileName = "Couplism-location-File-"
-							+ sdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
+							+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
 					logger.debug("변경된 파일이름 " + mfrenamedFileName);
 					try {
 						mf.transferTo(new File(saveDirFile + "/" + mfrenamedFileName));// 파일을 저장
