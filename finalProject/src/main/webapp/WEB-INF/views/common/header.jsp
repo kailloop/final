@@ -38,7 +38,7 @@
 <style>
 	.modal-content{
 		/* background-color:purple; */
-		background-image:url(/couplism/resources/images/login-logo.jpg);
+		/* background-image:url(/couplism/resources/images/login-logo.jpg); */
 		
 	}
 	.modal-body{
@@ -68,6 +68,21 @@
 		transition: all ease 1s;
 	}
 	#login-close:hover{
+		transform:rotate(360deg);
+	}
+	#location-close{
+		position:absolute;
+		margin:0;
+		padding:0;
+		top:30px;
+		right:40px;
+		cursor:pointer;
+		width:auto;
+		height:auto;
+		font-size:38px;
+		transition: all ease 1s;
+	}
+	#location-close:hover{
 		transform:rotate(360deg);
 	}
 	#id-placeholder{
@@ -245,6 +260,7 @@
 						<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
 					</div>
 				</c:if>
+				<button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button>
 				
 				<div id="mypage" class="circle">
 				<c:if test="${logginedMember!=null }">
@@ -270,7 +286,7 @@
 				<div id="nav-main">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a href="" class="nav-color nav-link">회사소개</a></li>
-						<li class="nav-item"><a id="travel" class="nav-color nav-link" style="cursor:pointer;">여행지</a></li>
+						<li class="nav-item"><a id="travel" class="nav-color nav-link" onclick="travel();" style="cursor:pointer;">여행지</a></li>
 						<li class="nav-item"><a class="nav-color nav-link">리즘</a></li>
 						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;">기념일</a></li>
 						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;">커뮤니티</a></li>
@@ -281,10 +297,10 @@
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
-						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
+						<!-- <li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
-						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li>
+						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li> -->
 						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/myCalendar.do"  class="nav-link nav-color" >기념일 설정</a></li>
 						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li>
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
@@ -303,10 +319,10 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 		        <div class="modal-body">
-		          <!-- Default form login -->
+		          <!-- Default form login -->c:
 					<form action="${path }/member/memberLogin" method="post">						
 						
-							<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
+						<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
 						
 					    <label class="login-title">Couplism</label>
 					    
@@ -360,8 +376,42 @@
 		</div>
 	</div>
 	</c:if>
-
+	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<i id="location-close" class="fas fa-times" aria-hidden="true"></i>
+					<label id="location-modal-title">지역 선택</label>
+					<label class="location-label">찾아보고자 하시는 지역을 선택해주세요</label><br/>
+					<label id="location-first-demo"></label><label id="location-space" style="display:none;">&nbsp;&nbsp;</label><label id="location-second-demo"></label>
+					<br/>
+					<table id="location-select-table">
+						<tr class="location-tr tr-one">
+						</tr>
+						<tr class="location-tr tr-two">							
+						</tr>
+						<tr class="location-tr tr-three">
+						</tr>
+						<tr class="location-tr tr-four">
+						</tr>
+						<tr class="location-tr tr-five">
+						</tr>
+						<tr class="location-tr tr-six">
+						</tr>
+						<tr class="location-tr tr-seven">
+						</tr>
+						<tr class="location-tr tr-eight">
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 <script>
+	function travel(){
+		location.replace('${path}/moveLocation');
+	}
 	function logout(){
 		location.replace('${path}/member/memberLogout');
 	}
@@ -393,14 +443,6 @@
 		$("#nav-sub").css("left","-400px");
 		$(".nav-community").css("display","inline");
 		nav=2;
-	});
-	$("#travel").click(function(){
-		$("#nav-main").css("transition","0.5s");
-		$("#nav-sub").css("transition","1s");
-		$("#nav-main").css("left","-600px");
-		$("#nav-sub").css("left","-400px");
-		$(".nav-travel").css("display","inline");
-		nav=1;
 	});
 	$(".nav-back").click(function(){
 		$("#nav-main").css("transition","1s");
@@ -442,6 +484,12 @@
 	});
 	$("#login-close").click(function(){
 		$("#loginModal").modal("hide");
+	});
+	$("#location-close").click(function(){
+		$("#locationModal").modal("hide");
+		$('td').remove('.location-select-font');
+		$("#location-space").css("display","none");
+		$("#location-second-demo").text("");
 	});
 	
 	$("#id-input").focus(function(){

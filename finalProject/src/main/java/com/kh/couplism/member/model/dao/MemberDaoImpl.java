@@ -27,5 +27,9 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectOneMember(SqlSession session, Map param) {
 		// TODO Auto-generated method stub
 		return session.selectOne("member.selectOneMember",param);
+
 	}
+	
+	
 }
+

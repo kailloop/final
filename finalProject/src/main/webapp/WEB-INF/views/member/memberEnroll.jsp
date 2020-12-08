@@ -64,7 +64,7 @@
 		border-radius:100px;
 	}
 	section{
-		height:2100px;
+		height:1700px;
 		background-color:#F8F8F8;
 	}
 	body{
@@ -451,7 +451,9 @@
 					alert("닉네임을 적어주세요");
 					offset = $("#nickname").offset();
 					$('html, body').animate({scrollTop: offset.top},1000);
+
 					return;
+
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");
@@ -502,10 +504,4 @@
 		});	
 	});
 	</script>
-	<footer>
-		
-	</footer>
-	
-	
-</body>
-</html>
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

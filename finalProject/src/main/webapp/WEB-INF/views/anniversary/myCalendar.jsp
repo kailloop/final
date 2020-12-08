@@ -25,16 +25,27 @@
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
-
   #calendar {
     max-width: 1100px;
     margin: 0 auto;
   }
-
 </style>
 	
 <br><br><br><br>
 	<div id='calendar'></div>	
+	
+	
+	<table style="visibility: hidden;">
+		<tr>
+            <th>제목</th>
+        	<th>날짜</th>
+        </tr>
+        <c:forEach var="c" items="${jsonList}">
+        <tr>
+        	<td id="cTitle"><c:out value="${c.calendarTitle}" /></td>
+        	<td id="cWriter"><c:out value="${c.calendarWriter}" /></td>
+        </c:forEach>
+	</table>
 	
 </section>	
 <script>
@@ -78,10 +89,14 @@
       events: {
     	    url: '/calendarValue',
     	    method: 'POST',
+    	    
+    	    
     	    extraParams: {
-    	    	title: 'Long Event',
+    	    
+    	    	title: 'Title',
     	        start: '2020-09-07',
     	        end: '2020-09-10'
+    	    
     	    },
     	    failure: function() {
     	      alert('캘린더 목록 불러오기실패');
@@ -97,3 +112,4 @@
   });
 
 </script>
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

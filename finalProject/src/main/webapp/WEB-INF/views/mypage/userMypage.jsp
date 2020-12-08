@@ -183,8 +183,8 @@
 					<br>
 					<h2>MY PAGE</h2>
 					<br><br><br>
-					<div class="features" >
-						<div class="feature">	
+					<div class="features">
+						<div class="feature" onclick="location.replace('${path }/faq/faqLocation.do');">	
 							<i class="fas fa-user-cog"></i>
 							<h3>회원정보수정</h3>
 							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
@@ -204,13 +204,15 @@
 							<h3>결제내역</h3>
 							<p>결제하신 내역을<br>확인하실 수 있습니다.</p>
 						</div>
-						<div class="feature">
+						<div class="feature" onclick="location.replace('${path}/reservation')">
 							<i class="fas fa-history"></i>
 							<h3>예약내역</h3>
 							<p>예약내역을 확인하실 수 있습니다.</p>
 						</div>
 					</div>
 				</div>
+				
+				<h3>로그인값 : <c:out value="${logginedMember.id }"/></h3>
 </section>
 </body>
 </html>
@@ -219,4 +221,4 @@
 <script src="${path }/resources/js/skel.min.js"></script>
 <script src="${path }/resources/js/util.js"></script>
 
-
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>

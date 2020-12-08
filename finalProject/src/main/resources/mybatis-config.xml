@@ -5,5 +5,6 @@
 		<typeAlias type="com.kh.couplism.common.StringArrayTypeHandler" alias="strArr"/>
 		<typeAlias type="com.kh.couplism.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.couplism.anniversary.model.vo.Calendar" alias="calendar"/>
+		<typeAlias type="com.kh.couplism.location.model.vo.LocationReservation" alias="reser"/>
 	</typeAliases>
 </configuration>

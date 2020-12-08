@@ -11,8 +11,15 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+
 <style>
-	
+	#search{
+		margin-left: auto; 
+		margin-right: auto;
+		text-align: center;
+		margin-top: 150px;
+		border-radius: 10px;
+	}
 	#search_input{
 		border: red 2px solid;   
 		width:450px;
@@ -21,231 +28,304 @@
 		outline-style: none;
 		margin-right: 10px;
 	}
-	#name_search{
-		background:#FCFCFC; 
-		width:1000px; 
-		height:160px; 
-		margin-left: auto; 
-		margin-right: auto;
-		text-align: center;
-		margin-top: 100px;
-		border-radius: 10px;
+	.inventory{
+		width:350px;
+		height:250px;
+		position:relative;
+		box-shadow:3px 3px 3px #A6A6A6;
+		border-radius:10px;
+		overflow:hidden;
+		display:inline-block;
+		margin:20px auto;
+		margin-left:50px;
+		cursor:pointer;
+	}
+	.img{
+		width: 100%;
+		height: 100%;
+	}
+	.text{
+		position:absolute;
+		color:yellow;
+		width: 100%;
+		height: 100%;
+		margin-top: 30px;
 	}
 	
+	.allow{
+		width:50px;
+		height:250px;
+		position:relative;
+		overflow:hidden;
+		display:inline-block;
+		margin:20px auto;
+		margin-left:50px;
+		cursor:pointer;
+		
+	}
 	
-	tr{
-		text-align: center;
-		cursor: pointer;
-	}
-	.search{
-		width: 47.5%;
-		position:relative;
-		margin-left:auto;
-		margin-right:auto;
-		cursor:pointer;
-		color:#F26A8D;
-		width:200px;
-		max-width:200px;
-	}
-	.day{
-		width: 47.5%;
-		position:relative;
-		margin-left:auto;
-		margin-right:auto;
-		cursor:pointer;
-		width:200px;
-		max-width:200px;
-	}
-	#menu_div{
-		width:1400px;
-		height:140px;
-		position:relative;
-		z-index:1;
-		margin:0;
-		margin-left:auto;
-		margin-right:auto;
-		padding:0;
-		color:lightgray;
-		font-family:Nanum Gothic Coding;
-		font-weight:bolder;
-		font-size:64px;
-	}
 
-	#menu_select{
-		position:relative;
-		top:0px;
-		left:21%;
-		border-bottom:3px pink solid;
-		width:24.5%;
-		transition:1s;
-	}	
 </style>
 
-    
+<div id="search">
+	<div class="search_view">
+		<input type="text" id="search_input">
+		<button type="button" id="search_btn" class="btn btn-outline-danger" ><i class="fas fa-search"></i></button>
+		
+				<!-- 
+		<hr style="margin-right: 100px; margin-left:100px; margin-top: 40px;"> -->
+	</div>
+		
+		<!-- <div class="list_view"> -->
+	<p style="margin-top:100px;"><b style="color:red;"><i class="fas fa-fire-alt"></i>HOT</b> 키워드</p>	
+		
+
+	
+	<style>
+		ul {
+		  list-style: none;
+			}
+		.slide {
+		  position: relative;
+		  padding-top: 50px;
+		  overflow: hidden;
+		  margin-left: auto;
+		  margin-right: auto;
+		}
+		.panel {
+		  width: 400%;
+		}
+		.panel:after {
+		  content: "";
+		  display: block;
+		  clear: both;
+		}
+		.panel>li {
+		  width: 25%;
+		  height: 400px;
+		  float: left;
+		  background-repeat: no-repeat;
+		  background-size: 100% 100%;
+		  position: relative;
+		}
+		.dot:after {
+		  content: "";
+		  display: block;
+		  clear: both;
+		}
+		.dot {
+		  position: absolute;
+		  left: 50%;
+		  bottom: 10%;
+		  transform: translateX(-50%);
+		  font-size:5px;
+		}
+		.dot>li {
+		  float: left;
+		  width: 25px;
+		  height: 25px;
+		  border-radius: 50%;
+		  background-color: #D5D5D5;
+		  margin-left: 10px;
+		  margin-right: 10px;
+		  text-indent: -9999px;
+		  cursor: pointer;
+		}
+		.dot>li.on {
+		  background-color: red;
+		}
+		.prev {
+		  position: absolute;
+		  width: 50px;
+		  height: 50px;
+		  background-color: #fff;
+		  top: 50%;
+		  transform: translateY(-50%);
+		  left: 10%;
+		  cursor: pointer;
+		}
+		.next {
+		  position: absolute;
+		  width: 50px;
+		  height: 50px;
+		  background-color: #fff;
+		  top: 50%;
+		  transform: translateY(-50%);
+		  right: 10%;
+		  cursor: pointer;
+		}
+	</style>
+	
+<div class="slide">
+	  <ul class="panel">
+	    <li>
+			<div class="inventory">
+				<img class="img" src="${path }/resources/images/anni/chris.png">
+			</div>
+			<div class="inventory">
+				<img class="img" src="${path }/resources/images/anni/choco.jpg">
+			</div>
+			
+		</li>
+	    <li>
+	    	<div class="inventory">
+				<img class="img" src="${path }/resources/images/anni/ha.png" >
+			
+			</div>
+			<div class="inventory">
+				<img class="img" src="${path }/resources/images/anni/ro.jpg">
+			</div>
+		</li>
+	  </ul>
+	  <ul class="dot">
+	    <li class="on">슬라이드 버튼1번</li>
+	    <li>슬라이드 버튼2번</li>
+	  </ul>
+	  <div class="next"><i class="fas fa-angle-right"></i></div>
+	  <div class="prev"><i class="fas fa-angle-left"></i></div>
 </div>
 	
-		
-		
-		<div id="menu_div">
-			<table style="width: 60%; margin-left: auto; margin-right: auto; ">
-				<tr>
-					<td class="search">
-						<label style="font-size: 100%;">이름검색</label>
-						
-					</td>
-					<td style="width:5%;">
-						<label> ㅣ </label>
-					</td>
-					<td class="day">
-						<label style="font-size: 100%;">날짜검색</label>
-					</td>
-				</tr>
-			</table>
-			<div id="menu_select"></div>
-		</div>
-		
-		<!-- 이름검색 -->
-		<div id="name_search">
-			<div class="search_view">
-				<input type="text" id="search_input">
-				<button type="button" id="search_btn" class="btn btn-outline-danger" width="100px;">Search</button>
-				<br>
-				<a href="#" style="color: #4374D9; pointer-events:none; cursor:default;">인기검색어 : </a>
-				&nbsp;
-				<a href="#" style="color: #4374D9;"># 크리스마스</a>
-				&emsp;
-				<a href="#" style="color: #4374D9;"># 100일</a>
-				&emsp;
-				<a href="#" style="color: #4374D9;"># 발렌타인데이</a>
-				&emsp;
-				&emsp;&emsp;&emsp;&emsp;&emsp;
-				
-				<hr style="margin-right: 100px; margin-left:100px;">
-			</div>
-			
-			<div class="list_view">
-			</div>
-		</div>
-		
-		
-		
-<style>
-/* 데이터피커디자인 */
-	.search_view {
-		margin-left: auto;
-		margin-right: auto;
-		padding-top: 50px;
-	}
-	
-	/*달력위에날짜나오는곳*/
-	.ui-datepicker-title {
-		font-weight: 500;
-	}
 	
 	
-	/* 주말색바꾸기
-	.ui-datepicker-week-end{color:red;}
-	.ui-datepicker-week-end .ui-state-default{color:red;} */
-	
-	/*토요일색*/
-	.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color:blue; }
-    /*일요일색 */
-    .ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color:red; }
-    
-    </style>
 		
-		<!-- 날짜검색 -->
-		<div id="day_search" style="display: none;">
-			<div class="search_view">
-		        
-				<!-- 달력부분 -->
-		        <div class='datepicker'></div>
-	       		
-				<input type="text" id="test_input"> 
-				<button id="inputBtn">확인</button>
-				
-				<br>
-				
-				<input type="text" id="result_input">
-	       		<hr style="margin-right: 100px; margin-left:100px;">
-			</div>
-			
-			<div class="list_view">
-			</div>
-		</div>
+</div>
+
 		
+
+
+
+
+
+
 		
 </section>	
 	
+
+<script>
+        $(function(){
+        	
+        	
+        	$(document).ready(function() {
+        		  slide();
+        		});
+
+
+        		// 슬라이드 
+        		function slide() {
+        		  var wid = 0;
+        		  var now_num = 0;
+        		  var slide_length = 0;
+        		  var auto = null;
+        		  var $dotli = $('.dot>li');
+        		  var $panel = $('.panel');
+        		  var $panelLi = $panel.children('li');
+
+        		  // 변수 초기화
+        		  function init() {
+        		    wid = $('.slide').width();
+        		    now_num = $('.dot>li.on').index();
+        		    slide_length = $dotli.length;
+        		  }
+
+        		  // 이벤트 묶음
+        		  function slideEvent() {
+
+        		    // 슬라이드 하단 dot버튼 클릭했을때
+        		    $dotli.click(function() {
+        		      now_num = $(this).index();
+        		      slideMove();
+        		    });
+
+        		    // 이후 버튼 클릭했을때
+        		    $('.next').click(function() {
+        		      nextChkPlay();
+        		    });
+
+        		    // 이전 버튼 클릭했을때
+        		    $('.prev').click(function() {
+        		      prevChkPlay();
+        		    });
+
+        		    // 오토플레이
+        		    autoPlay();
+
+        		    // 오토플레이 멈춤
+        		    autoPlayStop();
+
+        		    // 오토플레이 재시작
+        		    autoPlayRestart();
+
+        		    // 화면크기 재설정 되었을때
+        		    resize();
+        		  }
+
+        		  // 자동실행 함수
+        		  function autoPlay() {
+        		    auto = setInterval(function() {
+        		      nextChkPlay();
+        		    }, 5000);
+        		  }
+
+        		  // 자동실행 멈춤
+        		  function autoPlayStop() {
+        		    $panelLi.mouseenter(function() {
+        		      clearInterval(auto);
+        		    });
+        		  }
+
+
+        		  // 자동실행 멈췄다가 재실행
+        		  function autoPlayRestart() {
+        		    $panelLi.mouseleave(function() {
+        		      auto = setInterval(function() {
+        		        nextChkPlay();
+        		      }, 5000);
+        		    });
+        		  }
+
+        		  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
+        		  function prevChkPlay() {
+        		    if (now_num == 0) {
+        		      now_num = slide_length - 1;
+        		    } else {
+        		      now_num--;
+        		    }
+        		    slideMove();
+        		  }
+
+        		  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
+        		  function nextChkPlay() {
+        		    if (now_num == slide_length - 1) {
+        		      now_num = 0;
+        		    } else {
+        		      now_num++;
+        		    }
+        		    slideMove();
+        		  }
+
+        		  // 슬라이드 무브
+        		  function slideMove() {
+        		    $panel.stop().animate({
+        		      'margin-left': -wid * now_num
+        		    });
+        		    $dotli.removeClass('on');
+        		    $dotli.eq(now_num).addClass('on');
+        		  }
+
+        		  // 화면크기 조정시 화면 재설정
+        		  function resize() {
+        		    $(window).resize(function() {
+        		      init();
+        		      $panel.css({
+        		        'margin-left': -wid * now_num
+        		      });
+        		    });
+        		  }
+        		  init();
+        		  slideEvent();
+        		}
+        });
+</script>	
 	
-	<script>
-		$(function() {
-			$(".search").click(function(){
-				$(".search").css("color","#F26A8D");
-				$(".day").css("color","lightgray");
-				$("#menu_select").css("left","21%");
-				$("#name_search").show();
-				$("#day_search").hide();
-			});
-			
-			$(".day").click(function() {
-				$(".search").css("color","lightgray");
-				$(".day").css("color","#F26A8D");
-				$("#menu_select").css("left","55%");
-				$("#name_search").hide();
-				$("#day_search").show();
-			});
-
-			
-			$( ".datepicker" ).datepicker({
-				dateFormat: "yy-mm-dd",
-				duration: "fast",
-			 	nextText: '다음 달',
-	        	prevText: '이전 달',
-	        	//input text안에 값넣어주는거
-	        	altField:"#test_input",
-	        	//최소선택날짜
-	        	minDate:"today",
-	        	//최대선택날짜
-	        	maxDate:"+1Y",
-	        	//년도나오고 월나오게
-	        	showMonthAfterYear:true,
-	        	//달력위에 년도 뒤에붙는 글자
-	        	yearSuffix:"년",
-	        	//달력의 월 부분 텍스트
-	        	monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'], 
-	        	//달력의 월 부분 Tooltip 텍스트
-	        	monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	        	//달력의 요일 부분 텍스트
-	            dayNamesMin:['일','월','화','수','목','금','토'], 
-	          	//달력의 요일 부분 Tooltip 텍스트
-	            dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
-	            
-	        	//콤보박스
-	        	/* changeYear:true,
-	        	changeMonth:true */
-	        	
-	        	
-			});
-			
-			
-			
-			$("#inputBtn").click(function() {
-				
-				var a=$("#test_input").val();
-				
-				alert("값 : "+a);
-			})
-			
-			
-			
-		});
-		
-		
-	</script>
-	
-
-</body>
-</html>
-
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>
 

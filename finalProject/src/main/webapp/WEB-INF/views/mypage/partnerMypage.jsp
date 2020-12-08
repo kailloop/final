@@ -224,4 +224,4 @@
 <script src="${path }/resources/js/skel.min.js"></script>
 <script src="${path }/resources/js/util.js"></script>
 
-
+<jsp:include page='/WEB-INF/views/common/footer.jsp'/>
