@@ -1,0 +1,25 @@
+insert 두개 처리하기 
+
+인설트 후 no 가져와서 
+
+mapper에서
+
+	insert문 작성
+	INSERT INTO NOTICE(?.NEXTVAL, ~~~ SYSDATE, 0)
+		<selectKey keyProperty="파라미터 타입 으로 들어온 녀석의 필드명" resultType="_int" order="AFTER"><!-- 위에 로직을 실행한후에 셀렉트 키를 이용해서 값을 가져올수 있다 -->
+			SELECT 시퀀스이름.CURRVAL FROM DUAL
+		</selectKey>
+
+insert했을 때가져온다 
+
+이거 처리한후에 
+
+if(result>0){
+	파일저장 로직 실행
+	if(!files.isEmpty()){
+		for(NoticFile nf : files){
+			파일입력 로직
+		}
+	}
+}
+201026 46:57
