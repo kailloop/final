@@ -376,7 +376,7 @@
 		</div>
 	</div>
 	</c:if>
-	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
@@ -384,7 +384,7 @@
 					<i id="location-close" class="fas fa-times" aria-hidden="true"></i>
 					<label id="location-modal-title">지역 선택</label>
 					<label class="location-label">찾아보고자 하시는 지역을 선택해주세요</label><br/>
-					<label id="location-first-demo"></label>
+					<label id="location-first-demo"></label><label id="location-space" style="display:none;">&nbsp;&nbsp;</label><label id="location-second-demo"></label>
 					<br/>
 					<table id="location-select-table">
 						<tr class="location-tr tr-one">
@@ -398,6 +398,10 @@
 						<tr class="location-tr tr-five">
 						</tr>
 						<tr class="location-tr tr-six">
+						</tr>
+						<tr class="location-tr tr-seven">
+						</tr>
+						<tr class="location-tr tr-eight">
 						</tr>
 					</table>
 				</div>
@@ -484,6 +488,8 @@
 	$("#location-close").click(function(){
 		$("#locationModal").modal("hide");
 		$('td').remove('.location-select-font');
+		$("#location-space").css("display","none");
+		$("#location-second-demo").text("");
 	});
 	
 	$("#id-input").focus(function(){
