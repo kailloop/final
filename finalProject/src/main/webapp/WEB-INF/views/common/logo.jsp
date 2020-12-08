@@ -14,8 +14,8 @@
    }
    #logo img{
       background-size: cover;
-       background-repeat: no-repeat;
-       background-position: center center;
+      background-repeat: no-repeat;
+      background-position: center center;
       width:100%;
       height:100%;
       z-index:-1;

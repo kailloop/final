@@ -8,40 +8,8 @@
 	<jsp:param value="" name="title" />
 </jsp:include>
 <% int cp = 0; %>
-<style>
-#logo {
-	height: 900px;
-	width: 100%;
-	position: relative;
-	z-index: 0;
-	overflow: hidden;
-}
-
-#logo img {
-	filter: grayscale(65%);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-}
-
-#logo label {
-	position: absolute;
-	left: 27%;
-	top: 35%;
-	font-size: 120px;
-	z-index: 0;
-	cursor: pointer;
-	font-family: Dancing Script;
-	color: black;
-}
-</style>
-<div id="logo">
-	<img src="${path }/resources/images/notice.jpg" alt="notice" /> <label>Notice</label>
-</div>
-<section id="content" class="container" style="height: 500px;">
+<jsp:include page="/WEB-INF/views/common/logo.jsp"/>
+<div class="container">
 	<h1>
 		<c:out value="${notice.userId}" />
 		<c:out value="${notice.noticeTitle}" />
@@ -104,7 +72,6 @@
 		${html }
 		<h1><c:out value="${cp }"/></h1>
 		
-	</div>
 	<form name="commentForm" id="formAddComment" action="${path }/notice/addComment">
 		<div class="row">
 			<div id="replyStatus"></div>
@@ -119,7 +86,10 @@
 		</div>
 		<h1 id="cpH1"></h1>
 	</form>
+	
 	<c:if test="${logginedMember.id eq notice.userId}"><button type="button" onclick="deleteNotice();">삭제</button><button type="button" onclick="modifyNotice();">수정</button></c:if>
+		</div>
+	</div>
 </section>
 <script>
 
