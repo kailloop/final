@@ -146,7 +146,7 @@ public class NoticeController {
 			logger.debug("notice등록 성공!");
 			String saveDir = request.getServletContext().getRealPath("/resources/upload/notice");
 			
-			File dir = new File(saveDir);
+			File dir = new File(saveDir);//???
 			
 			int success=0;
 			for(MultipartFile mf : noticeFile) {
@@ -189,7 +189,7 @@ public class NoticeController {
 	
 	@RequestMapping("/notice/noticeView")
 	public ModelAndView noticeView(ModelAndView mv, int noticeNo, HttpServletRequest request, HttpServletResponse response) {
-		
+		logger.debug("==============================================LocationView==============================================");
 		Notice notice = service.getNotice(noticeNo);
 		boolean check = false;
 		Cookie[] cookieCheck = request.getCookies();
@@ -259,6 +259,7 @@ public class NoticeController {
 		mv.addObject("logoPath","resources/images/notice.jpg");
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		mv.setViewName("/notice/noticeView");
+		logger.debug("========================================================================================================");
 		return mv;
 	}
 	

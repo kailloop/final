@@ -14,3 +14,4 @@ public interface MemberDao {
 	
 	Member selectOneMember(SqlSession session,Map param);
 }
+

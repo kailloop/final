@@ -1,0 +1,25 @@
+location/create 에서 받아올 정보들
+
+1.제목
+2.타입
+3.지역
+4.작성자 // 히든
+6.메인 이미지
+7.이미지
+8.내용
+9.연락처
+==============================로케이션 로케이션 파일 로케이션 메인 처리완료
+11.상품 시간
+12.상품 요일
+13.가격
+14.인원
+
+locationCreator
+
+locationTitle
+locationType
+locationAddress
+mainFile
+locationFile
+locationPhone
+locationContent

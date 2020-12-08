@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.couplism.location.model.dao.LocationDao;
 import com.kh.couplism.location.model.vo.Location;
+import com.kh.couplism.location.model.vo.LocationFile;
+import com.kh.couplism.location.model.vo.LocationMain;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -40,6 +42,25 @@ public class LocationServiceImpl implements LocationService {
 	public List<Date> getDate() {
 		return dao.getDate(session);
 	}
+
+	@Override
+	public int insertLocation(Location location) {
+		return dao.insertLocation(location, session);
+	}
+
+	@Override
+	public int insertLocationMain(LocationMain lm) {
+		return dao.insertLocationMain(lm, session);
+	}
+
+	@Override
+	public int insertLocationFile(LocationFile lf) {
+		return dao.insertLocationFile(lf, session);
+	}
+	
+	
+	
+	
 	
 	
 	
