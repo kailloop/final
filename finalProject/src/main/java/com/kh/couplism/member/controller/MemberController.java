@@ -1,5 +1,4 @@
 package com.kh.couplism.member.controller;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
@@ -195,18 +194,4 @@ public class MemberController {
 			return "none";
 		}
 	}
-	
-	@RequestMapping(value="/member/memberLogout")
-	public String memberLogout(SessionStatus status,Model m) {
-		String msg="";
-		if(!status.isComplete()) {
-			status.setComplete();//세션삭제
-			msg="커플리즘 사이트에서 로그아웃  되셨습니다.";
-		}else {
-			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요.";
-		}
-		m.addAttribute("msg",msg);
-		return "common/msg";
-	}
-	
 }

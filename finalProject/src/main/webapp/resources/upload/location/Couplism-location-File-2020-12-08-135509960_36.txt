@@ -1,0 +1,18 @@
+데이터 가져오는 방법
+
+Attribute : ${key값 }
+
+Parameter : ${param.key값}
+
+배열로 넘어갔을때  ${paramValues.key값[인덱스번호]}
+
+여러객체에 동일한 키값을 가진 데이터가 존재할때
+
+page -> request -> session -> context 순으로 key값을 매칭하여 출력 
+
+${requestScope.key값}
+${sessionScope.key값}
+${applicationScope.key값}
+
+cookie값 가져오기
+${cookie.key값.value}

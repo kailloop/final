@@ -10,14 +10,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.kh.couplism.member.model.vo.Member;
 import com.kh.couplism.notice.model.service.NoticeService;
 import com.kh.couplism.notice.model.vo.Notice;
 import com.kh.couplism.notice.model.vo.NoticeComment;
@@ -102,7 +106,10 @@ public class NoticeController {
 		}
 		m.addAttribute("list",list);
 		m.addAttribute("pageBar",pageBar);
-		
+		m.addAttribute("titleHan","공지사항");
+		m.addAttribute("titleEng","Notice");
+		m.addAttribute("logoPath","resources/images/notice1.jpg");
+		m.addAttribute("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		return"/notice/noticeList";
 	}
 	
@@ -113,7 +120,7 @@ public class NoticeController {
 	
 	
 	@RequestMapping("notice/writeEnd")
-	public ModelAndView noticeWriteEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice, HttpServletRequest request) {
+	public ModelAndView noticeWriteEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice, HttpServletRequest request, HttpSession session) {
 		
 		logger.debug("========================== NoticeWriet ==========================");
 		
@@ -124,9 +131,8 @@ public class NoticeController {
 		 * logger.debug("제목 : "+notice.getNoticeTitle());
 		 * logger.debug("내용 : "+notice.getNoticeContent());
 		 */
-		
-		notice.setUserId("admin");//로인완료시 처리를 해줘야함 !로그인 한사람을 Session에서 불러와서 입력해준다
-		
+		//notice.setUserId("admin");//로인완료시 처리를 해줘야함 !로그인 한사람을 Session에서 불러와서 입력해준다
+		logger.debug("Notiec : "+notice);
 		int result = service.insertNotice(notice);
 		
 		logger.debug("result : "+result);
@@ -140,7 +146,7 @@ public class NoticeController {
 			logger.debug("notice등록 성공!");
 			String saveDir = request.getServletContext().getRealPath("/resources/upload/notice");
 			
-			File dir = new File(saveDir);
+			File dir = new File(saveDir);//???
 			
 			int success=0;
 			for(MultipartFile mf : noticeFile) {
@@ -174,13 +180,40 @@ public class NoticeController {
 		
 		logger.debug("=================================================================");
 		mv.setViewName("redirect:/notice/noticeList");
-		
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		return mv;
 	}
 	
 	@RequestMapping("/notice/noticeView")
-	public ModelAndView noticeView(ModelAndView mv, int noticeNo) {
+	public ModelAndView noticeView(ModelAndView mv, int noticeNo, HttpServletRequest request, HttpServletResponse response) {
+		logger.debug("==============================================LocationView==============================================");
 		Notice notice = service.getNotice(noticeNo);
+		boolean check = false;
+		Cookie[] cookieCheck = request.getCookies();
+		for(Cookie c : cookieCheck) {
+			if(c.getValue().equals(String.valueOf(noticeNo))){
+				check = true;
+			}
+		}
+		logger.debug("쿠키 존재여부 : "+check);
+		if(check == false) {
+			logger.debug("if문 들어옴 ");
+			int viewCount =  notice.getViewCount();
+			viewCount++;
+			notice.setViewCount(viewCount);
+			int result = service.upViewCount(notice);
+			if(result == 1) {
+				logger.debug("조회수 증가완료 !");
+			}
+			Cookie addCookie = new Cookie("couplism_Notice_"+noticeNo, String.valueOf(noticeNo));
+			addCookie.setMaxAge(60*60*3);//3시간 동안 안오름
+			response.addCookie(addCookie);
+			logger.debug("Cookie추가 완료!");
+		}
+		
 		List<NoticeFile> noticeFile = service.getNoticeFile(noticeNo);
 		List<NoticeComment> noticeComment = service.getNoticeComment(noticeNo);
 		int cp = 0;
@@ -213,8 +246,6 @@ public class NoticeController {
 		}
 		html += "</div>"+"<hr>";
 		
-		
-		
 		logger.debug("notice : "+notice);
 		logger.debug("noticFile : "+noticeFile);
 		logger.debug("noticeComment : "+noticeComment);
@@ -223,7 +254,12 @@ public class NoticeController {
 		mv.addObject("noticeComment", noticeComment);
 		mv.addObject("cp", cp+1);
 		mv.addObject("html", html);
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		mv.setViewName("/notice/noticeView");
+		logger.debug("========================================================================================================");
 		return mv;
 	}
 	
@@ -317,7 +353,7 @@ public class NoticeController {
 	@ResponseBody
 	public void noticeAddCommentAjax(@RequestParam(value="commentPosition", defaultValue="0", required=false) int commentPosition,
 			   @RequestParam(value="replyPosition", defaultValue="0", required=false) int replyPosition,
-			   @RequestParam(value="commentContent") String commentContent,
+			   @RequestParam(value="commentContent") String commentContent, String userId,
 			   int noticeNo, HttpServletRequest rq, HttpServletResponse resp) throws JsonIOException, IOException{
 		
 		resp.setCharacterEncoding("utf-8");
@@ -332,15 +368,16 @@ public class NoticeController {
 
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
 		logger.debug("noticeNo : "+noticeNo);
+		logger.debug("userId : "+userId);
 		logger.debug("commentContent : "+commentContent);
 		logger.debug("commentPosition : "+commentPosition);
 		logger.debug("replyPosition : "+replyPosition);
-		logger.debug(""+new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+		logger.debug(""+new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		int result = 0;
 		if(replyPosition>0) {//답글
-			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+			result = service.addComment(new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		}else {
-			result = service.addComment(new NoticeComment(noticeNo,"admin",commentContent,commentPosition,replyPosition,""));
+			result = service.addComment(new NoticeComment(noticeNo,userId,commentContent,commentPosition,replyPosition,""));
 		}
 		logger.debug("result : "+result);
 		if(result>0) {
@@ -424,7 +461,55 @@ public class NoticeController {
 		service.deleteNotice(noticeNo);
 		logger.debug("Notice 삭제 완료.");
 		logger.debug("----------------------------------------------------------------------------------------------------------------------");
-		rs.sendRedirect(request.getContextPath()+"/notice/noticeList");
+		rs.sendRedirect(request.getContextPath()+"/notice/noticeList?");
+	}
+	
+	@RequestMapping("/notice/checkMember")//로그인 되어있는 사용자 가져옴
+	public void checkMember(HttpSession session) {
+		Member m = (Member)session.getAttribute("logginedMember");
+		logger.debug(""+m);
+	}
+	
+	@RequestMapping("/notice/modifyNotice")
+	public ModelAndView modifyNotice(int noticeNo, ModelAndView mv) {
+		logger.debug("--------------------------------------------------modifyNotice--------------------------------------------------------");
+		logger.debug("noticeNo : "+noticeNo);
+		Notice n = service.getNotice(noticeNo);
+		logger.debug("notice가져옴");
+		logger.debug("Notice : "+n);
+		List<NoticeFile> nf = service.getNoticeFile(noticeNo);
+		logger.debug("NoticeFile : "+nf);
+		mv.addObject("noticeFile", nf);
+		mv.addObject("notice",n);
+		mv.setViewName("/notice/modifyNotice");
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		logger.debug("----------------------------------------------------------------------------------------------------------------------");
+		return mv;
+	}
+	@RequestMapping("/notice/modifyNoticeEnd")
+	public ModelAndView modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice,String fileRenameName, HttpServletRequest request, HttpSession session){
+		logger.debug("--------------------------------------------------modifyNoticeEnd--------------------------------------------------------");
+		logger.debug("Notiec : "+notice);
+		logger.debug("NoticeFile : "+noticeFile);
+		String[]renamedFiles = fileRenameName.split(",");
+		List<NoticeFile> nf = service.getNoticeFile(notice.getNoticeNo());
+		for(NoticeFile nff : nf) {//비교하는 로직 작성 !
+			for(String rf : renamedFiles) {
+				if(rf != nff.getRenameName()) {
+					logger.debug("사용하지 않을 이전 파일 :"+nff);
+				}
+			}
+		}
+		mv.setViewName("/notice/noticeList");
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		logger.debug("-------------------------------------------------------------------------------------------------------------------------");
+		return mv;
 	}
 	
 }

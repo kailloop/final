@@ -63,7 +63,7 @@
 		<hr>
 	</c:forEach>
 	<br>
-		<textarea rows="30" class="form-control" style="resize: none;" disabled readonly><c:out value="${notice.noticeTitle }"/></textarea>
+		<textarea rows="30" class="form-control" style="resize: none;" disabled readonly><c:out value="${notice.noticeContent }"/></textarea>
 	<br>
 <%-- 	<c:if test="${noticeComment != null}"> --%>
 		<div id="allCommentDiv">
@@ -108,7 +108,7 @@
 	<form name="commentForm" id="formAddComment" action="${path }/notice/addComment">
 		<div class="row">
 			<div id="replyStatus"></div>
-			<input id="jh-userId" type="hidden" name="userId" value="admin"/>
+			<input id="jh-userId" type="hidden" name="userId" value="${logginedMember.id }"/>
 			<input id="jh-noticNo"type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
 			<input id="jh-replyPosition" type="hidden" name="replyPosition" value=""/>
 			<input id="jh-commentPosition"type="hidden" name="commentPosition" value="${cp}"/>
@@ -119,12 +119,16 @@
 		</div>
 		<h1 id="cpH1"></h1>
 	</form>
-	<button type="button" onclick="deleteNotice();">삭제</button>
+	<c:if test="${logginedMember.id eq notice.userId}"><button type="button" onclick="deleteNotice();">삭제</button><button type="button" onclick="modifyNotice();">수정</button></c:if>
 </section>
 <script>
 
 	function deleteNotice(){
 		location.href = "${path}/notice/deleteNotice?noticeNo=${notice.noticeNo}";
+	}
+	
+	function modifyNotice(){
+		location.href = "${path}/notice/modifyNotice?noticeNo=${notice.noticeNo}";
 	}
 
 ﻿/* 	setInterval(function(){
@@ -213,6 +217,10 @@
 		};
 		if(commentContent==""){
 			alert("내용을입력해주세요.");
+			return;
+		}
+		if(${logginedMember eq null}){
+			alert("회원만 댓글 작성이 가능합니다 로그인해 주세요.");
 			return;
 		}
 		/* console.log(form);
