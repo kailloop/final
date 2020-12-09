@@ -36,7 +36,7 @@ public class LocationController {
 	@RequestMapping("/moveLocation/category")
 	public ModelAndView category(ModelAndView mv,@RequestParam(value="address")String location) {
 		
-		 mv.addObject("logoPath","/resources/images/location-Address.jpg");
+		 mv.addObject("logoPath","/resources/images/category.jpg");
 	      
 	      mv.addObject("titleHan","전체 카테고리");
 	      mv.addObject("titleEng","Choose Your Memory");

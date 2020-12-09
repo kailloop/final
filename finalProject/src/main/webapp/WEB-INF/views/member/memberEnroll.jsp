@@ -57,10 +57,20 @@
 		transition:1s;
 	}
 	#enrollContainer{
+		transition:1s;
 		position:relative;
 		width:100%;
 		height:1200px;
 		top:50px;
+		border-radius:100px;
+	}
+	#partnerContainer{
+		transition:1s;
+		position:relative;
+		width:100%;
+		height:1200px;
+		left:100%;
+		top:-1150px;
 		border-radius:100px;
 	}
 	section{
@@ -340,8 +350,139 @@
 				</div>
 			</div>
 		</div>
-		
-		
+		<!-- 제휴회원 테이블 -->
+		<div id="partnerContainer" style="text-align:center">
+			<div id="user">
+				<label class="enroll-title">COUPLISM</label>
+				<form name="memberEnrollFrm" action="${path }/member/memberEnrollEnd" method="post">
+				<table>
+					<!-- 아이디 -->
+					<tr>
+						<td class="enroll-title-param"><label for="id">아이디</label></td>
+					<tr>
+						<td class="enroll-title-value"><input class="enroll-input" type="text" id="id" name="id" maxlength="30" autocomplete="off"><i id="check-id" class="fas fa-check"></i></td>
+					</tr>
+					<!-- 비밀번호 -->
+					<tr>
+						<td class="enroll-title-param"><label for="password">비밀번호</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value"><input class="enroll-input" type="password" id="password" name="password" autocomplete="off"></td>
+					</tr>
+					<!-- 비밀번호 확인 -->
+					<tr>
+						<td class="enroll-title-param"><label for="pwck">비밀번호 확인</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input class="enroll-input" type="password" id="pwck" name="pwck">
+							<i id="check-pw" class="fas fa-check"></i>
+						</td>
+					</tr>
+					<!-- 닉네임 -->
+					<tr>
+						<td class="enroll-title-param"><label for="nickname">닉네임</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value"><input class="enroll-input" type="text" id="nickname" name="nickname" autocomplete="off"></td>
+					</tr>
+					<!-- 성별 -->
+					<tr>
+						<td class="enroll-title-param">
+							<label for="gender">성별</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<select id="gender" name="gender" class="enroll-input" style="text-align:center;">
+								<option value="M">남자</option>
+								<option value="F">여자</option>
+							</select>
+						</td>
+					</tr>
+					<!-- 핸드폰 번호 -->
+					<tr>
+						<td class="enroll-title-param"><label for="phone">핸드폰 번호</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input class="enroll-input" type="text" id="phone" name="phone" placeholder="010-1111-2222" autocomplete="off">
+						</td>
+					</tr>
+					<!-- 생년월일 -->
+					<tr>
+						<td class="enroll-title-param"><label for="year">생년월일</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input class="enroll-birthday" type="text" id="year" placeholder="년(4자)" pattern="[0-9]{4}" title="1920~2015 안으로 입력해주세요" maxlength="4" name="year">
+							<select class="enroll-birthday" id="month" name="month" form="userForm">
+								<option value="월">월</option>
+							    <option value="01">1</option>
+							    <option value="02">2</option>
+							    <option value="03">3</option>
+							    <option value="04">4</option>
+							    <option value="05">5</option>
+							    <option value="06">6</option>
+							    <option value="07">7</option>
+							    <option value="08">8</option>
+							    <option value="09">9</option>
+							    <option value="10">10</option>
+							    <option value="11">11</option>
+							    <option value="12">12</option>
+							</select>
+							<input class="enroll-birthday" name="day" id="day" type="text" pattern="[0-9]{2}" maxlength="2" placeholder="일" required>
+							<input type="hidden" name="birthday" id="birthday">
+							<br/>
+							<br/>
+						</td>
+					</tr>
+					<!-- 주거지 및 커플아이디 숨김 -->
+					<tr>
+						<td class="enroll-title-param"><label for="sample6_address">주소</label>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input type="text" class="enroll-input" id="sample6_address" style="margin-top:5px;" placeholder="주소">
+							<input type="text" class="enroll-input" id="sample6_detailAddress" style="margin-top:5px;" placeholder="상세주소">
+							<input type="button" style="transition:0.2s; position:relative; padding:0; margin:0;  left:270px;top:-110px;width:120px; border:none; height:50px; background-color:#F26A8D;color:white; margin-top:5px; border-radius:5px; outline:none;"
+							 onclick="sample6_execDaumPostcode()" style="margin-top:5px;" value="우편번호 찾기">
+							 <input type="hidden" class="enroll-input" id="location" name="location">
+							 <input type="hidden" id="couple" name="couple" value="">
+							<br/>
+							<br/>
+						</td>
+					</tr>
+					<!-- 이메일 -->
+					<tr>
+						<td class="enroll-title-param"><label for="email">이메일</label></td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input class="enroll-input" style="" type="text" id="email" name="email" autocomplete="off">
+						</td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input class="enroll-input" style="width:286px;" type="text" id="emailcheck" name="emailcheck" autocomplete="off" >
+							<input id="check-email" type="button" style="transition:0.2s; position:relative; padding:0; margin:0; margin-top:5px; top:-2px;width:110px; border:none; height:50px; background-color:#F26A8D;color:white; border-radius:5px; outline:none;"
+							 value="인증번호 받기">
+							 <input type="hidden" id="emailNum" name="emailNum">
+							 <br/>
+							 <br/>
+						</td>
+					</tr>
+					<tr>
+						<td class="enroll-title-value">
+							<input id="enroll-join" type="button" style="transition:0.2s; position:relative; padding:0; margin:0; top:-2px;width:100%; border:none; height:50px; background-color:#F26A8D;color:white; border-radius:5px; outline:none;"
+							 value="가입하기"> 
+						</td>
+					</tr>
+				</table>
+				</form>
+				</div>
+			</div>
+		</div>
 	
 	</section>
 	<script>
@@ -496,11 +637,16 @@
 			$(".enrollPartner").css("color","#F26A8D");
 			$(".enrollUser").css("color","lightgray");
 			$("#enroll-select").css("left","55%");
+			$("#enrollContainer").css("left","-100%");
+			$("#partnerContainer").css("left","0%");
+			
 		});
 		$(".enrollUser").click(function(){
 			$(".enrollPartner").css("color","lightgray");
 			$(".enrollUser").css("color","#F26A8D");
 			$("#enroll-select").css("left","21%");
+			$("#enrollContainer").css("left","0%");
+			$("#partnerContainer").css("left","100%");
 		});	
 	});
 	</script>
