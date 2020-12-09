@@ -33,6 +33,25 @@ public class LocationController {
 	private LocationService service;
 	
 	
+	@RequestMapping("/moveLocation/category")
+	public ModelAndView category(ModelAndView mv,@RequestParam(value="address")String location) {
+		
+		 mv.addObject("logoPath","/resources/images/category.jpg");
+	      
+	      mv.addObject("titleHan","전체 카테고리");
+	      mv.addObject("titleEng","Choose Your Memory");
+	      mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+	      
+	      mv.setViewName("location/category");
+		
+		
+		return mv;
+	}
 	
 	@RequestMapping("/moveLocation")
 	   public ModelAndView moveLocation(ModelAndView mv) {
