@@ -354,7 +354,7 @@
 		<div id="partnerContainer" style="text-align:center">
 			<div id="user">
 				<label class="enroll-title">COUPLISM</label>
-				<form name="memberEnrollFrm" action="${path }/member/memberEnrollEnd" method="post">
+				<form name="partnerEnrollFrm" action="${path }/member/partnerEnrollEnd" method="post">
 				<table>
 					<!-- 아이디 -->
 					<tr>

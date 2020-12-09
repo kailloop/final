@@ -125,6 +125,30 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	@RequestMapping(value="/member/partnerEnrollEnd",method=RequestMethod.POST)
+	public String partnerEnrollEnd(Member member,Model m) {
+		
+		String encodePw=encoder.encode(member.getPassword());
+		
+		member.setPassword(encodePw);
+		int result=service.enrollMember(member);
+		
+		String msg="";
+		String loc="";
+		
+		if(result>0) {
+			msg="회원가입에 성공하셨습니다!";
+			loc="/";
+		}else {
+			msg="회원가입실패하였습니다. 관리자에게 문의해주세요.";
+			loc="/enrollMember.do";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+	
 	@RequestMapping("/member/checkEmail")
 	@ResponseBody
 	public String emailCheck(@RequestParam (value="email",required=false,defaultValue="kailloop@daum.net")String email,
