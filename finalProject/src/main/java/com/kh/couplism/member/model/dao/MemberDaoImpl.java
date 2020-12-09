@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.couplism.member.model.vo.Member;
+import com.kh.couplism.member.model.vo.Partner;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -17,6 +18,12 @@ public class MemberDaoImpl implements MemberDao {
 		return session.insert("member.enrollMember",m);
 	}
 	
+	@Override
+	public int enrollPartner(SqlSession session, Partner p) {
+		// TODO Auto-generated method stub
+		return session.insert("member.enrollPartner",p);
+	}
+
 	@Override
 	public int duplicateId(SqlSession session,String id) {
 		

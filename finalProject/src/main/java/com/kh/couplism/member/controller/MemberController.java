@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.couplism.email.MailAuth;
 import com.kh.couplism.member.model.service.MemberService;
 import com.kh.couplism.member.model.vo.Member;
+import com.kh.couplism.member.model.vo.Partner;
 
 @Controller
 @SessionAttributes(value= {"logginedMember","member"})
@@ -126,19 +127,25 @@ public class MemberController {
 		return "common/msg";
 	}
 	@RequestMapping(value="/member/partnerEnrollEnd",method=RequestMethod.POST)
-	public String partnerEnrollEnd(Member member,Model m) {
+	public String partnerEnrollEnd(Member member,Partner p,Model m) {
 		
 		String encodePw=encoder.encode(member.getPassword());
 		
 		member.setPassword(encodePw);
 		int result=service.enrollMember(member);
+		int resultTwo=service.enrollPartner(p);
 		
 		String msg="";
 		String loc="";
 		
 		if(result>0) {
-			msg="회원가입에 성공하셨습니다!";
-			loc="/";
+			if(resultTwo>0) {
+				msg="회원가입에 성공하셨습니다!";
+				loc="/";
+			}else {
+				msg="회원가입에 실패하였습니다. 파트너오류";
+				loc="/";
+			}
 		}else {
 			msg="회원가입실패하였습니다. 관리자에게 문의해주세요.";
 			loc="/enrollMember.do";
@@ -219,6 +226,25 @@ public class MemberController {
 			return "none";
 		}
 	}
+	
+	@RequestMapping("/partner/duplicateId")
+	@ResponseBody
+	public String duplicatePartnerId(@RequestParam(value="id",required=false,defaultValue="") String id,HttpServletRequest request) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		
+		int result=service.duplicateId(id);
+		
+		if(result>0) {
+			//아이디 중복
+			
+			return "exist"; 
+		}else {
+			//아이디 중복 안됌
+			
+			return "none";
+		}
+	}
+	
 	@RequestMapping(value="/member/memberLogout")
 	public String memberLogout(SessionStatus status,Model m) {
 		String msg="";

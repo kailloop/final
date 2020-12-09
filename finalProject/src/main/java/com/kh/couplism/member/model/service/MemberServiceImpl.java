@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.couplism.member.model.dao.MemberDao;
 import com.kh.couplism.member.model.vo.Member;
+import com.kh.couplism.member.model.vo.Partner;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -22,6 +23,12 @@ public class MemberServiceImpl implements MemberService {
 	public int enrollMember(Member m) {
 		// TODO Auto-generated method stub
 		return dao.enrollMember(session,m);
+	}
+	
+	@Override
+	public int enrollPartner(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.enrollPartner(session,p);
 	}
 
 	@Override
