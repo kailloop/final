@@ -20,6 +20,7 @@ public interface NoticeService {
 	public List<NoticeComment> getNoticeComment(int noticeNo);
 	public int addComment(NoticeComment nc);
 	public int deleteNoticeFile(int noticeNo);
+	public int deleteNoticeFile(Map<String,Object> deleteMap);
 	public int deleteNoticeComment(int noticeNo);
 	public int deleteNotice(int noticeNo);
 	public int upViewCount(Notice notice);
