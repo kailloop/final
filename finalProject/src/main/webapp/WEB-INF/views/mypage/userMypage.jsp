@@ -179,6 +179,7 @@
             }
       }
 </style>
+	<form>
 				<div class="inner" style="text-align:center;">
 					<br>
 					<h2>MY PAGE</h2>
@@ -212,7 +213,8 @@
 					</div>
 				</div>
 				
-				<h3>로그인값 : <c:out value="${logginedMember.id }"/></h3>
+				<input type="text" id="idvalue" name="idvalue" value="<c:out value="${logginedMember.id }"/>">
+		</form>	
 </section>
 </body>
 </html>

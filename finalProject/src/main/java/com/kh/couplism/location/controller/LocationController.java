@@ -47,8 +47,11 @@ public class LocationController {
 	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 	            + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 	      
+	      System.out.println(location);
+	      mv.addObject("address",location);
 	      mv.setViewName("location/category");
-		
+	      
+	      
 		
 		return mv;
 	}
@@ -95,6 +98,10 @@ public class LocationController {
 						 @RequestParam(value="locationAddress", defaultValue="", required=false) String locationAddress,
 						 @RequestParam(value="keyword", defaultValue="", required=false) String keyword,
 						 @RequestParam(value="cPage", defaultValue="1", required=false) int cPage,
+						 
+						 @RequestParam(value="address")String location,
+						 @RequestParam(value="category")String category,
+						 
 						 ModelAndView mv, HttpServletRequest request) {
 
 		logger.debug("=======================================Location===========================================");

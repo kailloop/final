@@ -74,7 +74,7 @@
     </style>
 
     <div id="btndiv" style="text-align: center; margin-top: 150px;">
-    	<button  type="button" class="btn btn-outline-danger">지역 다시선택하기</button>
+    	<button type="button" class="btn btn-outline-danger" onclick="location.replace('${path}/moveLocation')">지역 다시선택하기</button>
     </div>
     
 <div id="icondiv" style="margin-top: 200px;">
@@ -132,24 +132,21 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S"><i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-hotel"></i> <br>호텔</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S1"><i class="fas fa-hotel"></i> <br>호텔</a>
                 </td>
                 <td>
-                    
-                    <a href="#"><i class="fas fa-home"></i> <br>펜션</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S2"><i class="fas fa-home"></i> <br>펜션</a>
                 </td>
             </tr>
             <tr class="hovertr">
                 <td>
-                    
-                    <a href="#"><i class="fas fa-campground"></i> <br>글램핑/캠핑</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S3"><i class="fas fa-campground"></i> <br>글램핑/캠핑</a>
                 </td>
                 <td>
-                    
-                    <a href="#"><i class="fas fa-house-user"></i> <br>게스트하우스</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S4"><i class="fas fa-house-user"></i> <br>게스트하우스</a>
                 </td>
                 <td class="backtd">
                     <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
@@ -166,21 +163,21 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=l"> <i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-certificate"></i><br>랜드마크</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=l1"><i class="fas fa-certificate"></i><br>랜드마크</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-tree"></i><br>자연/공원</a><br>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=l2"><i class="fas fa-tree"></i><br>자연/공원</a><br>
                 </td>
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"><i class="fas fa-horse"></i><br>놀이동산</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=l3"><i class="fas fa-horse"></i><br>놀이동산</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-swimming-pool"></i><br>워터파크</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=l4"><i class="fas fa-swimming-pool"></i><br>워터파크</a>
                 </td>
                 <td class="backtd">
                     <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
@@ -196,14 +193,14 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=f"> <i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-concierge-bell"></i><br>식당</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=f1"><i class="fas fa-concierge-bell"></i><br>식당</a>
                 </td>
                 <td>
                     
-                    <a href="#"><i class="fas fa-coffee"></i><br>카페</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=f2"><i class="fas fa-coffee"></i><br>카페</a>
                 </td>
             </tr>
             <tr class="hovertr">
@@ -223,21 +220,21 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=a"> <i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-snowboarding"></i><br>스키/썰매</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=a1"><i class="fas fa-snowboarding"></i><br>스키/썰매</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-fish"></i><br>낚시</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=a2"><i class="fas fa-fish"></i><br>낚시</a>
                 </td>
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"><i class="fas fa-tint"></i><br>수상레저</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=a3"><i class="fas fa-tint"></i><br>수상레저</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-motorcycle"></i><br>바이크</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=a4"><i class="fas fa-motorcycle"></i><br>바이크</a>
                 </td>
                 <td class="backtd">
                     <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>
@@ -253,21 +250,21 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"> <i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=sh"> <i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-flag"></i><br>특산품가게</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=sh1"><i class="fas fa-flag"></i><br>특산품가게</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-gift"></i><br>기념품가게</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=sh2"><i class="fas fa-gift"></i><br>기념품가게</a>
                 </td>
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="#"><i class="fas fa-tshirt"></i><br>의류가게</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=sh3"><i class="fas fa-tshirt"></i><br>의류가게</a>
                 </td>
                 <td>
-                    <a href="#"><i class="fas fa-futbol"></i><br>스포츠가게</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=sh4"><i class="fas fa-futbol"></i><br>스포츠가게</a>
                 </td>
                 <td class="backtd">
                     <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>

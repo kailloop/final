@@ -2,10 +2,13 @@ package com.kh.couplism.mypage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.couplism.location.model.vo.LocationReservation;
@@ -43,6 +46,9 @@ public class MypageController {
 				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				);
 		mv.setViewName("mypage/partnerMypage");
+		
+	
+	
 		return mv;
 	}
 	
@@ -65,19 +71,24 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/reservation")
-	public ModelAndView reservation(ModelAndView mv) {
+	public ModelAndView reservation(ModelAndView mv,
+							@RequestParam(value="idvalue", required=false) String idvalue) {
 		mv.addObject("logoPath","/resources/images/home-logo3.jpg");
 		mv.addObject("titleHan","한글 타이틀");
 		mv.addObject("titleEng","Reservation");
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				+ "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				);
+		System.out.println("idvalue값 : "+idvalue);
+		
 		
 		List<LocationReservation> list=service.selectList();
-		
 		System.out.println(list);
+		
 		mv.addObject("list",list);
+		mv.addObject("idvalue",idvalue);
 		mv.setViewName("mypage/reservationList");
+		
 		
 		return mv;
 	}

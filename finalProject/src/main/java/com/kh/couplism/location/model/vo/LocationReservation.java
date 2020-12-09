@@ -21,5 +21,5 @@ public class LocationReservation {
 	private String reservationDay;
 	private int reservationPrice;
 	private Date paymentDate;
-	private Date ReservationDate;
+	private Date reservationDate;
 }
