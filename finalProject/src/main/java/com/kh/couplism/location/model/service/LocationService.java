@@ -9,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
+import com.kh.couplism.location.model.vo.LocationPrice;
 
 public interface LocationService {
 
@@ -19,4 +20,5 @@ public interface LocationService {
 	public int insertLocation(Location location);
 	public int insertLocationMain(LocationMain lm);
 	public int insertLocationFile(LocationFile lf);
+	public int insertLocationPrice(LocationPrice lp);
 }

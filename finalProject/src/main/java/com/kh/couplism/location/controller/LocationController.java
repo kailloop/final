@@ -23,6 +23,7 @@ import com.kh.couplism.location.model.service.LocationService;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
+import com.kh.couplism.location.model.vo.LocationPrice;
 
 @Controller
 public class LocationController {
@@ -172,8 +173,10 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/createEnd")
-	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile,
-			Location location, HttpServletRequest request) {
+	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, Location location, 
+			@RequestParam(value="locationTime")String[] locationTime, 
+			@RequestParam(value="locationDay")String[] locationDay, 
+			@RequestParam(value="locationPeople")String[] locationPeople, HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 		location.setLocationCreator("admin");
@@ -241,7 +244,19 @@ public class LocationController {
 					}
 				}
 			}
-
+			logger.debug("locationTime Size : "+locationTime.length);
+			logger.debug("locationDay Size : "+locationDay.length);
+			logger.debug("locationPeople Size : "+locationPeople.length);
+			
+			for(int i = 0; i<locationTime.length; i++) {//시간 순서별로 정리 필요함
+				logger.debug(locationTime[i]);
+				logger.debug(locationDay[i]);
+				logger.debug(locationPeople[i]);
+				LocationPrice lp = new LocationPrice(location.getLocationNo(),locationTime[i],locationDay[i],5600,Integer.parseInt(locationPeople[i]));
+				logger.debug("LocationPrice : "+lp);
+				int Result = service.insertLocationPrice(lp);
+				logger.debug("결과 : "+Result);
+			}
 		}
 
 		logger.debug("mainFile : " + mainFile.getOriginalFilename());
