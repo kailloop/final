@@ -1,7 +1,6 @@
 package com.kh.couplism.member.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Date;
 import java.util.Map;
 import java.util.Properties;
 
@@ -32,7 +31,7 @@ import com.kh.couplism.email.MailAuth;
 import com.kh.couplism.member.model.service.MemberService;
 import com.kh.couplism.member.model.vo.Member;
 import com.kh.couplism.member.model.vo.Partner;
-
+import com.kh.couplism.member.model.vo.SNSMember;
 
 @Controller
 @SessionAttributes(value= {"logginedMember","member"})
@@ -86,13 +85,19 @@ public class MemberController {
 		return "member/naverCallback";
 	}
 	@RequestMapping("/member/naverLoginEnd")//네이버로그인
-	public String naverLoginEnd(@RequestParam Map param) {
-		System.out.println((String)param.get("email"));
-		System.out.println((String)param.get("name"));
-		System.out.println((String)param.get("birthday"));
-		System.out.println((String)param.get("age"));
-		System.out.println((String)param.get("id"));
-		return "home";
+	public String naverLoginEnd(@RequestParam Map param,Model m,HttpSession session) {
+		SNSMember user=service.selectOneSnsMember(param);
+			
+		if(user!=null) {
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
+		}else {//가입해야할때
+			int result=service.enrollSnsMember(param);
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
+		}
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/enrollMember.do")
