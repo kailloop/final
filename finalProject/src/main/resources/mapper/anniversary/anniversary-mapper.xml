@@ -3,6 +3,6 @@
 <mapper namespace="anniversary">
 	
 	<select id="selectList" resultType="calendar">
-		SELECT * FROM calendar
+		SELECT * FROM calendar WHERE CALENDARWRITER=#{idv}
 	</select>
 </mapper>

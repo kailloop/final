@@ -49,10 +49,8 @@
 	
 </section>	
 <script>
-
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
     
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -67,7 +65,6 @@
        select: function(arg) {
         var title = prompt('일정 추가:');
         if (title) {
-
           calendar.addEvent({
             title: title,
             start: arg.start,
@@ -85,15 +82,18 @@
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      
+
+     
+
+    <c:forEach items="${list}" var="l">
       events: {
-    	    url: '/calendarValue',
+    	    url: '/',
     	    method: 'POST',
     	    
     	    
     	    extraParams: {
     	    
-    	    	title: 'Title',
+    	    	title: '${l.calendarTitle}',
     	        start: '2020-09-07',
     	        end: '2020-09-10'
     	    
@@ -104,12 +104,11 @@
     	    color: 'yellow',  
     	    textColor: 'black'
     	  }
+    </c:forEach>
       
       
     });
-
     calendar.render();
   });
-
 </script>
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

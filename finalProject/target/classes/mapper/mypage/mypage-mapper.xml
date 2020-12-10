@@ -13,8 +13,8 @@
 		<result property="reservationDate" column="RESERVATION_DATE"/>
 	</resultMap>
 	
-	<select id="selectList" resultMap="locationReservation">
-		SELECT * FROM LOCATION_RESERVATION
+	<select id="selectList" resultMap="locationReservation" parameterType="String">
+		select * from location_reservation where user_id=#{idv}
 	</select>
 
 </mapper>

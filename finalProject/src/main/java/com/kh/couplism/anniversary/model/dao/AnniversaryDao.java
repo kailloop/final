@@ -7,5 +7,5 @@ import org.apache.ibatis.session.SqlSession;
 import com.kh.couplism.anniversary.model.vo.Calendar;
 
 public interface AnniversaryDao {
-	List<Calendar> selectList(SqlSession session);
+	List<Calendar> selectList(SqlSession session,String idv);
 }
