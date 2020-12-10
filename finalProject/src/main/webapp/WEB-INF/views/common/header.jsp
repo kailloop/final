@@ -95,7 +95,7 @@
 		z-index:0;
 		transition:all ease 0.5s;
 		left:70px;
-		top:272px;
+		top:232px;
 	}
 	#id-input{
 		z-index:1;
@@ -129,7 +129,7 @@
 		z-index:0;
 		transition:all ease 0.5s;
 		left:70px;
-		top:354px;
+		top:314px;
 	}
 	.dance-font{
 		font-family:Dancing Script;
@@ -260,7 +260,7 @@
 						<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
 					</div>
 				</c:if>
-				<button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button>
+				<%-- <button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button> --%>
 				
 				<div id="mypage" class="circle">
 				<c:if test="${logginedMember!=null }">
@@ -269,7 +269,6 @@
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
             	</div>
-				
 			</div>
 		</div>
 	</div>
@@ -319,7 +318,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 		        <div class="modal-body">
-		          <!-- Default form login -->c:
+		          <!-- Default form login -->
 					<form action="${path }/member/memberLogin" method="post">						
 						
 						<i id="login-close" class="fas fa-times" aria-hidden="true"></i>
@@ -496,7 +495,7 @@
 	$("#id-input").focus(function(){
 		$("#id-input").css("border-bottom","1px blue solid");
 		$("#id-placeholder").css("color","blue");
-		$("#id-placeholder").css("top","242px");
+		$("#id-placeholder").css("top","197px");
 		$("#id-placeholder").css("font-size","12px");
 	});
 	$("#id-input").blur(function(){
@@ -504,14 +503,14 @@
 		if(id==""){
 			$("#id-input").css("border-bottom","1px black solid");
 			$("#id-placeholder").css("color","gray");
-			$("#id-placeholder").css("top","272px");
+			$("#id-placeholder").css("top","232px");
 			$("#id-placeholder").css("font-size","20px");
 		}
 	});
 	$("#pw-input").focus(function(){
 		$("#pw-input").css("border-bottom","1px blue solid");
 		$("#pw-placeholder").css("color","blue");
-		$("#pw-placeholder").css("top","322px");
+		$("#pw-placeholder").css("top","287px");
 		$("#pw-placeholder").css("font-size","12px");
 	});
 	$("#pw-input").blur(function(){
@@ -519,7 +518,7 @@
 		if(pw==""){
 		$("#pw-input").css("border-bottom","1px black solid");
 		$("#pw-placeholder").css("color","gray");
-		$("#pw-placeholder").css("top","354px");
+		$("#pw-placeholder").css("top","314px");
 		$("#pw-placeholder").css("font-size","20px");
 		}
 	});
