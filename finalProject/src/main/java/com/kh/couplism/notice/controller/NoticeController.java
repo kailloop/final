@@ -2,7 +2,10 @@ package com.kh.couplism.notice.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,8 +23,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -565,5 +568,66 @@ public class NoticeController {
 	public String checkCk() {
 		return "/location/checkCK";
 	}
+	
+	  @RequestMapping(value = "/community/imageUpload", method = RequestMethod.POST)
+	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+		  	logger.debug("이미지 업로드 들어옴");
+	        OutputStream out = null;
+	        PrintWriter printWriter = null;
+	        response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html;charset=utf-8");
+	 
+	        try{
+	 
+	   
+	            byte[] bytes = upload.getBytes();
+	            
+	            String mforiginalFileName = upload.getOriginalFilename();
+				String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+				int mfrandomNum = (int) (Math.random() * 1000);
+				String mfrenamedFileName = "Couplism-location-File-"
+						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
+	            File f = new File(request.getServletContext().getRealPath("/resources/upload/location")+"/"+mfrenamedFileName);
+	            out = new FileOutputStream(f);
+	            out.write(bytes);
+	            String callback = request.getParameter("CKEditorFuncNum");
+	 
+	            printWriter = response.getWriter();
+	            String fileUrl = request.getContextPath()+"/resources/upload/location/"+f.getName();//url경로
+	            logger.debug(callback);
+	            logger.debug(fileUrl);
+				/*
+				 * printWriter.
+				 * println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+				 * + "1" + ",'" + fileUrl + "','이미지를 업로드 하였습니다.'" + ")</script>");
+				 * printWriter.flush();
+				 */
+
+	            printWriter.println("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+	        }catch(IOException e){
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (out != null) {
+	                    out.close();
+	                }
+	                if (printWriter != null) {
+	                    printWriter.close();
+	                }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	 
+	        return;
+	    }
+	 @RequestMapping("/getcheckCk")
+	  public ModelAndView getcheckCk(String ckeditor, ModelAndView mv) {
+		  logger.debug(ckeditor);
+		  mv.setViewName("/location/getcheckCk");
+		  mv.addObject("content",ckeditor);
+		  return mv;
+	  }
 	
 }
