@@ -45,7 +45,6 @@ public class AnniversaryController {
 		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		mv.setViewName("anniversary/myCalendar");
 		
-		
 		List<Calendar> list=service.selectList(idv);
 		System.out.println(list);
 		System.out.println(idv);
@@ -62,17 +61,17 @@ public class AnniversaryController {
 		mv.addObject("jsonList",jsonList.fromObject(list));
 		System.out.println(jsonList.fromObject(list));
 		
-		
-		
 		return mv;
 	}
 	
 
+	
 	/*
-	 * @RequestMapping("/calendarValue")
+	 * @RequestMapping("/calendarValue") public ModelAndView
+	 * calendarValue(ModelAndView mv,
 	 * 
-	 * @ResponseBody //자바객체 http요청의 body내용으로 매핑 public ModelAndView
-	 * calendarValue(ModelAndView mv) {
+	 * @RequestParam(value="idvalue") String idv) {
+	 * 
 	 * 
 	 * 
 	 * 
