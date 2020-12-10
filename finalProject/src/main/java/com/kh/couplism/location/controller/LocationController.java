@@ -89,9 +89,9 @@ public class LocationController {
 		types.put("locationType", "%" + locationType + "%");
 		types.put("locationAddress", "%" + locationAddress + "%");
 		types.put("keyword", "%" + keyword + "%");
-
+		
 		logger.debug("types : " + types);
-
+		
 		int numPerPage = 15;
 		RowBounds rb = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 
@@ -266,5 +266,9 @@ public class LocationController {
 
 		return mv;
 	}
-
+	
+	@RequestMapping("/location/checks")
+	public String checks(){
+		return "location/checks";
+	}
 }
