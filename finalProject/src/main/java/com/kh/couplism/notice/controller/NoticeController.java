@@ -502,16 +502,19 @@ public class NoticeController {
 		logger.debug("NoticeFile : "+noticeFile);//수정에서 받아온 파일 리스트
 		List<NoticeFile> nf = service.getNoticeFile(notice.getNoticeNo());//기존에 있던 파일 리스트
 		//1.파일삭제
-		if(deleteFileName.length!=0) {
-			for(String dn : deleteFileName) {
-				File df = new File(request.getServletContext().getRealPath("/resources/upload/notice/")+dn);
-				if(df.exists()) {
-					Map<String,Object> deleteMap = new HashMap();
-					deleteMap.put("noticeNo", notice.getNoticeNo());
-					deleteMap.put("deleteFileName", dn);
-					service.deleteNoticeFile(deleteMap);
-					boolean deleteResult =df.delete();
-					logger.debug(dn+" 처리결과  : "+deleteResult);
+		
+		if(deleteFileName!=null) {
+			if(deleteFileName.length!=0) {
+				for(String dn : deleteFileName) {
+					File df = new File(request.getServletContext().getRealPath("/resources/upload/notice/")+dn);
+					if(df.exists()) {
+						Map<String,Object> deleteMap = new HashMap();
+						deleteMap.put("noticeNo", notice.getNoticeNo());
+						deleteMap.put("deleteFileName", dn);
+						service.deleteNoticeFile(deleteMap);
+						boolean deleteResult =df.delete();
+						logger.debug(dn+" 처리결과  : "+deleteResult);
+					}
 				}
 			}
 		}

@@ -7,7 +7,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
-	<div class="container">
+	<div class="container" style="background: red; margin-top:100px;">
 		<form action="${path }/notice/writeEnd" method="post" enctype="multipart/form-data">
 			<input type="text" name="noticeTitle" placeholder="제목" style="width: 100%;">
 			<div id="div-container-file">
