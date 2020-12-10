@@ -101,4 +101,8 @@
 	<insert id="insertLocationFile" parameterType="com.kh.couplism.location.model.vo.LocationFile">
 		INSERT INTO LOCATIONFILE VALUES(#{locationNo},#{originalName},#{renameName})
 	</insert>
+	
+	<insert id="insertLocationPrice" parameterType="com.kh.couplism.location.model.vo.LocationPrice">
+		INSERT INTO LOCATION_PRICE VALUES(#{locationNo},#{priceTime},#{priceDay},#{price},#{pricePeople})
+	</insert>
 </mapper>

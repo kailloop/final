@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
+import com.kh.couplism.location.model.vo.LocationPrice;
 
 public interface LocationDao {
 	public List<Location> locationList(Map<String,String> types, RowBounds rb, SqlSessionTemplate session);
@@ -19,4 +20,5 @@ public interface LocationDao {
 	public int insertLocation(Location location, SqlSessionTemplate session);
 	public int insertLocationMain(LocationMain lm, SqlSessionTemplate session);
 	public int insertLocationFile(LocationFile lf, SqlSessionTemplate session);
+	public int insertLocationPrice(LocationPrice lp, SqlSessionTemplate session);
 }

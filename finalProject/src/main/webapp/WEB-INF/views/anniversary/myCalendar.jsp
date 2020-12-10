@@ -110,5 +110,9 @@
     });
     calendar.render();
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 </script>
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

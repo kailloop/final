@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
+import com.kh.couplism.location.model.vo.LocationPrice;
 
 @Repository
 public class LocationDaoImpl implements LocationDao {
@@ -48,6 +49,11 @@ public class LocationDaoImpl implements LocationDao {
 	@Override
 	public int insertLocationFile(LocationFile lf, SqlSessionTemplate session) {
 		return session.insert("location.insertLocationFile",lf);
+	}
+
+	@Override
+	public int insertLocationPrice(LocationPrice lp, SqlSessionTemplate session) {
+		return session.insert("location.insertLocationPrice",lp);
 	}
 	
 	

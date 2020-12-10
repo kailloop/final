@@ -32,6 +32,7 @@ import com.kh.couplism.member.model.service.MemberService;
 import com.kh.couplism.member.model.vo.Member;
 import com.kh.couplism.member.model.vo.Partner;
 
+
 @Controller
 @SessionAttributes(value= {"logginedMember","member"})
 public class MemberController {

@@ -67,13 +67,17 @@ public class AnniversaryController {
 		return mv;
 	}
 	
-	
-//	 @RequestMapping("/calendarValue")
-//	 public ModelAndView calendarValue(ModelAndView mv) {
-//	 
-//	 
-//		 
-//		 return mv; 
-//	 }
-	 
+
+	/*
+	 * @RequestMapping("/calendarValue")
+	 * 
+	 * @ResponseBody //자바객체 http요청의 body내용으로 매핑 public ModelAndView
+	 * calendarValue(ModelAndView mv) {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return mv; }
+	 */
+
 }
