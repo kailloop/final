@@ -561,4 +561,9 @@ public class NoticeController {
 		return mv;
 	}
 	
+	@RequestMapping("checkCk")
+	public String checkCk() {
+		return "/location/checkCK";
+	}
+	
 }
