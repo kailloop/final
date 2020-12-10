@@ -42,6 +42,7 @@
 					var profileImage = naverLogin.user.getProfileImage();
 					var birthday = naverLogin.user.getBirthday();
 					var age = naverLogin.user.getAge();
+					var id = naverLogin.user.getId();
 					if( email == undefined || email == null) {
 						alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
 						/* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */
@@ -49,7 +50,8 @@
 						return;
 					}
 
-					window.location.replace("http://localhost:9090/couplism/member/naverLoginEnd?name="+name+",email="+email);
+					window.location.replace("http://localhost:9090/couplism/member/naverLoginEnd?email="+email+"&name="+name+"&birthday="+birthday+"&age="+age+"&id="+id);
+					
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}

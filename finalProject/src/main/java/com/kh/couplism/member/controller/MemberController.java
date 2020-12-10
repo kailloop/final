@@ -1,6 +1,7 @@
 package com.kh.couplism.member.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
 import java.util.Map;
 import java.util.Properties;
 
@@ -79,13 +80,17 @@ public class MemberController {
 		return path;
 	}
 	@RequestMapping("/member/naverLogin")
-	public String naverLogin(@RequestParam(value="email",required=false,defaultValue="") String email) {
-		System.out.println(email);
+	public String naverLogin() {
+		//System.out.println(email);
 		return "member/naverCallback";
 	}
-	@RequestMapping("/member/naverLoginEnd")
+	@RequestMapping("/member/naverLoginEnd")//네이버로그인
 	public String naverLoginEnd(@RequestParam Map param) {
 		System.out.println((String)param.get("email"));
+		System.out.println((String)param.get("name"));
+		System.out.println((String)param.get("birthday"));
+		System.out.println((String)param.get("age"));
+		System.out.println((String)param.get("id"));
 		return "home";
 	}
 	
