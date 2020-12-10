@@ -50,7 +50,7 @@
 						return;
 					}
 
-					window.location.replace("http://localhost:9090/couplism/member/naverLoginEnd?email="+email+"&name="+name+"&birthday="+birthday+"&age="+age+"&id="+id);
+					window.location.replace("http://localhost:9090/couplism/member/naverLoginEnd?email="+email+"&name="+name+"&birthday="+birthday+"&age="+age);
 					
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
