@@ -264,7 +264,7 @@
 				
 				<div id="mypage" class="circle">
 				<c:if test="${logginedMember!=null }">
-	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
+	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.email }"/>'">${logginedMember.nickname }님</i></p> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
@@ -375,19 +375,6 @@
 		</div>
 	</div>
 	</c:if>
-<script type="text/javascript">
-	var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "oSbOyaRHkoBb4q1c1aSI",
-			callbackUrl: "http://localhost:9090/couplism/member/naverLogin",
-			isPopup: false, /* 팝업을 통한 연동처리 여부 */
-			loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
-		}
-	);
-	
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
-</script>
 	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -420,11 +407,27 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "oSbOyaRHkoBb4q1c1aSI",
+			callbackUrl: "http://localhost:9090/couplism/member/naverLogin",
+			isPopup: false, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+		}
+	);
+	
+	/* 설정정보를 초기화하고 연동을 준비 */
+	naverLogin.init();
+</script>
 <script>
 	function travel(){
 		location.replace('${path}/moveLocation');
 	}
 	function logout(){
+		var popup = window.open("https://nid.naver.com/nidlogin.logout", "네이버팝업", "width=700px,height=800px");
+
+	    
 		location.replace('${path}/member/memberLogout');
 	}
 	function login(){

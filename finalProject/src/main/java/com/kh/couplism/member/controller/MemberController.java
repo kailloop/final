@@ -91,10 +91,12 @@ public class MemberController {
 		if(user!=null) {
 			//session.addAttribute("logginedMember",user);
 			session.setAttribute("logginedMember", user);
+			session.setAttribute("naverLogin", user);
 		}else {//가입해야할때
 			int result=service.enrollSnsMember(param);
 			//session.addAttribute("logginedMember",user);
 			session.setAttribute("logginedMember", user);
+			session.setAttribute("naverLogin", user);
 		}
 		
 		return "redirect:/";
@@ -267,10 +269,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/memberLogout")
-	public String memberLogout(SessionStatus status,Model m) {
+	public String memberLogout(SessionStatus status,Model m,HttpSession session) {
 		String msg="";
 		if(!status.isComplete()) {
 			status.setComplete();//세션삭제
+			session.invalidate();
 			msg="커플리즘 사이트에서 로그아웃  되셨습니다.";
 		}else {
 			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요";
