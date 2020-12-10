@@ -7,53 +7,22 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="title" />
 </jsp:include>
-<style>
-#logo {
-	height: 900px;
-	width: 100%;
-	position: relative;
-	z-index: 0;
-	overflow: hidden;
-}
-
-#logo img {
-	filter: grayscale(65%);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-}
-
-#logo label {
-	position: absolute;
-	left: 27%;
-	top: 35%;
-	font-size: 120px;
-	z-index: 0;
-	cursor: pointer;
-	font-family: Dancing Script;
-	color: black;
-}
-</style>
-<div id="logo">
-	<img src="${path }/resources/images/notice.jpg" alt="notice" /> <label>Notice</label>
-</div>
-<section id="content">
+<jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 	<div class="container">
 		<form action="${path }/notice/modifyNoticeEnd" method="post"
 			enctype="multipart/form-data">
 			<input type="text" name="noticeTitle" placeholder="제목"
 				style="width: 100%;" value="${notice.noticeTitle}">
 			<div id="fileListDiv">
-				<c:forEach var="file" items="${noticeFile}">
+				<c:forEach var="file" items="${NoticeFile}">
 					<div id="fileDiv">
 						<c:out value="${file.originalName }" />
 						<input name="fileRenameName" type="hidden" value="${file.renameName }">
 						<button type="button" onclick="deleteFile(event);">삭제</button>
 					</div>
 				</c:forEach>
+			</div>
+			<div id="delete-file-name">
 			</div>
 			<div id="div-container-file">
 				<div class="input-group mb-3">
@@ -83,7 +52,10 @@
 	function deleteFile(event){
 		console.log(event.target);
 		console.log($(event.target).parent());
+		console.log($(event.target).prev().val());
+		var deleteFileName = $(event.target).prev().val();
 		$(event.target).parent().remove();
+		$("#delete-file-name").append("<input type='hidden' name='deleteFileName' value='"+deleteFileName+"'>");
 	}
 	function checknotice(){
 		console.log("체크들어옴");
