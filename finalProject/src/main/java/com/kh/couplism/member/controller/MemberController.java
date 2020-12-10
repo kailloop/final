@@ -273,7 +273,7 @@ public class MemberController {
 			status.setComplete();//세션삭제
 			msg="커플리즘 사이트에서 로그아웃  되셨습니다.";
 		}else {
-			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요.";
+			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요";
 		}
 		m.addAttribute("msg",msg);
 		return "common/msg";
