@@ -7,11 +7,18 @@
 	<insert id="enrollPartner" parameterType="partner">
 		INSERT INTO PARTNER VALUES(#{id},#{employee_No},#{employee_Content},#{employee_Type},DEFAULT,#{employee_Type_two})
 	</insert>
+	<insert id="enrollSnsMember" parameterType="map">
+		INSERT INTO SNSMEMBER VALUES(#{email},#{name},#{birthday},#{age},SYSDATE);
+	</insert>
 	<select id="duplicateId" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id}
 	</select>
 	
 	<select id="selectOneMember" parameterType="map" resultType="member">
 		SELECT * FROM MEMBER WHERE ID=#{id-input}
+	</select>
+	
+	<select id="selectOneSnsMember" parameterType="map" resultType="SnsMember">
+		SELECT * FROM SNSMEMBER WHERE EMAIL=#{email}
 	</select>
 </mapper>
