@@ -8,7 +8,7 @@
 		INSERT INTO PARTNER VALUES(#{id},#{employee_No},#{employee_Content},#{employee_Type},DEFAULT,#{employee_Type_two})
 	</insert>
 	<insert id="enrollSnsMember" parameterType="map">
-		INSERT INTO SNSMEMBER VALUES(#{email},#{name},#{birthday},#{age},SYSDATE);
+		INSERT INTO SNSMEMBER VALUES(#{email},#{name},#{birthday},#{age},SYSDATE)
 	</insert>
 	<select id="duplicateId" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id}

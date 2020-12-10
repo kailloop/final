@@ -85,17 +85,19 @@ public class MemberController {
 		return "member/naverCallback";
 	}
 	@RequestMapping("/member/naverLoginEnd")//네이버로그인
-	public String naverLoginEnd(@RequestParam Map param,Model m) {
+	public String naverLoginEnd(@RequestParam Map param,Model m,HttpSession session) {
 		SNSMember user=service.selectOneSnsMember(param);
 			
 		if(user!=null) {
-			m.addAttribute("logginedMember",user);
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
 		}else {//가입해야할때
 			int result=service.enrollSnsMember(param);
-			m.addAttribute("logginedMember",user);
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
 		}
 		
-		return "home";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/enrollMember.do")
