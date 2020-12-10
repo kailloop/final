@@ -23,10 +23,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
 
@@ -364,7 +364,7 @@
 					    </p>
 					
 					    <!-- Social login -->
-					    <a href="#" class="mx-2" role="button"><button>1</button></a>
+					    <div id="naverIdLogin"></div>
 					    <a href="#" class="mx-2" role="button"><button>2</button></a>
 					    <a href="#" class="mx-2" role="button"><button>3</button></a>
 					    <a href="#" class="mx-2" role="button"><button>4</button></a>
@@ -375,6 +375,19 @@
 		</div>
 	</div>
 	</c:if>
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "oSbOyaRHkoBb4q1c1aSI",
+			callbackUrl: "http://localhost:9090/couplism/member/naverLogin",
+			isPopup: false, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+		}
+	);
+	
+	/* 설정정보를 초기화하고 연동을 준비 */
+	naverLogin.init();
+</script>
 	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
 		<div class="modal-dialog">
 			<!-- Modal content-->

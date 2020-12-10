@@ -78,6 +78,16 @@ public class MemberController {
 		System.out.println(user);
 		return path;
 	}
+	@RequestMapping("/member/naverLogin")
+	public String naverLogin(@RequestParam(value="email",required=false,defaultValue="") String email) {
+		System.out.println(email);
+		return "member/naverCallback";
+	}
+	@RequestMapping("/member/naverLoginEnd")
+	public String naverLoginEnd(@RequestParam Map param) {
+		System.out.println((String)param.get("email"));
+		return "home";
+	}
 	
 	@RequestMapping("/enrollMember.do")
 	public ModelAndView enrollMember(ModelAndView mv) {
