@@ -20,7 +20,7 @@
 </style>
 
 <div style="text-align: center; margin-top: 50px;">
-	<p style="font-size: 25px;"><c:out value="${idvalue}"/> 님의 예약내역</p>
+	<p style="font-size: 25px;"><c:out value="${logginedMember.nickname }"/> 님의 예약내역</p>
 	
 	<hr>
 	<br>
