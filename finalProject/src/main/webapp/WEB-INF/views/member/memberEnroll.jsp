@@ -769,14 +769,9 @@
 					alert("닉네임을 적어주세요");
 					offset = $("#nickname").offset();
 					$('html, body').animate({scrollTop: offset.top},1000);
-<<<<<<< HEAD
-
-					return;
-=======
 
 					return;
 
->>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");
