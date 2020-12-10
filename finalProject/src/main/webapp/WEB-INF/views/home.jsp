@@ -128,8 +128,8 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	</div>
 	<section>
-		<img class="img one" src="${path }/resources/images/home-logo2.jpg" alt="로고2">
-		<img class="img two" src="${path }/resources/images/home-logo3.jpg" alt="로고3">
+		<img class="img one" src="${path }/resources/images/mainimg2.jpg" alt="로고2">
+		<img class="img two" src="${path }/resources/images/mainimg1.jpg" alt="로고3">
 		
 		
 		

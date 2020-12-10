@@ -25,7 +25,7 @@ public class MypageController {
 	
 	@RequestMapping("/mypage/userMypage.do")
 	public ModelAndView userMypage(ModelAndView mv) {
-		mv.addObject("logoPath","/resources/images/home-logo3.jpg");
+		mv.addObject("logoPath","/resources/images/mypagelogo.jpg");
 		mv.addObject("titleHan","한글 타이틀");
 		mv.addObject("titleEng","MY PAGE");
 		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
@@ -72,21 +72,22 @@ public class MypageController {
 	
 	@RequestMapping("/reservation")
 	public ModelAndView reservation(ModelAndView mv,
-							@RequestParam(value="idvalue", required=false) String idvalue) {
-		mv.addObject("logoPath","/resources/images/home-logo3.jpg");
+							@RequestParam(value="idvalue") String idv) {
+		mv.addObject("logoPath","/resources/images/mypagelogo.jpg");
 		mv.addObject("titleHan","한글 타이틀");
 		mv.addObject("titleEng","Reservation");
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				+ "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 				);
-		System.out.println("idvalue값 : "+idvalue);
+		
+		System.out.println("idvalue값 : "+idv);
 		
 		
-		List<LocationReservation> list=service.selectList();
+		List<LocationReservation> list=service.selectList(idv);
 		System.out.println(list);
 		
+		mv.addObject("idvalue",idv);
 		mv.addObject("list",list);
-		mv.addObject("idvalue",idvalue);
 		mv.setViewName("mypage/reservationList");
 		
 		

@@ -5,5 +5,5 @@ import java.util.List;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
 public interface MypageService {
-	List<LocationReservation> selectList();
+	List<LocationReservation> selectList(String idv);
 }

@@ -771,6 +771,7 @@
 					$('html, body').animate({scrollTop: offset.top},1000);
 
 					return;
+
 				}
 				if(!birth.test($("input[id='birthday']").val())){
 					alert("생년월일을 정확히 기입해주세요.");

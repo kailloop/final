@@ -10,10 +10,12 @@ import com.kh.couplism.location.model.vo.LocationReservation;
 public class MypageDaoImpl implements MypageDao {
 
 	@Override
-	public List<LocationReservation> selectList(SqlSession session) {
-		return session.selectList("mypage.selectList");
+	public List<LocationReservation> selectList(SqlSession session, String idv) {
+		// TODO Auto-generated method stub
+		return session.selectList("mypage.selectList",idv);
 	}
 
+	
 	
 	
 }

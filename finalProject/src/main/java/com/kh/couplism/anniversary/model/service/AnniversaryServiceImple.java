@@ -19,9 +19,9 @@ public class AnniversaryServiceImple implements AnniversaryService {
 	private SqlSession session;
 	
 	@Override
-	public List<Calendar> selectList() {
+	public List<Calendar> selectList(String idv) {
 		// TODO Auto-generated method stub
-		return dao.selectList(session);
+		return dao.selectList(session,idv);
 	}
 	
 }

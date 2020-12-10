@@ -4,17 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="title" />
-</jsp:include>
-<style>
-#content {
-	position: relative;
-	margin-top: 500px;
-}
-</style>
-<section id="content">
-	<div class="container">
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/logo.jsp"/>
+	<div class="container" style="background: red; margin-top:100px;">
 		<form action="${path }/notice/writeEnd" method="post" enctype="multipart/form-data">
 			<input type="text" name="noticeTitle" placeholder="제목" style="width: 100%;">
 			<div id="div-container-file">

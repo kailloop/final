@@ -49,10 +49,8 @@
 	
 </section>	
 <script>
-
   document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
+    var calendarEl = document.getElementById('calendar'); //캘린더 div
     
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -67,7 +65,6 @@
        select: function(arg) {
         var title = prompt('일정 추가:');
         if (title) {
-
           calendar.addEvent({
             title: title,
             start: arg.start,
@@ -78,6 +75,7 @@
         }
         calendar.unselect()
       }, 
+      
       eventClick: function(arg) {
     	 if (confirm('일정을 삭제하시겠습니까? 삭제하시면 다시 복구하실 수 없습니다.')) {
           arg.event.remove()
@@ -85,15 +83,16 @@
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      
+     
+
       events: {
-    	    url: '/calendarValue',
+    	    url: '/',
     	    method: 'POST',
     	    
     	    
     	    extraParams: {
     	    
-    	    	title: 'Title',
+    	    	title: 'ㅊㅌ',
     	        start: '2020-09-07',
     	        end: '2020-09-10'
     	    
@@ -107,9 +106,7 @@
       
       
     });
-
     calendar.render();
   });
-
 </script>
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

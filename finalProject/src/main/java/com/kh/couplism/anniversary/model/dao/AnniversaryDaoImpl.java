@@ -11,8 +11,8 @@ import com.kh.couplism.anniversary.model.vo.Calendar;
 public class AnniversaryDaoImpl implements AnniversaryDao {
 
 	@Override
-	public List<Calendar> selectList(SqlSession session) {
-		return session.selectList("anniversary.selectList");
+	public List<Calendar> selectList(SqlSession session,String idv) {
+		return session.selectList("anniversary.selectList",idv);
 	}
 	
 }

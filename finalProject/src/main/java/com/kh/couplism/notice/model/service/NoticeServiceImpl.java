@@ -81,6 +81,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int upViewCount(Notice notice) {
 		return dao.upViewCount(notice, session);
 	}
+
+	@Override
+	public int deleteNoticeFile(Map<String, Object> deleteMap) {
+		return dao.deleteNoticeFile(deleteMap, session);
+	}
 	
 	
 }

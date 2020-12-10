@@ -21,6 +21,7 @@ public interface NoticeDao {
 	public List<NoticeComment> getNoticeComment(int noticeNo, SqlSessionTemplate session);
 	public int addComment(NoticeComment nc, SqlSessionTemplate session);
 	public int deleteNoticeFile(int noticeNo, SqlSessionTemplate session);
+	public int deleteNoticeFile(Map<String,Object> deleteMap, SqlSessionTemplate session);
 	public int deleteNoticeComment(int noticeNo, SqlSessionTemplate session);
 	public int deleteNotice(int noticeNo, SqlSessionTemplate session);
 	public int upViewCount(Notice notice, SqlSessionTemplate session);

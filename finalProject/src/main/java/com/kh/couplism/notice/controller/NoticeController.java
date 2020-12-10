@@ -114,8 +114,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/write")
-	public String noticeWrite() {
-		return"/notice/noticeWrite";
+	public ModelAndView noticeWrite(ModelAndView mv) {
+		mv.setViewName("/notice/noticeWrite");
+		mv.addObject("titleHan","공지사항");
+		mv.addObject("titleEng","Notice");
+		mv.addObject("logoPath","resources/images/notice1.jpg");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		return mv;
 	}
 	
 	
@@ -480,7 +485,7 @@ public class NoticeController {
 		logger.debug("Notice : "+n);
 		List<NoticeFile> nf = service.getNoticeFile(noticeNo);
 		logger.debug("NoticeFile : "+nf);
-		mv.addObject("noticeFile", nf);
+		mv.addObject("NoticeFile", nf);
 		mv.addObject("notice",n);
 		mv.setViewName("/notice/modifyNotice");
 		mv.addObject("titleHan","공지사항");
@@ -491,19 +496,62 @@ public class NoticeController {
 		return mv;
 	}
 	@RequestMapping("/notice/modifyNoticeEnd")
-	public ModelAndView modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, Notice notice,String fileRenameName, HttpServletRequest request, HttpSession session){
+	public ModelAndView modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, String[] deleteFileName, Notice notice, HttpServletRequest request, HttpSession session){
 		logger.debug("--------------------------------------------------modifyNoticeEnd--------------------------------------------------------");
 		logger.debug("Notiec : "+notice);
-		logger.debug("NoticeFile : "+noticeFile);
-		String[]renamedFiles = fileRenameName.split(",");
-		List<NoticeFile> nf = service.getNoticeFile(notice.getNoticeNo());
-		for(NoticeFile nff : nf) {//비교하는 로직 작성 !
-			for(String rf : renamedFiles) {
-				if(rf != nff.getRenameName()) {
-					logger.debug("사용하지 않을 이전 파일 :"+nff);
+		logger.debug("NoticeFile : "+noticeFile);//수정에서 받아온 파일 리스트
+		List<NoticeFile> nf = service.getNoticeFile(notice.getNoticeNo());//기존에 있던 파일 리스트
+		//1.파일삭제
+		
+		if(deleteFileName!=null) {
+			if(deleteFileName.length!=0) {
+				for(String dn : deleteFileName) {
+					File df = new File(request.getServletContext().getRealPath("/resources/upload/notice/")+dn);
+					if(df.exists()) {
+						Map<String,Object> deleteMap = new HashMap();
+						deleteMap.put("noticeNo", notice.getNoticeNo());
+						deleteMap.put("deleteFileName", dn);
+						service.deleteNoticeFile(deleteMap);
+						boolean deleteResult =df.delete();
+						logger.debug(dn+" 처리결과  : "+deleteResult);
+					}
 				}
 			}
 		}
+		//2.파일추가
+		String saveDir = request.getServletContext().getRealPath("/resources/upload/notice");
+		
+		File dir = new File(saveDir);//???
+		
+		int success=0;
+		for(MultipartFile mf : noticeFile) {
+			if(!mf.isEmpty()) {// mf.isEmpty()
+				logger.debug("file명 : "+mf.getOriginalFilename());
+				logger.debug("file Size : "+mf.getSize());
+				String originalFileName = mf.getOriginalFilename();
+				String ext = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+				int randomNum = (int)(Math.random()*1000);
+				String renamedFileName = "Couplism-Notice-"+sdf.format(new Date(System.currentTimeMillis()))+"_"+randomNum+"."+ext;
+				logger.debug("변경된 파일이름 "+renamedFileName);
+				try {
+					mf.transferTo(new File(saveDir+"/"+renamedFileName));//파일을 저장
+					logger.debug("파일 등록성공!");
+					//파일을 db에 등록하는 로직작성
+					NoticeFile nfOfTry = new NoticeFile(notice.getNoticeNo(), mf.getOriginalFilename(), renamedFileName);
+					int result = service.insertNoticeFile(nfOfTry);
+					String fileCheck = "실패";
+					if(result>0) {
+						fileCheck = "성공";
+					}
+					logger.debug("파일 등록결과 : "+fileCheck);
+					success++;
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		mv.setViewName("/notice/noticeList");
 		mv.addObject("titleHan","공지사항");
 		mv.addObject("titleEng","Notice");

@@ -264,7 +264,7 @@
 				
 				<div id="mypage" class="circle">
 				<c:if test="${logginedMember!=null }">
-	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">${logginedMember.nickname }님</i></p> 
+	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
@@ -287,7 +287,7 @@
 						<li class="nav-item"><a href="" class="nav-color nav-link">회사소개</a></li>
 						<li class="nav-item"><a id="travel" class="nav-color nav-link" onclick="travel();" style="cursor:pointer;">여행지</a></li>
 						<li class="nav-item"><a class="nav-color nav-link">리즘</a></li>
-						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;">기념일</a></li>
+						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;" href="${path }/anniversary/anniversarySearch.do">기념일</a></li>
 						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;">커뮤니티</a></li>
 					</ul>
 				</div>
@@ -300,8 +300,8 @@
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >액티비티</a></li> -->
-						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/myCalendar.do"  class="nav-link nav-color" >기념일 설정</a></li>
-						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li>
+						<%-- <li class="nav-item nav-anniversary"><a href="${path }/anniversary/myCalendar.do"  class="nav-link nav-color" >기념일 설정</a></li>
+						<li class="nav-item nav-anniversary"><a href="${path }/anniversary/anniversarySearch.do" class="nav-link nav-color" >기념 여행지</a></li> --%>
 						<li class="nav-item"><a class="nav-link nav-color nav-back" style="cursor:pointer;" >뒤로가기</a></li>
 					</ul>
 				</div>
@@ -440,14 +440,15 @@
 	let nav=0;
 	//1=여행지, 2=커뮤니티
 	//3=기념일
-	$("#anniversary").click(function(){
+
+	/* $("#anniversary").click(function(){
 		$("#nav-main").css("transition","0.5s");
 		$("#nav-sub").css("transition","1s");
 		$("#nav-main").css("left","-600px");
 		$("#nav-sub").css("left","-400px");
 		$(".nav-anniversary").css("display","inline");
 		nav=3;
-	});
+	}); */
 	$("#community").click(function(){
 		$("#nav-main").css("transition","0.5s");
 		$("#nav-sub").css("transition","1s");

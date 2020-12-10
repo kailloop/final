@@ -192,20 +192,20 @@
 						</div>
 						<div class="feature">
 							<i class="far fa-heart"></i>
-							<h3>연인등록</h3>
-							<p>상대방 아이디를 연인으로<br>등록하고 관리할 수 있습니다.</p>
+							<h3>연인관리</h3>
+							<p>상대방 아이디를 연인아이디로<br>관리할 수 있습니다.</p>
 						</div>
 						<div class="feature">
 							<i class="fas fa-box-open"></i>
 							<h3>쿠폰함</h3>
-							<p>보유하고 계신 쿠폰의<br> 구체적인 내역을 확인합니다.</p>
+							<p>보유하고 계신 쿠폰을<br>확인, 관리할 수 있습니다.</p>
 						</div>
-						<div class="feature">
-							<i class="fas fa-receipt"></i>
-							<h3>결제내역</h3>
-							<p>결제하신 내역을<br>확인하실 수 있습니다.</p>
+						<div class="feature" onclick="location.replace('${path }/anniversary/myCalendar.do?idvalue=<c:out value="${logginedMember.id }"/>')">
+							<i class="fas fa-calendar-alt"></i>
+							<h3>캘린더</h3>
+							<p>캘린더를 이용하실 수 있습니다.</p>
 						</div>
-						<div class="feature" onclick="location.replace('${path}/reservation')">
+						<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${logginedMember.id }"/>')">
 							<i class="fas fa-history"></i>
 							<h3>예약내역</h3>
 							<p>예약내역을 확인하실 수 있습니다.</p>
@@ -213,7 +213,7 @@
 					</div>
 				</div>
 				
-				<input type="text" id="idvalue" name="idvalue" value="<c:out value="${logginedMember.id }"/>">
+				<input type="hidden" value="<c:out value="${logginedMember.id }"/>">
 		</form>	
 </section>
 </body>

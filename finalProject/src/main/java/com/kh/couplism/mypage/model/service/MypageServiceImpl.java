@@ -22,8 +22,8 @@ public class MypageServiceImpl implements MypageService {
 	private Logger logger;
 	
 	@Override
-	public List<LocationReservation> selectList() {
-		return dao.selectList(session);
+	public List<LocationReservation> selectList(String idv) {
+		return dao.selectList(session,idv);
 	}
 	
 }

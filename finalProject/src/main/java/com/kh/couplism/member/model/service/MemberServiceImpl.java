@@ -42,6 +42,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectOneMember(Map param) {
 		// TODO Auto-generated method stub
 		return dao.selectOneMember(session,param);
+
 	}
 
 	@Override
