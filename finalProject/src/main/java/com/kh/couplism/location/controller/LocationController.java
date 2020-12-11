@@ -95,25 +95,23 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location")//로케이션 리스트 목록을 보여주는곳
-	public ModelAndView location(@RequestParam(value="locationType", defaultValue="", required=false) String locationType,
-						 @RequestParam(value="locationAddress", defaultValue="", required=false) String locationAddress,
+	public ModelAndView location(
+						 @RequestParam(value="address", defaultValue="", required=false) String address,
 						 @RequestParam(value="keyword", defaultValue="", required=false) String keyword,
+						 @RequestParam(value="category", defaultValue="", required=false) String category,
 						 @RequestParam(value="cPage", defaultValue="1", required=false) int cPage,
-						 
 						 @RequestParam(value="address")String location,
-						 @RequestParam(value="category")String category,
-						 
 						 ModelAndView mv, HttpServletRequest request) {
 
 		logger.debug("=======================================Location===========================================");
-		logger.debug("locationType : " + locationType);
-		logger.debug("locationAddress : " + locationAddress);
+		logger.debug("category : " + category);
+		logger.debug("address : " + address);
 		logger.debug("keyword : " + keyword);
 		logger.debug("cPage : " + cPage);
-
+		
 		Map<String, String> types = new HashMap();
-		types.put("locationType", "%" + locationType + "%");
-		types.put("locationAddress", "%" + locationAddress + "%");
+		types.put("category", "%" + category + "%");
+		types.put("address", "%" + address + "%");
 		types.put("keyword", "%" + keyword + "%");
 		
 		logger.debug("types : " + types);
@@ -139,8 +137,8 @@ public class LocationController {
 					+ "</li>";
 		} else {
 			pageBar = "<li class='page-item'>" + "<a class='page-link text-dark' href='" + request.getContextPath()
-					+ "/location?cPage=" + (pageNo - 1) + "&locationType=" + locationType + "&locationAddress="
-					+ locationAddress + "&keyword=" + keyword + "' aria-label='Previous'>"
+					+ "/location?cPage=" + (pageNo - 1) + "&category=" + category + "&address="
+					+ address + "&keyword=" + keyword + "' aria-label='Previous'>"
 					+ "<span aria-hidden='true'>&laquo;</span>" + "<span class='sr-only'>Previous</span>" + "</a>"
 					+ "</li>";
 		}
@@ -150,8 +148,8 @@ public class LocationController {
 				pageBar += "<li class='page-item'><a class='page-link text-dark'>" + pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link text-dark' href='" + request.getContextPath()
-						+ "/location?cPage=" + pageNo + "&locationType=" + locationType + "&locationAddress="
-						+ locationAddress + "&keyword=" + keyword + "'>" + pageNo + "</a></li>";
+						+ "/location?cPage=" + pageNo + "&category=" + category + "&address="
+						+ address + "&keyword=" + keyword + "'>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -161,8 +159,8 @@ public class LocationController {
 					+ "</li>";
 		} else {
 			pageBar += "<li class='page-item'>" + "<a class='page-link text-dark' href='" + request.getContextPath()
-					+ "/gowith/search?cPage=" + pageNo + "&locationType=" + locationType + "&locationAddress="
-					+ locationAddress + "&keyword=" + keyword + "' aria-label='Next'>"
+					+ "/gowith/search?cPage=" + pageNo + "&category=" + category + "&address="
+					+ address + "&keyword=" + keyword + "' aria-label='Next'>"
 					+ "<span aria-hidden='true'>&raquo;</span>" + "<span class='sr-only'>Next</span>" + "</a>"
 					+ "</li>";
 		}
