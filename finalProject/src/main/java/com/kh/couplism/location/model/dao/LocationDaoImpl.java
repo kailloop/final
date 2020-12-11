@@ -12,6 +12,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.Review;
 
 @Repository
 public class LocationDaoImpl implements LocationDao {
@@ -54,6 +55,17 @@ public class LocationDaoImpl implements LocationDao {
 	@Override
 	public int insertLocationPrice(LocationPrice lp, SqlSessionTemplate session) {
 		return session.insert("location.insertLocationPrice",lp);
+	}
+
+	@Override
+	public LocationMain getLocationMain(int locationNo, SqlSessionTemplate session) {
+		return session.selectOne("location.getLocationMain", locationNo);
+	}
+
+	@Override
+	public List<Review> getLocationReview(int locationNo, SqlSessionTemplate session) {
+		
+		return session.selectList("location.getLocationReview", locationNo);
 	}
 	
 	

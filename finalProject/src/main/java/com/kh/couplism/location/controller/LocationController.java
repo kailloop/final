@@ -3,9 +3,11 @@ package com.kh.couplism.location.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.Review;
 
 @Controller
 public class LocationController {
@@ -109,6 +112,9 @@ public class LocationController {
 		logger.debug("keyword : " + keyword);
 		logger.debug("cPage : " + cPage);
 		
+		
+		
+		
 		Map<String, String> types = new HashMap();
 		types.put("category", "%" + category + "%");
 		types.put("address", "%" + address + "%");
@@ -120,9 +126,44 @@ public class LocationController {
 		RowBounds rb = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 
 		List<Location> locationList = service.locationList(types, rb);
-
 		logger.debug("locatoin 갯수 : " + locationList.size());
 		logger.debug("locationList : " + locationList);
+		
+		List<Map> list = new ArrayList();
+		for(Location l : locationList) {
+			logger.debug("l : "+l);
+			logger.debug("l.getLocationNo() : "+l.getLocationNo());
+			LocationMain locationMain = service.getLocationMain(l.getLocationNo());
+			logger.debug("locationMain : "+locationMain);
+			List<Review> rl = service.getLocationReview(l.getLocationNo());
+			logger.debug("RewvieList lr : "+rl);
+			int reviewTotal = 0;
+			double review = 0.00;
+			if(rl.size()>0) {
+				for(Review lr : rl) {
+				reviewTotal += lr.getReviewGrade();
+				}
+				review = reviewTotal/rl.size();
+			}
+			Double.parseDouble(String.format(Locale.KOREAN, "%.1f", review));
+			Map<String,Object> locationMap = new HashMap();
+			if(locationMain != null) {
+				locationMap.put("locationMain", "resources/upload/locationMain/"+locationMain.getRenameName());
+			}else {
+				locationMap.put("locationMain", "");
+			}
+			
+			locationMap.put("locationAddress",l.getLocationAddress());
+			locationMap.put("locationStatus",l.getLocationStatus());
+			locationMap.put("reviewCount",rl.size());
+			locationMap.put("viewCount", l.getViewCount());
+			locationMap.put("review",String.valueOf(review));
+			locationMap.put("locationTitle",l.getLocationTitle());
+			logger.debug("locationMap :"+locationMap);
+			list.add(locationMap);
+		}
+
+		
 		int totalData = service.locationCount(types);
 		logger.debug("totalData : " + totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerPage);
@@ -165,12 +206,15 @@ public class LocationController {
 					+ "</li>";
 		}
 
+
 		mv.addObject("address",address);
 		mv.addObject("category",category);
 		
+		logger.debug(""+list);
+
 		mv.setViewName("/location/list");
-		mv.addObject("locationList", locationList);
-		
+
+		mv.addObject("list", list);
 		mv.addObject("pageBar", pageBar);
 
 		mv.addObject("logoPath","/resources/images/locationmain.jpg");
