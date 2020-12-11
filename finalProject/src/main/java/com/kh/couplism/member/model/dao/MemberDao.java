@@ -22,5 +22,7 @@ public interface MemberDao {
 	SNSMember selectOneSnsMember(SqlSession session,Map param);
 	
 	int enrollSnsMember(SqlSession session,Map param);
+	
+	Member findId(SqlSession session,Map param);
 }
 

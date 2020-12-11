@@ -21,4 +21,9 @@
 	<select id="selectOneSnsMember" parameterType="map" resultType="SnsMember">
 		SELECT * FROM SNSMEMBER WHERE EMAIL=#{email}
 	</select>
+	
+	<select id="findId" parameterType="map" resultType="member">
+		SELECT * FROM MEMBER WHERE EMAIL=#{email} AND PHONE=#{phone}
+	</select>
+	
 </mapper>
