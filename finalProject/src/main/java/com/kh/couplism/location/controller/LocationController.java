@@ -165,10 +165,18 @@ public class LocationController {
 					+ "</li>";
 		}
 
+		mv.addObject("address",address);
+		mv.addObject("category",category);
+		
 		mv.setViewName("/location/list");
 		mv.addObject("locationList", locationList);
 		mv.addObject("pageBar", pageBar);
 
+		mv.addObject("logoPath","/resources/images/locationmain.jpg");
+		mv.addObject("titleHan","예약");
+		mv.addObject("titleEng","Location");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		
 		logger.debug("==========================================================================================");
 
 		return mv;

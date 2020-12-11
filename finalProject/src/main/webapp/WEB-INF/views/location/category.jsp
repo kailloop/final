@@ -132,21 +132,21 @@
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S"><i class="fas fa-plus"></i> <br>전체보기</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=s"><i class="fas fa-plus"></i> <br>전체보기</a>
                 </td>
                 <td>
-                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S1"><i class="fas fa-hotel"></i> <br>호텔</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=s1"><i class="fas fa-hotel"></i> <br>호텔</a>
                 </td>
                 <td>
-                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S2"><i class="fas fa-home"></i> <br>펜션</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=s2"><i class="fas fa-home"></i> <br>펜션</a>
                 </td>
             </tr>
             <tr class="hovertr">
                 <td>
-                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S3"><i class="fas fa-campground"></i> <br>글램핑/캠핑</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=s3"><i class="fas fa-campground"></i> <br>글램핑/캠핑</a>
                 </td>
                 <td>
-                    <a href="${path }/location?address=<c:out value="${address}"/>&category=S4"><i class="fas fa-house-user"></i> <br>게스트하우스</a>
+                    <a href="${path }/location?address=<c:out value="${address}"/>&category=s4"><i class="fas fa-house-user"></i> <br>게스트하우스</a>
                 </td>
                 <td class="backtd">
                     <a href="#"><i class="fas fa-arrow-left"></i> <br>뒤로가기</a>

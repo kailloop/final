@@ -64,12 +64,7 @@ public class AnniversaryController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
 
-	
-=======
-
->>>>>>> branch 'JH' of https://github.com/kailloop/final.git
 	/*
 	 * @RequestMapping("/calendarValue") public ModelAndView
 	 * calendarValue(ModelAndView mv,
