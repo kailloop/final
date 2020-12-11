@@ -53,9 +53,9 @@ public class MemberController {
 	@RequestMapping("/member/findId")
 	public String memberFindId(Model m) {
 		
-		m.addAttribute("logoPath", "resources/images/lock.jpg");
-		m.addAttribute("titleHan","아이디 찾기");
-		m.addAttribute("titleEng","Find Your ID");
+		m.addAttribute("logoPath", "resources/images/back-idpw.jpg");
+		m.addAttribute("titleHan","아이디 / 비밀번호 찾기");
+		m.addAttribute("titleEng","Find Your ID / PW");
 		m.addAttribute("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
