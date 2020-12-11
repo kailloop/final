@@ -16,6 +16,8 @@ public interface MemberService {
 	
 	int duplicateId(String id);
 	
+	Member findId(Map param);
+	
 	SNSMember selectOneSnsMember(Map param);
 	
 	Member selectOneMember(Map param);

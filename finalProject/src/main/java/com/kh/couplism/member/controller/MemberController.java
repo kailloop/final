@@ -227,6 +227,22 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("/member/findMemberId")
+	@ResponseBody
+	public String findId(@RequestParam Map param,Model m,HttpServletRequest request) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		System.out.println(param.get("phone"));
+		System.out.println(param.get("email"));
+		Member result=service.findId(param);
+		if(result!=null) {
+			m.addAttribute("member",result);
+			return String.valueOf(result);
+		}else {
+			return null;
+		}
+		
+	}
+	
 	@RequestMapping("/partner/duplicateId")
 	@ResponseBody
 	public String duplicatePartnerId(@RequestParam(value="id",required=false,defaultValue="") String id,HttpServletRequest request) throws UnsupportedEncodingException {

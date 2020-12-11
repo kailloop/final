@@ -48,6 +48,12 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.insert("member.enrollSnsMember",param);
 	}
+
+	@Override
+	public Member findId(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("member.findId",param);
+	}
 	
 	
 	

@@ -56,6 +56,14 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return dao.enrollSnsMember(session,param);
 	}
+
+	@Override
+	public Member findId(Map param) {
+		// TODO Auto-generated method stub
+		return dao.findId(session,param);
+	}
+	
+	
 	
 	
 	
