@@ -123,6 +123,10 @@
 
     });
 
+    calendar.render();
+  });
+
+
   });
 
 </script>

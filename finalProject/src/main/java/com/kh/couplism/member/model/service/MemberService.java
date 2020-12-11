@@ -7,7 +7,7 @@ import com.kh.couplism.member.model.vo.Partner;
 import com.kh.couplism.member.model.vo.SNSMember;
 
 public interface MemberService {
-	
+
 	int enrollMember(Member m);
 	
 	int enrollPartner(Partner p);
@@ -15,7 +15,6 @@ public interface MemberService {
 	int enrollSnsMember(Map param);
 	
 	int duplicateId(String id);
-	
 	
 	SNSMember selectOneSnsMember(Map param);
 	

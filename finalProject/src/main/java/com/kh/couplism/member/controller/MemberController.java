@@ -31,7 +31,6 @@ import com.kh.couplism.email.MailAuth;
 import com.kh.couplism.member.model.service.MemberService;
 import com.kh.couplism.member.model.vo.Member;
 import com.kh.couplism.member.model.vo.Partner;
-import com.kh.couplism.member.model.vo.SNSMember;
 
 @Controller
 @SessionAttributes(value= {"logginedMember","member"})
@@ -49,20 +48,6 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-	
-	@RequestMapping("/member/findId")
-	public String memberFindId(Model m) {
-		
-		m.addAttribute("logoPath", "resources/images/lock.jpg");
-		m.addAttribute("titleHan","아이디 찾기");
-		m.addAttribute("titleEng","Find Your ID");
-		m.addAttribute("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		
-		return "member/memberFindId";
-	}
 	
 	@RequestMapping("/member/memberLogin")
 	public String memberLogin(@RequestParam Map param,Model m,HttpSession session){
@@ -92,47 +77,6 @@ public class MemberController {
 		m.addAttribute("msg",msg);
 		System.out.println(user);
 		return path;
-	}
-	@RequestMapping("/member/naverLogin")
-	public String naverLogin() {
-		//System.out.println(email);
-		return "member/naverCallback";
-	}
-	@RequestMapping("/member/naverLoginEnd")//네이버로그인
-	public String naverLoginEnd(@RequestParam Map param,Model m,HttpSession session) {
-		SNSMember user=service.selectOneSnsMember(param);
-			
-		if(user!=null) {
-			//session.addAttribute("logginedMember",user);
-			session.setAttribute("logginedMember", user);
-			session.setAttribute("naverLogin", user);
-		}else {//가입해야할때
-			int result=service.enrollSnsMember(param);
-			//session.addAttribute("logginedMember",user);
-			session.setAttribute("logginedMember", user);
-			session.setAttribute("naverLogin", user);
-		}
-		
-		return "redirect:/";
-	}
-	
-	@RequestMapping("/member/kakaoLoginEnd")
-	public String kakaoLoginEnd(@RequestParam Map param,Model m,HttpSession session) {
-		
-		SNSMember user=service.selectOneSnsMember(param);
-		
-		if(user!=null) {
-			//session.addAttribute("logginedMember",user);
-			session.setAttribute("logginedMember", user);
-			session.setAttribute("kakaoLogin", user);
-		}else {//가입해야할때
-			int result=service.enrollSnsMember(param);
-			//session.addAttribute("logginedMember",user);
-			session.setAttribute("logginedMember", user);
-			session.setAttribute("kakaoLogin", user);
-		}
-		
-		return "redirect:/";
 	}
 	
 	@RequestMapping("/enrollMember.do")
@@ -302,14 +246,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/memberLogout")
-	public String memberLogout(SessionStatus status,Model m,HttpSession session) {
+	public String memberLogout(SessionStatus status,Model m) {
 		String msg="";
 		if(!status.isComplete()) {
 			status.setComplete();//세션삭제
-			session.invalidate();
 			msg="커플리즘 사이트에서 로그아웃  되셨습니다.";
 		}else {
-			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요";
+			msg="로그아웃하는데 오류가 발생했습니다. 관리자에게 문의해주세요.";
 		}
 		m.addAttribute("msg",msg);
 		return "common/msg";

@@ -31,8 +31,7 @@
 		<hr>
 	</c:forEach>
 	<br>
-		<textarea rows="30" class="form-control" style="resize: none;" disabled readonly><c:out value="${notice.noticeContent }"/></textarea>
-	<br>
+		<div id="Noticecontent">${notice.noticeContent }</div>
 <%-- 	<c:if test="${noticeComment != null}"> --%>
 		<div id="allCommentDiv">
 				<%-- <c:forEach var="comment" items="${noticeComment}">
@@ -86,7 +85,6 @@
 		</div>
 		<h1 id="cpH1"></h1>
 	</form>
-	
 	<c:if test="${logginedMember.id eq notice.userId}"><button type="button" onclick="deleteNotice();">삭제</button><button type="button" onclick="modifyNotice();">수정</button></c:if>
 		</div>
 	</div>

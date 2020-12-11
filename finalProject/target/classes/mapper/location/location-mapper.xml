@@ -66,8 +66,8 @@
 		SELECT *
 		FROM LOCATION
 		WHERE LOCATIONTITLE LIKE #{keyword}
-		AND LOCATIONTYPE LIKE #{locationType}
-		AND LOCATIONADDRESS LIKE #{locationAddress}
+		AND LOCATIONTYPE LIKE #{category}
+		AND LOCATIONADDRESS LIKE #{address}
 		ORDER BY LOCATIONNO DESC
 	</select>
 	
@@ -75,8 +75,8 @@
 	<select id="locationCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM LOCATION 
 		WHERE LOCATIONTITLE LIKE #{keyword}
-		AND LOCATIONTYPE LIKE #{locationType}
-		AND LOCATIONADDRESS LIKE #{locationAddress}
+		AND LOCATIONTYPE LIKE #{category}
+		AND LOCATIONADDRESS LIKE #{address}
 	</select>
 	
 	<insert id="checkDate" parameterType="date">
