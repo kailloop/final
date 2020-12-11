@@ -1,14 +1,11 @@
-package com.kh.couplism.community.faq.controller;
+package com.kh.couplism.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class FaqController {
-
-
-
+public class CommumityController {
 	@RequestMapping("/faq/faqList.do")
 	public ModelAndView userMypage(ModelAndView mv) {
 		mv.addObject("logoPath","/resources/images/faq.jpg");
@@ -19,5 +16,4 @@ public class FaqController {
 		mv.setViewName("community/faq/faqList");
 		return mv;
 	}
-    
 }

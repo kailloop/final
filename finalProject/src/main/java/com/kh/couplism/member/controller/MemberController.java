@@ -50,6 +50,20 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	@RequestMapping("/member/findId")
+	public String memberFindId(Model m) {
+		
+		m.addAttribute("logoPath", "resources/images/lock.jpg");
+		m.addAttribute("titleHan","아이디 찾기");
+		m.addAttribute("titleEng","Find Your ID");
+		m.addAttribute("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		return "member/memberFindId";
+	}
+	
 	@RequestMapping("/member/memberLogin")
 	public String memberLogin(@RequestParam Map param,Model m,HttpSession session){
 		Member user=service.selectOneMember(param);
@@ -97,6 +111,25 @@ public class MemberController {
 			//session.addAttribute("logginedMember",user);
 			session.setAttribute("logginedMember", user);
 			session.setAttribute("naverLogin", user);
+		}
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/member/kakaoLoginEnd")
+	public String kakaoLoginEnd(@RequestParam Map param,Model m,HttpSession session) {
+		
+		SNSMember user=service.selectOneSnsMember(param);
+		
+		if(user!=null) {
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
+			session.setAttribute("kakaoLogin", user);
+		}else {//가입해야할때
+			int result=service.enrollSnsMember(param);
+			//session.addAttribute("logginedMember",user);
+			session.setAttribute("logginedMember", user);
+			session.setAttribute("kakaoLogin", user);
 		}
 		
 		return "redirect:/";
