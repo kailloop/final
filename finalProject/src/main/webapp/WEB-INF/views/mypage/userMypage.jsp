@@ -237,7 +237,6 @@
 							</c:if>
 						
 							<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->	
-								<c:if test="${naverLogin.email==null }">
 								<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${naverLogin.email }"/>')">
 									<i class="fas fa-history"></i>
 									<h3>예약내역</h3>
@@ -253,6 +252,10 @@
 								</div>
 							</c:if>
 						</c:if>
+						
+						
+						
+						
 					</div>
 				</div>
 				
