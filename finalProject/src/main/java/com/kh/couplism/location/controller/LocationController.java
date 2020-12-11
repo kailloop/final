@@ -170,6 +170,7 @@ public class LocationController {
 		
 		mv.setViewName("/location/list");
 		mv.addObject("locationList", locationList);
+		
 		mv.addObject("pageBar", pageBar);
 
 		mv.addObject("logoPath","/resources/images/locationmain.jpg");

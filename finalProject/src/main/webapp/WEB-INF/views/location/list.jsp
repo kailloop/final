@@ -9,6 +9,10 @@
 
 	<div id="locationListDiv" style=" margin-top:20px; margin-left:auto; margin-right:auto; width: 1050px; text-align: center;">
 		
+	
+		
+		
+		
 		<!--상단 스타일 -->
 		<style>
 			#topdiv{
@@ -96,25 +100,136 @@
 		</div>
 		
 		
-		<!--쿠폰배너 스타일-->
+		
+		
+		
+		
+		<!--검색 디자인 -->
 		<style>
-			#couponDiv{
-				background: linear-gradient( to right, #41aea9, #27DBB7);
-				margin-bottom: 30px;
-				height: 70px;
-				border-radius: 20px;
-				cursor: pointer;
-				padding-left: 100px;
-				width:961px;
-				margin-left:30px;
-				margin-top:100px;
+			#searchDiv{
+				margin-top: 60px;
+			}
+			#searchInput{
+				width:400px;
+				outline: none;
+				border: 1px solid #14A0A0;
+				height: 40px;
+			}
+			/*플레이스홀더 색  */
+			input::-ms-input-placeholder { color: #14A0A0; }
+			input::-webkit-input-placeholder { color: #14A0A0; }
+			input::-moz-placeholder { color: #14A0A0; }
+			#searchBtn{
+				height: 40px;
 			}
 		</style>
 		
-		<!--쿠폰배너  -->
-		<div id="couponDiv" onclick="coupon();">
-			<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운받으러 가기 <i class="fas fa-chevron-circle-right"></i></p>
-		</div>		
+		<!--검색  -->
+		<div id="searchDiv">
+			<input type="text" id="searchInput" placeholder="키워드를 검색해주세요" >
+			<button id="searchBtn" class="btn btn-outline-info"><i class="fas fa-search"></i>검색</button>
+		</div>
+		
+		
+		<!--돌아가기 버튼 디자인 -->
+		<style>
+			#backDiv{
+				margin-top: 40px;
+			}
+		</style>
+		
+		<!--돌아가기 버튼  -->
+		<div id="backDiv">
+			<button class="btn btn-info">지역다시선택</button>
+			<button class="btn btn-info">카테고리다시선택</button>
+		</div>
+		
+		
+		
+		
+		
+			
+		
+		
+		
+		<!--정렬디자인  -->
+		<style>
+			#rangeDiv{
+				margin-top: 80px;
+				margin-left: 35px;
+				
+			}
+			#rangeTable{
+				border-bottom: 1px solid #c8c8c8;
+				border-top: 1px solid #c8c8c8;
+				
+			}
+			td{
+				widht:40px;
+				 font-size: 14px;
+			}
+			
+			/*드롭다운 */
+			.dropbtn {
+				color: #828282;
+				padding: 16px;
+				  font-size: 14px;
+				  border: none;
+				background: #A7FAEB;
+			}
+				
+				.dropdown {
+				  position: relative;
+				  display: inline-block;
+				}
+				
+				.dropdown-content {
+				  display: none;
+				  position: absolute;
+				  background-color: #f1f1f1;
+				  min-width: 160px;
+				  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				  z-index: 1;
+				}
+				
+				.dropdown-content a {
+				  color: black;
+				  padding: 12px 16px;
+				  text-decoration: none;
+				  display: block;
+				}
+				
+				.dropdown-content a:hover {background-color: #ddd;}
+				
+				.dropdown:hover .dropdown-content {display: block;}
+				
+				.dropdown:hover .dropbtn {background-color: #969696; color:white;}
+		</style>
+		
+		<!--정렬  -->
+		<div id="rangeDiv">
+			<table id="rangeTable">
+				<tr>
+					<td style="cursor: pointer; color:#0A6ECD; font-weight: bold;">&emsp;최신순 &emsp;</td>
+					<td style="cursor: pointer;"> | &emsp;</td>
+					<td style="cursor: pointer;">인기순 &emsp;</td>
+					<td style="cursor: pointer;"> | &emsp;</td>
+					<td style="cursor: pointer;"> 
+						<div class="dropdown">
+							<button class="dropbtn">리뷰순</button>
+						    <div class="dropdown-content">
+						    	<a href="#">전체</a>
+						    	<a href="#">10대</a>
+						    	<a href="#">20대</a>
+						    	<a href="#">30대</a>
+						    	<a href="#">40대</a>
+						 	</div>
+						 </div>
+					</td>
+					<td style="width:72.5%;"></td>
+				</tr>
+			</table>
+		</div>
 		
 		
 		
@@ -126,7 +241,7 @@
 				margin: 0px;
 				margin-left:30px;
 				margin-bottom:80px;
-				top:10px;
+				top:30px;
 				width:300px;
 				float: left;
 				height: 300px;
@@ -158,9 +273,10 @@
 				<!--제휴업체 분기처리 시작 -->
 				<div class="partner">제휴업체<br>예약가능</div>
 				<!--제휴업체 분기처리 끝 -->
-				<p style="font-weight:bold; font-size:20px; color:black; text-align: left; padding-left: 20px; height: 10px;"><c:out value="${lL.locationTitle}" /></p>
-				<p style="font-size:15px; text-align: left; padding-left: 20px; padding-top:3px; height: 5px;"><i style="color: #FFC314;" class="fas fa-star"></i> [고치기]리뷰값 4.5(31)</p>
-				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:43px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i> [고치기]장소값 서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
+				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: left; padding-left: 20px; height: 10px;"><c:out value="${lL.locationTitle}" /></p>
+				<p style="position:absolute; top:209px; left:210px; font-size:15px; text-align: right; height:15px; margin-top: 25px; padding-right: 20px;">조회수 53</p>
+				<p style="font-size:15px; text-align: left; padding-left: 20px; padding-top:7px; height: 5px;"><i style="color: #FFC314;" class="fas fa-star"></i> 4.5(31)</p>
+				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:41px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
 			</div>
 		</c:forEach>
 		
@@ -175,7 +291,30 @@
 		<div class="clearfixed"></div>
 		
 		
-		<br><br>
+		
+		
+		
+		
+		  
+		<!--쿠폰배너 스타일-->
+		<style>
+			#couponDiv{
+				background: linear-gradient( to right, #41aea9, #27DBB7);
+				margin-bottom: 30px;
+				height: 70px;
+				border-radius: 20px;
+				cursor: pointer;
+				padding-left: 100px;
+				width:961px;
+				margin-left:30px;
+				margin-top:30px;
+			}
+		</style>
+		
+		<!--쿠폰배너  -->
+		<div id="couponDiv" onclick="coupon();">
+			<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운받으러 가기 <i class="fas fa-chevron-circle-right"></i></p>
+		</div>	
 		
 		
 		
@@ -190,6 +329,13 @@
 	        </div>
          
          
+         
+         
+         
+         
+         
+         
+       
            
             
 	</div><!--locationListDiv닫기  -->
@@ -197,7 +343,7 @@
 
 
 <script>
-
+	/*쿠폰배너->이벤트페이지로 이동 */
 	function coupon(){
 		location.replace('${path }/event/eventList.do');
 	}
