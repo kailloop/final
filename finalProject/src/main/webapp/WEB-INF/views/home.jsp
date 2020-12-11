@@ -134,4 +134,7 @@
 		
 		
 	</section>
+
+	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
+	
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

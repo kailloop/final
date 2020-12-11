@@ -22,9 +22,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- 로그인 API -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${path }/resources/css/style.css">
 
@@ -34,6 +37,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <style>
+	#kakao-login-btn{
+		width:235px;
+	}
 	.modal-content{
 		/* background-color:purple; */
 		/* background-image:url(/couplism/resources/images/login-logo.jpg); */
@@ -44,7 +50,7 @@
 		border-radius:20px;
 		text-align:center;
 		overflow:hidden;
-		height:650px;
+		height:750px;
 	}
 	.login-title{
 	text-align:center;
@@ -254,17 +260,50 @@
 					</div>
 				</c:if>
 				<c:if test="${logginedMember!=null }">
-					<div id="logout" onclick="logout();">
-						<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
-					</div>
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">
+							<div id="logout" onclick="logout();">
+								<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
+							</div>
+						</c:if>
+					</c:if>
+				</c:if>
+				<c:if test="${logginedMember!=null }">
+					<c:if test="${naverLogin!=null }">
+						<div id="logout" onclick="logoutNaver();">
+							<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${logginedMember!=null }">
+					<c:if test="${kakaoLogin!=null }">
+						<div id="logout" onclick="logoutKakao();">
+							<i id="clickLogin" class="fas fa-sign-out-alt"></i><label for="logout" id="logout-font">&nbsp;LOGOUT</label>
+						</div>
+					</c:if>
 				</c:if>
 				<%-- <button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button> --%>
 				
 				<div id="mypage" class="circle">
+				
 				<c:if test="${logginedMember!=null }">
-	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
+						<c:if test="${logginedMember.email eq 'admin@admin' }"> <!--관리자  -->
+		                	<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">   <small>관리자</small> 님</i></p>
+		                </c:if>
+						<c:if test="${naverLogin.email==null }"> <!--일반회원  -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
+						</c:if>
+					
+					
+						<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
+						</c:if>
+						<c:if test="${kakaoLogin.email!=null }"> <!-- 카카오회원 -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.email }"/>'">${kakaoLogin.nickname }님</i></p>
+						</c:if>
+					
+	                
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
-	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
             	</div>
 			</div>
@@ -293,7 +332,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
+						<li class="nav-item nav-community"><a href="${path }/event/eventList.do" class="nav-link nav-color" >이벤트</a></li>
 						<!-- <li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>
@@ -336,15 +375,14 @@
 					    <!-- Password -->
 					    <label id="pw-placeholder" for="pw-input">Please Enter your Password</label>
 					    <input id="pw-input" name="pw-input" type="password" class="mb-6">
-					    <br>
+					    <br/><br/>
 					    
 					    
 					    
-					    
+						    
 					    <div class="d-flex justify-content-around">
 					        <div>
-					            <!-- Forgot password -->
-					            <a href="">Forgot id?</a>&nbsp;&nbsp;&nbsp;
+					            <a href="${path}/member/findId">Forgot id?</a>&nbsp;&nbsp;&nbsp;
 					            <a href="">Forgot password?</a>
 					        </div>
 					        
@@ -362,8 +400,10 @@
 					    </p>
 					
 					    <!-- Social login -->
-					    <a href="#" class="mx-2" role="button"><button>1</button></a>
-					    <a href="#" class="mx-2" role="button"><button>2</button></a>
+					    <div id="naverIdLogin"></div><br/>
+					    <%-- <div id="kakaoLogin"><img src="${path }/resources/images/kakao.png" style="width:100%;height:100%;"></div> --%>
+					    <a id="kakao-login-btn"></a>
+					    <br/>
 					    <a href="#" class="mx-2" role="button"><button>3</button></a>
 					    <a href="#" class="mx-2" role="button"><button>4</button></a>
 					
@@ -373,6 +413,46 @@
 		</div>
 	</div>
 	</c:if>
+<%-- <c:if test="${kakaoLogin==null }"> --%>
+<script>
+    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('dc4be6609b0d77bafef6497d03397d47');
+    Kakao.isInitialized();
+	
+    // SDK 초기화 여부를 판단합니다.
+    console.log(Kakao.isInitialized(),Kakao.isInitialized());
+    
+    Kakao.Auth.createLoginButton({
+    	container: '#kakao-login-btn',
+    	success: function(response){
+    		Kakao.API.request({
+    			url:'/v2/user/me',
+    			success:function(response){
+    				var id=response.id;
+    				var email=response.kakao_account.email;
+    				var name=response.properties.nickname;
+    				var birthday=response.kakao_account.birthday;
+    				var age=response.kakao_account.age_range;
+    				
+    				console.log("id : "+id);
+    				console.log("email : "+email);
+    				console.log("name : "+name);
+    				console.log("birthday : "+birthday);
+    				console.log("age : "+age);
+    				
+    				window.location.replace("http://localhost:9090/couplism/member/kakaoLoginEnd?email="+email+"&name="+name+"&birthday="+birthday+"&age="+age);
+    			},
+    			fail:function(error){
+    				console.log("request fail",error);
+    			}
+    		});
+    	},
+    	fail:function(error){
+    		console.log("fail",error);
+    	}
+    });
+</script>
+<%-- </c:if> --%>
 	<div id="locationModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -405,12 +485,57 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "oSbOyaRHkoBb4q1c1aSI",
+			callbackUrl: "http://localhost:9090/couplism/member/naverLogin",
+			isPopup: false, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+		}
+	);
+	
+	/* 설정정보를 초기화하고 연동을 준비 */
+	naverLogin.init();
+</script>
+
+
+
 <script>
 	function travel(){
 		location.replace('${path}/moveLocation');
 	}
 	function logout(){
+		if(Kakao.Auth.getAccessToken()){
+			console.log('카카오 인증 액세스 토큰이 존재합니다.',Kakao.Auth.getAccessToken());
+			Kakao.Auth.logout(() => {
+				console.log('로그아웃 되었습니다',Kakao.Auth.getAccessToken());
+				this.setState({
+					isLogin:false
+				})
+			});
+		}
 		location.replace('${path}/member/memberLogout');
+	}
+	function logoutNaver(){
+		var popup = window.open("https://nid.naver.com/nidlogin.logout", "네이버팝업", "width=700px,height=800px");
+		
+		location.replace('${path}/member/memberLogout');
+	}
+	function logoutKakao(){
+		Kakao.Auth.logout(function() {
+			console.log(Kakao.Auth.getAccessToken());
+		});
+		Kakao.API.request({
+		  url: '/v1/user/unlink',
+		  success: function(response) {
+		    console.log(response);
+		  },
+		  fail: function(error) {
+		    console.log(error);
+		  },
+		});
+		location.replace("${path}/member/memberLogout");
 	}
 	function login(){
 		console.log("작동");
