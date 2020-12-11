@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class Review {
 	private int reviewNo;
 	private int locationNo;
-	private int reviewPosition;
 	private int reviewLevel;
 	private String reviewId;
 	private String reviewContent;
 	private int reviewGrade;
 	private String ReviewDate;
+	private int reviewPosition;
 }

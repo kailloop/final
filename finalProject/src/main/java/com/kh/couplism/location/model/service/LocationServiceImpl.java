@@ -14,6 +14,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.Review;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -62,6 +63,16 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public int insertLocationPrice(LocationPrice lp) {
 		return dao.insertLocationPrice(lp, session);
+	}
+
+	@Override
+	public LocationMain getLocationMain(int locationNo) {
+		return dao.getLocationMain(locationNo, session);
+	}
+
+	@Override
+	public List<Review> getLocationReview(int locationNo) {
+		return dao.getLocationReview(locationNo, session);
 	}
 	
 	
