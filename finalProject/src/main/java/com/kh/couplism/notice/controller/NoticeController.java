@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -554,6 +555,37 @@ public class NoticeController {
 				}
 			}
 		}
+		String noticeContent = notice.getNoticeContent();// LocationContent가져옴
+		String[] contentSplit = noticeContent.split("<img alt=\"\" src=");// 경로로 스플릿함
+		List<String> imgPath = new ArrayList();
+		for(int i = 1; i>contentSplit.length; i=i+2) {
+			String[] splitPath = contentSplit[i].split("\"");
+			imgPath.add(splitPath[0]);
+		}
+		logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
+		
+		//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+		
+		for(String path : imgPath) {
+			File moveFile = new File(path);
+			logger.debug("파일존재 여부 : "+moveFile.exists());
+			String[] newFilePath = moveFile.getName().split("#");//newFilePath[2]으로 저장하면됨
+			File newFile = new File(request.getServletContext().getRealPath("/resources/upload/notice")+"/"+newFilePath[1]);
+			 if(moveFile.exists()) {
+				 boolean isMoved = moveFile.renameTo(newFile);
+				 logger.debug("파일 이동여부 : "+isMoved);
+			 }
+		}
+		
+		File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite"));
+		File[] imgFileList = imgFile.listFiles();
+		for(File f : imgFileList) {
+			String[] fileName = f.getName().split("#");
+			if(fileName[0] == notice.getUserId()) {
+				f.delete();
+				logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+			}
+		}
 		
 		mv.setViewName("/notice/noticeList");
 		mv.addObject("titleHan","공지사항");
@@ -569,9 +601,10 @@ public class NoticeController {
 		return "/location/checkCK";
 	}
 	
-	  @RequestMapping(value = "/community/imageUpload", method = RequestMethod.POST)
-	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+	  @RequestMapping(value = "/notice/imageUpload", method = RequestMethod.POST)
+	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload, String creator) {
 		  	logger.debug("이미지 업로드 들어옴");
+		  	logger.debug("creator : "+creator);
 	        OutputStream out = null;
 	        PrintWriter printWriter = null;
 	        response.setCharacterEncoding("utf-8");
@@ -586,15 +619,15 @@ public class NoticeController {
 				String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
 				SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
 				int mfrandomNum = (int) (Math.random() * 1000);
-				String mfrenamedFileName = "Couplism-location-File-"
+				String mfrenamedFileName = creator+"#Couplism-location-File-"
 						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
-	            File f = new File(request.getServletContext().getRealPath("/resources/upload/location")+"/"+mfrenamedFileName);
+	            File f = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite")+"/"+mfrenamedFileName);
 	            out = new FileOutputStream(f);
 	            out.write(bytes);
 	            String callback = request.getParameter("CKEditorFuncNum");
 	 
 	            printWriter = response.getWriter();
-	            String fileUrl = request.getContextPath()+"/resources/upload/location/"+f.getName();//url경로
+	            String fileUrl = request.getContextPath()+"/resources/upload/noticeWirte/"+f.getName();//url경로
 	            logger.debug(callback);
 	            logger.debug(fileUrl);
 				/*
@@ -605,6 +638,7 @@ public class NoticeController {
 				 */
 
 	            printWriter.println("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+	            logger.debug("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 	        }catch(IOException e){
 	            e.printStackTrace();
 	        } finally {
