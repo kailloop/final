@@ -7,6 +7,8 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
+<script type="text/javascript" src="${path }/resources/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="${path }/resources/ckeditor/contents.css">
 	<div class="container" style="background: red; margin-top:100px;">
 		<form action="${path }/notice/writeEnd" method="post" enctype="multipart/form-data">
 			<input type="text" name="noticeTitle" placeholder="제목" style="width: 100%;">
@@ -22,13 +24,42 @@
 				  <button id="addInputFile" style="width:80px;" type="button">+</button>
 				</div>
 			</div>
-			<textarea name="noticeContent" class="form-control" style="resize: none;"
-				rows="30"></textarea>
+        <div class="form-group">
+            <div class="col-lg-12">
+                <textarea name="noticeContent" id="noticeContent" style="resize: none;"></textarea>
+            </div>
+        </div>
 			<input type="hidden" name="userId" value="${logginedMember.id}">
 			<button class="float-right" type="submit">작성</button>
 		</form>
+		
 	</div>
+	
 	<script>
+	$(function(){
+        
+        CKEDITOR.replace( 'noticeContent', {//해당 이름으로 된 textarea에 에디터를 적용
+            width:'100%',
+            height:'400px',
+            filebrowserImageUploadUrl: '${path}/community/imageUpload' //여기 경로로 파일을 전달하여 업로드 시킨다.
+        });
+         
+         
+        CKEDITOR.on('dialogDefinition', function( ev ){
+            var dialogName = ev.data.name;
+            var dialogDefinition = ev.data.definition;
+          
+            switch (dialogName) {
+                case 'image': //Image Properties dialog
+                    //dialogDefinition.removeContents('info');
+                    dialogDefinition.removeContents('Link');
+                    dialogDefinition.removeContents('advanced');
+                    break;
+            }
+        });
+         
+    });
+
 		var filecount = 1;
 		$(function(){
 			$('[name=noticeFile]').change(e => {

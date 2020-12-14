@@ -18,4 +18,6 @@ public class Location {
 	private String locationPhone;
 	private String locationAddress;
 	private int locationStatus;
+	private int viewCount;
+	private String locationAddressType;
 }

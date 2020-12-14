@@ -332,5 +332,3 @@ public class MemberController {
 	}
 	
 }
-	
-

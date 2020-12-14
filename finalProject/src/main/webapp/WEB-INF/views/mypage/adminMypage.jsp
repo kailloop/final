@@ -185,16 +185,26 @@
 					<br><br><br>
 					<div class="features" >
 						<div class="feature">	
+							<i class="fas fa-pen"></i>
+							<h3>정보수정</h3>
+							<p>정보를 수정할 수 있습니다.</p>
+						</div>
+						<div class="feature">	
 							<i class="fas fa-users-cog"></i>
 							<h3>회원관리</h3>
-							<p>회원들의 정보를 관리할 수 있습니다.</p>
+							<p>모든 회원들의 정보를 관리할 수 있습니다.</p>
 						</div>
 						<div class="feature">
 							<i class="fas fa-tasks"></i>
+							<h3>제휴회원관리</h3>
+							<p>제휴회원 승인/거절 할 수 있습니다.</p>
+						</div>
+						<div class="feature">
+							<i class="fas fa-thumbtack"></i>
 							<h3>여행지관리</h3>
 							<p>여행지를 관리하실 수 있습니다.</p>
 						</div>
-						<div class="feature">
+						<div class="feature" onclick="">
 							<i class="fas fa-ticket-alt"></i>
 							<h3>쿠폰관리</h3>
 							<p>쿠폰을 발송하고<br>관리하실 수 있습니다.</p>

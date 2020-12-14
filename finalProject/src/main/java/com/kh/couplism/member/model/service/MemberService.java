@@ -7,7 +7,7 @@ import com.kh.couplism.member.model.vo.Partner;
 import com.kh.couplism.member.model.vo.SNSMember;
 
 public interface MemberService {
-	
+
 	int enrollMember(Member m);
 	
 	int enrollPartner(Partner p);

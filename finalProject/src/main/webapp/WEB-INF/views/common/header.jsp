@@ -15,7 +15,6 @@
 	<script src="https://kit.fontawesome.com/d41f04266a.js" crossorigin="anonymous"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
 	<!-- Material 폰트 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
@@ -286,10 +285,25 @@
 				<%-- <button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button> --%>
 				
 				<div id="mypage" class="circle">
+				
 				<c:if test="${logginedMember!=null }">
-	                <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do'">${logginedMember.nickname }님</i></p> 
+						<c:if test="${logginedMember.email eq 'admin@admin' }"> <!--관리자  -->
+		                	<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">   <small>관리자</small> 님</i></p>
+		                </c:if>
+						<c:if test="${naverLogin.email==null }"> <!--일반회원  -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
+						</c:if>
+					
+					
+						<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
+						</c:if>
+						<c:if test="${kakaoLogin.email!=null }"> <!-- 카카오회원 -->
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.email }"/>'">${kakaoLogin.nickname }님</i></p>
+						</c:if>
+					
+	                
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
-	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do'">   <small>관리자</small> 님</i></p> --%> 
 				</c:if>
             	</div>
 			</div>
@@ -318,7 +332,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
-						<li class="nav-item nav-community"><a href="" class="nav-link nav-color" >이벤트</a></li>
+						<li class="nav-item nav-community"><a href="${path }/event/eventList.do" class="nav-link nav-color" >이벤트</a></li>
 						<!-- <li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >숙박시설</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >명소</a></li>
 						<li class="nav-item nav-travel"><a href="" class="nav-link nav-color" >식당</a></li>

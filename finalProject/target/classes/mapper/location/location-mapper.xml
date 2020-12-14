@@ -10,6 +10,8 @@
 		<result property="locationPhone" column="LOCATIONPHONE"/>
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="locationAddressType" column="LOCATIONADDRESS_TYPE"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
@@ -66,8 +68,8 @@
 		SELECT *
 		FROM LOCATION
 		WHERE LOCATIONTITLE LIKE #{keyword}
-		AND LOCATIONTYPE LIKE #{locationType}
-		AND LOCATIONADDRESS LIKE #{locationAddress}
+		AND LOCATIONTYPE LIKE #{category}
+		AND LOCATIONADDRESS LIKE #{address}
 		ORDER BY LOCATIONNO DESC
 	</select>
 	
@@ -75,8 +77,8 @@
 	<select id="locationCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM LOCATION 
 		WHERE LOCATIONTITLE LIKE #{keyword}
-		AND LOCATIONTYPE LIKE #{locationType}
-		AND LOCATIONADDRESS LIKE #{locationAddress}
+		AND LOCATIONTYPE LIKE #{category}
+		AND LOCATIONADDRESS LIKE #{address}
 	</select>
 	
 	<insert id="checkDate" parameterType="date">
@@ -88,7 +90,7 @@
 	</select>
 	
 	<insert id="insertLocation" parameterType="com.kh.couplism.location.model.vo.Location">
-		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus})
+		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus},0,#{locationAddressType})
 		<selectKey keyProperty="locationNo" resultType="_int">
 			SELECT SEQ_LOCATIONNO.CURRVAL FROM DUAL
 		</selectKey>
@@ -105,4 +107,14 @@
 	<insert id="insertLocationPrice" parameterType="com.kh.couplism.location.model.vo.LocationPrice">
 		INSERT INTO LOCATION_PRICE VALUES(#{locationNo},#{priceTime},#{priceDay},#{price},#{pricePeople})
 	</insert>
+	
+	<select id="getLocationMain" parameterType="_int" resultMap="locationMain">
+		SELECT * FROM LOCATIONMAIN
+		WHERE LOCATIONNO LIKE #{locationNo}
+	</select>
+	
+	<select id="getLocationReview" parameterType="_int" resultMap="review">
+		SELECT * FROM REVIEW
+		WHERE LOCATIONNO LIKE #{locationNo}
+	</select>
 </mapper>

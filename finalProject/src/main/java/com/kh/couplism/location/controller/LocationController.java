@@ -3,9 +3,11 @@ package com.kh.couplism.location.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.Review;
 
 @Controller
 public class LocationController {
@@ -96,25 +99,26 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location")//로케이션 리스트 목록을 보여주는곳
-	public ModelAndView location(@RequestParam(value="locationType", defaultValue="", required=false) String locationType,
-						 @RequestParam(value="locationAddress", defaultValue="", required=false) String locationAddress,
+	public ModelAndView location(
+						 @RequestParam(value="address", defaultValue="", required=false) String address,
 						 @RequestParam(value="keyword", defaultValue="", required=false) String keyword,
+						 @RequestParam(value="category", defaultValue="", required=false) String category,
 						 @RequestParam(value="cPage", defaultValue="1", required=false) int cPage,
-						 
 						 @RequestParam(value="address")String location,
-						 @RequestParam(value="category")String category,
-						 
 						 ModelAndView mv, HttpServletRequest request) {
 
 		logger.debug("=======================================Location===========================================");
-		logger.debug("locationType : " + locationType);
-		logger.debug("locationAddress : " + locationAddress);
+		logger.debug("category : " + category);
+		logger.debug("address : " + address);
 		logger.debug("keyword : " + keyword);
 		logger.debug("cPage : " + cPage);
-
+		
+		
+		
+		
 		Map<String, String> types = new HashMap();
-		types.put("locationType", "%" + locationType + "%");
-		types.put("locationAddress", "%" + locationAddress + "%");
+		types.put("category", "%" + category + "%");
+		types.put("address", "%" + address + "%");
 		types.put("keyword", "%" + keyword + "%");
 		
 		logger.debug("types : " + types);
@@ -123,9 +127,44 @@ public class LocationController {
 		RowBounds rb = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 
 		List<Location> locationList = service.locationList(types, rb);
-
 		logger.debug("locatoin 갯수 : " + locationList.size());
 		logger.debug("locationList : " + locationList);
+		
+		List<Map> list = new ArrayList();
+		for(Location l : locationList) {
+			logger.debug("l : "+l);
+			logger.debug("l.getLocationNo() : "+l.getLocationNo());
+			LocationMain locationMain = service.getLocationMain(l.getLocationNo());
+			logger.debug("locationMain : "+locationMain);
+			List<Review> rl = service.getLocationReview(l.getLocationNo());
+			logger.debug("RewvieList lr : "+rl);
+			int reviewTotal = 0;
+			double review = 0.00;
+			if(rl.size()>0) {
+				for(Review lr : rl) {
+				reviewTotal += lr.getReviewGrade();
+				}
+				review = reviewTotal/rl.size();
+			}
+			Double.parseDouble(String.format(Locale.KOREAN, "%.1f", review));
+			Map<String,Object> locationMap = new HashMap();
+			if(locationMain != null) {
+				locationMap.put("locationMain", "resources/upload/locationMain/"+locationMain.getRenameName());
+			}else {
+				locationMap.put("locationMain", "");
+			}
+			
+			locationMap.put("locationAddress",l.getLocationAddress());
+			locationMap.put("locationStatus",l.getLocationStatus());
+			locationMap.put("reviewCount",rl.size());
+			locationMap.put("viewCount", l.getViewCount());
+			locationMap.put("review",String.valueOf(review));
+			locationMap.put("locationTitle",l.getLocationTitle());
+			logger.debug("locationMap :"+locationMap);
+			list.add(locationMap);
+		}
+
+		
 		int totalData = service.locationCount(types);
 		logger.debug("totalData : " + totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerPage);
@@ -140,8 +179,8 @@ public class LocationController {
 					+ "</li>";
 		} else {
 			pageBar = "<li class='page-item'>" + "<a class='page-link text-dark' href='" + request.getContextPath()
-					+ "/location?cPage=" + (pageNo - 1) + "&locationType=" + locationType + "&locationAddress="
-					+ locationAddress + "&keyword=" + keyword + "' aria-label='Previous'>"
+					+ "/location?cPage=" + (pageNo - 1) + "&category=" + category + "&address="
+					+ address + "&keyword=" + keyword + "' aria-label='Previous'>"
 					+ "<span aria-hidden='true'>&laquo;</span>" + "<span class='sr-only'>Previous</span>" + "</a>"
 					+ "</li>";
 		}
@@ -151,8 +190,8 @@ public class LocationController {
 				pageBar += "<li class='page-item'><a class='page-link text-dark'>" + pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link text-dark' href='" + request.getContextPath()
-						+ "/location?cPage=" + pageNo + "&locationType=" + locationType + "&locationAddress="
-						+ locationAddress + "&keyword=" + keyword + "'>" + pageNo + "</a></li>";
+						+ "/location?cPage=" + pageNo + "&category=" + category + "&address="
+						+ address + "&keyword=" + keyword + "'>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -162,16 +201,26 @@ public class LocationController {
 					+ "</li>";
 		} else {
 			pageBar += "<li class='page-item'>" + "<a class='page-link text-dark' href='" + request.getContextPath()
-					+ "/gowith/search?cPage=" + pageNo + "&locationType=" + locationType + "&locationAddress="
-					+ locationAddress + "&keyword=" + keyword + "' aria-label='Next'>"
+					+ "/gowith/search?cPage=" + pageNo + "&category=" + category + "&address="
+					+ address + "&keyword=" + keyword + "' aria-label='Next'>"
 					+ "<span aria-hidden='true'>&raquo;</span>" + "<span class='sr-only'>Next</span>" + "</a>"
 					+ "</li>";
 		}
+		logger.debug(""+list);
 
+
+		mv.addObject("address",address);
+		mv.addObject("category",category);
 		mv.setViewName("/location/list");
-		mv.addObject("locationList", locationList);
+		mv.addObject("list", list);
+
 		mv.addObject("pageBar", pageBar);
 
+		mv.addObject("logoPath","/resources/images/locationmain.jpg");
+		mv.addObject("titleHan","예약");
+		mv.addObject("titleEng","Location");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		
 		logger.debug("==========================================================================================");
 
 		return mv;
@@ -212,7 +261,7 @@ public class LocationController {
 	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, Location location, 
 			@RequestParam(value="locationTime")String[] locationTime, 
 			@RequestParam(value="locationDay")String[] locationDay, 
-			@RequestParam(value="locationPeople")String[] locationPeople, HttpServletRequest request) {
+			@RequestParam(value="locationPeople")String[] locationPeople,HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 		location.setLocationCreator("admin");

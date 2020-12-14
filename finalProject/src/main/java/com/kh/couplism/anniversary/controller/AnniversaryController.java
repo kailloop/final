@@ -65,7 +65,6 @@ public class AnniversaryController {
 	}
 	
 
-	
 	/*
 	 * @RequestMapping("/calendarValue") public ModelAndView
 	 * calendarValue(ModelAndView mv,
