@@ -21,6 +21,11 @@
 	margin-left:auto;
 	margin-right:auto;
 	width:100%;
+	top:-95%;
+}
+section{
+	height:2200px;
+	
 }
 section table{
 	width:80%;
@@ -33,8 +38,15 @@ section table{
 		position:relative;
 		width:100%;
 		height:1200px;
-		border:1px red solid;
+		border:none;
+		border-top:3px gray solid;
 		top:0px;
+		z-index:1;
+	}
+	#reservation-img{
+		width:100%;
+		height:100%;
+		z-index:-1;
 	}
 	#day-btns{
 		position:relative;
@@ -60,6 +72,7 @@ section table{
 		border-image-slice: 1;
 		font-family:Nanum Gothic Coding;
 		font-size:24px;
+		font-weight:bolder;
 		border-image-radius:30px;
 	}
 	#reservation-content{
@@ -69,26 +82,35 @@ section table{
 		height:900px;
 	}
 	#reservation-add{
-		position:relative;
+		position:absolute;
 		width:100%;
-		border:1px yellow solid;
 		height:100px;
+		background-color:transparent;
 	}
 	#reservation-addspec{
 		position:relative;
 		left:90%;
 		width:10%;
-		border:1px red solid;
 		border-radius:30px;
-		height:100px;
+		min-height:100px;
+		height:auto;
 		text-align:center;
 		font-size:22px;
+		top:-85%;
 	}
 	#reservation-addspec > div{
 		position:relative;
-		top:25.5%;
+		top:-10%;
 		width:100%;
-		border:1px purple solid;
+		height:72px;
+		font-size:62px;
+	}
+	#reservation-addspec > div > i{
+		position:relative;
+		cursor:pointer;
+		color:black;
+		top:-15%;
+		transition:0.5s;
 	}
 	#reservation-table{
 		position:relative;
@@ -112,8 +134,28 @@ section table{
 	}
 	.location-input{
 		outline:none;
-		width:100%;
-		transition:0.5s;
+		width:30%;
+		transition:0.1s;
+	}
+	#reservation-add-val{
+		position:relative;
+		text-align:center;
+		width:90%;
+		height:auto;
+		left:0%;
+		margin-left:0;
+		color:black;
+	}
+	.hourClass{
+		position:relative;
+		width:15%;
+		outline:none;
+		border:none;
+		border-bottom:1px black solid;
+		text-align:right;
+	}
+	.td-create > label{
+		font-weight:bolder;
 	}
 </style>
 <script>
@@ -164,7 +206,8 @@ function loadAddress() {
     }).open();
 }
 </script>
-	<div id="create">
+	<img id="reservation-img" src="${path }/resources/images/frame.jpg">
+	<div id="create" style="background-color:transparent;">
 			<form action="${path }/location/createEnd" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="locationCreator" value="${logginedMember.id}">
 				<table>
@@ -172,7 +215,7 @@ function loadAddress() {
 						<tr><td class="td-create"><label>제목</label></td><td><input class="location-input" type="text" name="locationTitle"></td></tr>
 						<tr><td class="td-create"><label>타입</label></td>
 							<td>
-								<select id="locationType-one" onchange="selectType()" style="width:49.5%;height:40px;">
+								<select id="locationType-one" onchange="selectType()" style="width:30%;height:40px;">
 									<option value="N">영업점 주 테마를 정해주세요</option>
 									<option value="S">숙박</option>
 									<option value="L">명소</option>
@@ -180,7 +223,7 @@ function loadAddress() {
 									<option value="A">스포츠/레저</option>
 									<option value="SH">가게</option>
 								</select>
-								<select id="locationType-two" style="width:49.5%;height:40px;">
+								<select id="locationType-two" style="width:30%;height:40px;">
 									<option class="typeTwo" value="N">영업점 세부 테마를 정해주세요</option>
 								</select>
 								<input type="hidden" id="locationType" name="locationType">
@@ -191,36 +234,25 @@ function loadAddress() {
 								<label>지역</label>
 							</td>
 							<td>
-								<input class="location-input" style="width:49.5%;" type="text" onclick="loadAddress();" onchange="loadMap()" id="locationAddress" name="locationAddress" placeholder="도로명 및 지번 주소 검색">
-								<input class="location-input" style="width:49.5%;" type="text" name="locationAddressDetail" id="locationAddressDetail" placeholder="상세 주소를 적어주세요(선택)">
+								<input class="location-input" style="width:30%;" type="text" onclick="loadAddress();" id="locationAddress" name="locationAddress" placeholder="도로명 및 지번 주소 검색">
+								<input class="location-input" style="width:30%;" type="text" name="locationAddressDetail" id="locationAddressDetail" placeholder="상세 주소를 적어주세요(선택)">
 							</td>
 						</tr>
 						<tr><td class="td-create"><label>메인 이미지</label></td><td><input type="file" name="mainFile"></td></tr>
-						<tr><td class="td-create"><label>세부 이미지</label></td><td>
-								<div id="div-container-file">
-									<div class="input-group mb-3">
-									  <div class="input-group-prepend">
-									    <span class="input-group-text" id="inputGroupFileAddon01">파일</span>
-									  </div>
-									  <div class="custom-file">
-									    <input name="locationFile" onchange="changeFile(event);" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-									    <label class="custom-file-label" for="inputGroupFile01">여기를 클릭하여 파일을 선택하세요.</label>
-									  </div>
-									  <button id="addInputFile" style="width:80px;" type="button">+</button>
-									</div>
-								</div></td></tr>
 						<tr>
-							<td class="td-create">전화번호
+							<td class="td-create" style="border-bottom:3px gray solid;height:100px;"><label>전화번호</label><br/>
 							</td>
 							<td>
-								<input style="width:32.5%;" class="location-input" type="text" name="locationPhone" place-holder="000">
-								<input style="width:32.5%;" class="location-input" type="text" name="locationPhone" place-holder="0000">
-								<input style="width:32.5%;" class="location-input" type="text" name="locationPhone" place-holder="0000">
+								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="000">&nbsp;-
+								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="0000">&nbsp;-
+								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="0000">
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
+								<br/>
 								<div id="map"></div>
+								<br/>
 							</td>
 						</tr>
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6494e3b11b016671e5a8df0ea1d331bf&libraries=services"></script>
@@ -266,7 +298,7 @@ function loadAddress() {
 		<tr>
 	<td colspan="2" style="text-align:center;">
 		<div id="reservation-container">
-		<div id="day-btns">
+		<div id="day-btns" style="z-index:1;">
 			<button type="button" class="day-btns">월요일</button>
 			<button type="button" class="day-btns">화요일</button>
 			<button type="button" class="day-btns">수요일</button>
@@ -275,12 +307,46 @@ function loadAddress() {
 			<button type="button" class="day-btns">토요일</button>
 			<button type="button" class="day-btns">일요일</button>
 		</div>
-		<div id="reservation-add">
+		<div id="reservation-add" style="z-index:1;" style="border:1px gray solid">
+			<table id="reservation-add-val" style="z-index:1;background-color:transparent">
+				<tr>
+					<td>
+						<label>예약 시간</label>
+					</td>
+					<td>
+						<label>예약 가격</label>
+					</td>
+					<td>
+						<label>예약 인원 수</label>
+					</td>
+					<td>
+						<label>예약 날짜</label>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:center;">
+						<input class="hourClass" type="number" min="1" max="24" maxlength="2" name="st-add-time-hour" style="width:10%;">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+						<input class="hourClass" type="number" min="0" max="59" maxlength="2" name="st-add-tiem-minute" style="width:10%;">
+						<label>~</label>
+						<input class="hourClass" type="number" min="1" max="24" maxlength="2" name="af-add-time-hour" style="width:10%;">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+						<input class="hourClass" type="number" min="0" max="59" maxlength="2" name="af-add-tiem-minute" style="width:10%;">
+					</td>
+					<td>
+						<input class="location-input" type="text" name="add-price">
+					</td>
+					<td>
+						<input class="location-input" type="text" name="add-people">
+					</td>
+					<td>
+						<input class="location-input" type="text" name="add-day">
+					</td>
+				</tr>
+			</table>
 			<div id="reservation-addspec">
-				<div>예약 추가</div>
+				<div><i id="reservation-plus" class="far fa-plus-square"></i></div>
 			</div>
 		</div>
-		<div id="reservation-content">
+		<div id="reservation-content" style="position:relative;top:10%;">
 			<table id="reservation-table">
 				<tr>
 					<th>시간</th>
@@ -296,9 +362,9 @@ function loadAddress() {
 				</tr>
 			</table>
 		</div>
-	</div>
-	</td></tr>
-	<tr><td>내용</td><td><textarea name="locationContent" class="form-control" style="resize: none;"rows="30"></textarea></td></tr>
+		</div>
+		</td>
+	</tr>
 		<script>
 			$(".day-btns").hover(function(e){
 				$(e.target).css("background","linear-gradient(to right, #DD2D4A, #F49CBB)");
@@ -363,6 +429,16 @@ function loadAddress() {
 			}
 		}
 		$(function(){
+			$("#reservation-plus").click(function(){
+				console.log("확인");
+			});
+			$("#reservation-plus").hover(function(){
+				$("#reservation-plus").css("color","#F26A8D");
+				
+			},function(){
+				$("#reservation-plus").css("color","black");
+			});
+			
 			$('[name=noticeFile]').change(e => {
 				var file = $(e.target)[0].files[0];
 				if(file!=null){
@@ -373,32 +449,17 @@ function loadAddress() {
 				}
 			});
 			$(".location-input").focus(function(e){
-				$(e.target).css("border","2px #F26A8D solid");
+				$(e.target).css("border","1px #F26A8D solid");
 			});
 			$(".location-input").blur(function(e){
 				$(e.target).css("border","1px black solid");
 			});
+			$(".hourClass").focus(function(e){
+				$(e.target).css("border-bottom","1px #F26A8D solid");
+			});
+			$(".hourClass").blur(function(e){
+				$(e.target).css("border-bottom","1px black solid");
+			});
 		});
-		$(function(){
-			$('#addInputFile').click(e => {
-				if(filecount < 5){
-					$("#div-container-file").append("<div class='input-group mb-3'><div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01'>파일</span></div><div class='custom-file'><input name='locationFile' onchange='changeFile(event);' type='file' class='custom-file-input' id='inputGroupFile01' aria-describedby='inputGroupFileAddon01'><label class='custom-file-label' for='inputGroupFile01'>여기를 클릭하여 파일을 선택하세요.</label></div><button onclick='deleteInputFile(event);' type='button' style='width:80px;''>삭제</button></div>");
-					filecount++;
-				}
-			})
-		});
-		function deleteInputFile(event){
-			$(event.target).parent().remove();
-			filecount--;
-		}
-		function changeFile(event){
-			var file = $(event.target)[0].files[0];
-			if(file!=null){
-				$(event.target).next(".custom-file-label").html(file.name);
-			}else{
-				console.log(file);
-				$(event.target).next(".custom-file-label").html("여기를 클릭하여 파일을 선택하세요.");
-			}
-		}
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
