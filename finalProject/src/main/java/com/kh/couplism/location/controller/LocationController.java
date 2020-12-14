@@ -251,7 +251,7 @@ public class LocationController {
 	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, Location location, 
 			@RequestParam(value="locationTime")String[] locationTime, 
 			@RequestParam(value="locationDay")String[] locationDay, 
-			@RequestParam(value="locationPeople")String[] locationPeople, HttpServletRequest request) {
+			@RequestParam(value="locationPeople")String[] locationPeople,HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 		location.setLocationCreator("admin");

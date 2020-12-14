@@ -84,16 +84,16 @@
 			<c:if test="${category eq 'sh'}">	
 				<a style="color:black; font-weight: bold;">가게전체</a>
 			</c:if>
-			<c:if test="${category eq 'sh'}">	
+			<c:if test="${category eq 'sh1'}">	
 				<a style="color:black; font-weight: bold;">특산품가게</a>
 			</c:if>
-			<c:if test="${category eq 'sh'}">	
+			<c:if test="${category eq 'sh2'}">	
 				<a style="color:black; font-weight: bold;">기념품가게</a>
 			</c:if>
-			<c:if test="${category eq 'sh'}">	
+			<c:if test="${category eq 'sh3'}">	
 				<a style="color:black; font-weight: bold;">의류가게</a>
 			</c:if>
-			<c:if test="${category eq 'sh'}">	
+			<c:if test="${category eq 'sh4'}">	
 				<a style="color:black; font-weight: bold;">스포츠가게</a>
 			</c:if>
 			
@@ -267,19 +267,20 @@
 		</style>
 						
 		<!--리스트-->
-		<c:forEach items="${locationList }" var="lL">
+		<c:forEach items="${list }" var="map" varStatus="status">
 			<div class="listdiv" onclick="list_onclick();">
-				<img class="imgclass" alt="" src="${path }/resources/images/faq.jpg" width="298px" height="200px;">
+				<img class="imgclass" alt="" src="${map.locationMain}" width="298px" height="200px;">
 				<!--제휴업체 분기처리 시작 -->
+				<c:if test="${map.locationStatus eq 1}">
 				<div class="partner">제휴업체<br>예약가능</div>
 				<!--제휴업체 분기처리 끝 -->
-				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: left; padding-left: 20px; height: 10px;"><c:out value="${lL.locationTitle}" /></p>
-				<p style="position:absolute; top:209px; left:210px; font-size:15px; text-align: right; height:15px; margin-top: 25px; padding-right: 20px;">조회수 53</p>
-				<p style="font-size:15px; text-align: left; padding-left: 20px; padding-top:7px; height: 5px;"><i style="color: #FFC314;" class="fas fa-star"></i> 4.5(31)</p>
-				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:41px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
+				</c:if>
+				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: left; padding-left: 20px; height: 10px;"><c:out value="${map.locationTitle}" /></p>
+				<p style="position:absolute; top:209px; left:210px; font-size:15px; text-align: right; height:15px; margin-top: 25px; padding-right: 20px;">조회수 ${map.viewCount}</p>
+				<p style="font-size:15px; text-align: left; padding-left: 20px; padding-top:7px; height: 5px;"><i style="color: #FFC314;" class="fas fa-star"></i> ${map.review}(${map.reviewCount})</p>
+				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:41px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>${map.locationAddress}</p>
 			</div>
 		</c:forEach>
-		
 		
 				
 				
