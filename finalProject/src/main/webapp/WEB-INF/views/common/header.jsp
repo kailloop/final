@@ -293,8 +293,6 @@
 						<c:if test="${naverLogin.email==null }"> <!--일반회원  -->
 							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
 						</c:if>
-					
-					
 						<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->
 							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
 						</c:if>
