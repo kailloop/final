@@ -14,6 +14,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -194,7 +195,16 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/create")
-	public String createLocation() {// 로케이션 생성 페이지로 이동
+	public String createLocation(Model m) {// 로케이션 생성 페이지로 이동
+		
+		m.addAttribute("logoPath","resources/images/create-location.jpg");
+		m.addAttribute("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		m.addAttribute("titleHan","내 상점 만들기");
+		m.addAttribute("titleEng","Create Your Shop");
+		
 		return "/location/create";
 	}
 
