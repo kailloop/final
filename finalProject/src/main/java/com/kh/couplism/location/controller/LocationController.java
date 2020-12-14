@@ -429,6 +429,7 @@ public class LocationController {
 				String mfrenamedFileName = creator+"#Couplism-location-File-"
 						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
 	            File f = new File(request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
+	            logger.debug("path File f :"+request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
 	            out = new FileOutputStream(f);
 	            out.write(bytes);
 	            String callback = request.getParameter("CKEditorFuncNum");

@@ -186,6 +186,59 @@ public class NoticeController {
 				}
 			}
 		}
+		String noticeContent = notice.getNoticeContent();// LocationContent가져옴
+		logger.debug("notcieContent : "+notice.getNoticeContent());
+		String[] contentSplit = noticeContent.split("src=");// 경로로 스플릿함
+		logger.debug("contentSplit : "+contentSplit);
+		logger.debug("contentSplit.length : "+contentSplit.length);
+		List<String> imgPath = new ArrayList();
+		for(int i = 0; i<contentSplit.length; i++) {
+			logger.debug("contentSplit["+i+"] : "+contentSplit[i]);
+			if(i%2==1) {
+				logger.debug("for문 정상적으로 작동");
+				logger.debug("contentSplit replace : "+contentSplit[i].replace("\"", "\\|"));
+				String splitPatha = contentSplit[i].replace("\"", "\\|");
+				String[] splitPath = splitPatha.split("\\|");
+				logger.debug("splitPath[1] : "+splitPath[1]);
+				String[] pathArr = splitPath[1].replace("\\", "").split("/");
+				int lastIndex = pathArr.length-1;
+				imgPath.add(pathArr[lastIndex]);
+				logger.debug("pathArr[lastIndex] : "+pathArr[lastIndex]);
+			}
+		}
+		logger.debug("imgPath Size : "+imgPath.size());
+		logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
+		
+		//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+		
+		for(String path : imgPath) {
+			logger.debug("path : "+path);
+			File moveFile = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite")+"/"+path);
+			logger.debug("파일존재 여부 : "+moveFile.exists());
+			logger.debug("moveFile.getName() : "+moveFile.getName());
+			String[] newFilePath = moveFile.getName().split("_");//newFilePath[2]으로 저장하면됨
+			logger.debug("newFilePath length : "+newFilePath.length);
+			logger.debug("newFilePath : "+newFilePath);
+			/*
+			 * File newFile = new
+			 * File(request.getServletContext().getRealPath("/resources/upload/notice")+"/"+
+			 * newFilePath[1]); if(moveFile.exists()) { boolean isMoved =
+			 * moveFile.renameTo(newFile); logger.debug("파일 이동여부 : "+isMoved); }
+			 */
+		}
+		logger.debug("userId : "+notice.getUserId());
+		File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite"));
+		File[] imgFileList = imgFile.listFiles();
+		logger.debug("imgFileList.length() : "+imgFileList.length);
+		for(File f : imgFileList) {//이로직 로그인할때도 돌려줘야함 !!@#!@#
+			String[] fileName = f.getName().split("_");
+			logger.debug("fileName[0] : "+fileName[0]);
+			logger.debug("fileName[1] : "+fileName[1]);
+			if(fileName[0].equals(notice.getUserId())) {
+				f.delete();
+				logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+			}
+		}
 		
 		logger.debug("=================================================================");
 		mv.setViewName("redirect:/notice/noticeList");
@@ -555,37 +608,7 @@ public class NoticeController {
 				}
 			}
 		}
-		String noticeContent = notice.getNoticeContent();// LocationContent가져옴
-		String[] contentSplit = noticeContent.split("<img alt=\"\" src=");// 경로로 스플릿함
-		List<String> imgPath = new ArrayList();
-		for(int i = 1; i>contentSplit.length; i=i+2) {
-			String[] splitPath = contentSplit[i].split("\"");
-			imgPath.add(splitPath[0]);
-		}
-		logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
 		
-		//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
-		
-		for(String path : imgPath) {
-			File moveFile = new File(path);
-			logger.debug("파일존재 여부 : "+moveFile.exists());
-			String[] newFilePath = moveFile.getName().split("#");//newFilePath[2]으로 저장하면됨
-			File newFile = new File(request.getServletContext().getRealPath("/resources/upload/notice")+"/"+newFilePath[1]);
-			 if(moveFile.exists()) {
-				 boolean isMoved = moveFile.renameTo(newFile);
-				 logger.debug("파일 이동여부 : "+isMoved);
-			 }
-		}
-		
-		File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite"));
-		File[] imgFileList = imgFile.listFiles();
-		for(File f : imgFileList) {
-			String[] fileName = f.getName().split("#");
-			if(fileName[0] == notice.getUserId()) {
-				f.delete();
-				logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
-			}
-		}
 		
 		mv.setViewName("/notice/noticeList");
 		mv.addObject("titleHan","공지사항");
@@ -619,15 +642,14 @@ public class NoticeController {
 				String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
 				SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
 				int mfrandomNum = (int) (Math.random() * 1000);
-				String mfrenamedFileName = creator+"#Couplism-location-File-"
-						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
+				String mfrenamedFileName = creator+"_"+"Couplism-Notice-File-"+mfsdf.format(new Date(System.currentTimeMillis()))+"-"+mfrandomNum+"."+mfext;
 	            File f = new File(request.getServletContext().getRealPath("/resources/upload/noticeWrite")+"/"+mfrenamedFileName);
 	            out = new FileOutputStream(f);
 	            out.write(bytes);
 	            String callback = request.getParameter("CKEditorFuncNum");
 	 
 	            printWriter = response.getWriter();
-	            String fileUrl = request.getContextPath()+"/resources/upload/noticeWirte/"+f.getName();//url경로
+	            String fileUrl = request.getContextPath()+"/resources/upload/noticeWrite/"+f.getName();//url경로
 	            logger.debug(callback);
 	            logger.debug(fileUrl);
 				/*
