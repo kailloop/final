@@ -245,6 +245,11 @@
 	.nav-anniversary{
 		display:none;
 	}
+	#login-btn{
+		position:relative;
+		left:10%;
+		width:80%;
+	}
 </style>
 
 <body>
@@ -388,7 +393,7 @@
 					        
 					    </div>
 					    <!-- Sign in button -->
-					    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
+					    <button id="login-btn" class="btn btn-dark btn-block my-4" type="submit">Login</button>
 					    
 					
 					    
@@ -404,8 +409,6 @@
 					    <%-- <div id="kakaoLogin"><img src="${path }/resources/images/kakao.png" style="width:100%;height:100%;"></div> --%>
 					    <a id="kakao-login-btn"></a>
 					    <br/>
-					    <a href="#" class="mx-2" role="button"><button>3</button></a>
-					    <a href="#" class="mx-2" role="button"><button>4</button></a>
 					
 					</form>
 		        </div>
