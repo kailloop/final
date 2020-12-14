@@ -9,7 +9,7 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 
-<div id="eventListDiv" style=" margin-top:20px; margin-left:auto; margin-right:auto; width: 1050px; text-align: center;">
+<div id="eventListDiv" style=" margin-top:60px; margin-left:auto; margin-right:auto; width: 1050px; text-align: center;">
 
 	<!--리스트 스타일  -->
 		<style>
@@ -45,13 +45,36 @@
 		<!--리스트-->
 		<c:forEach items="${list }" var="list">
 			<div class="listdiv" onclick="location.replace('${path }/eventView?eventNo=<c:out value="${list.eventNo }"/>')">
-				<img class="imgclass" alt="" src="${path }/resources/images/faq.jpg" width="298px" height="200px;">
-				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: center;">
+				<img class="imgclass" alt="" src="${path }/resources/images/home-logo3.jpg" width="298px" height="200px;">
+				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: center; height: 15px;">
 					<c:out value="${list.eventTitle}" />
 				</p>
+				<p><c:out value="${list.eventContent }"/></p>
 				
 			</div>
 		</c:forEach>
+		
+		
+		
+		<!--div정리용 스타일 (무시)  -->
+		<style>
+     		div.clearfixed::after{display:block;content:"";clear:both}
+		</style>
+		<!--div정리용 (무시)  -->
+		<div class="clearfixed"></div>
+		
+		
+		
+		
+		<div id="pageBar">
+		</div>
+		
+		
+		
+		<div id="btnDiv">
+			<!--관리자만 글쓰기할수있게 분기처리  -->
+			<button type="button" onclick="location.href='${path }/eventWrite'" class="btn btn-warning">글쓰기</button>
+		</div>
 
 	</div><!--eventListDiv닫는곳  -->
 

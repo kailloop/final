@@ -12,4 +12,6 @@ public interface CommunityDao {
 	List<Event> selectList(SqlSession session);
 	
 	Event selectEvent(SqlSession session, int eventNo);
+	
+	int insertEvent(SqlSession session,Event e);
 }

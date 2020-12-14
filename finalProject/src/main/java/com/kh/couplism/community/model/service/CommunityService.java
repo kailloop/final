@@ -12,4 +12,6 @@ public interface CommunityService {
 	List<Event> selectList();
 	
 	Event selectEvent(int eventNo);
+	
+	int insertEvent(Event e);
 }

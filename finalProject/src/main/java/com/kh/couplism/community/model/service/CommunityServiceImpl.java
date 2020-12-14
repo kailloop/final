@@ -28,6 +28,12 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return dao.selectEvent(session,eventNo);
 	}
+
+	@Override
+	public int insertEvent(Event e) {
+		// TODO Auto-generated method stub
+		return dao.insertEvent(session,e);
+	}
 	
 	
 	

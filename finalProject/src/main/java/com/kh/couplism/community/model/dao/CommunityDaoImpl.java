@@ -20,6 +20,11 @@ public class CommunityDaoImpl implements CommunityDao {
 	public Event selectEvent(SqlSession session, int eventNo) {
 		return session.selectOne("community.selectEvent",eventNo);
 	}
+
+	@Override
+	public int insertEvent(SqlSession session, Event e) {
+		return session.insert("community.insertEvent",e);
+	}
 	
 	
 	
