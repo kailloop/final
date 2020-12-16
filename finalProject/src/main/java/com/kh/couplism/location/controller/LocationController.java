@@ -1,7 +1,10 @@
 package com.kh.couplism.location.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,12 +14,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -206,15 +211,16 @@ public class LocationController {
 					+ "</li>";
 		}
 
+		logger.debug(""+list);
+
 
 		mv.addObject("address",address);
 		mv.addObject("category",category);
-		
-		logger.debug(""+list);
 
 		mv.setViewName("/location/list");
 
 		mv.addObject("list", list);
+
 		mv.addObject("pageBar", pageBar);
 
 		mv.addObject("logoPath","/resources/images/locationmain.jpg");
@@ -253,10 +259,39 @@ public class LocationController {
 	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, Location location, 
 			@RequestParam(value="locationTime")String[] locationTime, 
 			@RequestParam(value="locationDay")String[] locationDay, 
-			@RequestParam(value="locationPeople")String[] locationPeople, HttpServletRequest request) {
+			@RequestParam(value="locationPeople")String[] locationPeople,HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
-		location.setLocationCreator("admin");
+		
+		/*
+		 * String locationContent = location.getLocationContent();// LocationContent가져옴
+		 * String[] contentSplit = locationContent.split("<img alt=\"\" src=");// 경로로
+		 * 스플릿함 List<String> imgPath = new ArrayList(); for(int i = 1;
+		 * i>contentSplit.length; i=i+2) { String[] splitPath =
+		 * contentSplit[i].split("\""); imgPath.add(splitPath[0]); }
+		 * logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴
+		 * 
+		 * //imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+		 * 
+		 * for(String path : imgPath) { File moveFile = new File(path);
+		 * logger.debug("파일존재 여부 : "+moveFile.exists()); String[] newFilePath =
+		 * moveFile.getName().split("#");//newFilePath[2]으로 저장하면됨 File newFile = new
+		 * File(request.getServletContext().getRealPath("/resources/upload/location/")+
+		 * newFilePath[1]); if(moveFile.exists()) { boolean isMoved =
+		 * moveFile.renameTo(newFile); logger.debug("파일 이동여부 : "+isMoved); } }
+		 * 
+		 * File imgFile = new File(request.getServletContext().getRealPath(
+		 * "/resources/upload/locationCreate")); File[] imgFileList =
+		 * imgFile.listFiles(); for(File f : imgFileList) { String[] fileName =
+		 * f.getName().split("#"); if(fileName[0] == location.getLocationCreator()) {
+		 * f.delete(); logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!"); } }
+		 */
+		
+		
+		/*
+		 * location.setLocationCreator("admin");//???
+		 */
+		
 		logger.debug("location : " + location);
 		int locationResult = service.insertLocation(location);// location DB에 등록
 		logger.debug("locationResult : " + locationResult);
@@ -264,6 +299,42 @@ public class LocationController {
 		int locationMainResult = 0;
 		int locationFileResult = 0;
 		if (locationResult > 0) {// 정상적으로 location이 DB에 등록이 되었을때
+			
+			String locationContent = location.getLocationContent();// LocationContent가져옴
+			String[] contentSplit = locationContent.split("<img alt=\"\" src=");// 경로로 스플릿함
+			List<String> imgPath = new ArrayList();
+			for(int i = 1; i>contentSplit.length; i=i+2) {
+				String[] splitPath = contentSplit[i].split("\"");
+				imgPath.add(splitPath[0]);
+			}
+			logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
+			
+			//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+			
+			for(String path : imgPath) {
+				File moveFile = new File(path);
+				logger.debug("파일존재 여부 : "+moveFile.exists());
+				String[] newFilePath = moveFile.getName().split("#");//newFilePath[2]으로 저장하면됨
+				File newFile = new File(request.getServletContext().getRealPath("/resources/upload/location")+"/"+newFilePath[1]);
+				 if(moveFile.exists()) {
+					 boolean isMoved = moveFile.renameTo(newFile);
+					 logger.debug("파일 이동여부 : "+isMoved);
+				 }
+			}
+			
+			File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/locationCreate"));
+			File[] imgFileList = imgFile.listFiles();
+			for(File f : imgFileList) {
+				String[] fileName = f.getName().split("#");
+				if(fileName[0] == location.getLocationCreator()) {
+					f.delete();
+					logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+				}
+			}
+			
+			
+			
+			
 			String saveDirMain = request.getServletContext().getRealPath("/resources/upload/locationMain");
 			logger.debug("locationMain file명 : " + mainFile.getOriginalFilename());
 			logger.debug("locationMain file Size : " + mainFile.getSize());
@@ -290,37 +361,28 @@ public class LocationController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			logger.debug("locationFile Size : "+locationFile.size());
-			String saveDirFile = request.getServletContext().getRealPath("/resources/upload/location");
-			for (MultipartFile mf : locationFile) {
-				if (!mf.isEmpty()) {// mf.isEmpty()
-					logger.debug("file명 : " + mf.getOriginalFilename());
-					logger.debug("file Size : " + mf.getSize());
-					String mforiginalFileName = mf.getOriginalFilename();
-					String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
-					SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
-					int mfrandomNum = (int) (Math.random() * 1000);
-					String mfrenamedFileName = "Couplism-location-File-"
-							+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
-					logger.debug("변경된 파일이름 " + mfrenamedFileName);
-					try {
-						mf.transferTo(new File(saveDirFile + "/" + mfrenamedFileName));// 파일을 저장
-						logger.debug("파일 등록성공!");
-						// 파일을 db에 등록하는 로직작성
-						LocationFile lf = new LocationFile(location.getLocationNo(), mf.getOriginalFilename(),
-								mfrenamedFileName);
-						logger.debug("locationFile : " + lf);
-						locationFileResult = service.insertLocationFile(lf);
-						String fileCheck = "실패";
-						if (locationFileResult > 0) {
-							fileCheck = "성공";
-						}
-						logger.debug("파일 등록결과 LocationFile : " + fileCheck);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+			/*
+			 * logger.debug("locationFile Size : "+locationFile.size()); String saveDirFile
+			 * = request.getServletContext().getRealPath("/resources/upload/location"); for
+			 * (MultipartFile mf : locationFile) { if (!mf.isEmpty()) {// mf.isEmpty()
+			 * logger.debug("file명 : " + mf.getOriginalFilename());
+			 * logger.debug("file Size : " + mf.getSize()); String mforiginalFileName =
+			 * mf.getOriginalFilename(); String mfext =
+			 * mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
+			 * SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS"); int
+			 * mfrandomNum = (int) (Math.random() * 1000); String mfrenamedFileName =
+			 * "Couplism-location-File-" + mfsdf.format(new
+			 * Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
+			 * logger.debug("변경된 파일이름 " + mfrenamedFileName); try { mf.transferTo(new
+			 * File(saveDirFile + "/" + mfrenamedFileName));// 파일을 저장
+			 * logger.debug("파일 등록성공!"); // 파일을 db에 등록하는 로직작성 LocationFile lf = new
+			 * LocationFile(location.getLocationNo(), mf.getOriginalFilename(),
+			 * mfrenamedFileName); logger.debug("locationFile : " + lf); locationFileResult
+			 * = service.insertLocationFile(lf); String fileCheck = "실패"; if
+			 * (locationFileResult > 0) { fileCheck = "성공"; }
+			 * logger.debug("파일 등록결과 LocationFile : " + fileCheck); } catch (IOException e)
+			 * { e.printStackTrace(); } } }
+			 */
 			logger.debug("locationTime Size : "+locationTime.length);
 			logger.debug("locationDay Size : "+locationDay.length);
 			logger.debug("locationPeople Size : "+locationPeople.length);
@@ -348,4 +410,61 @@ public class LocationController {
 	public String checks(){
 		return "location/checks";
 	}
+	
+	 @RequestMapping(value = "/location/uploadImg", method = RequestMethod.POST)
+	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload, String creator) {
+		  	logger.debug("이미지 업로드 들어옴");
+		  	logger.debug("creator : "+creator);
+	        OutputStream out = null;
+	        PrintWriter printWriter = null;
+	        response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html;charset=utf-8");
+	 
+	        try{
+	 
+	   
+	            byte[] bytes = upload.getBytes();
+	            
+	            String mforiginalFileName = upload.getOriginalFilename();
+				String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+				int mfrandomNum = (int) (Math.random() * 1000);
+				String mfrenamedFileName = creator+"#Couplism-location-File-"
+						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
+	            File f = new File(request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
+	            logger.debug("path File f :"+request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
+	            out = new FileOutputStream(f);
+	            out.write(bytes);
+	            String callback = request.getParameter("CKEditorFuncNum");
+	 
+	            printWriter = response.getWriter();
+	            String fileUrl = request.getContextPath()+"/resources/upload/locationCreate/"+f.getName();//url경로
+	            logger.debug(callback);
+	            logger.debug(fileUrl);
+				/*
+				 * printWriter.
+				 * println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+				 * + "1" + ",'" + fileUrl + "','이미지를 업로드 하였습니다.'" + ")</script>");
+				 * printWriter.flush();
+				 */
+
+	            printWriter.println("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+	        }catch(IOException e){
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (out != null) {
+	                    out.close();
+	                }
+	                if (printWriter != null) {
+	                    printWriter.close();
+	                }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	 
+	        return;
+	    }
+	
 }
