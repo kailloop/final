@@ -78,6 +78,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	public int upViewCount(Notice notice, SqlSessionTemplate session) {
 		return session.update("notice.upViewCount", notice );
 	}
+
+	@Override
+	public int updateNotice(Notice notice, SqlSessionTemplate session) {
+		return session.update("notice.updateNotice", notice);
+	}
 	
 	
 	

@@ -25,4 +25,5 @@ public interface NoticeDao {
 	public int deleteNoticeComment(int noticeNo, SqlSessionTemplate session);
 	public int deleteNotice(int noticeNo, SqlSessionTemplate session);
 	public int upViewCount(Notice notice, SqlSessionTemplate session);
+	public int updateNotice(Notice notice, SqlSessionTemplate session);
 }

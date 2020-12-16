@@ -86,6 +86,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int deleteNoticeFile(Map<String, Object> deleteMap) {
 		return dao.deleteNoticeFile(deleteMap, session);
 	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		return dao.updateNotice(notice, session);
+	}
 	
 	
 }

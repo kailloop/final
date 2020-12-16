@@ -7,48 +7,76 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="title" />
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/logo.jsp"/>
-	<div class="container">
-		<form action="${path }/notice/modifyNoticeEnd" method="post"
-			enctype="multipart/form-data">
-			<input type="text" name="noticeTitle" placeholder="제목"
-				style="width: 100%;" value="${notice.noticeTitle}">
-			<div id="fileListDiv">
-				<c:forEach var="file" items="${NoticeFile}">
-					<div id="fileDiv">
-						<c:out value="${file.originalName }" />
-						<input name="fileRenameName" type="hidden" value="${file.renameName }">
-						<button type="button" onclick="deleteFile(event);">삭제</button>
-					</div>
-				</c:forEach>
-			</div>
-			<div id="delete-file-name">
-			</div>
-			<div id="div-container-file">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroupFileAddon01">파일</span>
-					</div>
-					<div class="custom-file">
-						<input name="noticeFile" type="file" class="custom-file-input"
-							id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-						<label class="custom-file-label" for="inputGroupFile01">여기를
-							클릭하여 파일을 선택하세요.</label>
-					</div>
-					<button id="addInputFile" style="width: 80px;" type="button">+</button>
+<jsp:include page="/WEB-INF/views/common/logo.jsp" />
+<script type="text/javascript" src="${path }/resources/ckeditor/ckeditor.js"></script>
+
+<div class="container">
+	<form action="${path }/notice/modifyNoticeEnd" method="post"
+		enctype="multipart/form-data">
+		<input type="text" name="noticeTitle" placeholder="제목"
+			style="width: 100%;" value="${notice.noticeTitle}">
+		<div id="fileListDiv">
+			<c:forEach var="file" items="${NoticeFile}">
+				<div id="fileDiv">
+					<c:out value="${file.originalName }" />
+					<input name="fileRenameName" type="hidden"
+						value="${file.renameName }">
+					<button type="button" onclick="deleteFile(event);">삭제</button>
 				</div>
+			</c:forEach>
+		</div>
+		<div id="delete-file-name"></div>
+		<div id="div-container-file">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroupFileAddon01">파일</span>
+				</div>
+				<div class="custom-file">
+					<input name="noticeFile" type="file" class="custom-file-input"
+						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+					<label class="custom-file-label" for="inputGroupFile01">여기를
+						클릭하여 파일을 선택하세요.</label>
+				</div>
+				<button id="addInputFile" style="width: 80px;" type="button">+</button>
 			</div>
-			<textarea name="noticeContent" rows="30" class="form-control"
-				style="resize: none;"><c:out
-					value="${notice.noticeContent }" /></textarea>
-			<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-			<input type="hidden" name="userId" value="${notice.userId}">
-			<button class="float-right" type="submit">작성</button>
-			<button class="float-left" onclick="checknotice();" type="button">체크</button>
-		</form>
-	</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-12">
+				<textarea name="noticeContent" id="noticeContent"
+					style="resize: none;">${notice.noticeContent}</textarea>
+			</div>
+		</div>
+		<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
+		<input type="hidden" name="userId" value="${notice.userId}">
+		<button class="float-right" type="submit">작성</button>
+		<button class="float-left" onclick="checknotice();" type="button">체크</button>
+	</form>
+</div>
 </section>
 <script>
+$(function(){
+    
+    CKEDITOR.replace( 'noticeContent', {//해당 이름으로 된 textarea에 에디터를 적용
+        width:'100%',
+        height:'400px',
+        filebrowserImageUploadUrl: '${path}/notice/imageUpload?creator=${logginedMember.id}' //여기 경로로 파일을 전달하여 업로드 시킨다.
+    });
+     
+     
+    CKEDITOR.on('dialogDefinition', function( ev ){
+        var dialogName = ev.data.name;
+        var dialogDefinition = ev.data.definition;
+      
+        switch (dialogName) {
+            case 'image': //Image Properties dialog
+                //dialogDefinition.removeContents('info');
+                dialogDefinition.removeContents('Link');
+                dialogDefinition.removeContents('advanced');
+                break;
+        }
+    });
+     
+});
 	function deleteFile(event){
 		console.log(event.target);
 		console.log($(event.target).parent());
