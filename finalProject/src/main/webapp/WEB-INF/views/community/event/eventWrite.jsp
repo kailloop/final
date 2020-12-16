@@ -43,17 +43,17 @@
 			}
 		</style>
 		<!--글쓰기  -->
-			<div id="write">
 			<form action="${path}/eventWriteEnd" name="eventForm" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="admin" value="${logginedMember.id}">
+			<div id="write">
+					<input type="hidden" name="eventWriter" value="${logginedMember.id}">
 				<table border="1">
 					<tr>
 						<td style="width: 100px;">제목</td>
-						<td><input type="text" name="title" placeholder="제목을 입력해주세요"> </td>
+						<td><input type="text" name="eventTitle" placeholder="제목을 입력해주세요"> </td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea name="content" placeholder="내용을 입력해주세요"></textarea> </td>
+						<td><textarea name="eventContent" placeholder="내용을 입력해주세요"></textarea> </td>
 					</tr>
 					<tr>
 						<td>첨부파일</td>
@@ -63,7 +63,7 @@
 					    </td>
 					</tr>
 				</table>
-				</form>	
+				
 			</div>
 			
 			
@@ -82,7 +82,8 @@
 			</div>
 			
 			
-	
+			</form>	
+			
 		</div><!-- eventWriteDiv닫기 -->
 		
 

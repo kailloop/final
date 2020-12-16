@@ -9,7 +9,11 @@
 		select * from event where eventNo=#{eventNo}
 	</select>
 	
-	<select id="insertEvent" parameterType="com.kh.couplism.community.model.vo.Event">
+	<insert id="insertEvent" parameterType="com.kh.couplism.community.model.vo.Event">
 		insert into event values(seq_eventNo.nextval,#{eventTitle},#{eventWriter},#{eventContent},#{eventOriginalFilename},#{eventRenamedFilename})
+	</insert>
+	
+	<select id="eventRemove" parameterType="_int">
+		delete from event where eventNo=#{eventNo}
 	</select>
 </mapper>

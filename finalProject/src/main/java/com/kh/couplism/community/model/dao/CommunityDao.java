@@ -13,5 +13,7 @@ public interface CommunityDao {
 	
 	Event selectEvent(SqlSession session, int eventNo);
 	
-	int insertEvent(SqlSession session,Event e);
+	int insertEvent(SqlSession session,Event event);
+	
+	int eventRemove(SqlSession session,int eventNo);
 }

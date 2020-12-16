@@ -22,8 +22,14 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 
 	@Override
-	public int insertEvent(SqlSession session, Event e) {
-		return session.insert("community.insertEvent",e);
+	public int insertEvent(SqlSession session, Event event) {
+		return session.insert("community.insertEvent",event);
+	}
+
+	@Override
+	public int eventRemove(SqlSession session, int eventNo) {
+		// TODO Auto-generated method stub
+		return session.delete("community.eventRemove",eventNo);
 	}
 	
 	

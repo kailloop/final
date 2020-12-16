@@ -30,9 +30,15 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int insertEvent(Event e) {
+	public int insertEvent(Event event) {
 		// TODO Auto-generated method stub
-		return dao.insertEvent(session,e);
+		return dao.insertEvent(session,event);
+	}
+
+	@Override
+	public int eventRemove(int eventNo) {
+		// TODO Auto-generated method stub
+		return dao.eventRemove(session,eventNo);
 	}
 	
 	

@@ -51,7 +51,7 @@
 		<!--리스트  -->
 		<div id="listDiv" style="width: 1050px;">
 			
-			<img src="${path }/resources/images/home-logo3.jpg" width="100%" height="600px">
+			<img src="${path }/resources/images/${event.eventRenamedFilename}" width="100%" height="600px">
 			
 		</div>
 		
@@ -97,6 +97,12 @@
 		<!--목록,수정,삭제버튼  -->
 		<div id="btnDiv">
 			<button type="button" onclick="location.href='${path }/event/eventList.do'" class="btn btn-warning">목록</button>
+			
+			<!-- 관리자만 볼 수있게 분기처리  -->
+			<button type="button" class="btn btn-warning">수정</button>
+			<button type="button" class="btn btn-warning" onclick="removeBtn();">삭제</button>
+			<!-- 분기처리끝 -->
+			
 		</div>
 	</div><!-- eventViewDiv닫기 -->
 
@@ -104,7 +110,11 @@
 </section>
 
 <script>
-		
+function removeBtn(){
+	if(confirm("삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?")){ 
+		location.replace('${path}/eventRemove?eventNo=${event.eventNo}');
+	}
+}	
 </script>
 	
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>
