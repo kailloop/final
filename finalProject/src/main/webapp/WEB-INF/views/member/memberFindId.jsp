@@ -9,29 +9,13 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <style>
-	#back-one{
-		position:relative;
-		border:1px red solid;
-		top:-850px;
-		width:100%;
-		height:200px;
-		background-color:white;
-	}
-	#back-two{
-		position:relative;
-		width:100%;
-		height:800px;
-		top:-800px;
-		background:white
-	}
-	#background-img{
-		width:100%;
-		height:100%;
+	body{
+		background:linear-gradient(to bottom,white,#F8F8F8);
 	}
 	section{
 		height:800px;
 		overflow:hidden;
-		
+		background:linear-gradient(to bottom,white,#F8F8F8);
 	}
 	#first-div{
 		margin:0;
@@ -62,6 +46,7 @@
 		top:-15%;
 		left:120%;
 		transition:1s;
+		background-color:white;
 	}
 	#first-q > img{
 		width:50%;
@@ -184,18 +169,17 @@
 						<td><label id="success-id" class="q-title"></label><label class="q-title">입니다.</label></td>
 					</tr>
 					<tr>
-						<td><button type="button" class="email-btn">로그인</button><button type="button" class="email-btn">비밀번호 찾기</button></td>
+						<td>
+							<button type="button" class="email-btn" data-toggle="modal" data-target="#loginModal">로그인</button>
+							<button type="button" class="email-btn" onclick="findPw();">비밀번호 찾기</button>
+						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	<div id="back-one">
-	</div>
 	</section>
-	<div id="back-two">
-		<img id="background-img" src="${path }/resources/images/back-idpw.jpg">
-	</div>
+	
 	
 <script>
 	var idEmail=0;

@@ -16,6 +16,8 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<!-- Material 폰트 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Hi+Melody&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <!-- jQuery library -->
@@ -245,6 +247,14 @@
 	.nav-anniversary{
 		display:none;
 	}
+	#login-btn{
+		position:relative;
+		left:10%;
+		width:80%;
+	}
+	.nav-item{
+		font-size:32px;
+	}
 </style>
 
 <body>
@@ -321,15 +331,15 @@
 			<div class="collapse navbar-collapse" id="ftco-nav" style="overflow:hidden;">
 				<div id="nav-main">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a href="" class="nav-color nav-link">회사소개</a></li>
-						<li class="nav-item"><a id="travel" class="nav-color nav-link" onclick="travel();" style="cursor:pointer;">여행지</a></li>
-						<li class="nav-item"><a class="nav-color nav-link">리즘</a></li>
-						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;" href="${path }/anniversary/anniversarySearch.do">기념일</a></li>
-						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;">커뮤니티</a></li>
+						<li class="nav-item"><a href="" class="nav-color nav-link" style="font-size:16px;">회사소개</a></li>
+						<li class="nav-item"><a id="travel" class="nav-color nav-link" onclick="travel();" style="cursor:pointer;font-size:16px;">여행지</a></li>
+						<li class="nav-item"><a class="nav-color nav-link" style="cursor:pointer;font-size:16px;" onclick="lism();">리즘</a></li>
+						<li class="nav-item"><a id="anniversary" class="nav-link nav-color" style="cursor:pointer;font-size:16px;" href="${path }/anniversary/anniversarySearch.do">기념일</a></li>
+						<li class="nav-item"><a id="community" class="nav-link nav-color" style="cursor:pointer;font-size:16px;">커뮤니티</a></li>
 					</ul>
 				</div>
 				<div id="nav-sub">
-					<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav ml-auto" style="font-size:16px;">
 						<li class="nav-item nav-community"><a href="${path }/notice/noticeList" class="nav-link nav-color">공지사항</a></li>
 						<li class="nav-item nav-community"><a href="${path }/faq/faqList.do" class="nav-link nav-color" >FAQ</a></li>
 						<li class="nav-item nav-community"><a href="${path }/event/eventList.do" class="nav-link nav-color" >이벤트</a></li>
@@ -388,7 +398,7 @@
 					        
 					    </div>
 					    <!-- Sign in button -->
-					    <button class="btn btn-dark btn-block my-4" type="submit">Login</button>
+					    <button id="login-btn" class="btn btn-dark btn-block my-4" type="submit">Login</button>
 					    
 					
 					    
@@ -404,8 +414,6 @@
 					    <%-- <div id="kakaoLogin"><img src="${path }/resources/images/kakao.png" style="width:100%;height:100%;"></div> --%>
 					    <a id="kakao-login-btn"></a>
 					    <br/>
-					    <a href="#" class="mx-2" role="button"><button>3</button></a>
-					    <a href="#" class="mx-2" role="button"><button>4</button></a>
 					
 					</form>
 		        </div>
@@ -502,6 +510,9 @@
 
 
 <script>
+	function lism(){
+		location.replace('${path}/moveLism');
+	}
 	function travel(){
 		location.replace('${path}/moveLocation');
 	}
