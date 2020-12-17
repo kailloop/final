@@ -1,162 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path" value="${pageContext.request.contextPath }"/>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-<jsp:param value="" name="title"/>
+	<jsp:param value="" name="title" />
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/logo.jsp"/>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<jsp:include page="/WEB-INF/views/common/logo.jsp" />
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-#map{
-	position:relative;
-	width:100%;
-	height:300px;
+#map {
+	position: relative;
+	width: 100%;
+	height: 300px;
 }
-#create{
-	position:relative;
-	margin:0;
-	margin-left:auto;
-	margin-right:auto;
-	width:100%;
-	top:-95%;
+
+#create {
+	position: relative;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	top: -95%;
 }
-section{
-	height:2200px;
-	
+
+section {
+	height: 2200px;
 }
-section table{
-	width:80%;
-	margin:0;
-	margin-left:auto;
-	margin-right:auto;
-	
+
+section table {
+	width: 80%;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
 }
-#reservation-container{
-		position:relative;
-		width:100%;
-		height:1200px;
-		border:none;
-		border-top:3px gray solid;
-		top:0px;
-		z-index:1;
-	}
-	#reservation-img{
-		width:100%;
-		height:100%;
-		z-index:-1;
-	}
-	#day-btns{
-		position:relative;
-		height:200px;
-		width:100%;
-	}
-	.day-btns{
-		position:relative;
-		width:10%;
-		height:80px;
-		left:0px;
-		margin-left:1.5%;
-		margin-right:1.5%;
-		top:60px;
-		cursor:pointer;
-		outline:none;
-		background:white;
-		border:1px linear-gradient(to right,#DD2D4A,#F26A8D) solid;
-		color:#F26A8D;
-		transition:1s;
-		border-style: solid;
-		border-image: linear-gradient(to right, #DD2D4A 0%, #F49CBB 100%);
-		border-image-slice: 1;
-		font-family:Nanum Gothic Coding;
-		font-size:24px;
-		font-weight:bolder;
-		border-image-radius:30px;
-	}
-	#reservation-content{
-		position:relative;
-		width:100%;
-		border:1px purple solid;
-		height:900px;
-	}
-	#reservation-add{
-		position:absolute;
-		width:100%;
-		height:100px;
-		background-color:transparent;
-	}
-	#reservation-addspec{
-		position:relative;
-		left:90%;
-		width:10%;
-		border-radius:30px;
-		min-height:100px;
-		height:auto;
-		text-align:center;
-		font-size:22px;
-		top:-85%;
-	}
-	#reservation-addspec > div{
-		position:relative;
-		top:-10%;
-		width:100%;
-		height:72px;
-		font-size:62px;
-	}
-	#reservation-addspec > div > i{
-		position:relative;
-		cursor:pointer;
-		color:black;
-		top:-15%;
-		transition:0.5s;
-	}
-	#reservation-table{
-		position:relative;
-		width:100%;
-		height:auto;
-	}
-	#reservation-table > tr{
-		border:1px blue solid;
-		height:50px;
-		font-size:20px;
-	}
-	#reservation-table > tr > td{
-		color:black;
-		
-	}
-	.td-create{
-		text-align:center;
-		color:#F26A8D;
-		font-size:20px;
-		font-family:Nanum Gothic Coding;
-	}
-	.location-input{
-		outline:none;
-		width:30%;
-		transition:0.1s;
-	}
-	#reservation-add-val{
-		position:relative;
-		text-align:center;
-		width:90%;
-		height:auto;
-		left:0%;
-		margin-left:0;
-		color:black;
-	}
-	.hourClass{
-		position:relative;
-		width:15%;
-		outline:none;
-		border:none;
-		border-bottom:1px black solid;
-		text-align:right;
-	}
-	.td-create > label{
-		font-weight:bolder;
-	}
+
+#reservation-container {
+	position: relative;
+	width: 100%;
+	height: 1200px;
+	border: none;
+	border-top: 3px gray solid;
+	top: 0px;
+	z-index: 1;
+}
+
+#reservation-img {
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+#day-btns {
+	position: relative;
+	height: 200px;
+	width: 100%;
+}
+
+.day-btns {
+	position: relative;
+	width: 10%;
+	height: 80px;
+	left: 0px;
+	margin-left: 1.5%;
+	margin-right: 1.5%;
+	top: 60px;
+	cursor: pointer;
+	outline: none;
+	background: white;
+	border: 1px linear-gradient(to right, #DD2D4A, #F26A8D) solid;
+	color: #F26A8D;
+	transition: 1s;
+	border-style: solid;
+	border-image: linear-gradient(to right, #DD2D4A 0%, #F49CBB 100%);
+	border-image-slice: 1;
+	font-family: Nanum Gothic Coding;
+	font-size: 24px;
+	font-weight: bolder;
+	border-image-radius: 30px;
+}
+
+#reservation-content {
+	position: relative;
+	width: 100%;
+	border: 1px purple solid;
+	height: 900px;
+}
+
+#reservation-add {
+	position: absolute;
+	width: 100%;
+	height: 100px;
+	background-color: transparent;
+}
+
+#reservation-addspec {
+	position: relative;
+	left: 90%;
+	width: 10%;
+	border-radius: 30px;
+	min-height: 100px;
+	height: auto;
+	text-align: center;
+	font-size: 22px;
+	top: -85%;
+}
+
+#reservation-addspec>div {
+	position: relative;
+	top: -10%;
+	width: 100%;
+	height: 72px;
+	font-size: 62px;
+}
+
+#reservation-addspec>div>i {
+	position: relative;
+	cursor: pointer;
+	color: black;
+	top: -15%;
+	transition: 0.5s;
+}
+
+#reservation-table {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+#reservation-table>tr {
+	border: 1px blue solid;
+	height: 50px;
+	font-size: 20px;
+}
+
+#reservation-table>tr>td {
+	color: black;
+}
+
+.td-create {
+	text-align: center;
+	color: #F26A8D;
+	font-size: 20px;
+	font-family: Nanum Gothic Coding;
+}
+
+.location-input {
+	outline: none;
+	width: 30%;
+	transition: 0.1s;
+}
+
+#reservation-add-val {
+	position: relative;
+	text-align: center;
+	width: 90%;
+	height: auto;
+	left: 0%;
+	margin-left: 0;
+	color: black;
+}
+
+.hourClass {
+	position: relative;
+	width: 15%;
+	outline: none;
+	border: none;
+	border-bottom: 1px black solid;
+	text-align: right;
+}
+
+.td-create>label {
+	font-weight: bolder;
+}
 </style>
 <script>
 function loadAddress() {
@@ -206,56 +224,64 @@ function loadAddress() {
     }).open();
 }
 </script>
-	<img id="reservation-img" src="${path }/resources/images/frame.jpg">
-	<div id="create" style="background-color:transparent;">
-			<form action="${path }/location/createEnd" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="locationCreator" value="${logginedMember.id}">
-				<table>
-					<tbody>
-						<tr><td class="td-create"><label>제목</label></td><td><input class="location-input" type="text" name="locationTitle"></td></tr>
-						<tr><td class="td-create"><label>타입</label></td>
-							<td>
-								<select id="locationType-one" onchange="selectType()" style="width:30%;height:40px;">
-									<option value="N">영업점 주 테마를 정해주세요</option>
-									<option value="S">숙박</option>
-									<option value="L">명소</option>
-									<option value="F">음식</option>
-									<option value="A">스포츠/레저</option>
-									<option value="SH">가게</option>
-								</select>
-								<select id="locationType-two" style="width:30%;height:40px;">
-									<option class="typeTwo" value="N">영업점 세부 테마를 정해주세요</option>
-								</select>
-								<input type="hidden" id="locationType" name="locationType">
-							</td>
-						</tr>
-						<tr>
-							<td class="td-create">
-								<label>지역</label>
-							</td>
-							<td>
-								<input class="location-input" style="width:30%;" type="text" onclick="loadAddress();" id="locationAddress" name="locationAddress" placeholder="도로명 및 지번 주소 검색">
-								<input class="location-input" style="width:30%;" type="text" name="locationAddressDetail" id="locationAddressDetail" placeholder="상세 주소를 적어주세요(선택)">
-							</td>
-						</tr>
-						<tr><td class="td-create"><label>메인 이미지</label></td><td><input type="file" name="mainFile"></td></tr>
-						<tr>
-							<td class="td-create" style="border-bottom:3px gray solid;height:100px;"><label>전화번호</label><br/>
-							</td>
-							<td>
-								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="000">&nbsp;-
-								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="0000">&nbsp;-
-								<input style="width:10%;" class="location-input" type="text" name="locationPhone" place-holder="0000">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<br/>
-								<div id="map"></div>
-								<br/>
-							</td>
-						</tr>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6494e3b11b016671e5a8df0ea1d331bf&libraries=services"></script>
+<img id="reservation-img" src="${path }/resources/images/frame.jpg">
+<div id="create" style="background-color: transparent;">
+	<form action="${path }/location/createEnd" method="post"
+		enctype="multipart/form-data">
+		<input type="hidden" name="locationCreator"
+			value="${logginedMember.id}">
+		<table>
+			<tbody>
+				<tr>
+					<td class="td-create"><label>제목</label></td>
+					<td><input class="location-input" type="text"
+						name="locationTitle"></td>
+				</tr>
+				<tr>
+					<td class="td-create"><label>타입</label></td>
+					<td><select id="locationType-one" onchange="selectType()"
+						style="width: 30%; height: 40px;">
+							<option value="N">영업점 주 테마를 정해주세요</option>
+							<option value="S">숙박</option>
+							<option value="L">명소</option>
+							<option value="F">음식</option>
+							<option value="A">스포츠/레저</option>
+							<option value="SH">가게</option>
+					</select> <select id="locationType-two" style="width: 30%; height: 40px;">
+							<option class="typeTwo" value="N">영업점 세부 테마를 정해주세요</option>
+					</select> <input type="hidden" id="locationType" name="locationType">
+					</td>
+				</tr>
+				<tr>
+					<td class="td-create"><label>지역</label></td>
+					<td><input class="location-input" style="width: 30%;"
+						type="text" onclick="loadAddress();" id="locationAddress"
+						name="locationAddress" placeholder="도로명 및 지번 주소 검색"> <input
+						class="location-input" style="width: 30%;" type="text"
+						name="locationAddressDetail" id="locationAddressDetail"
+						placeholder="상세 주소를 적어주세요(선택)"></td>
+				</tr>
+				<tr>
+					<td class="td-create"><label>메인 이미지</label></td>
+					<td><input type="file" name="mainFile"></td>
+				</tr>
+				<tr>
+					<td class="td-create"
+						style="border-bottom: 3px gray solid; height: 100px;"><label>전화번호</label><br />
+					</td>
+					<td><input style="width: 10%;" class="location-input"
+						type="text" name="locationPhone" place-holder="000">&nbsp;-
+						<input style="width: 10%;" class="location-input" type="text"
+						name="locationPhone" place-holder="0000">&nbsp;- <input
+						style="width: 10%;" class="location-input" type="text"
+						name="locationPhone" place-holder="0000"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><br />
+						<div id="map"></div> <br /></td>
+				</tr>
+				<script type="text/javascript"
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6494e3b11b016671e5a8df0ea1d331bf&libraries=services"></script>
 				<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = { 
@@ -295,77 +321,105 @@ function loadAddress() {
 						});
 				}
 		</script>
-		<tr>
-	<td colspan="2" style="text-align:center;">
-		<div id="reservation-container">
-		<div id="day-btns" style="z-index:1;">
-			<button type="button" class="day-btns">월요일</button>
-			<button type="button" class="day-btns">화요일</button>
-			<button type="button" class="day-btns">수요일</button>
-			<button type="button" class="day-btns">목요일</button>
-			<button type="button" class="day-btns">금요일</button>
-			<button type="button" class="day-btns">토요일</button>
-			<button type="button" class="day-btns">일요일</button>
-		</div>
-		<div id="reservation-add" style="z-index:1;" style="border:1px gray solid">
-			<table id="reservation-add-val" style="z-index:1;background-color:transparent">
 				<tr>
-					<td>
-						<label>예약 시간</label>
-					</td>
-					<td>
-						<label>예약 가격</label>
-					</td>
-					<td>
-						<label>예약 인원 수</label>
-					</td>
-					<td>
-						<label>예약 날짜</label>
+					<td colspan="2" style="text-align: center;">
+						<div id="reservation-container">
+							<div id="day-btns" style="z-index: 1;">
+								<button id="btn-Mon" type="button" class="day-btns">월요일</button>
+								<button id="btn-Tue" type="button" class="day-btns">화요일</button>
+								<button id="btn-Wen" type="button" class="day-btns">수요일</button>
+								<button id="btn-Thu" type="button" class="day-btns">목요일</button>
+								<button id="btn-Fri" type="button" class="day-btns">금요일</button>
+								<button id="btn-Sat" type="button" class="day-btns">토요일</button>
+								<button id="btn-Sun" type="button" class="day-btns">일요일</button>
+								<input id="show-div" type="hidden" value="#reservaiton-Mon">
+							</div>
+							<div id="reservation-add" style="z-index: 1;"
+								style="border:1px gray solid">
+								<table id="reservation-add-val"
+									style="z-index: 1; background-color: transparent">
+									<tr>
+										<td><label>예약 시간</label></td>
+										<td><label>예약 가격</label></td>
+										<td><label>예약 인원 수</label></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><input id="rTime" type="time">
+										</td>
+										<td><input id="rPrice" class="location-input" type="text"
+											name="add-price"></td>
+										<td><input id="rPeople" class="location-input" type="text"
+											name="add-people"></td>
+									</tr>
+								</table>
+								<div id="reservation-addspec">
+									<div>
+										<i id="reservation-plus" class="far fa-plus-square"></i>
+									</div>
+								</div>
+							</div>
+							<div id="reservation-content"
+								style="position: relative; top: 10%;">
+								<div id="reservaiton-Mon">
+									<table id="reservaiton-Mon-table">
+										<tr>
+											<td>월</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Tue">
+									<table id="reservaiton-Tue-table">
+										<tr>
+											<td>화</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Wen">
+									<table id="reservaiton-Wen-table">
+										<tr>
+											<td>수</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Thu">
+									<table id="reservaiton-Thu-table">
+										<tr>
+											<td>목</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Fri">
+									<table id="reservaiton-Fri-table">
+										<tr>
+											<td>금</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Sat">
+									<table id="reservaiton-Sat-table">
+										<tr>
+											<td>토</td>
+										</tr>
+									</table>
+								</div>
+								<div id="reservaiton-Sun">
+									<table id="reservaiton-Sun-table">
+										<tr>
+											<td>일</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
 					</td>
 				</tr>
-				<tr>
-					<td style="text-align:center;">
-						<input class="hourClass" type="number" min="1" max="24" maxlength="2" name="st-add-time-hour" style="width:10%;">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
-						<input class="hourClass" type="number" min="0" max="59" maxlength="2" name="st-add-tiem-minute" style="width:10%;">
-						<label>~</label>
-						<input class="hourClass" type="number" min="1" max="24" maxlength="2" name="af-add-time-hour" style="width:10%;">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
-						<input class="hourClass" type="number" min="0" max="59" maxlength="2" name="af-add-tiem-minute" style="width:10%;">
-					</td>
-					<td>
-						<input class="location-input" type="text" name="add-price">
-					</td>
-					<td>
-						<input class="location-input" type="text" name="add-people">
-					</td>
-					<td>
-						<input class="location-input" type="text" name="add-day">
-					</td>
-				</tr>
-			</table>
-			<div id="reservation-addspec">
-				<div><i id="reservation-plus" class="far fa-plus-square"></i></div>
-			</div>
-		</div>
-		<div id="reservation-content" style="position:relative;top:10%;">
-			<table id="reservation-table">
-				<tr>
-					<th>시간</th>
-					<th>가격</th>
-					<th>인원 수</th>
-					<th>날짜</th>
-				</tr>
-				<tr>
-					<td>10:00 ~ 12:00</td>
-					<td>12000</td>
-					<td>8 명</td>
-					<td>2020.12.22</td>
-				</tr>
-			</table>
-		</div>
-		</div>
-		</td>
-	</tr>
-		<script>
+			</tbody>
+		</table>
+		<div id="inputTypeHidden"></div>
+		<input type="submit">
+	</form>
+</div>
+<script>
 			$(".day-btns").hover(function(e){
 				$(e.target).css("background","linear-gradient(to right, #DD2D4A, #F49CBB)");
 				$(e.target).css("color","white");
@@ -373,14 +427,58 @@ function loadAddress() {
 				$(e.target).css("color","#F26A8D");
 				$(e.target).css("background","white");
 			});
-		</script>
-</td></tr>
-					</tbody>
-				</table>
-				<input type="submit">
-			</form>
-		</div>
-			<script>
+			(function() {
+				console.log("실행");
+				$('#reservaiton-Tue').hide();
+				$('#reservaiton-Wen').hide();
+				$('#reservaiton-Thu').hide();
+				$('#reservaiton-Fri').hide();
+				$('#reservaiton-Sat').hide();
+				$('#reservaiton-Sun').hide();
+			}());
+			$("#btn-Mon").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Mon').show();
+				$('#show-div').val("#reservaiton-Mon");
+			});
+			$("#btn-Tue").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Tue').show();
+				$('#show-div').val("#reservaiton-Tue");
+			});
+			$("#btn-Wen").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Wen').show();
+				$('#show-div').val("#reservaiton-Wen");
+			});
+			$("#btn-Thu").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Thu').show();
+				$('#show-div').val("#reservaiton-Thu");
+			});
+			$("#btn-Fri").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Fri').show();
+				$('#show-div').val("#reservaiton-Fri");
+			});
+			$("#btn-Sat").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Sat').show();
+				$('#show-div').val("#reservaiton-Sat");
+			});
+			$("#btn-Sun").click(function(){
+				var day = $('#show-div').val();
+				$(day).hide();
+				$('#reservaiton-Sun').show();
+				$('#show-div').val("#reservaiton-Sun");
+			});
+			
 		var filecount = 1;
 		function selectType(){
 			var typeVal=$("#locationType-one").val();
@@ -430,7 +528,55 @@ function loadAddress() {
 		}
 		$(function(){
 			$("#reservation-plus").click(function(){
-				console.log("확인");
+				var day =  $('#show-div').val();
+				var dayArr = day.split("#");
+				var dayClass = '.'+dayArr[1];
+				var rTime = $('#rTime').val();
+				var rTimeReplace = rTime.replace(":","");
+				console.log(rTimeReplace);
+				var rPrice = $('#rPrice').val();
+				var rPeople = $('#rPeople').val();
+				
+				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td></tr>");
+				
+				//여기에 인풋 타입 히든 만드는 로직 작성
+				
+				var sortEl = $(dayClass);
+				//var clone = $('.trClass').clone();
+				console.log(dayClass);
+				console.log($(sortEl).length);
+				var s = $(sortEl).length;
+				var coco = [];
+				for(var i = 0; i<s; i++){
+					console.log("이거밑에");
+					console.log($(sortEl));
+					console.log($(sortEl).eq(i).val());
+					coco.push($(sortEl).eq(i).children("input").eq(0).val().replace(":",""));
+				}
+				
+				console.log(coco);
+				coco.sort();
+				console.log(coco);
+				console.log("이거 밑에 clone");
+				for(var i in coco){
+					//console.log(coco[i]);
+					//console.log("#rTimes"+dayArr[1]+coco[i]);
+					//let name = "#rTimes"+dayArr[1]+coco[i];
+					//console.log("eq");
+					//console.log($(clone).eq(i));
+					//console.log("children");
+					//console.log($(clone).children().eq(i));
+					console.log("#rTimes"+dayArr[1]+coco[i]);
+					console.log($("#rTimes"+dayArr[1]+coco[i]));
+					var clone = $("#rTimes"+dayArr[1]+coco[i]).clone();
+					console.log("이거 밑에 클론");
+					console.log(clone);
+					$("#rTimes"+dayArr[1]+coco[i]).remove();
+					$(day+'-table').append(clone);
+				}			
+				
+				
+				
 			});
 			$("#reservation-plus").hover(function(){
 				$("#reservation-plus").css("color","#F26A8D");
@@ -462,4 +608,4 @@ function loadAddress() {
 			});
 		});
 	</script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
