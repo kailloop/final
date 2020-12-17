@@ -46,10 +46,14 @@
 			<form action="${path}/eventWriteEnd" name="eventForm" method="post" enctype="multipart/form-data">
 			<div id="write">
 					<input type="hidden" name="eventWriter" value="${logginedMember.id}">
-				<table border="1">
+				<table>
 					<tr>
 						<td style="width: 100px;">제목</td>
 						<td><input type="text" name="eventTitle" placeholder="제목을 입력해주세요"> </td>
+					</tr>
+					<tr>
+						<td style="width: 100px;">제목</td>
+						<td><input type="text" name="couponPrice" placeholder="쿠폰가격을 입력해주세요"> </td>
 					</tr>
 					<tr>
 						<td>내용</td>

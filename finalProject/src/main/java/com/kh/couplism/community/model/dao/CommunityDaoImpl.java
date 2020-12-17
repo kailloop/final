@@ -31,6 +31,18 @@ public class CommunityDaoImpl implements CommunityDao {
 		// TODO Auto-generated method stub
 		return session.delete("community.eventRemove",eventNo);
 	}
+
+	@Override
+	public Event selectEventOne(SqlSession session, int eventNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("community.selectEventOne",eventNo);
+	}
+
+	@Override
+	public int updateEvent(SqlSession session, Event event) {
+		// TODO Auto-generated method stub
+		return session.update("community.updateEvent",event);
+	}
 	
 	
 	

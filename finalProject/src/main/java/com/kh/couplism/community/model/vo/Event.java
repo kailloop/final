@@ -18,4 +18,5 @@ public class Event {
 	private String eventContent;
 	private String eventOriginalFilename;
 	private String eventRenamedFilename;
+	private int couponPrice;
 }

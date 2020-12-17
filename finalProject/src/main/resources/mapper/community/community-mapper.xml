@@ -10,10 +10,24 @@
 	</select>
 	
 	<insert id="insertEvent" parameterType="com.kh.couplism.community.model.vo.Event">
-		insert into event values(seq_eventNo.nextval,#{eventTitle},#{eventWriter},#{eventContent},#{eventOriginalFilename},#{eventRenamedFilename})
+		insert into event values(seq_eventNo.nextval,#{eventTitle},#{eventWriter},#{eventContent},#{eventOriginalFilename},#{eventRenamedFilename},#{couponPrice})
 	</insert>
 	
 	<select id="eventRemove" parameterType="_int">
 		delete from event where eventNo=#{eventNo}
 	</select>
+	
+	<select id="selectEventOne" parameterType="_int" resultType="com.kh.couplism.community.model.vo.Event">
+		select * from event where eventNo=#{eventNo}
+	</select>
+	
+	<update id="updateEvent" parameterType="com.kh.couplism.community.model.vo.Event">
+		update event 
+		set eventTitle=#{eventTitle},
+			eventContent=#{eventContent},
+			eventOriginalFilename=#{eventOriginalFilename},
+			eventRenamedFilename=#{eventRenamedFilename},
+			couponPrice=#{couponPrice}
+		where eventNo=#{eventNo}
+	</update>
 </mapper>

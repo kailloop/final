@@ -16,4 +16,8 @@ public interface CommunityService {
 	int insertEvent(Event event);
 	
 	int eventRemove(int eventNo);
+	
+	Event selectEventOne(int eventNo);
+	
+	int updateEvent(Event event);
 }

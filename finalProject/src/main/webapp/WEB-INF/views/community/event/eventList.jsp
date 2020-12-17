@@ -45,7 +45,7 @@
 		<!--리스트-->
 		<c:forEach items="${list }" var="list">
 			<div class="listdiv" onclick="location.replace('${path }/eventView?eventNo=<c:out value="${list.eventNo }"/>')">
-				<img class="imgclass" alt="" src="<c:out value='${list.eventRenamedFilename}' />" width="298px" height="200px;">
+				<img class="imgclass" alt="" src="${path }/resources/upload/event/${list.eventRenamedFilename}" width="298px" height="200px;">
 				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: center; height: 15px;">
 					<c:out value="${list.eventTitle}" />
 				</p>
@@ -81,9 +81,5 @@
 
 </section>
 
-<script>
-	/*목록클릭 (view로 가는거)  */
-	
-</script>
 	
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

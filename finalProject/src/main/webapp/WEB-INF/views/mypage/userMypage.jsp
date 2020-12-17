@@ -188,11 +188,13 @@
 					
 					<c:if test="${logginedMember!=null }">
 						<c:if test="${naverLogin.email==null }">
-							<div class="feature" onclick="location.replace('${path }/faq/faqList.do');">	
-								<i class="fas fa-user-cog"></i>
-								<h3>회원정보수정</h3>
-								<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
-							</div>
+							<c:if test="${kakaoLogin.email!=null }">
+								<div class="feature" onclick="location.replace('${path }/faq/faqList.do');">	
+									<i class="fas fa-user-cog"></i>
+									<h3>회원정보수정</h3>
+									<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
+								</div>
+							</c:if>
 						</c:if>
 						
 						<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->

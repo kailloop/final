@@ -96,6 +96,7 @@ public class CommumityController {
 		logger.debug("파일크기:"+img.getSize());
 		logger.debug("작성자:"+event.getEventWriter());
 		logger.debug("제목:"+event.getEventTitle());
+		logger.debug("가격:"+event.getCouponPrice());
 		logger.debug("내용:"+event.getEventContent());
 		
 		String saveDir=request.getServletContext().getRealPath("/resources/upload/event");
@@ -103,7 +104,6 @@ public class CommumityController {
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
-		
 		
 		if(!img.isEmpty()) {
 			String original=img.getOriginalFilename();
@@ -117,11 +117,8 @@ public class CommumityController {
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
-			event=new Event(0,event.getEventTitle(),event.getEventWriter(),event.getEventContent(),original,rename);
+			event=new Event(0,event.getEventTitle(),event.getEventWriter(),event.getEventContent(),original,rename,event.getCouponPrice());
 		}
-		
-		
-		//data DB에 저장하기
 		int result=0;
 		try {
 			result=service.insertEvent(event);
@@ -139,14 +136,99 @@ public class CommumityController {
 	
 	
 	@RequestMapping("/eventRemove")
-	public ModelAndView eventremove(ModelAndView mv,
-			@RequestParam(value="eventNo") int eventNo) {
+	public ModelAndView eventremove(ModelAndView mv, @RequestParam(value="eventNo") int eventNo) {
 	
 		int result=service.eventRemove(eventNo);
 		mv.setViewName("redirect:/event/eventList.do");
 
 		return mv;
 	}
-
 	
+	
+	
+	
+	
+//	글수정 이동하는 메소드
+	@RequestMapping("/eventUpdate")
+	public ModelAndView eventUpdate(ModelAndView mv, @RequestParam(value="eventNo") int eventNo) {
+		mv.addObject("logoPath","/resources/images/eventlogo.jpg");
+		mv.addObject("titleHan","이벤트 수정");
+		mv.addObject("titleEng","Event Update");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		
+		Event e=service.selectEventOne(eventNo);
+		
+		mv.addObject("event",e);
+		mv.setViewName("community/event/eventUpdate");
+		return mv;
+	}
+	
+	@RequestMapping("/eventUpdateEnd")
+	public ModelAndView eventUpdateEnd(ModelAndView mv,MultipartFile img,Event event,HttpServletRequest request,
+								@RequestParam(value="eventNo") int eventNo) {
+		logger.debug("파일명:"+img.getOriginalFilename());
+		logger.debug("파일크기:"+img.getSize());
+		logger.debug("작성자:"+event.getEventWriter());
+		logger.debug("제목:"+event.getEventTitle());
+		logger.debug("가격:"+event.getCouponPrice());
+		logger.debug("내용:"+event.getEventContent());
+		
+		
+		
+		String saveDir=request.getServletContext().getRealPath("/resources/upload/event");
+		File dir=new File(saveDir);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		
+		if(!img.isEmpty()) {
+			String original=img.getOriginalFilename();
+			String ext=original.substring(original.lastIndexOf(".")+1);
+			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+			int random=(int)(Math.random()*100);
+			String rename="evnet"+sdf.format(new Date(System.currentTimeMillis()))+random+"."+ext;
+			try {
+				img.transferTo(new File(saveDir+"/"+rename));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			event=new Event(0,event.getEventTitle(),event.getEventWriter(),event.getEventContent(),original,rename,event.getCouponPrice());
+		}
+		
+		int result=0;
+		try {
+			result=service.updateEvent(event);
+			System.out.println(result);
+		}catch(RuntimeException e) {
+			System.out.println("입력실패");
+			e.printStackTrace();
+		}
+		mv.addObject("msg",result>0?"게시글 수정":"게시글 수정실패");
+		mv.addObject("loc","/event/eventList.do");
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+	
+	
+	
+//	쿠폰창 보여주는 메소드
+	@RequestMapping("/coupon")
+	public ModelAndView coupon(ModelAndView mv,Event event,
+						@RequestParam(value="eventNo") int eventNo,
+						@RequestParam(value="couponPrice") int couponPrice,
+						@RequestParam(value="eventTitle") String eventTitle,
+						@RequestParam(value="couponId") String couponId) {
+		
+		logger.debug("작성자:"+event.getEventWriter());
+		logger.debug("제목:"+event.getEventTitle());
+		logger.debug("가격:"+event.getCouponPrice());
+		logger.debug("내용:"+event.getEventContent());
+		
+		
+		
+		mv.setViewName("community/event/coupon");
+		return mv;
+	}
 }
