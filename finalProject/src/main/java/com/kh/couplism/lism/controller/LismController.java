@@ -32,4 +32,20 @@ public class LismController {
 		return mv;
 	}
 	
+	@RequestMapping("/lism/create")
+	public ModelAndView createLism(ModelAndView mv) {
+		
+		mv.addObject("logoPath","/resources/lism/lism-create.jpg");
+		mv.addObject("titleHan","추억을 담아보세요");
+		mv.addObject("titleEng","Create Your Lism");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		mv.setViewName("lism/create");
+		
+		return mv;
+	}
+	
 }
