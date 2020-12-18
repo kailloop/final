@@ -74,10 +74,16 @@
 		position:relative;
 		width:50%;
 		top:14%;
-		height:350px;
+		height:300px;
 		margin-left:auto;
 		margin-right:auto;
 		border:1px red solid;
+		overflow:hidden;
+	}
+	.slideFont{
+		font-size:62px;
+		color:black;
+		cursor:pointer;
 	}
 </style>
 	<label id="page-title">Couplism</label>
@@ -88,9 +94,11 @@
 		</div>
 		<br/>
 		<div id="focus-one" class="focus">
-			
+			<label>${logginedMember.id }</label>
 		</div>
 		<div id="focus-two" class="focus">
+				<label class="slideFont">〈</label>
+				<label class="slideFont">〉</label>
 			<div class="handle">
 			</div>
 		</div>

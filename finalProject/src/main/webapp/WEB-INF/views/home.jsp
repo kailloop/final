@@ -132,7 +132,6 @@
 		<img class="img two" src="${path }/resources/images/mainimg1.jpg" alt="로고3">
 		
 		
-		
 	</section>
 
 	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
