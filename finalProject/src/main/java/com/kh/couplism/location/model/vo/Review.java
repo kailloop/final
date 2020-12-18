@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 public class Review {
-	private int reviewNo;
-	private int locationNo;
-	private int reviewLevel;
-	private String reviewId;
-	private String reviewContent;
-	private int reviewGrade;
-	private String ReviewDate;
-	private int reviewPosition;
+	private int reviewNo;//리뷰번호
+	private int locationNo;//location번호
+	private int reviewLevel;//리뷰 위치
+	private String reviewId;//리뷰 작성자
+	private String reviewContent;//리뷰 내용
+	private int reviewGrade;//리뷰 별점
+	private String reviewDate;//리뷰 작성일
 }

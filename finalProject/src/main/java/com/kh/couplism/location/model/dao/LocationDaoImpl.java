@@ -64,8 +64,17 @@ public class LocationDaoImpl implements LocationDao {
 
 	@Override
 	public List<Review> getLocationReview(int locationNo, SqlSessionTemplate session) {
-		
 		return session.selectList("location.getLocationReview", locationNo);
+	}
+
+	@Override
+	public Location getLocation(int locationNo, SqlSessionTemplate session) {
+		return session.selectOne("location.getLocation",locationNo);
+	}
+
+	@Override
+	public List<LocationPrice> getLocationPrice(int locationNo, SqlSessionTemplate session) {
+		return session.selectList("location.getLocationPrice",locationNo);
 	}
 	
 	

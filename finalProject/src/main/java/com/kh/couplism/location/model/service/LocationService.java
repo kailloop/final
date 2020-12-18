@@ -24,4 +24,6 @@ public interface LocationService {
 	public int insertLocationPrice(LocationPrice lp);
 	public LocationMain getLocationMain(int locationNo);
 	public List<Review> getLocationReview(int locationNo);
+	public Location getLocation(int locationNo);
+	public List<LocationPrice> getLocationPrice(int locationNo);
 }

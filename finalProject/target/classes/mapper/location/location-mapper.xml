@@ -32,8 +32,7 @@
 		<result property="reviewId" column="REVIEWID"/>
 		<result property="reviewContent" column="REVIEWCONTENT"/>
 		<result property="reviewGrade" column="REVIEWGRADE"/>
-		<result property="ReviewDate" column="REVIEWDATE"/>
-		<result property="reviewPosition" column="REVIEWPOSITION"/>
+		<result property="reviewDate" column="REVIEWDATE"/>
 	</resultMap>
 	
 	<resultMap id="reviewFile" type="com.kh.couplism.location.model.vo.ReviewFile">
@@ -115,5 +114,15 @@
 	<select id="getLocationReview" parameterType="_int" resultMap="review">
 		SELECT * FROM REVIEW
 		WHERE LOCATIONNO LIKE #{locationNo}
+	</select>
+	
+	<select id="getLocation" parameterType="_int" resultMap="location">
+		SELECT * FROM LOCATION 
+		WHERE LOCATIONNO LIKE #{locationNo}	
+	</select>
+	
+	<select id="getLocationPrice" parameterType="_int" resultMap="locationPrice">
+		SELECT * FROM LOCATION_PRICE
+		WHERE LOCATION_NO LIKE #{locationNo}
 	</select>
 </mapper>

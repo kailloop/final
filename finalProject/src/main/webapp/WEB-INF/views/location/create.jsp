@@ -228,7 +228,7 @@ function loadAddress() {
 </script>
 <img id="reservation-img" src="${path }/resources/images/frame.jpg">
 <div id="create" style="background-color: transparent; ">
-	<form action="${path }/location/createEnd" method="post"
+	<form id="createForm" action="${path }/location/createEnd" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="locationCreator"
 			value="${logginedMember.id}">
@@ -249,7 +249,7 @@ function loadAddress() {
 							<option value="F">음식</option>
 							<option value="A">스포츠/레저</option>
 							<option value="SH">가게</option>
-					</select> <select id="locationType-two" style="width: 30%; height: 40px;">
+					</select> <select id="locationType-two" style="width: 30%; height: 40px;" onchange="selectTypeTwo()">
 							<option class="typeTwo" value="N">영업점 세부 테마를 정해주세요</option>
 					</select> <input type="hidden" id="locationType" name="locationType">
 					</td>
@@ -258,10 +258,11 @@ function loadAddress() {
 					<td class="td-create"><label>지역</label></td>
 					<td><input class="location-input" style="width: 30%;"
 						type="text" onclick="loadAddress();" id="locationAddress"
-						name="locationAddress" placeholder="도로명 및 지번 주소 검색"> <input
+						name="locationAddr" placeholder="도로명 및 지번 주소 검색"> <input
 						class="location-input" style="width: 30%;" type="text"
 						name="locationAddressDetail" id="locationAddressDetail"
 						placeholder="상세 주소를 적어주세요(선택)"></td>
+						<input type="hidden" id="endAddr" name="locationAddress">
 				</tr>
 				<tr>
 					<td class="td-create"><label>메인 이미지</label></td>
@@ -272,11 +273,7 @@ function loadAddress() {
 						style="border-bottom: 3px gray solid; height: 100px;"><label>전화번호</label><br />
 					</td>
 					<td><input style="width: 10%;" class="location-input"
-						type="text" name="locationPhone" place-holder="000">&nbsp;-
-						<input style="width: 10%;" class="location-input" type="text"
-						name="locationPhone" place-holder="0000">&nbsp;- <input
-						style="width: 10%;" class="location-input" type="text"
-						name="locationPhone" place-holder="0000"></td>
+						type="text" name="locationPhone" place-holder="000-0000-0000">
 				</tr>
 				<tr>
 					<td colspan="2"><br />
@@ -421,7 +418,7 @@ function loadAddress() {
 			</tbody>
 		</table>
 		<div id="inputTypeHidden"></div>
-		<input type="submit">
+		<button type="button" onclick="submitForm();">전송</button>
 	</form>
 </div>
 <script>
@@ -553,6 +550,18 @@ function loadAddress() {
 				$("#locationType-two").append("<option value='4' class='typeTwo'>스포츠가게</option>");
 				return;
 			}
+		}
+		
+		
+		function selectTypeTwo(){
+			var typeVals=$("#locationType-one").val()+$("#locationType-two").val();
+			$("#locationType").val(typeVals);
+		}
+		
+		function submitForm(){
+			var endAddr = $("#locationAddress").val()+$("#locationAddressDetail").val();
+			$("#endAddr").val(endAddr);
+			$("#createForm").submit();
 		}
 		$(function(){
 			$("#reservation-plus").click(function(){
