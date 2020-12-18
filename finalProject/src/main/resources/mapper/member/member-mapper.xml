@@ -26,4 +26,8 @@
 		SELECT * FROM MEMBER WHERE EMAIL=#{email} AND PHONE=#{phone}
 	</select>
 	
+	<select id="selectOnePartner" parameterType="map" resultType="partner">
+		SELECT * FROM PARTNER WHERE ID=#{id-input}
+	</select>
+	
 </mapper>

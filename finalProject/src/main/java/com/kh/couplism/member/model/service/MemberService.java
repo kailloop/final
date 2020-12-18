@@ -22,6 +22,6 @@ public interface MemberService {
 	
 	Member selectOneMember(Map param);
 	
-	
+	Partner selectOnePartner(Map param);
 	
 }

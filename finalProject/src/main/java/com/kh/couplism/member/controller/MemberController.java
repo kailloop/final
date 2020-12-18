@@ -74,9 +74,17 @@ public class MemberController {
 		if(user!=null) {
 			//id체크
 			if(encoder.matches((String)param.get("pw-input"),user.getPassword())){
-				path="redirect:/";
-				m.addAttribute("logginedMember",user);
-				//session.setAttribute("logginedMember", user);
+				Partner partner=service.selectOnePartner(param);
+				if(partner==null) {
+					path="redirect:/";
+					m.addAttribute("logginedMember",user);
+					//session.setAttribute("logginedMember", user);
+				}else {
+					path="redirect:/";
+					m.addAttribute("logginedMember",user);
+					m.addAttribute("partnerMember",partner);
+				}
+				
 			}else {
 				//비밀번호 다름
 				msg="아이디나 패스워드가 일치하지 않습니다.";

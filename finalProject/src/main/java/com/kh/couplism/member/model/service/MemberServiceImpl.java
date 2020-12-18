@@ -62,6 +62,14 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return dao.findId(session,param);
 	}
+
+	@Override
+	public Partner selectOnePartner(Map param) {
+		// TODO Auto-generated method stub
+		return dao.selectOnePartner(session,param);
+	}
+	
+	
 	
 	
 	

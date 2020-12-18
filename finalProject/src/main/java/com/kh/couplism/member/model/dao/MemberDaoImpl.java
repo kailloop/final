@@ -54,6 +54,14 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("member.findId",param);
 	}
+
+	@Override
+	public Partner selectOnePartner(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("member.selectOnePartner",param);
+	}
+	
+	
 	
 	
 	
