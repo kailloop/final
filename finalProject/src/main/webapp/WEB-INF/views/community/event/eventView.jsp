@@ -96,8 +96,8 @@
 				<input type="hidden" name="eventTitle" value="${event.eventTitle }">
 				<input type="hidden" name=eventNo value="${event.eventNo }">
 				<c:if test="${logginedMember!=null}">
-					<c:if test="${naverLogin.email==null }">
-						<c:if test="${kakaoLogin.email==null }">
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">
 							<input type="hidden" name="couponId" value="${logginedMember.id}">
 						</c:if>
 					</c:if>
@@ -105,8 +105,8 @@
 				
 				<!--로그인한 사람들 쿠폰배너  -->
 				<c:if test="${logginedMember!=null}">
-					<c:if test="${naverLogin.email==null }">
-						<c:if test="${kakaoLogin.email==null }">
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">
 							<button type="button" class="couponBtn" onclick="couponDownBtn();">
 								<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
 							</button>	
@@ -117,7 +117,7 @@
 		
 			<!--네이버,카카오회원 쿠폰배너  -->
 			<c:if test="${logginedMember!=null}">
-				<c:if test="${naverLogin.email!=null || kakaoLogin.email!=null}">
+				<c:if test="${naverLogin!=null || kakaoLogin!=null}">
 					<button type="button" class="couponBtn" onclick="snscoupon();">
 						<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
 					</button>
@@ -126,8 +126,8 @@
 	
 			<!--로그인안한 사람들 쿠폰배너  -->	
 			<c:if test="${logginedMember==null}">
-				<c:if test="${naverLogin.email==null}">
-					<c:if test="${kakaoLogin.email==null}">
+				<c:if test="${naverLogin==null}">
+					<c:if test="${kakaoLogin==null}">
 						<button type="button" class="couponBtn" onclick="nocoupon();">
 							<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
 						</button>
