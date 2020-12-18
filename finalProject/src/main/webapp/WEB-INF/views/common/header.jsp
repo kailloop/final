@@ -295,8 +295,7 @@
 				<%-- <button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button> --%>
 				
 				<div id="mypage" class="circle">
-				
-				
+	
 		        
            		<!--관리자  -->
 		        <c:if test="${logginedMember!=null }">
@@ -324,7 +323,7 @@
 				<c:if test="${logginedMember!=null }">
 					<c:if test="${naverLogin!=null }">
 						<c:if test="${kakaoLogin==null }">
-							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.id }"/>'">${naverLogin.nickname }님</i></p> 
 						</c:if>
 					</c:if>
 				</c:if>
@@ -332,7 +331,7 @@
 				<c:if test="${logginedMember!=null }"> 
 					<c:if test="${naverLogin==null }">
 						<c:if test="${kakaoLogin!=null }">
-							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.email }"/>'">${kakaoLogin.nickname }님</i></p> 
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.id }"/>'">${kakaoLogin.nickname }님</i></p> 
 						</c:if>
 					</c:if>
 				</c:if>	
