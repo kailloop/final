@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class SNSMember {
-	private String email;
+	private String id;
 	private String nickname;
 	private String birthday;
 	private String age;

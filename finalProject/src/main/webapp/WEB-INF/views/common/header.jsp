@@ -296,7 +296,7 @@
 				
 				<div id="mypage" class="circle">
 				
-				<c:if test="${logginedMember!=null }"> ㅇㅇ 로그인했을때
+				<c:if test="${logginedMember!=null }">
 						<c:if test="${logginedMember.email eq 'admin@admin' }"> <!--관리자  -->
 		                	<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">   <small>관리자</small> 님</i></p>
 		                </c:if>
