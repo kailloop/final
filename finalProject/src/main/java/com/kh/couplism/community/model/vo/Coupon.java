@@ -1,5 +1,17 @@
 package com.kh.couplism.community.model.vo;
 
-public class Coupon {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
+public class Coupon {
+	private int eventNo;
+	private String eventTitle;
+	private String couponId;
+	private int couponPrice;
 }

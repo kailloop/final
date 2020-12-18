@@ -1,7 +1,5 @@
 package com.kh.couplism.community.model.vo;
 
-import com.kh.couplism.location.model.vo.Review;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

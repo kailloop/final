@@ -14,12 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.couplism.common.PageBarFactory;
 import com.kh.couplism.community.model.service.CommunityService;
+import com.kh.couplism.community.model.vo.Coupon;
 import com.kh.couplism.community.model.vo.Event;
-import com.sun.corba.se.impl.util.Utility;
 
 
 @Controller
@@ -43,17 +43,19 @@ public class CommumityController {
 	}
 	
 	@RequestMapping("/event/eventList.do")
-	public ModelAndView eventList(ModelAndView mv) {
+	public ModelAndView eventList(ModelAndView mv,
+						@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
+						@RequestParam(value="numPerPage", required=false, defaultValue="9") int numPerPage) {
 		mv.addObject("logoPath","/resources/images/eventlogo.jpg");
 		mv.addObject("titleHan","이벤트");
 		mv.addObject("titleEng","EVENT");
 		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 		
-		List<Event> list=service.selectList();
-		
+		List<Event> list=service.selectList(cPage,numPerPage);
+		int totalData=service.selectCount();
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalData, cPage, numPerPage, "boardList.do"));
+		mv.addObject("totalData",totalData);
 		mv.addObject("list",list);
-		
-		
 		
 		mv.setViewName("community/event/eventList");
 		return mv;
@@ -213,20 +215,22 @@ public class CommumityController {
 	
 	
 	
-//	쿠폰창 보여주는 메소드
+//	쿠폰발급받고 창띄워주는 메소드
 	@RequestMapping("/coupon")
-	public ModelAndView coupon(ModelAndView mv,Event event,
+	public ModelAndView coupon(ModelAndView mv,Coupon coupon,
 						@RequestParam(value="eventNo") int eventNo,
 						@RequestParam(value="couponPrice") int couponPrice,
 						@RequestParam(value="eventTitle") String eventTitle,
 						@RequestParam(value="couponId") String couponId) {
 		
-		logger.debug("작성자:"+event.getEventWriter());
-		logger.debug("제목:"+event.getEventTitle());
-		logger.debug("가격:"+event.getCouponPrice());
-		logger.debug("내용:"+event.getEventContent());
+		logger.debug("이벤트인덱스:"+coupon.getEventNo());
+		logger.debug("이벤트제목:"+coupon.getEventTitle());
+		logger.debug("쿠폰받는아이디:"+coupon.getCouponId());
+		logger.debug("쿠폰가격:"+coupon.getCouponPrice());
 		
-		
+		coupon=new Coupon(coupon.getEventNo(),coupon.getEventTitle(),coupon.getCouponId(),coupon.getCouponPrice());
+		int result=service.couponDown(coupon);
+		/* Coupon c=service.couponSelect(eventNo); */
 		
 		mv.setViewName("community/event/coupon");
 		return mv;

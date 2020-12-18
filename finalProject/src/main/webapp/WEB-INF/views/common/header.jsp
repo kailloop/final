@@ -296,27 +296,49 @@
 				
 				<div id="mypage" class="circle">
 				
-				<c:if test="${logginedMember!=null }"> ㅇㅇ 로그인했을때
-						<c:if test="${logginedMember.email eq 'admin@admin' }"> <!--관리자  -->
-		                	<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">   <small>관리자</small> 님</i></p>
-		                </c:if>
-						<c:if test="${naverLogin.email==null }"> <!--일반회원  -->
-							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p> 
-						</c:if>
-						<c:if test="${logginedMember!=null }">
-							<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->
-								<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
+				
+		        
+           		<!--관리자  -->
+		        <c:if test="${logginedMember!=null }">
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">				
+		            		<c:if test="${logginedMember.id eq 'admin' }">
+		            			<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/adminMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">   <small>관리자</small> 님</i></p>
+		            		</c:if>
+		            	</c:if>
+		            </c:if>
+		        </c:if>
+		        
+		        <!--일반회원  -->
+		        <c:if test="${logginedMember!=null }">
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">
+							<c:if test="${logginedMember.id ne 'admin' }">
+		            			<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${logginedMember.id }"/>'">${logginedMember.nickname }님</i></p>
 							</c:if>
 						</c:if>
-						<c:if test="${logginedMember!=null }"> 
-							<c:if test="${kakaoLogin.email!=null }"> <!-- 카카오회원 -->
-								<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.email }"/>'">${kakaoLogin.nickname }님</i></p>
-							</c:if>
+		            </c:if>
+		        </c:if>
+		   
+		        <!--네이버회원  -->
+				<c:if test="${logginedMember!=null }">
+					<c:if test="${naverLogin!=null }">
+						<c:if test="${kakaoLogin==null }">
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${naverLogin.email }"/>'">${naverLogin.nickname }님</i></p> 
 						</c:if>
-					
+					</c:if>
+				</c:if>
+				<!--카카오회원  -->
+				<c:if test="${logginedMember!=null }"> 
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin!=null }">
+							<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/userMypage.do?idvalue=<c:out value="${kakaoLogin.email }"/>'">${kakaoLogin.nickname }님</i></p> 
+						</c:if>
+					</c:if>
+				</c:if>	
 	                
 	                <%-- <p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do'">   <small>파트너</small> 님</i></p> --%> 
-				</c:if>
+				
             	</div>
 			</div>
 		</div>

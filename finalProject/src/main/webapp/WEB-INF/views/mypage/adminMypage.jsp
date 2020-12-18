@@ -192,12 +192,12 @@
 						<div class="feature">	
 							<i class="fas fa-users-cog"></i>
 							<h3>회원관리</h3>
-							<p>모든 회원들의 정보를 관리할 수 있습니다.</p>
+							<p>모든 회원들의 정보를<br>관리할 수 있습니다.</p>
 						</div>
 						<div class="feature">
 							<i class="fas fa-tasks"></i>
 							<h3>제휴회원관리</h3>
-							<p>제휴회원 승인/거절 할 수 있습니다.</p>
+							<p>제휴회원 승인/거절<br>할 수 있습니다.</p>
 						</div>
 						<div class="feature">
 							<i class="fas fa-thumbtack"></i>

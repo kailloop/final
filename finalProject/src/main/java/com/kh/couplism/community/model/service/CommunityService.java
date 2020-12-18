@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.couplism.community.model.vo.Coupon;
 import com.kh.couplism.community.model.vo.Event;
 
 @Service
 public interface CommunityService {
 
-	List<Event> selectList();
+	List<Event> selectList(int cPage, int numPerPage);
+	int selectCount();
 	
 	Event selectEvent(int eventNo);
 	
@@ -20,4 +22,6 @@ public interface CommunityService {
 	Event selectEventOne(int eventNo);
 	
 	int updateEvent(Event event);
+	
+	int couponDown(Coupon coupon);
 }

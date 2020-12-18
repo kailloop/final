@@ -67,13 +67,21 @@
 		
 		
 		<div id="pageBar">
-		</div>
+        	${pageBar }
+        </div>
 		
 		
-		
+		<!--관리자만 글쓰기가능  -->
 		<div id="btnDiv">
-			<!--관리자만 글쓰기할수있게 분기처리  -->
-			<button type="button" onclick="location.href='${path }/eventWrite'" class="btn btn-warning">글쓰기</button>
+			<c:if test="${logginedMember!=null }">
+				<c:if test="${naverLogin==null }">
+					<c:if test="${kakaoLogin==null }">				
+		            	<c:if test="${logginedMember.id eq 'admin' }">
+							<button type="button" onclick="location.href='${path }/eventWrite'" class="btn btn-warning">글쓰기</button>
+						</c:if>
+					</c:if>
+				</c:if>
+			</c:if>
 		</div>
 
 	</div><!--eventListDiv닫는곳  -->

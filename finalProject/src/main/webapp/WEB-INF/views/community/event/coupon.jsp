@@ -51,8 +51,7 @@
 
 <script>
 	function downBtn(){
-		if(confirm("삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?")){ 
-			location.replace('${path}/eventRemove?eventNo=${event.eventNo}');
-		}
+		javascript:window.close();
+		window.opener.location.href='${path}/conponList?idvalue=<c:out value="${logginedMember.id }"/>';
 	}
 </script>

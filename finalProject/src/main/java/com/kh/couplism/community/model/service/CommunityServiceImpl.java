@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.couplism.community.model.dao.CommunityDao;
+import com.kh.couplism.community.model.vo.Coupon;
 import com.kh.couplism.community.model.vo.Event;
 
 @Service
@@ -18,9 +19,15 @@ public class CommunityServiceImpl implements CommunityService {
 	private SqlSession session;
 
 	@Override
-	public List<Event> selectList() {
+	public List<Event> selectList(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
-		return dao.selectList(session);
+		return dao.selectList(session,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectCount() {
+		// TODO Auto-generated method stub
+		return dao.selectCount(session);
 	}
 
 	@Override
@@ -51,6 +58,12 @@ public class CommunityServiceImpl implements CommunityService {
 	public int updateEvent(Event event) {
 		// TODO Auto-generated method stub
 		return dao.updateEvent(session,event);
+	}
+
+	@Override
+	public int couponDown(Coupon coupon) {
+		// TODO Auto-generated method stub
+		return dao.couponDown(session,coupon);
 	}
 	
 	

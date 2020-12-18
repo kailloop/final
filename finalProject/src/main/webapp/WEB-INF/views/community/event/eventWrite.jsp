@@ -52,7 +52,7 @@
 						<td><input type="text" name="eventTitle" placeholder="제목을 입력해주세요"> </td>
 					</tr>
 					<tr>
-						<td style="width: 100px;">제목</td>
+						<td style="width: 100px;">가격</td>
 						<td><input type="text" name="couponPrice" placeholder="쿠폰가격을 입력해주세요"> </td>
 					</tr>
 					<tr>

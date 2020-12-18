@@ -180,40 +180,53 @@
       }
 </style>
 	<form>
-				<div class="inner" style="text-align:center;">
-					<br>
-					<h2>MY PAGE</h2>
-					<br><br><br>
-					<div class="features">
-					
-					<c:if test="${logginedMember!=null }">
-						<c:if test="${naverLogin.email==null }">
-							<c:if test="${kakaoLogin.email!=null }">
-								<div class="feature" onclick="location.replace('${path }/faq/faqList.do');">	
-									<i class="fas fa-user-cog"></i>
-									<h3>회원정보수정</h3>
-									<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
-								</div>
-							</c:if>
-						</c:if>
-						
-						<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->
-							<div class="feature" onclick="naver_update();">	
-								<i class="fas fa-user-cog"></i>
-								<h3>회원회원정보수정</h3>
-								<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
-							</div> 
-						</c:if>
-						
-						<c:if test="${kakaoLogin.email!=null }"> <!--카카오회원  -->
-							<div class="feature" onclick="kakao_update();">	
-								<i class="fas fa-user-cog"></i>
-								<h3>회원회원정보수정</h3>
-								<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
-							</div> 
-						</c:if>
+		<div class="inner" style="text-align:center;">
+		<br>
+		<h2>MY PAGE</h2>
+		<br><br><br>
+		<div class="features">			
+			<!--일반회원  -->
+			<c:if test="${logginedMember!=null }">
+				<c:if test="${naverLogin==null }">
+					<c:if test="${kakaoLogin==null }">
+						<div class="feature" onclick="location.replace('${path }/faq/faqList.do');">	
+							<i class="fas fa-user-cog"></i>
+							<h3>회원정보수정</h3>
+							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
+						</div>
+						<div class="feature">
+							<i class="far fa-heart"></i>
+							<h3>연인관리</h3>
+							<p>상대방 아이디를 연인아이디로<br>관리할 수 있습니다.</p>
+						</div>
+						<div class="feature" onclick="location.replace('${path}/conponList?idvalue=<c:out value="${logginedMember.id }"/>')">
+							<i class="fas fa-box-open"></i>
+							<h3>쿠폰함</h3>
+							<p>보유하고 계신 쿠폰을<br>확인, 관리할 수 있습니다.</p>
+						</div>
+						<div class="feature" onclick="location.replace('${path }/anniversary/myCalendar.do?idvalue=<c:out value="${logginedMember.id }"/>')">
+							<i class="fas fa-calendar-alt"></i>
+							<h3>캘린더</h3>
+							<p>캘린더를 이용하실 수 있습니다.</p>
+						</div>
+						<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${logginedMember.id }"/>')">
+							<i class="fas fa-history"></i>
+							<h3>예약내역</h3>
+							<p>예약내역을 확인하실 수 있습니다.</p>
+						</div>
 					</c:if>
+				</c:if>
+			</c:if>
 						
+			<!--네이버회원  -->	
+			<c:if test="${logginedMember!=null }">
+				<c:if test="${naverLogin.email!=null }">
+					<c:if test="${kakaoLogin==null }">
+						<div class="feature" onclick="naver_update();">	
+							<i class="fas fa-user-cog"></i>
+							<h3>회원정보수정</h3>
+							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
+						</div> 
 						<div class="feature">
 							<i class="far fa-heart"></i>
 							<h3>연인관리</h3>
@@ -229,37 +242,55 @@
 							<h3>캘린더</h3>
 							<p>캘린더를 이용하실 수 있습니다.</p>
 						</div>
-						<c:if test="${logginedMember!=null }">
-							<c:if test="${naverLogin.email==null }">
-								<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${logginedMember.id }"/>')">
-									<i class="fas fa-history"></i>
-									<h3>예약내역</h3>
-									<p>예약내역을 확인하실 수 있습니다.</p>
-								</div>
-							</c:if>
+						<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${naverLogin.email }"/>')">
+							<i class="fas fa-history"></i>
+							<h3>예약내역</h3>
+							<p>예약내역을 확인하실 수 있습니다.</p>
+						</div>
+					</c:if>
+				</c:if>
+			</c:if>
+					
+			<!--카카오회원  -->	
+			<c:if test="${logginedMember!=null }">
+				<c:if test="${naverLogin.email==null }">
+					<c:if test="${kakaoLogin.email!=null }"> 
+						<div class="feature" onclick="kakao_update();">	
+							<i class="fas fa-user-cog"></i>
+							<h3>회원정보수정</h3>
+							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
+						</div> 
+						<div class="feature">
+							<i class="far fa-heart"></i>
+							<h3>연인관리</h3>
+							<p>상대방 아이디를 연인아이디로<br>관리할 수 있습니다.</p>
+						</div>
+						<div class="feature">
+							<i class="fas fa-box-open"></i>
+							<h3>쿠폰함</h3>
+							<p>보유하고 계신 쿠폰을<br>확인, 관리할 수 있습니다.</p>
+						</div>
+						<div class="feature" onclick="location.replace('${path }/anniversary/myCalendar.do?idvalue=<c:out value="${logginedMember.email }"/>')">
+							<i class="fas fa-calendar-alt"></i>
+							<h3>캘린더</h3>
+							<p>캘린더를 이용하실 수 있습니다.</p>
+						</div>
+						<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${kakaoLogin.email }"/>')">
+							<i class="fas fa-history"></i>
+							<h3>예약내역</h3>
+							<p>예약내역을 확인하실 수 있습니다.</p>
+						</div>
+					</c:if>
+				</c:if>
+			</c:if>
 						
-							<c:if test="${naverLogin.email!=null }"> <!--네이버회원  -->	
-								<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${naverLogin.email }"/>')">
-									<i class="fas fa-history"></i>
-									<h3>예약내역</h3>
-									<p>예약내역을 확인하실 수 있습니다.</p>
-								</div>
-							</c:if>
-							
-							<c:if test="${kakaoLogin.email!=null }"> <!--카카오회원  -->
-								<div class="feature" onclick="location.replace('${path}/reservation?idvalue=<c:out value="${kakaoLogin.email }"/>')">
-									<i class="fas fa-history"></i>
-									<h3>예약내역</h3>
-									<p>예약내역을 확인하실 수 있습니다.</p>
-								</div>
-							</c:if>
-						</c:if>
 						
 						
 						
 						
-					</div>
-				</div>
+						
+		</div><!--features 닫기  -->
+		</div><!--inner 닫기  -->
 				
 				<input type="hidden" value="<c:out value="${logginedMember.email }"/>">
 		</form>	

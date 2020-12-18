@@ -38,6 +38,7 @@
 		</div>
 		
 		
+		 
 		
 		<!--리스트 스타일 -->
 		<style>
@@ -59,68 +60,81 @@
 		
 		<!--쿠폰배너 스타일-->
 		<style>
+			.couponBtn{
+				background: linear-gradient( to right, #FF5050, #FFEB5A);
+				height: 70px;
+				border-radius: 20px;
+				cursor: pointer;
+				width:1050px;
+				margin-top: 30px;
+				outline: none;
+				border: none;
+				text-align: center;
+			}
+			.couponBtn p{
+				font-size: 15px;
+				color: white;
+				padding-top:12px;
+			}
+			.couponBtn b{
+				font-size: 17px;
+			}
 			#couponDiv{
-				background: linear-gradient( to right, #FF5050, #FFEB5A);
-				height: 70px;
-				border-radius: 20px;
-				cursor: pointer;
-				width:1050px;
-				text-align:center;
+			text-align:center;
 				margin-left: auto;
 				margin-right: auto;
-				margin-top: 30px;
-			}
-			#notcouponDiv{
-				background: linear-gradient( to right, #FF5050, #FFEB5A);
-				height: 70px;
-				border-radius: 20px;
-				cursor: pointer;
 				width:1050px;
-				text-align:center;
-				margin-left: auto;
-				margin-right: auto;
-				margin-top: 30px;
-			}
-			#snscouponDiv{
-				background: linear-gradient( to right, #FF5050, #FFEB5A);
-				height: 70px;
-				border-radius: 20px;
-				cursor: pointer;
-				width:1050px;
-				text-align:center;
-				margin-left: auto;
-				margin-right: auto;
-				margin-top: 30px;
 			}
 		</style>
 		
-		<!--네이버,카카오회원 쿠폰배너  -->
-		<c:if test="${logginedMember==null}">
-			<c:if test="${naverLogin.email!=null }">
-				<c:if test="${kakaoLogin.email!=null }">
-					<div id="snscouponDiv">
-						<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
-					</div>
-				</c:if>
-			</c:if>
-		</c:if>
-		<!--로그인한 사람들 쿠폰배너  -->
-		<c:if test="${logginedMember!=null}">
-			<div id="couponDiv">
-				<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
-			</div>
-		</c:if>
-		<!--로그인안한 사람들 쿠폰배너  -->	
-		<c:if test="${logginedMember==null}">
-			<c:if test="${naverLogin.email==null}">
-				<c:if test="${kakaoLogin.email==null}">
-					<div id="notcouponDiv">
-						<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
-					</div>
-				</c:if>
-			</c:if>
-		</c:if>
 		
+		
+		<!--쿠폰배너  -->
+		<div id="couponDiv">
+			<form name="coupondown" action="#" method="post">
+				<input type="hidden" name="couponPrice" value="${event.couponPrice }">
+				<input type="hidden" name="eventTitle" value="${event.eventTitle }">
+				<input type="hidden" name=eventNo value="${event.eventNo }">
+				<c:if test="${logginedMember!=null}">
+					<c:if test="${naverLogin.email==null }">
+						<c:if test="${kakaoLogin.email==null }">
+							<input type="hidden" name="couponId" value="${logginedMember.id}">
+						</c:if>
+					</c:if>
+				</c:if>
+				
+				<!--로그인한 사람들 쿠폰배너  -->
+				<c:if test="${logginedMember!=null}">
+					<c:if test="${naverLogin.email==null }">
+						<c:if test="${kakaoLogin.email==null }">
+							<button type="button" class="couponBtn" onclick="couponDownBtn();">
+								<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
+							</button>	
+						</c:if>
+					</c:if>
+				</c:if>
+			</form>
+		
+			<!--네이버,카카오회원 쿠폰배너  -->
+			<c:if test="${logginedMember!=null}">
+				<c:if test="${naverLogin.email!=null || kakaoLogin.email!=null}">
+					<button type="button" class="couponBtn" onclick="snscoupon();">
+						<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
+					</button>
+				</c:if>
+			</c:if>
+	
+			<!--로그인안한 사람들 쿠폰배너  -->	
+			<c:if test="${logginedMember==null}">
+				<c:if test="${naverLogin.email==null}">
+					<c:if test="${kakaoLogin.email==null}">
+						<button type="button" class="couponBtn" onclick="nocoupon();">
+							<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
+						</button>
+					</c:if>
+				</c:if>
+			</c:if>
+		</div>
 		
 		
 		
@@ -143,10 +157,17 @@
 		<div id="btnDiv">
 			<button type="button" onclick="location.href='${path }/event/eventList.do'" class="btn btn-warning">목록</button>
 			
-			<!-- 관리자만 볼 수있게 분기처리  -->
-			<button type="button" class="btn btn-warning" onclick="updateBtn();">수정</button>
-			<button type="button" class="btn btn-warning" onclick="removeBtn();">삭제</button>
-			<!-- 분기처리끝 -->
+			<!-- 관리자만 수정,삭제가능  -->
+			<c:if test="${logginedMember!=null }">
+				<c:if test="${naverLogin==null }">
+					<c:if test="${kakaoLogin==null }">				
+		            	<c:if test="${logginedMember.id eq 'admin' }">
+							<button type="button" class="btn btn-warning" onclick="updateBtn();">수정</button>
+							<button type="button" class="btn btn-warning" onclick="removeBtn();">삭제</button>
+						</c:if>
+					</c:if>
+				</c:if>
+			</c:if>
 			
 		</div>
 	</div><!-- eventViewDiv닫기 -->
@@ -155,18 +176,7 @@
 </section>
 
 <script>
-	$(document).ready(function(){
-	    $("#notcouponDiv").on("click", function(){  
-	        alert("로그인이 필요한 서비스입니다.");
-	    });   
-	    $("#couponDiv").on("click",function(){
-	    	window.open('${path}/coupon?eventNo=${event.eventNo}&eventTitle=${event.eventTitle}&couponId=${logginedMember.id}&couponPrice=${couponPrice}','쿠폰발급','width=600,height=250');
-	    });
-	    $("#snscouponDiv").on("click",function(){
-	    	alert("커플리즘회원만 쿠폰을 받을 수 있습니다.");
-	    });
-	    
-	});
+	
 	function removeBtn(){
 		if(confirm("삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?")){ 
 			location.replace('${path}/eventRemove?eventNo=${event.eventNo}');
@@ -175,12 +185,24 @@
 	function updateBtn(){
 		location.replace('${path}/eventUpdate?eventNo=${event.eventNo}');
 	}
-	/* function coupon() {
-		window.open('${path}/coupon','쿠폰발급','width=430,height=200');
+	function nocoupon(){
+		alert("커플리즘 회원만 다운가능합니다.");
 	}
-	function coupon() {
-		alert("쿠폰을 발급받기 위해서는 로그인이 필요합니다.");
-	} */
+	function snscoupon(){
+		alert("커플리즘 회원만 다운가능합니다.");
+	}
+	
+	function couponDownBtn(){
+		const frm=$("#couponDownBtn");
+		
+		const url=window.open('${path}/coupon?eventNo=${event.eventNo}&eventTitle=${event.eventTitle}&couponId=${logginedMember.id}&couponPrice=${event.couponPrice}','쿠폰발급','width=600,height=250');
+		frm.attr({
+			"action":url,
+			"method":"post"
+		});
+		frm.submit();
+	}
+	
 </script>
 	
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

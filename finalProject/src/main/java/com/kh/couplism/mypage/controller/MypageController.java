@@ -70,6 +70,7 @@ public class MypageController {
 		return mv;
 	}
 	
+	//유저마이페이지 예약내역 이동하는 메소드
 	@RequestMapping("/reservation")
 	public ModelAndView reservation(ModelAndView mv,
 							@RequestParam(value="idvalue") String idv) {
@@ -95,7 +96,15 @@ public class MypageController {
 	}
 	
 	
-	
+	@RequestMapping("/conponList")
+	public ModelAndView couponList(ModelAndView mv) {
+		mv.addObject("logoPath","/resources/images/mypagelogo.jpg");
+		mv.addObject("titleHan","쿠폰함");
+		mv.addObject("titleEng","Coupon");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		mv.setViewName("mypage/couponList");
+		return mv;
+	}
 	
 	
 	
