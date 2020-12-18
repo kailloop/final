@@ -222,7 +222,7 @@
 			<c:if test="${logginedMember!=null }">
 				<c:if test="${naverLogin!=null }">
 					<c:if test="${kakaoLogin==null }">
-						<div class="feature" onclick="naver_update();">	
+						<div class="feature" onclick="naverLoginBtn();">	
 							<i class="fas fa-user-cog"></i>
 							<h3>회원정보수정</h3>
 							<p>고객님의 개인정보를<br>수정하고 관리할 수 있습니다.</p>
@@ -232,7 +232,7 @@
 							<h3>연인관리</h3>
 							<p>상대방 아이디를 연인아이디로<br>관리할 수 있습니다.</p>
 						</div>
-						<div class="feature">
+						<div class="feature" onclick="naverLoginBtn();">
 							<i class="fas fa-box-open"></i>
 							<h3>쿠폰함</h3>
 							<p>보유하고 계신 쿠폰을<br>확인, 관리할 수 있습니다.</p>
@@ -265,7 +265,7 @@
 							<h3>연인관리</h3>
 							<p>상대방 아이디를 연인아이디로<br>관리할 수 있습니다.</p>
 						</div>
-						<div class="feature">
+						<div class="feature" onclick="kakaoLoginBtn();">
 							<i class="fas fa-box-open"></i>
 							<h3>쿠폰함</h3>
 							<p>보유하고 계신 쿠폰을<br>확인, 관리할 수 있습니다.</p>
@@ -297,11 +297,11 @@
 </section>
 
 <script>
-	function naver_update() {
-		alert("네이버회원은 회원정보수정을 하실 수 없습니다.");
+	function naverLoginBtn() {
+		alert("네이버회원은 이용 하실 수 없습니다.");
 	}
-	function kakao_update(){
-		alert("카카오회원은 회원정보수정을 하실 수 없습니다.")
+	function kakaoLoginBtn(){
+		alert("카카오회원은 이용 하실 수 없습니다.")
 	}
 </script>
 	

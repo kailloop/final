@@ -24,4 +24,6 @@ public interface CommunityDao {
 	int updateEvent(SqlSession session,Event event);
 	
 	int couponDown(SqlSession session,Coupon coupon);
+	
+	Coupon couponSelect(SqlSession session,String couponId);
 }

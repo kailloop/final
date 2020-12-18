@@ -56,6 +56,12 @@ public class CommunityDaoImpl implements CommunityDao {
 		// TODO Auto-generated method stub
 		return session.insert("community.couponDown",coupon);
 	}
+
+	@Override
+	public Coupon couponSelect(SqlSession session, String couponId) {
+		// TODO Auto-generated method stub
+		return session.selectOne("community.couponSelect",couponId);
+	}
 	
 	
 	

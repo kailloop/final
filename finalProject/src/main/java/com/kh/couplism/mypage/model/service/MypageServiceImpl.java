@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.couplism.community.model.vo.Coupon;
 import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.mypage.model.dao.MypageDao;
 @Service
@@ -25,5 +26,19 @@ public class MypageServiceImpl implements MypageService {
 	public List<LocationReservation> selectList(String idv) {
 		return dao.selectList(session,idv);
 	}
+
+	@Override
+	public List<Coupon> couponList(String idvalue,int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return dao.couponList(session,idvalue,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectCount(String idvalue) {
+		// TODO Auto-generated method stub
+		return dao.selectCount(session,idvalue);
+	}
+	
+	
 	
 }

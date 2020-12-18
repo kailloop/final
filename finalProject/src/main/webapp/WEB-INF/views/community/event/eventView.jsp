@@ -107,12 +107,21 @@
 				<c:if test="${logginedMember!=null}">
 					<c:if test="${naverLogin==null }">
 						<c:if test="${kakaoLogin==null }">
-							<button type="button" class="couponBtn" onclick="couponDownBtn();">
-								<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
-							</button>	
+							<c:if test="${c==null }">
+								<button type="button" class="couponBtn" onclick="couponDownBtn();">
+									<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
+								</button>	
+							</c:if>
+							<c:if test="${c!=null }">
+								<button type="button" class="couponBtn" onclick="afterDownBtn();">
+									<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운로드 <i class="fas fa-download"></i></p>
+								</button>
+							</c:if>
 						</c:if>
 					</c:if>
 				</c:if>
+				
+				
 			</form>
 		
 			<!--네이버,카카오회원 쿠폰배너  -->
@@ -190,6 +199,9 @@
 	}
 	function snscoupon(){
 		alert("커플리즘 회원만 다운가능합니다.");
+	}
+	function afterDownBtn(){
+		alert("이미 쿠폰을 다운받으셨습니다.");
 	}
 	
 	function couponDownBtn(){

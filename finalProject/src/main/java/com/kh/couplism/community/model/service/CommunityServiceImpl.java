@@ -65,6 +65,12 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return dao.couponDown(session,coupon);
 	}
+
+	@Override
+	public Coupon couponSelect(String couponId) {
+		// TODO Auto-generated method stub
+		return dao.couponSelect(session,couponId);
+	}
 	
 	
 	

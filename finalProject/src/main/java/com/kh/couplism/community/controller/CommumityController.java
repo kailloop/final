@@ -53,7 +53,7 @@ public class CommumityController {
 		
 		List<Event> list=service.selectList(cPage,numPerPage);
 		int totalData=service.selectCount();
-		mv.addObject("pageBar",PageBarFactory.getPageBar(totalData, cPage, numPerPage, "boardList.do"));
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalData, cPage, numPerPage, "eventList.do"));
 		mv.addObject("totalData",totalData);
 		mv.addObject("list",list);
 		
@@ -229,10 +229,17 @@ public class CommumityController {
 		logger.debug("쿠폰가격:"+coupon.getCouponPrice());
 		
 		coupon=new Coupon(coupon.getEventNo(),coupon.getEventTitle(),coupon.getCouponId(),coupon.getCouponPrice());
-		int result=service.couponDown(coupon);
-		/* Coupon c=service.couponSelect(eventNo); */
 		
-		mv.setViewName("community/event/coupon");
+		Coupon c=service.couponSelect(couponId);
+		
+		int result=0;
+		if(c!=null) {//이미 쿠폰을 발급받았으면
+			mv.setViewName("community/event/notcoupon");
+		}else {//쿠폰발급을 안받았으면
+			result=service.couponDown(coupon);
+			mv.setViewName("community/event/coupon");
+		}
+		mv.addObject("c",c);
 		return mv;
 	}
 }

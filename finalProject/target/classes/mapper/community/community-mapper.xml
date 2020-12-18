@@ -39,4 +39,8 @@
 	<insert id="couponDown" parameterType="com.kh.couplism.community.model.vo.Coupon">
 		insert into coupon values(#{eventNo},#{eventTitle},#{couponId},#{couponPrice})
 	</insert>
+	
+	<select id="couponSelect" parameterType="string" resultType="com.kh.couplism.community.model.vo.Coupon">
+		select * from coupon where couponId=#{couponId}
+	</select>
 </mapper>
