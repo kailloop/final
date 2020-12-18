@@ -74,6 +74,16 @@ public class LocationServiceImpl implements LocationService {
 	public List<Review> getLocationReview(int locationNo) {
 		return dao.getLocationReview(locationNo, session);
 	}
+
+	@Override
+	public Location getLocation(int locationNo) {
+		return dao.getLocation(locationNo, session);
+	}
+
+	@Override
+	public List<LocationPrice> getLocationPrice(int locationNo) {
+		return dao.getLocationPrice(locationNo, session);
+	}
 	
 	
 	

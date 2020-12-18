@@ -24,4 +24,6 @@ public interface LocationDao {
 	public int insertLocationPrice(LocationPrice lp, SqlSessionTemplate session);
 	public LocationMain getLocationMain(int locationNo, SqlSessionTemplate session);
 	public List<Review> getLocationReview(int locationNo, SqlSessionTemplate session);
+	public Location getLocation(int locationNo,SqlSessionTemplate session);
+	public List<LocationPrice> getLocationPrice(int locationNo, SqlSessionTemplate session);
 }

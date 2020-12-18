@@ -268,13 +268,14 @@
 						
 		<!--리스트-->
 		<c:forEach items="${list }" var="map" varStatus="status">
-			<div class="listdiv" onclick="list_onclick();">
+			<div class="listdiv" onclick="location.replace('${path}/location/locationView?locationNo=${map.locationNo }');">
 				<img class="imgclass" alt="" src="${map.locationMain}" width="298px" height="200px;">
 				<!--제휴업체 분기처리 시작 -->
 				<c:if test="${map.locationStatus eq 1}">
 				<div class="partner">제휴업체<br>예약가능</div>
 				<!--제휴업체 분기처리 끝 -->
 				</c:if>
+				<input type="hidden" value="${map.locationNo }">
 				<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: left; padding-left: 20px; height: 10px;"><c:out value="${map.locationTitle}" /></p>
 				<p style="position:absolute; top:209px; left:210px; font-size:15px; text-align: right; height:15px; margin-top: 25px; padding-right: 20px;">조회수 ${map.viewCount}</p>
 				<p style="font-size:15px; text-align: left; padding-left: 20px; padding-top:7px; height: 5px;"><i style="color: #FFC314;" class="fas fa-star"></i> ${map.review}(${map.reviewCount})</p>
@@ -350,11 +351,13 @@
 	}
 
 	/*목록클릭 (view로 가는거)  */
-	function list_onclick() {
-		alert("리스트클릭");
-		/* [고치기]리스트뷰로가기 */
+/* 	function list_onclick(event) {
+	/* 	console.log(this);
+		console.log(event.target);
+		console.log($(event.target)); */
+/* 		location.replace('');
 	}
-
+ */
 	/*주소p클릭  */
 	function address_onclick() {
 		event.stopPropagation();
