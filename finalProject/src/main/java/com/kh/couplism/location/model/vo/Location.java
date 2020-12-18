@@ -19,5 +19,4 @@ public class Location {
 	private String locationAddress;
 	private int locationStatus;
 	private int viewCount;
-	private String locationAddressType;
 }

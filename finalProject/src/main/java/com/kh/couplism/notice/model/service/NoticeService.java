@@ -24,4 +24,5 @@ public interface NoticeService {
 	public int deleteNoticeComment(int noticeNo);
 	public int deleteNotice(int noticeNo);
 	public int upViewCount(Notice notice);
+	public int updateNotice(Notice notice);
 }

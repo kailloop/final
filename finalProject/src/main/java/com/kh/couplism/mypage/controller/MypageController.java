@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.couplism.common.PageBarFactory;
+import com.kh.couplism.community.model.vo.Coupon;
 import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.mypage.model.service.MypageService;
 
@@ -70,6 +72,7 @@ public class MypageController {
 		return mv;
 	}
 	
+	//유저마이페이지 예약내역 이동하는 메소드
 	@RequestMapping("/reservation")
 	public ModelAndView reservation(ModelAndView mv,
 							@RequestParam(value="idvalue") String idv) {
@@ -94,8 +97,26 @@ public class MypageController {
 		return mv;
 	}
 	
-	
-	
+	//유저마이페이지 쿠폰함 이동하는 메소드
+	@RequestMapping("/conponList")
+	public ModelAndView couponList(ModelAndView mv,
+					@RequestParam(value="idvalue") String idvalue,
+					@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
+					@RequestParam(value="numPerPage", required=false, defaultValue="5") int numPerPage) {
+		mv.addObject("logoPath","/resources/images/mypagelogo.jpg");
+		mv.addObject("titleHan","쿠폰함");
+		mv.addObject("titleEng","Coupon");
+		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		
+		List<Coupon> list=service.couponList(idvalue,cPage,numPerPage);
+		int totalData=service.selectCount(idvalue);
+		
+		mv.addObject("list",list);
+		mv.addObject("pageBar",PageBarFactory.getPageBar(totalData, cPage, numPerPage, "couponList"));
+		mv.addObject("totalData",totalData);
+		mv.setViewName("mypage/couponList");
+		return mv;
+	}
 	
 	
 	

@@ -16,5 +16,13 @@
 	<select id="selectList" resultMap="locationReservation" parameterType="String">
 		select * from location_reservation where user_id=#{idv}
 	</select>
+	
+	<select id="couponList" parameterType="string" resultType="com.kh.couplism.community.model.vo.Coupon">
+		select * from coupon where couponId=#{idvalue}
+	</select>
+	
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*) FROM coupon where couponId=#{idvalue}
+	</select>
 
 </mapper>
