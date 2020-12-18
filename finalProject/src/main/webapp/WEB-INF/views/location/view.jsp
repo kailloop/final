@@ -32,12 +32,21 @@
 				font-size:50px;
 				font-weight: bold;
 				color:black;
+				width: 1050px;
+				margin-left: auto; 
+				margin-right: auto;
 			}
 		</style>
 		
 		<!--상단 제목  -->
 		<div id="titleDiv">
-			<p>로케이션타이틀</p>
+			<!--[고치기]로케이션메인사진  -->
+			<img class="imgclass" alt="" src="${path }/resources/images/home-logo2.jpg" width="100%;" height="600px;">
+			<p style="text-align: left; height: 50px;">로케이션타이틀</p>
+			<!--[고치기]로케이션리뷰점수평균&갯수 -->
+			<p style="text-align: left; font-size:30px; height: 35px;"><i style="color: #FFC314;" class="fas fa-star"></i></i> 4.5</p>
+			<!--[고치기]로케이션장소  -->
+			<p style="text-align: left; font-size:20px; color:#b4b4b4;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
 		</div>
 		
 		<!--상세내용/리뷰  스타일-->
@@ -75,23 +84,13 @@
 			#listDiv{
 				margin-top:50px;
 			}
-			#listTable{
-				margin-left: auto; 
-				margin-right: auto;
-				width:1050px;
-			}
-			#listTable td{
-				width: 200px;
-				text-align: center;
-			}
+			
 		</style>
 		
-		<!--리스트  -->
+		<!--[고치기]리스트  -->
 		<div id="listDiv" style="width: 1050px; margin-left: auto; margin-right: auto;">
 			<!--내용  -->			
-			<img class="imgclass" alt="" src="${path }/resources/images/home-logo2.jpg" width="100%;" height="600px;">
-			<img class="imgclass" alt="" src="${path }/resources/images/home-logo3.jpg" width="100%;" height="600px;">
-			<img class="imgclass" alt="" src="${path }/resources/images/faq.jpg" width="100%;" height="600px;">
+			
 		</div>
 		
 		<!--상세내용/리뷰/판매자정보  -->
@@ -105,9 +104,52 @@
 			</table>
 		</div>
 		
-		<!--리뷰  -->
-		<div id="reviewDiv" style="margin-left: auto; margin-right: auto; text-align: center; margin-top:50px;" >
+		<!--리뷰  스타일-->
+		<style>
+			#reviewDiv{
+				margin-left: auto; 
+				margin-right: auto; 
+				text-align: center; 
+				margin-top:50px;
+			}
+			#reviewTable{
+				margin-left: auto; 
+				margin-right: auto;
+				width:1050px;
+			}
+			td{
+				width:50%;
+			}
+			#star{
+				color:#FFC314;
+				font-size: 50px;
+				height: 45px;
+			}
+			#starnum{
+				font-size:50px;
+				color:black;
+			}
+		</style>
 		
+		<!--리뷰  -->
+		<div id="reviewDiv">
+			<table id="reviewTable" border="1">
+				<tr>
+					<td>
+						<p style="height: 30px;">평균별점</p>
+						<p id="star"><i class="fas fa-star"></i></p>
+						<p id="starnum">4.5</p>
+					</td>
+					<td>
+						<p style="height: 30px;">별점비율</p>
+						<!--고치지  -->
+					</td>
+				</tr>
+				<!--[고치기] 사람들 리뷰내용  -->
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+			</table>
 		</div>
 		
 		
