@@ -27,18 +27,6 @@
 			.imgclass{
 				position: relative;
 			}
-			.partner{
-				position: absolute;
-				top:0%;
-				background: linear-gradient( to bottom, #27DBB7,#41aea9 );
-				padding-right: 5px;
-				padding-left: 5px;
-				padding-top: 5px;
-				padding-bottom: 5px;
-				margin-left: 5px;
-				font-size: 13px;
-				color:white;
-			}
 			
 		</style>
 						

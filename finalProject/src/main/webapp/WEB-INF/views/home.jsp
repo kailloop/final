@@ -63,7 +63,7 @@
 	}
 	section{
 		width:100%;
-		height:1300px;
+		height:2300px;
 		background-color:white;
 		z-index:0;
 		position:relative;
@@ -131,7 +131,79 @@
 		<img class="img one" src="${path }/resources/images/mainimg2.jpg" alt="로고2">
 		<img class="img two" src="${path }/resources/images/mainimg1.jpg" alt="로고3">
 		
+		<!--쿠폰배너 스타일-->
+		<style>
+			#couponDiv{
+				background: linear-gradient( to right, #28288C, #9C8CCD);
+				margin-bottom: 30px;
+				height: 110px;
+				border-radius: 20px;
+				cursor: pointer;
+				padding-left: 100px;
+				width:1100px;
+				margin-right:auto;
+				margin-left:auto;
+				margin-top:840px;
+			}
+			#couponDiv p{
+				font-size: 35px; 
+				color: white; 
+				padding-top:23px;
+				text-align: center;
+			}
+			#couponDiv i{
+				font-size: 35px; 
+				color: white; 
+				padding-top:20px;
+			}
+			#couponDiv b{
+				font-size: 35px; 
+				color: white; 
+				padding-top:20px;
+			}
+		</style>
 		
+		<!--쿠폰배너  -->
+		<div id="couponDiv" onclick="location.replace('${path }/event/eventList.do');">
+			<p><b><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운받으러 가기 <i class="fas fa-chevron-circle-right"></i></p>
+		</div>
+			
+		
+		
+		
+		<div id="eventListDiv" style=" margin-top:60px; margin-left:auto; margin-right:auto; width: 1050px; text-align: center;">
+			
+			<!--이벤트리스트3개만 스타일  -->
+			<style>
+				.listdiv{
+					position: relative;
+					margin: 0px;
+					margin-left:30px;
+					margin-bottom:80px;
+					top:30px;
+					width:300px;
+					float: left;
+					height: 300px;
+					cursor: pointer;
+				}
+				.imgclass{
+					position: relative;
+				}				
+			</style>
+							
+			<!--이벤트리스트3개만-->
+			<c:forEach items="${eventList }" var="eventList">
+				<div class="listdiv" onclick="location.replace('${path }/eventView?eventNo=<c:out value="${eventList.eventNo }"/>')">
+					<img class="imgclass" alt="" src="${path }/resources/upload/event/${eventList.eventRenamedFilename}" width="298px" height="200px;">
+					<p style="position:relative; font-weight:bold; font-size:20px; color:black; text-align: center; height: 15px;">
+						<c:out value="${eventList.eventTitle}" />
+					</p>
+					<p><c:out value="${eventList.eventContent }"/></p>
+					
+				</div>
+			</c:forEach>
+			
+		</div><!-- eventListDiv닫기 -->
 	</section>
 
 	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->

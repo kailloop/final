@@ -325,7 +325,7 @@
 		        	<c:if test="${naverLogin==null }">
 						<c:if test="${kakaoLogin==null }">
 							<c:if test="${partnerMember !=null}">
-								<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do?idvalue=<c:out value="${partnerMember.id }"/>'">${partnerMember.nickname }님</i></p>
+								<p id="myPage" class="mb-0"><i class="fas fa-user-circle" onclick="location.href='${path}/mypage/partnerMypage.do?idvalue=<c:out value="${partnerMember.id }"/>'">${logginedMember.nickname }님</i></p>
 							</c:if>
 						</c:if>
 					</c:if>
