@@ -10,6 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/logo.jsp" />
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="${path }/resources/ckeditor/ckeditor.js"></script>
 <style>
 #map {
 	position: relative;
@@ -27,7 +28,7 @@
 }
 
 section {
-	height: 2200px;
+	height: 3200px;
 }
 
 section table {
@@ -40,7 +41,7 @@ section table {
 #reservation-container {
 	position: relative;
 	width: 100%;
-	height: 1200px;
+	height: 100%;
 	border: none;
 	border-top: 3px gray solid;
 	top: 0px;
@@ -83,6 +84,7 @@ section table {
 }
 
 #reservation-content {
+	margin-top : 100px;
 	position: relative;
 	width: 100%;
 	border: 1px purple solid;
@@ -225,7 +227,7 @@ function loadAddress() {
 }
 </script>
 <img id="reservation-img" src="${path }/resources/images/frame.jpg">
-<div id="create" style="background-color: transparent;">
+<div id="create" style="background-color: transparent; ">
 	<form action="${path }/location/createEnd" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="locationCreator"
@@ -413,6 +415,9 @@ function loadAddress() {
 						</div>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="2"><textarea name="locationContent" id="locationContent" style="resize: none;"></textarea></td>
+				</tr>
 			</tbody>
 		</table>
 		<div id="inputTypeHidden"></div>
@@ -420,6 +425,29 @@ function loadAddress() {
 	</form>
 </div>
 <script>
+			$(function(){
+			    
+			    CKEDITOR.replace( 'locationContent', {//해당 이름으로 된 textarea에 에디터를 적용
+			        width:'100%',
+			        height:'400px',
+			        filebrowserImageUploadUrl: '${path}/location/imageUpload?creator=${logginedMember.id}' //여기 경로로 파일을 전달하여 업로드 시킨다.
+			    });
+			     
+			     
+			    CKEDITOR.on('dialogDefinition', function( ev ){
+			        var dialogName = ev.data.name;
+			        var dialogDefinition = ev.data.definition;
+			      
+			        switch (dialogName) {
+			            case 'image': //Image Properties dialog
+			                //dialogDefinition.removeContents('info');
+			                dialogDefinition.removeContents('Link');
+			                dialogDefinition.removeContents('advanced');
+			                break;
+			        }
+			    });
+			     
+			});
 			$(".day-btns").hover(function(e){
 				$(e.target).css("background","linear-gradient(to right, #DD2D4A, #F49CBB)");
 				$(e.target).css("color","white");
@@ -536,8 +564,7 @@ function loadAddress() {
 				console.log(rTimeReplace);
 				var rPrice = $('#rPrice').val();
 				var rPeople = $('#rPeople').val();
-				
-				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td></tr>");
+				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td><td><input type='hidden' name='locationPrice' value='"+rTime+"/"+dayArr[1]+"/"+rPrice+"/"+rPeople+"'></td></tr>");
 				
 				//여기에 인풋 타입 히든 만드는 로직 작성
 				

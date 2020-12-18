@@ -263,10 +263,7 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/createEnd")
-	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, Location location, 
-			@RequestParam(value="locationTime")String[] locationTime, 
-			@RequestParam(value="locationDay")String[] locationDay, 
-			@RequestParam(value="locationPeople")String[] locationPeople,HttpServletRequest request) {
+	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, List<MultipartFile> locationFile, List<String>locationPrice, Location location,HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 		
@@ -298,6 +295,9 @@ public class LocationController {
 		/*
 		 * location.setLocationCreator("admin");//???
 		 */
+		
+		logger.debug("locationPrice : "+locationPrice);
+		
 		
 		logger.debug("location : " + location);
 		int locationResult = service.insertLocation(location);// location DB에 등록
@@ -390,19 +390,15 @@ public class LocationController {
 			 * logger.debug("파일 등록결과 LocationFile : " + fileCheck); } catch (IOException e)
 			 * { e.printStackTrace(); } } }
 			 */
-			logger.debug("locationTime Size : "+locationTime.length);
-			logger.debug("locationDay Size : "+locationDay.length);
-			logger.debug("locationPeople Size : "+locationPeople.length);
 			
-			for(int i = 0; i<locationTime.length; i++) {//시간 순서별로 정리 필요함
-				logger.debug(locationTime[i]);
-				logger.debug(locationDay[i]);
-				logger.debug(locationPeople[i]);
-				LocationPrice lp = new LocationPrice(location.getLocationNo(),locationTime[i],locationDay[i],5600,Integer.parseInt(locationPeople[i]));
-				logger.debug("LocationPrice : "+lp);
-				int Result = service.insertLocationPrice(lp);
-				logger.debug("결과 : "+Result);
+			for(String s : locationPrice) {
+				String[] split = s.split("/");
+				LocationPrice price = new LocationPrice(location.getLocationNo(),split[0],split[1],Integer.parseInt(split[2]),Integer.parseInt(split[3]));
+				logger.debug("locationPrice : "+price);
+				int resultPrice = service.insertLocationPrice(price);
+				logger.debug("locationPrice 등록결과 : "+resultPrice);
 			}
+			
 		}
 
 		logger.debug("mainFile : " + mainFile.getOriginalFilename());
@@ -418,7 +414,7 @@ public class LocationController {
 		return "location/checks";
 	}
 	
-	 @RequestMapping(value = "/location/uploadImg", method = RequestMethod.POST)
+	 @RequestMapping(value = "/location/imageUpload", method = RequestMethod.POST)
 	    public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload, String creator) {
 		  	logger.debug("이미지 업로드 들어옴");
 		  	logger.debug("creator : "+creator);
@@ -436,16 +432,14 @@ public class LocationController {
 				String mfext = mforiginalFileName.substring(mforiginalFileName.lastIndexOf(".") + 1);
 				SimpleDateFormat mfsdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
 				int mfrandomNum = (int) (Math.random() * 1000);
-				String mfrenamedFileName = creator+"#Couplism-location-File-"
-						+ mfsdf.format(new Date(System.currentTimeMillis())) + "_" + mfrandomNum + "." + mfext;
-	            File f = new File(request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
-	            logger.debug("path File f :"+request.getServletContext().getRealPath("/resources/upload/locationCreate")+"/"+mfrenamedFileName);
+				String mfrenamedFileName = creator+"_"+"Couplism-Location-File-"+mfsdf.format(new Date(System.currentTimeMillis()))+"-"+mfrandomNum+"."+mfext;
+	            File f = new File(request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile")+"/"+mfrenamedFileName);
 	            out = new FileOutputStream(f);
 	            out.write(bytes);
 	            String callback = request.getParameter("CKEditorFuncNum");
 	 
 	            printWriter = response.getWriter();
-	            String fileUrl = request.getContextPath()+"/resources/upload/locationCreate/"+f.getName();//url경로
+	            String fileUrl = request.getContextPath()+"/resources/upload/location-Write-ContentFile/"+f.getName();//url경로
 	            logger.debug(callback);
 	            logger.debug(fileUrl);
 				/*
@@ -456,6 +450,7 @@ public class LocationController {
 				 */
 
 	            printWriter.println("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+	            logger.debug("{\"filename\" : \""+mfrenamedFileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 	        }catch(IOException e){
 	            e.printStackTrace();
 	        } finally {
