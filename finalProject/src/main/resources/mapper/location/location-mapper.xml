@@ -11,6 +11,7 @@
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
 		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="locationName" column="LOCATIONNAME"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
@@ -88,7 +89,7 @@
 	</select>
 	
 	<insert id="insertLocation" parameterType="com.kh.couplism.location.model.vo.Location">
-		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus},0)
+		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus},0,#{locationName})
 		<selectKey keyProperty="locationNo" resultType="_int">
 			SELECT SEQ_LOCATIONNO.CURRVAL FROM DUAL
 		</selectKey>

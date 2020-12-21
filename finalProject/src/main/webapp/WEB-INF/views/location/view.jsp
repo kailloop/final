@@ -42,11 +42,11 @@
 		<div id="titleDiv">
 			<!--[고치기]로케이션메인사진  -->
 			<img class="imgclass" alt="" src="${path }/resources/images/home-logo2.jpg" width="100%;" height="600px;">
-			<p style="text-align: left; height: 50px;">로케이션타이틀</p>
+			<p style="text-align: left; height: 50px;">[${location.locationName}]${location.locationTitle }</p>
 			<!--[고치기]로케이션리뷰점수평균&갯수 -->
-			<p style="text-align: left; font-size:30px; height: 35px;"><i style="color: #FFC314;" class="fas fa-star"></i></i> 4.5</p>
+			<p style="text-align: left; font-size:30px; height: 35px;"><i style="color: #FFC314;" class="fas fa-star"></i></i> ${reviewPoint }</p>
 			<!--[고치기]로케이션장소  -->
-			<p style="text-align: left; font-size:20px; color:#b4b4b4;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
+			<p style="text-align: left; font-size:20px; color:#b4b4b4;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>${location.locationAddress }</p>
 		</div>
 		
 		<!--상세내용/리뷰  스타일-->
@@ -71,9 +71,12 @@
 		<div id="box">
 			<table id="boxTable" border="1">
 				<tr>
-					<td class="chooseTd"><a href="#box" class="scroll">상세정보</a></td>
+					<td><a href="#box" class="scroll">소개</a></td>
 					<td><a href="#box2" class="scroll">리뷰</a></td>
-					<td><a href="#box3" class="scroll">판매자정보</a></td>
+					<td class="chooseTd"><a href="#box3" class="scroll">정보</a></td>
+				</tr>
+				<tr>
+					<td colspan="3">${location.locationContent}</td>
 				</tr>
 			</table>
 		</div>
@@ -97,9 +100,9 @@
 		<div id="box2">
 			<table id="boxTable" border="1">
 				<tr>
-					<td><a href="#box" class="scroll">상세정보</a></td>
-					<td class="chooseTd"><a href="#box2" class="scroll">리뷰</a></td>
-					<td><a href="#box3" class="scroll">판매자정보</a></td>
+					<td><a href="#box" class="scroll">소개</a></td>
+					<td><a href="#box2" class="scroll">리뷰</a></td>
+					<td class="chooseTd"><a href="#box3" class="scroll">정보</a></td>
 				</tr>
 			</table>
 		</div>
@@ -138,7 +141,7 @@
 					<td>
 						<p style="height: 30px;">평균별점</p>
 						<p id="star"><i class="fas fa-star"></i></p>
-						<p id="starnum">4.5</p>
+						<p id="starnum">${reviewPoint}</p>
 					</td>
 					<td>
 						<p style="height: 30px;">별점비율</p>
@@ -147,7 +150,32 @@
 				</tr>
 				<!--[고치기] 사람들 리뷰내용  -->
 				<tr>
-					<td colspan="2"></td>
+					<c:forEach items="${review }" var="ri">
+					<td colspan="2">
+						<p class="float-left">${ri.reviewId }</p>
+						<p class="float-right">${ri.reviewDate }</p>
+						<c:choose>
+							<c:when test="${ri.reviewGrade == '1'}">
+							   <p id="star"><i class="fas fa-star"></i></p>
+							</c:when>
+							<c:when test="${ri.reviewGrade == '2'}">
+							   <p id="star"><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+							</c:when>
+							<c:when test="${ri.reviewGrade == '3'}">
+							   <p id="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+							</c:when>
+							<c:when test="${ri.reviewGrade == '4'}">
+							   <p id="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+							</c:when>
+							<c:when test="${ri.reviewGrade == '5'}">
+							   <p id="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+							</c:when>
+							
+						</c:choose>
+						<p id="starnum">${ri.reviewGrade}</p>
+						<p>${ri.reviewContent }</p>
+					</td>
+					</c:forEach>
 				</tr>
 			</table>
 		</div>
@@ -157,9 +185,9 @@
 		<div id="box3">
 			<table id="boxTable" border="1">
 				<tr>
-					<td><a href="#box" class="scroll">상세정보</a></td>
+					<td><a href="#box" class="scroll">소개</a></td>
 					<td><a href="#box2" class="scroll">리뷰</a></td>
-					<td class="chooseTd"><a href="#box3" class="scroll">판매자정보</a></td>
+					<td class="chooseTd"><a href="#box3" class="scroll">정보</a></td>
 				</tr>
 			</table>
 		</div>
@@ -169,19 +197,21 @@
 			<table border="1" style="margin-left: auto; margin-right: auto;" width="1050px;">
 				<tr>
 					<td style="width: 200px; text-align: center;">사업장</td>
-					<td><!-- 로케이션타이틀쓰는곳--></td>
+					<td><!-- 로케이션타이틀쓰는곳-->${location.locationName }</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; text-align: center;">판매자</td>
-					<td><!-- 로케이션크리에이터쓰는곳--></td>
+					<td style="text-align: center;">사업장 위치</td>
+					<td><%-- 로케이션폰쓰는곳 --%>${location.locationAddress }</td>
+				</tr>
+				<tr>
+					<td style="width: 200px; text-align: center;">등록자</td>
+					<td><!-- 로케이션크리에이터쓰는곳-->${location.locationCreator }</td>
 				</tr>
 				<tr>
 					<td style="text-align: center;">전화번호</td>
-					<td><%-- 로케이션폰쓰는곳 --%></td>
+					<td><%-- 로케이션폰쓰는곳 --%>${location.locationPhone }</td>
 				</tr>
-				<!-- <tr> 추가할 거 있으면 추가
-					<td></td>
-				</tr> -->
+				
 			</table>
 		</div>
 		

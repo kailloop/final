@@ -240,6 +240,11 @@ function loadAddress() {
 						name="locationTitle"></td>
 				</tr>
 				<tr>
+					<td class="td-create"><label>사업장이름</label></td>
+					<td><input class="location-input" type="text"
+						name="locationName"></td>
+				</tr>
+				<tr>
 					<td class="td-create"><label>타입</label></td>
 					<td><select id="locationType-one" onchange="selectType()"
 						style="width: 30%; height: 40px;">
@@ -250,7 +255,7 @@ function loadAddress() {
 							<option value="A">스포츠/레저</option>
 							<option value="SH">가게</option>
 					</select> <select id="locationType-two" style="width: 30%; height: 40px;" onchange="selectTypeTwo()">
-							<option class="typeTwo" value="N">영업점 세부 테마를 정해주세요</option>
+							<option class="typeTwo" onchange="selectTypeTwo();" value="N">영업점 세부 테마를 정해주세요</option>
 					</select> <input type="hidden" id="locationType" name="locationType">
 					</td>
 				</tr>
@@ -556,6 +561,7 @@ function loadAddress() {
 		function selectTypeTwo(){
 			var typeVals=$("#locationType-one").val()+$("#locationType-two").val();
 			$("#locationType").val(typeVals);
+			console.log($("#locationType").val());
 		}
 		
 		function submitForm(){
