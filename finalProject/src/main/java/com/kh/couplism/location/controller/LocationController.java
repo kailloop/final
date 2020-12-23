@@ -290,7 +290,6 @@ public class LocationController {
 		 */
 
 		logger.debug("locationPrice : " + locationPrice);
-
 		logger.debug("location : " + location);
 
 		String locationContent = location.getLocationContent();// LocationContent가져옴
@@ -520,6 +519,7 @@ public class LocationController {
 			}
 			reviewPoint = reviewTotal / review.size();
 		}
+		
 		Double.parseDouble(String.format(Locale.KOREAN, "%.1f", reviewPoint));
 		mv.addObject("location",location);//로케이션 추가
 		mv.addObject("reviewPoint",reviewPoint);//리뷰 포인트 추가 
