@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,14 +25,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.couplism.location.model.service.LocationService;
 import com.kh.couplism.location.model.vo.Location;
-import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
 
 @Controller
@@ -538,5 +542,111 @@ public class LocationController {
 		logger.debug("============================================================================================================");
 		return mv;
 	}
+	
+	@RequestMapping("location/locationPayment")
+	public ModelAndView locationPayment(int locationNo, String locationName, ModelAndView mv) {
+		logger.debug("==================================LocationPayment=====================================");
+		logger.debug("locationNo : "+locationNo);
+		logger.debug("locationName : "+locationName);
+		List<LocationPrice> lp = service.getLocationPrice(locationNo);
+		logger.debug("locationPrice : "+lp);
+		Date today = new Date();
+		logger.debug("오늘 : "+today);
+		mv.addObject("locationPrice",lp);
+		mv.addObject("locationNo",locationNo);
+		mv.addObject("locationName"+locationName);
+		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
+		mv.addObject("titleHan", "예약");
+		mv.addObject("titleEng", "Location");
+		mv.addObject("borderSize", "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		mv.setViewName("/location/payment");
+		logger.debug("======================================================================================");
+		return mv;
+	}
+	
+	@RequestMapping("location/dateLogic")
+	@ResponseBody
+	public void dateLogic(String day, int locationNo, HttpServletRequest rq, HttpServletResponse resp) throws ParseException, JsonIOException, IOException {
+		logger.debug("====================================location dateLogic===================================");
+		logger.debug("locationNo"+locationNo);
+		logger.debug("day : "+day);
+		String[] splitDay = day.split("-"); 
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		Date selectDay = fm.parse(day);
+		SimpleDateFormat sdf = new SimpleDateFormat("E",new Locale("en", "US"));
+		logger.debug("selectDay : "+selectDay);
+		String dayOfTheWeek= sdf.format(selectDay);
+		logger.debug("dayOfTheWeek : "+dayOfTheWeek);
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
+		String getDate = sdf2.format(selectDay);
+		logger.debug("getDate : "+getDate);
+		Map<String,Object> map = new HashMap();
+		map.put("locationNo",locationNo);
+		map.put("day","%"+dayOfTheWeek+"%");
+		List<LocationPrice>locationPrice = service.getLocationPrice(map);// priceDay꺼내와서 
+		for(LocationPrice lp : locationPrice) {
+			String time = lp.getPriceTime();
+			Map<String,Object> fmp = new HashMap();
+			fmp.put("day", "%"+getDate+"%");
+			fmp.put("time",time);
+			fmp.put("locationNo",locationNo);
+			List<LocationReservation> lr = service.getLocationPirceOfTime(fmp);//locationNo 날짜 시간 한꺼번에 찾아서 rnum
+			logger.debug("lr : "+lr);
+			int reservationPeople = 0;
+			for(LocationReservation r : lr) {
+				reservationPeople += r.getPeople();
+			}
+			int totalPeople = lp.getPricePeople()-reservationPeople;
+			lp.setPricePeople(totalPeople);
+			
+		}
+		logger.debug("locationPrice : "+locationPrice);
+		logger.debug("=========================================================================================");
+		new Gson().toJson(locationPrice,resp.getWriter());
+	}
+	
+	@RequestMapping("location/checkReservation")
+	@ResponseBody
+	public void checkReservation(HttpServletResponse resp, String day, String time, int people, int no) throws JsonIOException, IOException, ParseException {
+		
+		logger.debug("=========================================checkReservaiont===================================");
+		logger.debug("day : "+day);
+		logger.debug("people : "+people);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse(day);
+		logger.debug("time : "+time);
+		logger.debug("no : "+no);
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
+		String formatString = sdf2.format(d);
+		SimpleDateFormat sdf3 = new SimpleDateFormat("E",new Locale("en", "US"));
+		String dayOfTheWeek= sdf3.format(d);
+		logger.debug("dayOfTheWeek : "+dayOfTheWeek);
+		Map<String,Object> m = new HashMap();
+		m.put("day2", "%"+dayOfTheWeek+"%");
+		m.put("day", "%"+formatString+"%");
+		m.put("time", time);	
+		m.put("locationNo", no);
+		
+		List<LocationReservation> lr = service.getLocationPirceOfTime(m);
+		int reservationCount = 0;
+		for(LocationReservation r : lr) {
+			reservationCount += r.getPeople();
+		}
+		logger.debug("reservaiontCount : "+reservationCount);
+		LocationPrice lp = service.checkPrice(m);
+		int completionCount = lp.getPricePeople()-reservationCount;
+		logger.debug("completionCount : "+completionCount);
+		resp.setCharacterEncoding("utf-8");
+		String returnData = "";
+		if (completionCount>=people) {
+			returnData = "true";
+		}else {
+			returnData = "false";
+		}
+		new Gson().toJson(returnData,resp.getWriter());
+		logger.debug("==========================================================================================");
+	}
+	
+	
 
 }

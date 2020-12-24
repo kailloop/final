@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LocationReservation {
 
-	private int reservationNo;
+	private int no;
 	private int locationNo;
-	private String userId;
-	private int reservationPeopleCount;
-	private String reservationTime;
-	private String reservationDay;
-	private int reservationPrice;
-	private Date paymentDate;
-	private Date reservationDate;
+	private String id;
+	private String name;
+	private String time;
+	private String day;
+	private int people;
+	private int price;
+	private String paymentDate;
 }

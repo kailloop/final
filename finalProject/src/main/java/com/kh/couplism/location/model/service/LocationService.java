@@ -10,6 +10,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
 
 public interface LocationService {
@@ -26,4 +27,7 @@ public interface LocationService {
 	public List<Review> getLocationReview(int locationNo);
 	public Location getLocation(int locationNo);
 	public List<LocationPrice> getLocationPrice(int locationNo);
+	public List<LocationPrice> getLocationPrice(Map<String,Object> map);
+	public List<LocationReservation> getLocationPirceOfTime(Map<String,Object> map);
+	public LocationPrice checkPrice(Map<String,Object>map);
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="EVENT" />
@@ -217,9 +218,10 @@
 		
 		
 	</div><!--listViewDiv닫기  -->
-
-
+	<button onclick="location.replace('${path}/location/locationPayment?locationNo=${location.locationNo }&locationName=${location.locationName }');">결제하기</button>
 </section>
+
+
 
 <script>
 	jQuery(document).ready(function($) {
