@@ -19,5 +19,8 @@ public interface AnniversaryDao {
 	
 	Location selectLocation(SqlSession session,int locationNo);
 	
+	int insertAnniversary(SqlSession session,Anniversary anniversary);
 	
+	List<Location> lookList(SqlSession session,int cPage,int numPerPage);
+	int lookCount(SqlSession session);
 }

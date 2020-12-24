@@ -36,6 +36,10 @@
 		<c:if test="${!empty locationList}">
 			<!--사업장목록보여주는 리스트  -->
 			<div id="locationList">
+				<div id="listBtn" style="text-align: center; margin-left: auto; margin-right: auto;">
+			        <button type="button" class="btn btn-secondary" onclick="location.href='${path }/anniversary/anniversarySearch.do'">목록으로</button>
+		        </div>
+				
 				<div id="listTable">
 					<p style="font-size: 25px; color: black; height: 30px;">내 사업장 목록 </p>
 					<p>원하시는 사업장을 선택해주세요</p>
@@ -128,6 +132,8 @@
 				<div id="pageBar">
 		        	${pageBar }
 		        </div>
+		        
+		        
 			</div><!--locationList닫기  -->
 	    </c:if>   
 		

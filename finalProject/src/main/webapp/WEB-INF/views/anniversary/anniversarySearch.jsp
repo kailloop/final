@@ -9,7 +9,7 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   -->
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
 <style>
@@ -205,7 +205,7 @@
             <c:forEach var="anni" items="${list }">
             	<tr>
             		<td><c:out value="${anni.anniversaryType }"/></td>
-            		<td>로케이션제목</td>
+            		<td>로케이션제목<c:out value="${anni.locationNo }"/></td>
             		<td>로케이션지역</td>
             		<td>로케이션타입</td>
             		<td><c:out value="${anni.anniversaryPrice }"/></td>
@@ -223,11 +223,25 @@
 	<!--등록버튼-->
 	<div id="btnDiv" style="text-align: right;">
 		<!-- 로그인한아이디만 가능&제휴회원만 등록가능 분기처리-->
-		<button type="button" class="btn btn-danger" onclick="location.href='${path }/anniWrite?userId=${logginedMember.id }'">기념일 설정</button>
-		<!-- 제휴회원만 등록가능 분기처리 끝-->
+		<c:if test="${logginedMember!=null }">
+			<c:if test="${naverLogin==null }">
+					<c:if test="${kakaoLogin==null }">
+						<c:if test="${partnerMember !=null}">
+							<button type="button" class="btn btn-danger" onclick="location.href='${path }/anniWrite?userId=${logginedMember.id }'">기념일 설정</button>
+						</c:if>
+					</c:if>
+				</c:if>
+			</c:if>
 		<!-- 로그인한아이디만 가능&일반회원만 등록가능 분기처리 -->
-		<button type="button" class="btn btn-danger">등록하기</button>
-		<!-- 일반회원만 등록가능 분기처리 끝-->
+		<c:if test="${logginedMember!=null }">
+					<c:if test="${naverLogin==null }">
+						<c:if test="${kakaoLogin==null }">
+							<c:if test="${partnerMember==null}">
+		<button type="button" class="btn btn-danger" onclick="location.href='${path }/anniWriteMember?userId=${logginedMember.id }'">기념일 등록</button>
+		</c:if>
+		</c:if>
+		</c:if>
+		</c:if>
 	</div>
 	
 		

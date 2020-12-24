@@ -55,6 +55,25 @@ public class AnniversaryServiceImple implements AnniversaryService {
 		// TODO Auto-generated method stub
 		return dao.selectLocation(session,locationNo);
 	}
+
+	@Override
+	public int insertAnniversary(Anniversary anniversary) {
+		// TODO Auto-generated method stub
+		return dao.insertAnniversary(session,anniversary);
+	}
+
+	@Override
+	public List<Location> lookList(int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return dao.lookList(session,cPage,numPerPage);
+	}
+
+	@Override
+	public int lookCount() {
+		// TODO Auto-generated method stub
+		return dao.lookCount(session);
+	}
+	
 	
 	
 }

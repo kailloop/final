@@ -47,6 +47,24 @@ public class AnniversaryDaoImpl implements AnniversaryDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("anniversary.selectLocation",locationNo);
 	}
+
+	@Override
+	public int insertAnniversary(SqlSession session, Anniversary anniversary) {
+		// TODO Auto-generated method stub
+		return session.insert("anniversary.insertAnniversary",anniversary);
+	}
+
+	@Override
+	public List<Location> lookList(SqlSession session, int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return session.selectList("anniversary.lookList",null,new RowBounds((cPage-1)*numPerPage,numPerPage));
+	}
+
+	@Override
+	public int lookCount(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("anniversary.lookCount");
+	}
 	
 	
 	

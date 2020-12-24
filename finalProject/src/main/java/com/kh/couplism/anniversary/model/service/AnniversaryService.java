@@ -16,4 +16,10 @@ public interface AnniversaryService {
 	int locationCount(String userId);
 	
 	Location selectLocation(int locationNo);
+	
+	int insertAnniversary(Anniversary anniversary);
+	
+	List<Location> lookList(int cPage,int numPerPage);
+	int lookCount();
+	
 }

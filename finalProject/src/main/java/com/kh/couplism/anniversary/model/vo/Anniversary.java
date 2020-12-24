@@ -16,4 +16,7 @@ public class Anniversary {
 	private int anniversaryPrice;
 	private String anniversaryDate;
 	private String anniversaryType;
+	private String anniversaryTime;
+	private int anniversaryPeople;
+	private String anniversaryContent;
 }
