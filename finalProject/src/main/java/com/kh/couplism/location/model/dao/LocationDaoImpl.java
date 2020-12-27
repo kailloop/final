@@ -92,6 +92,12 @@ public class LocationDaoImpl implements LocationDao {
 	public LocationPrice checkPrice(Map<String, Object> map, SqlSessionTemplate session) {
 		return session.selectOne("location.checkPrice",map);
 	}
+
+	@Override
+	public int insertReservation(LocationReservation reservation, SqlSessionTemplate session) {
+		return session.insert("location.insertReservation",reservation);
+	}
+	
 	
 	
 	

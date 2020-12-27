@@ -147,4 +147,8 @@
 		AND PRICE_TIME LIKE #{time}
 		
 	</select>
+	
+	<insert id="insertReservation">
+		INSERT INTO 
+	</insert>
 </mapper>

@@ -30,4 +30,5 @@ public interface LocationService {
 	public List<LocationPrice> getLocationPrice(Map<String,Object> map);
 	public List<LocationReservation> getLocationPirceOfTime(Map<String,Object> map);
 	public LocationPrice checkPrice(Map<String,Object>map);
+	public int insertReservation(LocationReservation reservation);
 }

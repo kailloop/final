@@ -554,7 +554,8 @@ public class LocationController {
 		logger.debug("오늘 : "+today);
 		mv.addObject("locationPrice",lp);
 		mv.addObject("locationNo",locationNo);
-		mv.addObject("locationName"+locationName);
+		mv.addObject("locationName",locationName);
+		mv.addObject("test","테스트 데이터 잘들어옴");
 		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
@@ -645,6 +646,20 @@ public class LocationController {
 		}
 		new Gson().toJson(returnData,resp.getWriter());
 		logger.debug("==========================================================================================");
+	}
+	
+	@RequestMapping("testPage")
+	public String testPage() {
+		return "/location/NewFile";
+	}
+	
+	@RequestMapping("location/insertReservation")
+	@ResponseBody
+	public void insertReservation(LocationReservation reservation) {
+		logger.debug("============================================== insertReservation ==========================================");
+		logger.debug("reservation : "+reservation);
+		int result = service.insertReservation(reservation);
+		logger.debug("===========================================================================================================");
 	}
 	
 	
