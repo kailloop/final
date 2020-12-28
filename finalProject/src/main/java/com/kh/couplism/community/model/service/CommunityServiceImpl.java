@@ -71,6 +71,13 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return dao.couponSelect(session,couponId);
 	}
+
+	@Override
+	public List<Event> threeEventList() {
+		// TODO Auto-generated method stub
+		return dao.threeEventList(session);
+		
+	}
 	
 	
 	

@@ -26,4 +26,6 @@ public interface CommunityService {
 	int couponDown(Coupon coupon);
 	
 	Coupon couponSelect(String couponId);
+	
+	List<Event> threeEventList();
 }

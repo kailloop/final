@@ -11,6 +11,7 @@
 		<result property="locationAddress" column="LOCATIONADDRESS"/>
 		<result property="locationStatus" column="LOCATIONSTATUS"/>
 		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="locationName" column="LOCATIONNAME"/>
 	</resultMap>
 	
 	<resultMap id="locationFile" type="com.kh.couplism.location.model.vo.LocationFile">
@@ -32,8 +33,7 @@
 		<result property="reviewId" column="REVIEWID"/>
 		<result property="reviewContent" column="REVIEWCONTENT"/>
 		<result property="reviewGrade" column="REVIEWGRADE"/>
-		<result property="ReviewDate" column="REVIEWDATE"/>
-		<result property="reviewPosition" column="REVIEWPOSITION"/>
+		<result property="reviewDate" column="REVIEWDATE"/>
 	</resultMap>
 	
 	<resultMap id="reviewFile" type="com.kh.couplism.location.model.vo.ReviewFile">
@@ -52,15 +52,15 @@
 	</resultMap>
 	
 	<resultMap id="locationReservation" type="com.kh.couplism.location.model.vo.LocationReservation">
-		<result property="reservationNo" column="RESERVATION_NO"/>
+		<result property="no" column="NO"/>
 		<result property="locationNo" column="LOCATION_NO"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="reservationPeopleCount" column="RESERVATION_PEOPLE_COUNT"/>
-		<result property="reservationTime" column="RESERVATION_TIME"/>
-		<result property="reservationDay" column="RESERVATION_DAY"/>
-		<result property="reservationPrice" column="RESERVATION_PRICE"/>
-		<result property="paymentDate" column="PAYMENT_DATE"/>
-		<result property="reservationDate" column="RESERVATION_DATE"/>
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="time" column="TIME"/>
+		<result property="day" column="DAY"/>
+		<result property="people" column="PEOPLE"/>
+		<result property="price" column="PRICE"/>
+		<result property="paymentDate" column="PAYMENTDAY"/>
 	</resultMap>
 	
 	<select id="locationList" parameterType="map" resultType="com.kh.couplism.location.model.vo.Location">
@@ -89,7 +89,7 @@
 	</select>
 	
 	<insert id="insertLocation" parameterType="com.kh.couplism.location.model.vo.Location">
-		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus},0)
+		INSERT INTO LOCATION VALUES(SEQ_LOCATIONNO.NEXTVAL,#{locationType},#{locationTitle},#{locationCreator},#{locationContent},#{locationPhone},#{locationAddress},#{locationStatus},0,#{locationName})
 		<selectKey keyProperty="locationNo" resultType="_int">
 			SELECT SEQ_LOCATIONNO.CURRVAL FROM DUAL
 		</selectKey>
@@ -116,4 +116,46 @@
 		SELECT * FROM REVIEW
 		WHERE LOCATIONNO LIKE #{locationNo}
 	</select>
+	
+	<select id="getLocation" parameterType="_int" resultMap="location">
+		SELECT * FROM LOCATION 
+		WHERE LOCATIONNO LIKE #{locationNo}	
+	</select>
+	
+	<select id="getLocationPrice" parameterType="_int" resultMap="locationPrice">
+		SELECT * FROM LOCATION_PRICE
+		WHERE LOCATION_NO LIKE #{locationNo}
+	</select>
+	
+	<select id="getLocationPriceString" parameterType="map" resultMap="locationPrice">
+		SELECT * FROM LOCATION_PRICE
+		WHERE LOCATION_NO LIKE #{locationNo}
+		AND PRICE_DAY LIKE #{day}
+	</select>
+	
+	<select id="getLocationPirceOfTime" parameterType="map" resultMap="locationReservation">
+		SELECT * FROM LOCATION_RESERVATION
+		WHERE LOCATION_NO LIKE #{locationNo}
+		AND DAY LIKE #{day}
+		AND TIME LIKE #{time}
+	</select>
+	
+	<select id="checkPrice" parameterType="map" resultMap="locationPrice">
+		SELECT * FROM LOCATION_PRICE
+		WHERE LOCATION_NO LIKE #{locationNo}
+		AND PRICE_DAY LIKE #{day2}
+		AND PRICE_TIME LIKE #{time}
+		
+	</select>
+	
+	<insert id="insertReservation" parameterType="com.kh.couplism.location.model.vo.LocationReservation">
+		INSERT INTO LOCATION_RESERVATION VALUES (SEQ_RESERVATION_NO.NEXTVAL,#{locationNo},#{id},#{name},#{time},#{day},#{people},#{price},SYSDATE)
+	</insert>
+	
+	<select id="checkReservation" parameterType="map" resultMap="locationReservation">
+		SELECT * FROM LOCATION_RESERVATION
+		WHERE LOCATION_NO LIKE #{locationNo}
+		AND ID LIKE #{id}
+	</select>
+	
 </mapper>

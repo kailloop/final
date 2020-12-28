@@ -43,4 +43,12 @@
 	<select id="couponSelect" parameterType="string" resultType="com.kh.couplism.community.model.vo.Coupon">
 		select * from coupon where couponId=#{couponId}
 	</select>
+	
+	<!--이벤트리스트중에서 랜덤하게 3개만 가져옴  -->
+	<select id="threeEventList" resultType="com.kh.couplism.community.model.vo.Event">
+		SELECT * FROM
+			( SELECT * FROM event
+				ORDER BY dbms_random.value )
+		WHERE 4>rownum ORDER BY eventNo DESC
+	</select>
 </mapper>

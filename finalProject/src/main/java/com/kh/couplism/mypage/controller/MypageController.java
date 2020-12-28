@@ -24,7 +24,7 @@ public class MypageController {
 	
 	@Autowired
 	private Logger logger;
-	
+	//일반회원(+네이버회원,+카카오회원)마이페이지 이동하는 메소드
 	@RequestMapping("/mypage/userMypage.do")
 	public ModelAndView userMypage(ModelAndView mv) {
 		mv.addObject("logoPath","/resources/images/mypagelogo.jpg");
@@ -38,6 +38,7 @@ public class MypageController {
 		return mv;
 	}
 	
+	//파트너회원 마이페이지 이동하는 메소드
 	@RequestMapping("/mypage/partnerMypage.do")
 	public ModelAndView partnerpage(ModelAndView mv) {
 		mv.addObject("logoPath","/resources/images/home-logo3.jpg");
@@ -54,6 +55,7 @@ public class MypageController {
 		return mv;
 	}
 	
+	//관리자(admin) 마이페이지 이동하는 메소드
 	@RequestMapping("/mypage/adminMypage.do")
 	public ModelAndView adminMypage(ModelAndView mv) {
 		

@@ -11,6 +11,7 @@ import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationFile;
 import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
+import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
 
 public interface LocationDao {
@@ -24,4 +25,11 @@ public interface LocationDao {
 	public int insertLocationPrice(LocationPrice lp, SqlSessionTemplate session);
 	public LocationMain getLocationMain(int locationNo, SqlSessionTemplate session);
 	public List<Review> getLocationReview(int locationNo, SqlSessionTemplate session);
+	public Location getLocation(int locationNo,SqlSessionTemplate session);
+	public List<LocationPrice> getLocationPrice(int locationNo, SqlSessionTemplate session);
+	public List<LocationPrice> getLocationPrice(Map<String,Object> map, SqlSessionTemplate session);
+	public List<LocationReservation> getLocationPirceOfTime(Map<String,Object> map, SqlSessionTemplate session);
+	public LocationPrice checkPrice(Map<String,Object> map, SqlSessionTemplate session);
+	public int insertReservation(LocationReservation reservation, SqlSessionTemplate session);
+	public List<LocationReservation> checkReservation(Map<String,Object> map, SqlSessionTemplate session);
 }
