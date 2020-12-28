@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <style>
 	section{
-		height:3200px;
+		height:3900px;
 		overflow:visible;
 	}
 	#my-container{
@@ -119,6 +119,17 @@
 		transition:1s;
 		opacity:1;
 	}
+	#pic-six-title{
+		position:relative;
+		top:-700px;
+		left:-55%;
+		font-size:82px;
+	}
+	#lism-list{
+		position:relative;
+		top:-500px;
+		border:1px red solid;
+	}
 	.pic-content{
 		font-family: 'Hi Melody', cursive;
 		font-size:22px;
@@ -156,13 +167,32 @@
 		top:-1250px;
 		opacity:1;
 	}
+	
 	#back-path{
 		position:relative;
 		width:120%;
 		height:500px;
 		top:2300px;
 		left:-10%;
-		filter: grayscale(80%);
+		overflow:hidden;
+		background-color:black;
+		opacity:0.7;
+	}
+	#back-path-img {
+		position:relative;
+		height:1400px;
+		transition:0.25s;
+		top:-200px;
+		background-color:transparent;
+		filter:grayscale(60%);
+	}
+	#second-page{
+		position:relative;
+		width:112.5%;
+		height:400px;
+		border:1px red solid;
+		left:-7%;
+		top:2500px;
 	}
 </style>
 	<div id="my-container">
@@ -198,11 +228,18 @@
 		<label id="pic-five-title" class="pic-title">Store</label>
 		<pre id="pic-five-content" class="pic-content">스키/썰매, 낚시, 수상레저, 바이크 등
 신나고 재미나게 노는 곳을 예약 해주세요.</pre>
+		<label id="pic-six-title" class="pic-title">Lism List</label>
 	</div>
 	<div id="back-path">
-		<img class="picture" src="${path }/resources/lism/lism-path.png">
+		<img id="back-path-img" class="picture" src="${path }/resources/lism/lism-path.png">
 	</div>
+	<div id="second-page">
+		
+	</div>
+	
+	
 <script>
+	var move=1;
 	$(window).scroll(function(){
 		var height=$(document).scrollTop();
 		console.log(height);
@@ -268,10 +305,15 @@
 				$("#pic-five-content").css("top","-1300px");	
 			},500);
 		}
+		if(height>=2500){
+			var top=$("#back-path-img").offset().top;
+			console.log(height-top);
+			if(height<3000){
+				var step=height-top-200;
+				$("#back-path-img").css("top",step);	
+			}
+		}
 	});
-</script>
-<script>
-	
 </script>
 	
 	
