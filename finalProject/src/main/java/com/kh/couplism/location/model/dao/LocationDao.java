@@ -31,4 +31,5 @@ public interface LocationDao {
 	public List<LocationReservation> getLocationPirceOfTime(Map<String,Object> map, SqlSessionTemplate session);
 	public LocationPrice checkPrice(Map<String,Object> map, SqlSessionTemplate session);
 	public int insertReservation(LocationReservation reservation, SqlSessionTemplate session);
+	public List<LocationReservation> checkReservation(Map<String,Object> map, SqlSessionTemplate session);
 }

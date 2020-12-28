@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
 import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
+import com.kh.couplism.member.model.vo.Member;
 
 @Controller
 public class LocationController {
@@ -501,7 +503,7 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location/locationView")
-	public ModelAndView locationView(ModelAndView mv, int locationNo) {
+	public ModelAndView locationView(ModelAndView mv, int locationNo ,HttpSession session) {
 		logger.debug("================================================locationView================================================");
 		Location location = service.getLocation(locationNo);
 		logger.debug("location : "+location);
@@ -523,8 +525,29 @@ public class LocationController {
 			}
 			reviewPoint = reviewTotal / review.size();
 		}
+		Member logginedMember = (Member)session.getAttribute("logginedMember");
+		logger.debug("logginedMember : "+logginedMember);
+		
+		
+		if(logginedMember!=null) {
+			Map<String,Object> mp = new HashMap();
+			mp.put("id", logginedMember.getId());
+			mp.put("locationNo",locationNo);
+			List<LocationReservation> lr =service.checkReservation(mp);
+			if(lr!=null) {
+				int lrSize = lr.size();
+				mv.addObject("reservationSize",lrSize);
+				logger.debug("reservationSize : "+lrSize);
+			}
+		}
+		
+		
+		
 		
 		Double.parseDouble(String.format(Locale.KOREAN, "%.1f", reviewPoint));
+		
+		
+		
 		mv.addObject("location",location);//로케이션 추가
 		mv.addObject("reviewPoint",reviewPoint);//리뷰 포인트 추가 
 		mv.addObject("review",review);//리뷰 추가
@@ -655,11 +678,19 @@ public class LocationController {
 	
 	@RequestMapping("location/insertReservation")
 	@ResponseBody
-	public void insertReservation(LocationReservation reservation) {
+	public String insertReservation(LocationReservation reservation) {
 		logger.debug("============================================== insertReservation ==========================================");
 		logger.debug("reservation : "+reservation);
 		int result = service.insertReservation(reservation);
+		logger.debug("result : "+result);
+		String returnData = "";
+		if(result>0) {
+			returnData = "true";
+		}else {
+			returnData = "false";
+		}
 		logger.debug("===========================================================================================================");
+		return returnData;
 	}
 	
 	

@@ -97,7 +97,12 @@ public class LocationDaoImpl implements LocationDao {
 	public int insertReservation(LocationReservation reservation, SqlSessionTemplate session) {
 		return session.insert("location.insertReservation",reservation);
 	}
-	
+
+	@Override
+	public List<LocationReservation> checkReservation(Map<String, Object> map, SqlSessionTemplate session) {
+		return session.selectList("location.checkReservation",map);
+	}
+
 	
 	
 	

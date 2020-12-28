@@ -120,7 +120,8 @@
 											        $.ajax({
 														url:"${path}/location/insertReservation?locationNo=${locationNo}&id=${logginedMember.id}&name="+checkName+"&time="+checkTime+"&day="+checkDay+"&people="+checkPeople+"&price="+checkPrice,
 														success:data => {
-															
+															alert("성공적으로 예약이 완료 되었습니다.");
+															location.href='${path}/location/locationView?locationNo=${locationNo}';
 														},
 														fail:error =>{
 															alert('결제는 완료하였으나 데이터가 등록되지 못했습니다. 관리자에게 문의 부탁드립니다.');

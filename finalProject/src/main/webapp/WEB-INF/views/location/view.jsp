@@ -151,6 +151,7 @@
 				</tr>
 				<!--[고치기] 사람들 리뷰내용  -->
 				<tr>
+					<c:if test="${reservationSize > 0}"><td colspan="2"><button onclick="addReview();" type="button">리뷰작성하기</button></td></c:if>
 					<c:forEach items="${review }" var="ri">
 					<td colspan="2">
 						<p class="float-left">${ri.reviewId }</p>

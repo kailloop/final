@@ -148,7 +148,14 @@
 		
 	</select>
 	
-	<insert id="insertReservation">
-		INSERT INTO 
+	<insert id="insertReservation" parameterType="com.kh.couplism.location.model.vo.LocationReservation">
+		INSERT INTO LOCATION_RESERVATION VALUES (SEQ_RESERVATION_NO.NEXTVAL,#{locationNo},#{id},#{name},#{time},#{day},#{people},#{price},SYSDATE)
 	</insert>
+	
+	<select id="checkReservation" parameterType="map" resultMap="locationReservation">
+		SELECT * FROM LOCATION_RESERVATION
+		WHERE LOCATION_NO LIKE #{locationNo}
+		AND ID LIKE #{id}
+	</select>
+	
 </mapper>
