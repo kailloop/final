@@ -503,8 +503,9 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location/locationView")
-	public ModelAndView locationView(ModelAndView mv, int locationNo ,HttpSession session) {
+	public ModelAndView locationView(ModelAndView mv, int locationNo ,HttpSession session, String id) {
 		logger.debug("================================================locationView================================================");
+		logger.debug("id : "+id);
 		Location location = service.getLocation(locationNo);
 		logger.debug("location : "+location);
 		List<LocationPrice> locationPrice = service.getLocationPrice(locationNo);
@@ -525,13 +526,12 @@ public class LocationController {
 			}
 			reviewPoint = reviewTotal / review.size();
 		}
-		Member logginedMember = (Member)session.getAttribute("logginedMember");
-		logger.debug("logginedMember : "+logginedMember);
+	
+
 		
 		
-		if(logginedMember!=null) {
 			Map<String,Object> mp = new HashMap();
-			mp.put("id", logginedMember.getId());
+			mp.put("id", id);
 			mp.put("locationNo",locationNo);
 			List<LocationReservation> lr =service.checkReservation(mp);
 			if(lr!=null) {
@@ -539,8 +539,6 @@ public class LocationController {
 				mv.addObject("reservationSize",lrSize);
 				logger.debug("reservationSize : "+lrSize);
 			}
-		}
-		
 		
 		
 		

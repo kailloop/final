@@ -268,7 +268,7 @@
 						
 		<!--리스트-->
 		<c:forEach items="${list }" var="map" varStatus="status">
-			<div class="listdiv" onclick="location.replace('${path}/location/locationView?locationNo=${map.locationNo }');">
+			<div class="listdiv" onclick="location.replace('${path}/location/locationView?locationNo=${map.locationNo }&id=${logginedMember.id }');">
 				<img class="imgclass" alt="" src="${map.locationMain}" width="298px" height="200px;">
 				<!--제휴업체 분기처리 시작 -->
 				<c:if test="${map.locationStatus eq 1}">

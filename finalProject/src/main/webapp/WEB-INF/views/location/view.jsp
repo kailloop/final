@@ -9,7 +9,7 @@
 	<jsp:param name="title" value="EVENT" />
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
-
+<script type="text/javascript" src="${path }/resources/ckeditor/ckeditor.js"></script>
 <style>
 	.chooseTd{
 		background: #A5E3E6;
@@ -151,7 +151,7 @@
 				</tr>
 				<!--[고치기] 사람들 리뷰내용  -->
 				<tr>
-					<c:if test="${reservationSize > 0}"><td colspan="2"><button onclick="addReview();" type="button">리뷰작성하기</button></td></c:if>
+					<c:if test="${reservationSize > 0}"><tr><td colspan="2"><button onclick="addReview(event);" type="button">리뷰작성하기</button></td><tr></c:if>
 					<c:forEach items="${review }" var="ri">
 					<td colspan="2">
 						<p class="float-left">${ri.reviewId }</p>
@@ -225,6 +225,8 @@
 
 
 <script>
+
+	var reviewTr = 
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){            
 			event.preventDefault();
@@ -234,7 +236,34 @@
 
 	});
 
-
+	function addReview(event){
+		console.log($(event.target).parent());
+		$(event.target).parent().parent().append("<textarea name='locationContent' id='locationContent' style='resize: none;'></textarea><button type='button'>등록하기</button>");
+	
+	$(function(){
+	    
+	    CKEDITOR.replace( 'locationContent', {//해당 이름으로 된 textarea에 에디터를 적용
+	        width:'100%',
+	        height:'400px',
+	        filebrowserImageUploadUrl: '${path}/location/imageUpload?creator=${logginedMember.id}' //여기 경로로 파일을 전달하여 업로드 시킨다.
+	    });
+	     
+	     
+	    CKEDITOR.on('dialogDefinition', function( ev ){
+	        var dialogName = ev.data.name;
+	        var dialogDefinition = ev.data.definition;
+	      
+	        switch (dialogName) {
+	            case 'image': //Image Properties dialog
+	                //dialogDefinition.removeContents('info');
+	                dialogDefinition.removeContents('Link');
+	                dialogDefinition.removeContents('advanced');
+	                break;
+	        }
+	    });
+	     
+	});
+	}
 </script>
 	
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>
