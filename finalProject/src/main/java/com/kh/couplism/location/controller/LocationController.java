@@ -851,9 +851,7 @@ public class LocationController {
 			}
 		
 		}
-		mv.setViewName("/location/locationView");
-		mv.addObject("address","");
-		mv.addObject("category","");
+		mv = location("","","",0,"",mv,request);
 		return mv;
 		
 	}
