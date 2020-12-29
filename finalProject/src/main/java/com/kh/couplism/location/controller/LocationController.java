@@ -38,7 +38,6 @@ import com.kh.couplism.location.model.vo.LocationMain;
 import com.kh.couplism.location.model.vo.LocationPrice;
 import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
-import com.kh.couplism.member.model.vo.Member;
 
 @Controller
 public class LocationController {
@@ -140,6 +139,7 @@ public class LocationController {
 		for (Location l : locationList) {
 			logger.debug("l : " + l);
 			logger.debug("l.getLocationNo() : " + l.getLocationNo());
+			l.setLocationAddress(l.getLocationAddress().replace("/", " "));
 			LocationMain locationMain = service.getLocationMain(l.getLocationNo());
 			logger.debug("locationMain : " + locationMain);
 			List<Review> rl = service.getLocationReview(l.getLocationNo());
@@ -503,7 +503,7 @@ public class LocationController {
 	}
 
 	@RequestMapping("/location/locationView")
-	public ModelAndView locationView(ModelAndView mv, int locationNo, HttpSession session, String id) {
+	public ModelAndView locationView(ModelAndView mv, int locationNo, HttpSession session, String id, HttpServletRequest request) {
 		logger.debug(
 				"================================================locationView================================================");
 		logger.debug("id : " + id);
@@ -549,14 +549,20 @@ public class LocationController {
 				logger.debug("등록안한 갯수 : " + (lrSize - ReviewExist));
 			}
 		}
-
+		String[] mapPath = location.getLocationAddress().split("/");
+		location.setLocationAddress(location.getLocationAddress().replace("/"," "));
+		
 		Double.parseDouble(String.format(Locale.KOREAN, "%.1f", reviewPoint));
-
+		LocationMain lm = service.getLocationMain(locationNo);
+		logger.debug("locationMain : resources/upload/locationMain/"+lm.getRenameName());
+		logger.debug("mapPath : "+mapPath[0]);
 		mv.addObject("location", location);// 로케이션 추가
+		mv.addObject("mapPath", mapPath[0]);
 		mv.addObject("reviewPoint", reviewPoint);// 리뷰 포인트 추가
 		mv.addObject("review", review);// 리뷰 추가
 		mv.addObject("locationPrice", locationPrice);
 		mv.addObject("ReviewExist", ReviewExist);
+		mv.addObject("locationMain", "resources/upload/locationMain/"+lm.getRenameName());
 		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
@@ -792,6 +798,63 @@ public class LocationController {
 		}else {
 			return "false";
 		}
+		
+	}
+	
+	@RequestMapping("/location/createMember")
+	public String createMember() {
+		return "/location/createMember";
+	}
+	
+	@RequestMapping("/location/createMemberEnd")
+	public ModelAndView createMemberEnd(ModelAndView mv, Location location, MultipartFile mainFile, HttpServletRequest request) {
+		
+		
+		logger.debug("===========================================================  createMember ================================================");
+		logger.debug("location : "+location);
+		//1. 인서트 
+		// service에서 새로운 location insert문작성 status 가 2 
+		
+		location.setLocationStatus(2);
+		
+		//2. locationMain 등록하기
+		
+		int result = service.insertLocation(location);// location insert결과 
+		int locationMainResult=0;// locationMain insert결과가 담길곳
+		
+		if (result > 0) {
+			String saveDirMain = request.getServletContext().getRealPath("/resources/upload/locationMain");
+			logger.debug("locationMain file명 : " + mainFile.getOriginalFilename());
+			logger.debug("locationMain file Size : " + mainFile.getSize());
+			String originalFileName = mainFile.getOriginalFilename();
+			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+			int randomNum = (int) (Math.random() * 1000);
+			String renamedFileName = "Couplism-Location-Main-" + sdf.format(new Date(System.currentTimeMillis())) + "_"
+					+ randomNum + "." + ext;
+			logger.debug("변경된 파일이름 " + renamedFileName);
+			try {
+				mainFile.transferTo(new File(saveDirMain + "/" + renamedFileName));// 파일을 저장
+				logger.debug("파일 등록성공!");
+				// 파일을 db에 등록하는 로직작성
+				LocationMain lm = new LocationMain(location.getLocationNo(), mainFile.getOriginalFilename(),
+						renamedFileName);
+				logger.debug("LocationMain : " + lm);
+				locationMainResult = service.insertLocationMain(lm);
+				String fileCheck = "실패";
+				if (locationMainResult > 0) {
+					fileCheck = "성공";
+				}
+				logger.debug("파일 등록결과 LocationMain : " + fileCheck);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}
+		mv.setViewName("/location/locationView");
+		mv.addObject("address","");
+		mv.addObject("category","");
+		return mv;
 		
 	}
 }
