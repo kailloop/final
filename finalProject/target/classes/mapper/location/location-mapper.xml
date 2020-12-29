@@ -158,4 +158,8 @@
 		AND ID LIKE #{id}
 	</select>
 	
+	<insert id="insertReview" parameterType="map">
+		INSERT INTO REVIEW VALUES(SEQ_REVIEWNO.NEXTVAL,#{locationNo},1,#{id},#{content},#{grade},SYSDATE)
+	</insert>
+	
 </mapper>

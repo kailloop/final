@@ -110,6 +110,11 @@ public class LocationServiceImpl implements LocationService {
 	public List<LocationReservation> checkReservation(Map<String,Object> map) {
 		return dao.checkReservation(map, session);
 	}
+
+	@Override
+	public int insertReview(Map<String, Object> map) {
+		return dao.insertReview(map, session);
+	}
 	
 	
 	

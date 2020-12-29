@@ -150,9 +150,9 @@
 					</td>
 				</tr>
 				<!--[고치기] 사람들 리뷰내용  -->
+				<c:if test="${reservationSize > 0}"><c:if test="${ReviewExist < reservationSize }"><tr><td colspan="2"><button id='addbutton' onclick="addReview(event);" type="button">리뷰작성하기</button></td></tr></c:if></c:if>
+				<c:forEach items="${review }" var="ri">
 				<tr>
-					<c:if test="${reservationSize > 0}"><tr><td colspan="2"><button onclick="addReview(event);" type="button">리뷰작성하기</button></td><tr></c:if>
-					<c:forEach items="${review }" var="ri">
 					<td colspan="2">
 						<p class="float-left">${ri.reviewId }</p>
 						<p class="float-right">${ri.reviewDate }</p>
@@ -177,8 +177,8 @@
 						<p id="starnum">${ri.reviewGrade}</p>
 						<p>${ri.reviewContent }</p>
 					</td>
-					</c:forEach>
 				</tr>
+				</c:forEach>
 			</table>
 		</div>
 		
@@ -237,9 +237,9 @@
 	});
 
 	function addReview(event){
-		console.log($(event.target).parent());
-		$(event.target).parent().parent().append("<textarea name='locationContent' id='locationContent' style='resize: none;'></textarea><button type='button'>등록하기</button>");
-	
+		console.log($(event.target).parent().parent());
+		$(event.target).parent().append("<form id='form'><textarea name='content' id='locationContent' style='resize: none;'></textarea><button onclick='insertReview();' type='button'>등록하기</button><select name='grade' id='reviewGrade'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option><option value='2'>★★☆☆☆</option><option value='1'>★☆☆☆☆</option></select>");
+		$("#addbutton").remove();
 	$(function(){
 	    
 	    CKEDITOR.replace( 'locationContent', {//해당 이름으로 된 textarea에 에디터를 적용
@@ -263,6 +263,31 @@
 	    });
 	     
 	});
+	}
+	
+	function insertReview(){
+		var reviewContent = CKEDITOR.instances.locationContent.getData();
+		var reviewGrade = $("#reviewGrade").val();
+		console.log(CKEDITOR.instances.locationContent.getData());
+		console.log(reviewContent);
+		console.log(${location.locationNo});
+		var jhData = {
+			id : "${logginedMember.id}",
+			locationNo : ${location.locationNo},
+			content : CKEDITOR.instances.locationContent.getData(),
+			grade : reviewGrade
+		};
+		$.ajax({
+			url:"${path}/location/AddReview",
+			data : jhData,
+			success:data => {
+					console.log(data);
+					location.replace('${path}/location/locationView?locationNo=${location.locationNo}&id=${logginedMember.id}');
+			},
+			fail:error =>{
+				
+			}  
+		});
 	}
 </script>
 	

@@ -262,8 +262,8 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/createEnd")
-	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile,
-			String[] locationPrice, Location location, HttpServletRequest request) {
+	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, String[] locationPrice,
+			Location location, HttpServletRequest request) {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 
@@ -364,7 +364,7 @@ public class LocationController {
 			logger.debug("변경된 noticeContent : " + pathReplace);
 			location.setLocationContent(pathReplace);
 		}
-		logger.debug("location : "+location);
+		logger.debug("location : " + location);
 		int result = service.insertLocation(location);
 
 		logger.debug("result : " + result);
@@ -501,82 +501,90 @@ public class LocationController {
 
 		return;
 	}
-	
+
 	@RequestMapping("/location/locationView")
-	public ModelAndView locationView(ModelAndView mv, int locationNo ,HttpSession session, String id) {
-		logger.debug("================================================locationView================================================");
-		logger.debug("id : "+id);
+	public ModelAndView locationView(ModelAndView mv, int locationNo, HttpSession session, String id) {
+		logger.debug(
+				"================================================locationView================================================");
+		logger.debug("id : " + id);
 		Location location = service.getLocation(locationNo);
-		logger.debug("location : "+location);
+		logger.debug("location : " + location);
 		List<LocationPrice> locationPrice = service.getLocationPrice(locationNo);
-		if(locationPrice.size()>1) {
-			//예약 가능 
+		if (locationPrice.size() > 1) {
+			// 예약 가능
 			logger.debug("예약 가능!");
 		}
-		for(LocationPrice lp : locationPrice) {//로케이션 프라이스
-			logger.debug("locationPrice : "+lp);
+		for (LocationPrice lp : locationPrice) {// 로케이션 프라이스
+			logger.debug("locationPrice : " + lp);
 		}
 		List<Review> review = service.getLocationReview(locationNo);
-		
+
 		int reviewTotal = 0;
 		double reviewPoint = 0.00;
+		int ReviewExist = 0;
 		if (review.size() > 0) {
 			for (Review r : review) {
 				reviewTotal += r.getReviewGrade();
+				if (id != null) {
+					if (r.getReviewId().equals(id)) {
+						ReviewExist++;
+						logger.debug("ReviewExist : "+ReviewExist);
+					}
+				}
+
 			}
 			reviewPoint = reviewTotal / review.size();
 		}
-	
 
-		
-		
-			Map<String,Object> mp = new HashMap();
+		if (id != null) {
+			Map<String, Object> mp = new HashMap();
 			mp.put("id", id);
-			mp.put("locationNo",locationNo);
-			List<LocationReservation> lr =service.checkReservation(mp);
-			if(lr!=null) {
+			mp.put("locationNo", locationNo);
+			List<LocationReservation> lr = service.checkReservation(mp);
+			if (lr != null) {
 				int lrSize = lr.size();
-				mv.addObject("reservationSize",lrSize);
-				logger.debug("reservationSize : "+lrSize);
+				mv.addObject("reservationSize", lrSize);
+				logger.debug("reservationSize : " + lrSize);
+				logger.debug("ReviewExist : " + ReviewExist);
+				logger.debug("등록안한 갯수 : " + (lrSize - ReviewExist));
 			}
-		
-		
-		
+		}
+
 		Double.parseDouble(String.format(Locale.KOREAN, "%.1f", reviewPoint));
-		
-		
-		
-		mv.addObject("location",location);//로케이션 추가
-		mv.addObject("reviewPoint",reviewPoint);//리뷰 포인트 추가 
-		mv.addObject("review",review);//리뷰 추가
-		mv.addObject("locationPrice",locationPrice);
+
+		mv.addObject("location", location);// 로케이션 추가
+		mv.addObject("reviewPoint", reviewPoint);// 리뷰 포인트 추가
+		mv.addObject("review", review);// 리뷰 추가
+		mv.addObject("locationPrice", locationPrice);
+		mv.addObject("ReviewExist", ReviewExist);
 		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
 		mv.addObject("borderSize", "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
-		
+
 		mv.setViewName("location/view");
-		
+
 		// 리뷰 불러옴 !
 		// 리뷰 불러올려면 ! 결제 !@
-		
-		logger.debug("============================================================================================================");
+
+		logger.debug(
+				"============================================================================================================");
 		return mv;
 	}
-	
+
 	@RequestMapping("location/locationPayment")
 	public ModelAndView locationPayment(int locationNo, String locationName, ModelAndView mv) {
 		logger.debug("==================================LocationPayment=====================================");
-		logger.debug("locationNo : "+locationNo);
-		logger.debug("locationName : "+locationName);
+		logger.debug("locationNo : " + locationNo);
+		logger.debug("locationName : " + locationName);
 		List<LocationPrice> lp = service.getLocationPrice(locationNo);
-		logger.debug("locationPrice : "+lp);
+		logger.debug("locationPrice : " + lp);
 		Date today = new Date();
-		logger.debug("오늘 : "+today);
-		mv.addObject("locationPrice",lp);
-		mv.addObject("locationNo",locationNo);
-		mv.addObject("locationName",locationName);
-		mv.addObject("test","테스트 데이터 잘들어옴");
+		logger.debug("오늘 : " + today);
+		mv.addObject("locationPrice", lp);
+		mv.addObject("locationNo", locationNo);
+		mv.addObject("locationName", locationName);
+		mv.addObject("test", "테스트 데이터 잘들어옴");
 		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
@@ -585,112 +593,205 @@ public class LocationController {
 		logger.debug("======================================================================================");
 		return mv;
 	}
-	
+
 	@RequestMapping("location/dateLogic")
 	@ResponseBody
-	public void dateLogic(String day, int locationNo, HttpServletRequest rq, HttpServletResponse resp) throws ParseException, JsonIOException, IOException {
+	public void dateLogic(String day, int locationNo, HttpServletRequest rq, HttpServletResponse resp)
+			throws ParseException, JsonIOException, IOException {
 		logger.debug("====================================location dateLogic===================================");
-		logger.debug("locationNo"+locationNo);
-		logger.debug("day : "+day);
-		String[] splitDay = day.split("-"); 
+		logger.debug("locationNo" + locationNo);
+		logger.debug("day : " + day);
+		String[] splitDay = day.split("-");
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
 		Date selectDay = fm.parse(day);
-		SimpleDateFormat sdf = new SimpleDateFormat("E",new Locale("en", "US"));
-		logger.debug("selectDay : "+selectDay);
-		String dayOfTheWeek= sdf.format(selectDay);
-		logger.debug("dayOfTheWeek : "+dayOfTheWeek);
+		SimpleDateFormat sdf = new SimpleDateFormat("E", new Locale("en", "US"));
+		logger.debug("selectDay : " + selectDay);
+		String dayOfTheWeek = sdf.format(selectDay);
+		logger.debug("dayOfTheWeek : " + dayOfTheWeek);
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
 		String getDate = sdf2.format(selectDay);
-		logger.debug("getDate : "+getDate);
-		Map<String,Object> map = new HashMap();
-		map.put("locationNo",locationNo);
-		map.put("day","%"+dayOfTheWeek+"%");
-		List<LocationPrice>locationPrice = service.getLocationPrice(map);// priceDay꺼내와서 
-		for(LocationPrice lp : locationPrice) {
+		logger.debug("getDate : " + getDate);
+		Map<String, Object> map = new HashMap();
+		map.put("locationNo", locationNo);
+		map.put("day", "%" + dayOfTheWeek + "%");
+		List<LocationPrice> locationPrice = service.getLocationPrice(map);// priceDay꺼내와서
+		for (LocationPrice lp : locationPrice) {
 			String time = lp.getPriceTime();
-			Map<String,Object> fmp = new HashMap();
-			fmp.put("day", "%"+getDate+"%");
-			fmp.put("time",time);
-			fmp.put("locationNo",locationNo);
-			List<LocationReservation> lr = service.getLocationPirceOfTime(fmp);//locationNo 날짜 시간 한꺼번에 찾아서 rnum
-			logger.debug("lr : "+lr);
+			Map<String, Object> fmp = new HashMap();
+			fmp.put("day", "%" + getDate + "%");
+			fmp.put("time", time);
+			fmp.put("locationNo", locationNo);
+			List<LocationReservation> lr = service.getLocationPirceOfTime(fmp);// locationNo 날짜 시간 한꺼번에 찾아서 rnum
+			logger.debug("lr : " + lr);
 			int reservationPeople = 0;
-			for(LocationReservation r : lr) {
+			for (LocationReservation r : lr) {
 				reservationPeople += r.getPeople();
 			}
-			int totalPeople = lp.getPricePeople()-reservationPeople;
+			int totalPeople = lp.getPricePeople() - reservationPeople;
 			lp.setPricePeople(totalPeople);
-			
+
 		}
-		logger.debug("locationPrice : "+locationPrice);
+		logger.debug("locationPrice : " + locationPrice);
 		logger.debug("=========================================================================================");
-		new Gson().toJson(locationPrice,resp.getWriter());
+		new Gson().toJson(locationPrice, resp.getWriter());
 	}
-	
+
 	@RequestMapping("location/checkReservation")
 	@ResponseBody
-	public void checkReservation(HttpServletResponse resp, String day, String time, int people, int no) throws JsonIOException, IOException, ParseException {
-		
+	public void checkReservation(HttpServletResponse resp, String day, String time, int people, int no)
+			throws JsonIOException, IOException, ParseException {
+
 		logger.debug("=========================================checkReservaiont===================================");
-		logger.debug("day : "+day);
-		logger.debug("people : "+people);
+		logger.debug("day : " + day);
+		logger.debug("people : " + people);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date d = sdf.parse(day);
-		logger.debug("time : "+time);
-		logger.debug("no : "+no);
+		logger.debug("time : " + time);
+		logger.debug("no : " + no);
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
 		String formatString = sdf2.format(d);
-		SimpleDateFormat sdf3 = new SimpleDateFormat("E",new Locale("en", "US"));
-		String dayOfTheWeek= sdf3.format(d);
-		logger.debug("dayOfTheWeek : "+dayOfTheWeek);
-		Map<String,Object> m = new HashMap();
-		m.put("day2", "%"+dayOfTheWeek+"%");
-		m.put("day", "%"+formatString+"%");
-		m.put("time", time);	
+		SimpleDateFormat sdf3 = new SimpleDateFormat("E", new Locale("en", "US"));
+		String dayOfTheWeek = sdf3.format(d);
+		logger.debug("dayOfTheWeek : " + dayOfTheWeek);
+		Map<String, Object> m = new HashMap();
+		m.put("day2", "%" + dayOfTheWeek + "%");
+		m.put("day", "%" + formatString + "%");
+		m.put("time", time);
 		m.put("locationNo", no);
-		
+
 		List<LocationReservation> lr = service.getLocationPirceOfTime(m);
 		int reservationCount = 0;
-		for(LocationReservation r : lr) {
+		for (LocationReservation r : lr) {
 			reservationCount += r.getPeople();
 		}
-		logger.debug("reservaiontCount : "+reservationCount);
+		logger.debug("reservaiontCount : " + reservationCount);
 		LocationPrice lp = service.checkPrice(m);
-		int completionCount = lp.getPricePeople()-reservationCount;
-		logger.debug("completionCount : "+completionCount);
+		int completionCount = lp.getPricePeople() - reservationCount;
+		logger.debug("completionCount : " + completionCount);
 		resp.setCharacterEncoding("utf-8");
 		String returnData = "";
-		if (completionCount>=people) {
+		if (completionCount >= people) {
 			returnData = "true";
-		}else {
+		} else {
 			returnData = "false";
 		}
-		new Gson().toJson(returnData,resp.getWriter());
+		new Gson().toJson(returnData, resp.getWriter());
 		logger.debug("==========================================================================================");
 	}
-	
+
 	@RequestMapping("testPage")
 	public String testPage() {
 		return "/location/NewFile";
 	}
-	
+
 	@RequestMapping("location/insertReservation")
 	@ResponseBody
 	public String insertReservation(LocationReservation reservation) {
-		logger.debug("============================================== insertReservation ==========================================");
-		logger.debug("reservation : "+reservation);
+		logger.debug(
+				"============================================== insertReservation ==========================================");
+		logger.debug("reservation : " + reservation);
 		int result = service.insertReservation(reservation);
-		logger.debug("result : "+result);
+		logger.debug("result : " + result);
 		String returnData = "";
-		if(result>0) {
+		if (result > 0) {
 			returnData = "true";
-		}else {
+		} else {
 			returnData = "false";
 		}
-		logger.debug("===========================================================================================================");
+		logger.debug(
+				"===========================================================================================================");
 		return returnData;
 	}
 	
-	
+	@RequestMapping("/location/AddReview")
+	@ResponseBody
+	public String AddReview(int locationNo, String content, String id, int grade,HttpServletRequest request) {
+		logger.debug("============================================= AddReview ==================================================");
+		logger.debug("locationNo : "+locationNo);
+		logger.debug("content : "+content);
+		logger.debug("id : "+id);
+		logger.debug("grade : "+grade);
+		// ckEditor  에서 서버에 저장한 파일에 대한 처리 후 가져온 값들은 content에 대한 내용을 db에 insert시킨다
+		
+		String[] contentSplit = content.split("src=");// 경로로 스플릿함
+		if (contentSplit.length > 1) {
 
+			logger.debug("contentSplit : " + contentSplit);
+			logger.debug("contentSplit.length : " + contentSplit.length);
+			List<String> imgPath = new ArrayList();
+			for (int i = 1; i < contentSplit.length; i++) {
+				logger.debug("contentSplit[" + i + "] : " + contentSplit[i]);
+				logger.debug("for문 정상적으로 작동");
+				logger.debug("contentSplit replace : " + contentSplit[i].replace("\"", "\\|"));
+				String splitPatha = contentSplit[i].replace("\"", "\\|");
+				String[] splitPath = splitPatha.split("\\|");
+				logger.debug("splitPath[1] : " + splitPath[1]);
+				String[] pathArr = splitPath[1].replace("\\", "").split("/");
+				int lastIndex = pathArr.length - 1;
+				imgPath.add(pathArr[lastIndex]);
+				logger.debug("pathArr[lastIndex] : " + pathArr[lastIndex]);
+			}
+			logger.debug("imgPath Size : " + imgPath.size());
+			logger.debug("imgPath List : " + imgPath);// 이미지파일의 경로를 받아옴
+
+			// imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+
+			for (String path : imgPath) {
+				logger.debug("path : " + path);
+				File moveFile = new File(
+						request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile") + "/"
+								+ path);
+				logger.debug("파일존재 여부 : " + moveFile.exists());
+				logger.debug("moveFile.getName() : " + moveFile.getName());
+				String[] newFilePath = moveFile.getName().split("_");// newFilePath[2]으로 저장하면됨
+				logger.debug("newFilePath length : " + newFilePath.length);
+				logger.debug("newFilePath : " + newFilePath);
+
+				File newFile = new File(
+						request.getServletContext().getRealPath("/resources/upload/location") + "/" + newFilePath[1]);
+				if (moveFile.exists()) {
+					boolean isMoved = moveFile.renameTo(newFile);
+					logger.debug("파일 이동여부 : " + isMoved);
+				}
+
+			}
+			logger.debug("userId : " + id);
+			File imgFile = new File(
+					request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile"));
+			File[] imgFileList = imgFile.listFiles();
+			logger.debug("imgFileList.length() : " + imgFileList.length);
+			for (File f : imgFileList) {// 이로직 로그인할때도 돌려줘야함 !!@#!@#
+				String[] fileName = f.getName().split("_");
+				logger.debug("fileName[0] : " + fileName[0]);
+				logger.debug("fileName[1] : " + fileName[1]);
+				if (fileName[0].equals(id)) {
+					f.delete();
+					logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+				}
+			}
+
+			// 이제 변경된경로로 noticeContent안에 src수정
+
+			String pathReplace = content.replace("location-Write-ContentFile", "location")
+					.replace(id+ "_", "");
+			logger.debug("변경된 noticeContent : " + pathReplace);
+			content = pathReplace;
+		}
+		Map<String,Object> map = new HashMap();
+		map.put("locationNo", locationNo);
+		map.put("id", id);
+		map.put("grade", grade);
+		map.put("content",content);
+		int result = service.insertReview(map);
+		logger.debug("result : "+result);
+		logger.debug("==========================================================================================================");
+		
+		
+		if(result>0) {
+			return "true";
+		}else {
+			return "false";
+		}
+		
+	}
 }
