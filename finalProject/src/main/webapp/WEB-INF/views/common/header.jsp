@@ -362,7 +362,7 @@
 	<nav class="navbar navbar-expand-xl navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container" style="background:white;
 										overflow:hidden;">
-			<a class="navbar-brand" href="/couplism/">Coupli<span>sm</span></a>
+			<a class="navbar-brand" href="${path }/">Coupli<span>sm</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             	<span class="oi oi-menu"></span> Menu
          	</button>

@@ -5,4 +5,36 @@
 	<select id="selectList" resultType="calendar">
 		SELECT * FROM calendar WHERE CALENDARWRITER=#{idv}
 	</select>
+	
+	<select id="anniversaryList" resultType="com.kh.couplism.anniversary.model.vo.Anniversary">
+		select * from anniversary order by anniversaryNo desc
+	</select>
+	
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*) FROM anniversary
+	</select>
+	
+	<select id="locationList" resultType="com.kh.couplism.location.model.vo.Location" parameterType="string">
+		select * from location where locationCreator=#{userId} order by locationNo desc
+	</select>
+	
+	<select id="locationCount" resultType="_int">
+		SELECT COUNT(*) FROM location where locationCreator=#{userId}
+	</select>
+	
+	<select id="selectLocation" parameterType="_int" resultType="com.kh.couplism.location.model.vo.Location">
+		SELECT * FROM location WHERE LOCATIONNO=#{locationNo}
+	</select>
+	
+	<insert id="insertAnniversary" parameterType="com.kh.couplism.anniversary.model.vo.Anniversary">
+		insert into anniversary values(SEQ_anniversaryNo.NEXTVAL,#{locationNo},1,#{anniversaryPrice},#{anniversaryDate},#{anniversaryType},#{anniversaryTime},#{anniversaryPeople})
+	</insert>
+	
+	<select id="lookList" resultType="com.kh.couplism.location.model.vo.Location" >
+		select * from location where locationtype LIKE '%l%' order by locationNo desc
+	</select>
+	
+	<select id="lookCount" resultType="_int">
+		select count(*) from location where locationtype LIKE '%l%'
+	</select>
 </mapper>
