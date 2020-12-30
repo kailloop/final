@@ -118,6 +118,26 @@ public class LocationDaoImpl implements LocationDao {
 		return session.selectOne("location.locationCountSplit", types);
 	}
 
+	@Override
+	public int deleteLocationMain(int locationNo, SqlSessionTemplate session) {
+		return session.delete("location.deleteLocationMain",locationNo);
+	}
+
+	@Override
+	public int deleteLocationReservation(int locationNo, SqlSessionTemplate session) {
+		return session.delete("location.deleteLocationReservation",locationNo);
+	}
+
+	@Override
+	public int deleteLocationPrice(int locationNo, SqlSessionTemplate session) {
+		return session.delete("location.deleteLocationPrice",locationNo);
+	}
+
+	@Override
+	public int deleteLocationLocation(int locationNo, SqlSessionTemplate session) {
+		return session.delete("location.deleteLocationLocation",locationNo);
+	}
+
 	
 	
 	

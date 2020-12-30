@@ -269,7 +269,41 @@
 				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:41px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>${map.locationAddress}</p>
 			</div>
 		</c:forEach>
-			<!-- 일반회원 -->
+			
+		<!--div정리용 스타일 (무시)  -->
+		<style>
+     		div.clearfixed::after{display:block;content:"";clear:both}
+		</style>
+		<!--div정리용 (무시)  -->
+		<div class="clearfixed"></div>
+		
+		
+		
+		
+		
+		
+		  
+		<!--쿠폰배너 스타일-->
+		<style>
+			#couponDiv{
+				background: linear-gradient( to right, #41aea9, #27DBB7);
+				margin-bottom: 30px;
+				height: 70px;
+				border-radius: 20px;
+				cursor: pointer;
+				padding-left: 100px;
+				width:961px;
+				margin-left:30px;
+				margin-top:30px;
+			}
+		</style>
+		
+		<!--쿠폰배너  -->
+		<div id="couponDiv" onclick="coupon();">
+			<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운받으러 가기 <i class="fas fa-chevron-circle-right"></i></p>
+		</div>	
+		
+		<!-- 일반회원 -->
 		        <c:if test="${logginedMember!=null }">
                     <c:if test="${naverLogin==null }">
                         <c:if test="${kakaoLogin==null }">
@@ -311,39 +345,6 @@
                         </c:if>
                     </c:if>
                 </c:if>
-		<!--div정리용 스타일 (무시)  -->
-		<style>
-     		div.clearfixed::after{display:block;content:"";clear:both}
-		</style>
-		<!--div정리용 (무시)  -->
-		<div class="clearfixed"></div>
-		
-		
-		
-		
-		
-		
-		  
-		<!--쿠폰배너 스타일-->
-		<style>
-			#couponDiv{
-				background: linear-gradient( to right, #41aea9, #27DBB7);
-				margin-bottom: 30px;
-				height: 70px;
-				border-radius: 20px;
-				cursor: pointer;
-				padding-left: 100px;
-				width:961px;
-				margin-left:30px;
-				margin-top:30px;
-			}
-		</style>
-		
-		<!--쿠폰배너  -->
-		<div id="couponDiv" onclick="coupon();">
-			<p style="font-size: 15px; color: white; padding-top:20px;"><b style="font-size: 17px;"><i class="fas fa-ticket-alt"></i> 쿠폰</b> 다운받으러 가기 <i class="fas fa-chevron-circle-right"></i></p>
-		</div>	
-		
 		
 		
 				

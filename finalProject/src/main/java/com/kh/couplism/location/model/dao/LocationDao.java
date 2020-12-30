@@ -35,4 +35,8 @@ public interface LocationDao {
 	public int insertReview(Map<String,Object> map, SqlSessionTemplate session);
 	public List<Location> locationListSplit(Map<String,Object> types, RowBounds rb, SqlSessionTemplate session);
 	public int locationCountSplit(Map<String,Object> types, SqlSessionTemplate session);
+	public int deleteLocationMain(int locationNo, SqlSessionTemplate session);
+	public int deleteLocationReservation(int locationNo, SqlSessionTemplate session);
+	public int deleteLocationPrice(int locationNo, SqlSessionTemplate session);
+	public int deleteLocationLocation(int locationNo, SqlSessionTemplate session);
 }

@@ -417,10 +417,11 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
                <td style="text-align: center;">전화번호</td>
                <td><%-- 로케이션폰쓰는곳 --%>${location.locationPhone }</td>
             </tr>
+            
+          
          </table>
-         <c:if test="${location.locationCreator eq logginedMember.id}"><button>수정</button><button>삭제</button></c:if>
-      </div>
-      
+            	<c:if test="${location.locationCreator eq logginedMember.id}"><button onclick="modifyL();">수정</button><button type="button" onclick="deleteL();" id="clickButton">삭제</button></c:if>
+       </div>
       
    </div><!--listViewDiv닫기  -->
    
@@ -429,6 +430,16 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 
 
 <script>
+
+	function modifyL(){
+		location.replace('${path}/location/modify?locationNo=${location.locationNo}');
+	}
+	
+	function deleteL(){
+		console.log("삭제");
+		console.log("${location.locationNo}");
+		location.replace('${path}/deleteLocation?locationNo=${location.locationNo}');
+	}
 
    var reviewTr = 
    jQuery(document).ready(function($) {

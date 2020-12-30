@@ -35,5 +35,9 @@ public interface LocationService {
 	public int insertReview(Map<String,Object>map);
 	public List<Location> locationListSplit (Map<String,Object> types, RowBounds rb);
 	public int locationCountSplit(Map<String,Object> types);
+	public int deleteLocationMain(int locationNo);
+	public int deleteLocationReservation(int locationNo);
+	public int deleteLocationPrice(int locationNo);
+	public int deleteLocationLocation(int locationNo);
 	
 }

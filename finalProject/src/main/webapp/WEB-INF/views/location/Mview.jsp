@@ -261,7 +261,7 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
       </div>
       
       
-		<c:if test="${location.locationCreator eq logginedMember.id}"><button>수정</button><button>삭제</button></c:if>
+		<c:if test="${location.locationCreator eq logginedMember.id}"><button onclick="modifyL();">수정</button><button onclick="deleteL();">삭제</button></c:if>
    </div><!--listViewDiv닫기  -->
    
 </section>
@@ -269,6 +269,9 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 
 
 <script>
+	function modifyL(){
+		location.replace('${path}/location/modify?locationNo=${location.locationNo}');
+	}
 
    var reviewTr = 
    jQuery(document).ready(function($) {
@@ -397,6 +400,11 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
          }  
       });
    }
+   function deleteL(){
+		console.log("삭제");
+		console.log("${location.locationNo}");
+		location.replace('${path}/deleteLocation?locationNo=${location.locationNo}');
+	}
 </script>
    
 <jsp:include page='/WEB-INF/views/common/footer.jsp'/>

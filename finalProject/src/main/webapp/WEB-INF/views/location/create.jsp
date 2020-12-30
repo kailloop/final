@@ -591,7 +591,7 @@ function loadAddress() {
 				console.log(rTimeReplace);
 				var rPrice = $('#rPrice').val();
 				var rPeople = $('#rPeople').val();
-				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td><td><input type='hidden' name='locationPrice' value='"+rTime+"/"+dayArr[1]+"/"+rPrice+"/"+rPeople+"'></td></tr>");
+				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td><td><input type='hidden' name='locationPrice' value='"+rTime+"/"+dayArr[1]+"/"+rPrice+"/"+rPeople+"'></td><td><button onclick='removePrice(event);' type='button'>제거</button></td></tr>");
 				
 				//여기에 인풋 타입 히든 만드는 로직 작성
 				
@@ -661,5 +661,11 @@ function loadAddress() {
 				$(e.target).css("border-bottom","1px black solid");
 			});
 		});
+		
+		function removePrice(event){
+			console.log("제거누름");
+			console.log(event.target);
+			$(event.target).parent().parent().eq(0).remove();
+		}
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

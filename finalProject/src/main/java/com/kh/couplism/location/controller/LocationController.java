@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,8 +121,12 @@ public class LocationController {
 		logger.debug("address : " + address);
 		logger.debug("keyword : " + keyword);
 		logger.debug("cPage : " + cPage);
-		String[] addressf = address.split(" ");
+		String[] addressf = null;
 		String[] addresss = null;
+		if(address != null) {
+			addressf = address.split(" ");
+		}
+		
 		if(addressf.length>1) {
 			addresss = addressf[1].split("/");
 		}
@@ -136,19 +141,27 @@ public class LocationController {
 		for(String a : addressf) {
 			logger.debug("addressf :"+a);
 		}
-		for(String a : addresss) {
-			logger.debug("addresss :"+a);
-		}
+		
 		
 		
 		int totalData = 0;
-		if(addresss.length>1) {
+		
+		if(addresss!=null) {
+			for(String a : addresss) {
+			logger.debug("addresss :"+a);
+			}
+			logger.debug("addresss.length : "+addresss.length);
 			String[] addresssChange = new String[addresss.length];
-			for(int i = 0; i>addresss.length; i++) {
+			logger.debug("addresssChange.length : "+addresssChange.length);
+			for(int i = 0; i<addresss.length; i++) {
 				addresssChange[i] = "%"+addresss[i]+"%";
 			}
 			types.put("addresss", addresssChange);
+			for(String a : addresssChange) {
+				logger.debug("addresssChange :"+a);
+			}
 			types.put("loopValue", "%"+addressf[0]+"%");
+			logger.debug("loopVale : "+"%"+addressf[0]+"%");
 			//types.put("loopCount",addresssChange.length);
 			locationList = service.locationListSplit(types,rb);
 			totalData = service.locationCountSplit(types);
@@ -586,7 +599,11 @@ public class LocationController {
 		
 		Double.parseDouble(String.format(Locale.KOREAN, "%.1f", reviewPoint));
 		LocationMain lm = service.getLocationMain(locationNo);
-		logger.debug("locationMain : resources/upload/locationMain/"+lm.getRenameName());
+		if(lm!=null) {
+			logger.debug("locationMain : resources/upload/locationMain/"+lm.getRenameName());
+			mv.addObject("locationMain", "resources/upload/locationMain/"+lm.getRenameName());
+		}
+		
 		logger.debug("mapPath : "+mapPath[0]);
 		mv.addObject("location", location);// 로케이션 추가
 		mv.addObject("mapPath", mapPath[0]);
@@ -594,7 +611,6 @@ public class LocationController {
 		mv.addObject("review", review);// 리뷰 추가
 		mv.addObject("locationPrice", locationPrice);
 		mv.addObject("ReviewExist", ReviewExist);
-		mv.addObject("locationMain", "resources/upload/locationMain/"+lm.getRenameName());
 		mv.addObject("logoPath", "/resources/images/locationmain.jpg");
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
@@ -851,7 +867,7 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location/createMemberEnd")
-	public ModelAndView createMemberEnd(ModelAndView mv, Location location, MultipartFile mainFile, HttpServletRequest request) {
+	public void createMemberEnd(Location location, MultipartFile mainFile, HttpServletRequest request,HttpServletResponse resp) throws IOException {
 		
 		
 		logger.debug("===========================================================  createMember ================================================");
@@ -860,6 +876,75 @@ public class LocationController {
 		// service에서 새로운 location insert문작성 status 가 2 
 		
 		location.setLocationStatus(2);
+		
+		
+		String locationContent = location.getLocationContent();// LocationContent가져옴
+		logger.debug("locationContent : " + location.getLocationContent());
+		String[] contentSplit = locationContent.split("src=");// 경로로 스플릿함
+		if (contentSplit.length > 1) {
+
+			logger.debug("contentSplit : " + contentSplit);
+			logger.debug("contentSplit.length : " + contentSplit.length);
+			List<String> imgPath = new ArrayList();
+			for (int i = 1; i < contentSplit.length; i++) {
+				logger.debug("contentSplit[" + i + "] : " + contentSplit[i]);
+				logger.debug("for문 정상적으로 작동");
+				logger.debug("contentSplit replace : " + contentSplit[i].replace("\"", "\\|"));
+				String splitPatha = contentSplit[i].replace("\"", "\\|");
+				String[] splitPath = splitPatha.split("\\|");
+				logger.debug("splitPath[1] : " + splitPath[1]);
+				String[] pathArr = splitPath[1].replace("\\", "").split("/");
+				int lastIndex = pathArr.length - 1;
+				imgPath.add(pathArr[lastIndex]);
+				logger.debug("pathArr[lastIndex] : " + pathArr[lastIndex]);
+			}
+			logger.debug("imgPath Size : " + imgPath.size());
+			logger.debug("imgPath List : " + imgPath);// 이미지파일의 경로를 받아옴
+
+			// imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+
+			for (String path : imgPath) {
+				logger.debug("path : " + path);
+				File moveFile = new File(
+						request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile") + "/"
+								+ path);
+				logger.debug("파일존재 여부 : " + moveFile.exists());
+				logger.debug("moveFile.getName() : " + moveFile.getName());
+				String[] newFilePath = moveFile.getName().split("_");// newFilePath[2]으로 저장하면됨
+				logger.debug("newFilePath length : " + newFilePath.length);
+				logger.debug("newFilePath : " + newFilePath);
+
+				File newFile = new File(
+						request.getServletContext().getRealPath("/resources/upload/location") + "/" + newFilePath[1]);
+				if (moveFile.exists()) {
+					boolean isMoved = moveFile.renameTo(newFile);
+					logger.debug("파일 이동여부 : " + isMoved);
+				}
+
+			}
+			logger.debug("userId : " + location.getLocationCreator());
+			File imgFile = new File(
+					request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile"));
+			File[] imgFileList = imgFile.listFiles();
+			logger.debug("imgFileList.length() : " + imgFileList.length);
+			for (File f : imgFileList) {// 이로직 로그인할때도 돌려줘야함 !!@#!@#
+				String[] fileName = f.getName().split("_");
+				logger.debug("fileName[0] : " + fileName[0]);
+				logger.debug("fileName[1] : " + fileName[1]);
+				if (fileName[0].equals(location.getLocationCreator())) {
+					f.delete();
+					logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+				}
+			}
+
+			// 이제 변경된경로로 noticeContent안에 src수정
+
+			String pathReplace = location.getLocationContent().replace("location-Write-ContentFile", "location")
+					.replace(location.getLocationCreator() + "_", "");
+			logger.debug("변경된 noticeContent : " + pathReplace);
+			location.setLocationContent(pathReplace);
+		}
+		logger.debug("location : " + location);
 		
 		//2. locationMain 등록하기
 		
@@ -895,8 +980,112 @@ public class LocationController {
 			}
 		
 		}
-		mv = location("","","",0,"",mv,request);
-		return mv;
+		
+		
+		
+		logger.debug("==========================================================================================================================");
+		resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
 		
 	}
+	
+	
+	
+	@RequestMapping("deleteLocation")
+	public void deleteLocation(int locationNo, HttpServletRequest request, HttpServletResponse resp) throws IOException {
+		logger.debug("====================================================== deleteLocation ====================================================");
+		logger.debug("locationNo : "+locationNo);
+		
+		Location location = service.getLocation(locationNo);//location.Content에 등록되어있는파일들을 삭제하기위해
+		LocationMain lm = service.getLocationMain(locationNo);
+		logger.debug("location : "+location);
+		
+		//locationMain삭제
+		int resultMain = service.deleteLocationMain(locationNo);
+		//locationReservation삭제
+		int resultResrevation = service.deleteLocationReservation(locationNo);
+		//locationPrice삭제
+		int resultPrice = service.deleteLocationPrice(locationNo);
+		//location삭제
+		int resultLocation =service.deleteLocationLocation(locationNo);
+		
+		//locationMain File삭제
+		if(lm!=null) {
+			File file = new File(request.getServletContext().getRealPath("/resources/upload/locationMain/"+lm.getRenameName()));
+			logger.debug(request.getServletContext().getRealPath("/resources/upload/locationMain/"+lm.getRenameName()));
+			if(file.exists()) {
+				logger.debug(lm.getRenameName()+" 접근 완료");
+				boolean deleteResult =file.delete();
+				logger.debug("처리결과  : "+deleteResult);
+			}else {
+				logger.debug(request.getServletContext().getRealPath("/resources/upload/locationMain/"+lm.getRenameName())+"를 찾을수 없습니다.");
+			}
+		}
+		
+		
+		
+		//locationContetn File삭제
+		String[] contentSplit = location.getLocationContent().split("src=");// 경로로 스플릿함
+		if (contentSplit.length > 1) {
+
+			logger.debug("contentSplit : " + contentSplit);
+			logger.debug("contentSplit.length : " + contentSplit.length);
+			List<String> imgPath = new ArrayList();
+			for (int i = 1; i < contentSplit.length; i++) {
+				logger.debug("contentSplit[" + i + "] : " + contentSplit[i]);
+				logger.debug("for문 정상적으로 작동");
+				logger.debug("contentSplit replace : " + contentSplit[i].replace("\"", "\\|"));
+				String splitPatha = contentSplit[i].replace("\"", "\\|");
+				String[] splitPath = splitPatha.split("\\|");
+				logger.debug("splitPath[1] : " + splitPath[1]);
+				String[] pathArr = splitPath[1].replace("\\", "").split("/");
+				int lastIndex = pathArr.length - 1;
+				imgPath.add(pathArr[lastIndex]);
+				logger.debug("pathArr[lastIndex] : " + pathArr[lastIndex]);
+			}
+			logger.debug("imgPath Size : " + imgPath.size());
+			logger.debug("imgPath List : " + imgPath);// 이미지파일의 경로를 받아옴
+			for(String path : imgPath) {//파일 삭제 시작
+				File f = new File(request.getServletContext().getRealPath("/resources/upload/location/"+path));
+				if(f.exists()) {
+					logger.debug(path+" 접근완료");
+					boolean deleteResult =f.delete();
+					logger.debug("처리결과  : "+deleteResult);
+				}else {
+					logger.debug(request.getServletContext().getRealPath("/resources/upload/location/"+path)+"를 찾을수 없습니다.");
+				}
+			}
+		}
+		
+		
+		logger.debug("--처리 결과 --");
+		logger.debug("resultMain : "+resultMain);
+		logger.debug("resultResrevation : "+resultResrevation);
+		logger.debug("resultPrice : "+resultPrice);
+		logger.debug("resultLocation : "+resultLocation);
+		logger.debug("==========================================================================================================================");
+		resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+		
+	}
+	
+	@RequestMapping("/location/modify")
+	public ModelAndView modifyLocation(int locationNo,ModelAndView mv) {
+		logger.debug("======================================================= LocationModify =========================================================");
+		logger.debug("locationNo : "+locationNo);
+		Location location = service.getLocation(locationNo);
+		logger.debug("location : "+location);
+		if(location.getLocationStatus()==1) {//파트너 회원일때  1.locationMain 2.locationPrice
+			LocationMain lm = service.getLocationMain(locationNo);
+			List<LocationPrice> lpl = service.getLocationPrice(locationNo);
+			mv.addObject("locationMain",lm);
+			mv.addObject("locationPrice", lpl);
+			mv.setViewName("/location/modify");
+		}else {//일반회원이 등록한 것 가져와야할것 1.locationMain 2.location
+			LocationMain lm = service.getLocationMain(locationNo);
+			mv.addObject("locationMain",lm);
+			mv.setViewName("/location/Mmodify");
+		}
+		logger.debug("================================================================================================================================");
+		return mv;
+	}
+	
 }

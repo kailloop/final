@@ -125,6 +125,27 @@ public class LocationServiceImpl implements LocationService {
 	public int locationCountSplit(Map<String, Object> types) {
 		return dao.locationCountSplit(types,session);
 	}
+
+	@Override
+	public int deleteLocationMain(int locationNo) {
+		return dao.deleteLocationMain(locationNo,session);
+	}
+
+	@Override
+	public int deleteLocationReservation(int locationNo) {
+		return dao.deleteLocationReservation(locationNo,session);
+	}
+
+	@Override
+	public int deleteLocationPrice(int locationNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteLocationPrice(locationNo,session);
+	}
+
+	@Override
+	public int deleteLocationLocation(int locationNo) {
+		return dao.deleteLocationLocation(locationNo,session);
+	}
 	
 	
 	

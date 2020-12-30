@@ -119,6 +119,7 @@
 	<select id="getLocationReview" parameterType="_int" resultMap="review">
 		SELECT * FROM REVIEW
 		WHERE LOCATIONNO LIKE #{locationNo}
+		ORDER BY REVIEWDATE DESC
 	</select>
 	
 	<select id="getLocation" parameterType="_int" resultMap="location">
@@ -170,9 +171,8 @@
 		SELECT *
 		FROM LOCATION
 		WHERE
-		1=1
 		<foreach  collection="addresss" item="item" open="(" close=")" separator="OR">
-			AND (LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
+			(LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
 			AND LOCATIONTYPE LIKE #{category}
 	        AND (LOCATIONADDRESS LIKE #{loopValue} AND LOCATIONADDRESS LIKE #{item})
 	  		AND (LOCATIONSTATUS LIKE 1 OR LOCATIONSTATUS LIKE 0)
@@ -183,14 +183,30 @@
 	
 	<select id="locationCountSplit" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM LOCATION 
-		WHERE 
-		1=1
+		WHERE
 		<foreach  collection="addresss" item="item" open="(" close=")" separator="OR">
-			AND (LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
+			(LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
 			AND LOCATIONTYPE LIKE #{category}
 	        AND (LOCATIONADDRESS LIKE #{loopValue} AND LOCATIONADDRESS LIKE #{item})
 	  		AND (LOCATIONSTATUS LIKE 1 OR LOCATIONSTATUS LIKE 0)
   		</foreach>
 	</select>
+	
+	<delete id="deleteLocationMain" parameterType="_int">
+		DELETE FROM LOCATIONMAIN
+		WHERE LOCATIONNO LIKE #{locationNo}
+	</delete>
+	<delete id="deleteLocationReservation" parameterType="_int">
+		DELETE FROM LOCATION_RESERVATION
+		WHERE LOCATION_NO LIKE #{locationNo}
+	</delete>
+	<delete id="deleteLocationPrice" parameterType="_int">
+		DELETE FROM LOCATION_PRICE
+		WHERE LOCATION_NO LIKE #{locationNo}
+	</delete>
+	<delete id="deleteLocationLocation" parameterType="_int">
+		DELETE FROM LOCATION
+		WHERE LOCATIONNO LIKE #{locationNo}
+	</delete>
 	
 </mapper>
