@@ -19,12 +19,12 @@ import com.kh.couplism.location.model.vo.Review;
 public class LocationDaoImpl implements LocationDao {
 
 	@Override
-	public List<Location> locationList(Map<String,String> types, RowBounds rb, SqlSessionTemplate session) {
+	public List<Location> locationList(Map<String,Object> types, RowBounds rb, SqlSessionTemplate session) {
 		return session.selectList("location.locationList", types, rb);
 	}
 
 	@Override
-	public int locationCount(Map<String, String> types, SqlSessionTemplate session) {
+	public int locationCount(Map<String, Object> types, SqlSessionTemplate session) {
 		return session.selectOne("location.locationCount", types);
 	}
 
@@ -106,6 +106,16 @@ public class LocationDaoImpl implements LocationDao {
 	@Override
 	public int insertReview(Map<String, Object> map, SqlSessionTemplate session) {
 		return session.insert("location.insertReview",map);
+	}
+
+	@Override
+	public List<Location> locationListSplit(Map<String, Object> types, RowBounds rb, SqlSessionTemplate session) {
+		return session.selectList("location.locationListSplit", types, rb);
+	}
+
+	@Override
+	public int locationCountSplit(Map<String, Object> types, SqlSessionTemplate session) {
+		return session.selectOne("location.locationCountSplit", types);
 	}
 
 	

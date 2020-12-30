@@ -8,11 +8,6 @@
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 
 	<div id="locationListDiv" style=" margin-top:20px; margin-left:auto; margin-right:auto; width: 1050px; text-align: center;">
-		
-	
-		
-		
-		
 		<!--상단 스타일 -->
 		<style>
 			#topdiv{
@@ -98,12 +93,6 @@
 			</c:if>
 			
 		</div>
-		
-		
-		
-		
-		
-		
 		<!--검색 디자인 -->
 		<style>
 			#searchDiv{
@@ -157,12 +146,10 @@
 			#rangeDiv{
 				margin-top: 80px;
 				margin-left: 35px;
-				
 			}
 			#rangeTable{
 				border-bottom: 1px solid #c8c8c8;
 				border-top: 1px solid #c8c8c8;
-				
 			}
 			td{
 				widht:40px;
@@ -271,7 +258,7 @@
 			<div class="listdiv" onclick="location.replace('${path}/location/locationView?locationNo=${map.locationNo }&id=${logginedMember.id }');">
 				<img class="imgclass" alt="" src="${map.locationMain}" width="298px" height="200px;">
 				<!--제휴업체 분기처리 시작 -->
-				<c:if test="${map.locationStatus eq 1}">
+				<c:if test="${map.locationStatus eq 0}">
 				<div class="partner">제휴업체<br>예약가능</div>
 				<!--제휴업체 분기처리 끝 -->
 				</c:if>
@@ -287,7 +274,7 @@
                     <c:if test="${naverLogin==null }">
                         <c:if test="${kakaoLogin==null }">
                             <c:if test="${partnerMember==null}">
-                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            	<button class="btn btn-outline-info" onclick="location.replace('${path}/location/createMember')">글쓰기</button>
                             </c:if>
                        </c:if>
                    </c:if>
@@ -298,7 +285,7 @@
                     <c:if test="${naverLogin==null }">
                         <c:if test="${kakaoLogin==null }">
                             <c:if test="${partnerMember !=null}">
-                            	<button onclick="location.replace('${path}/location/create')">글쓰기</button>
+                            	<button class="btn btn-outline-info" onclick="location.replace('${path}/location/create')">글쓰기</button>
                             </c:if>
                         </c:if>
                     </c:if>
@@ -309,7 +296,7 @@
                     <c:if test="${naverLogin!=null }">
                         <c:if test="${kakaoLogin==null }">
                             <c:if test="${partnerMember==null}">
-                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            	<button class="btn btn-outline-info" onclick="location.replace('${path}/location/createMember')">글쓰기</button>
                             </c:if>
                         </c:if>
                      </c:if>
@@ -319,17 +306,11 @@
                     <c:if test="${naverLogin==null }">
                         <c:if test="${kakaoLogin!=null }">
                             <c:if test="${partnerMember==null}">
-                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            	<button class="btn btn-outline-info" onclick="location.replace('${path}/location/createMember')">글쓰기</button>
                             </c:if>
                         </c:if>
                     </c:if>
                 </c:if>
-                
-               
-                
-                
-		<c:if test=""><button onclick="">글쓰기</button></c:if>
-		<c:if test=""><button onclick="">글쓰기</button></c:if>
 		<!--div정리용 스타일 (무시)  -->
 		<style>
      		div.clearfixed::after{display:block;content:"";clear:both}

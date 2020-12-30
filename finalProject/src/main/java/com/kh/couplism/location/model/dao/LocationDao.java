@@ -15,8 +15,8 @@ import com.kh.couplism.location.model.vo.LocationReservation;
 import com.kh.couplism.location.model.vo.Review;
 
 public interface LocationDao {
-	public List<Location> locationList(Map<String,String> types, RowBounds rb, SqlSessionTemplate session);
-	public int locationCount(Map<String,String> types, SqlSessionTemplate session);
+	public List<Location> locationList(Map<String,Object> types, RowBounds rb, SqlSessionTemplate session);
+	public int locationCount(Map<String,Object> types, SqlSessionTemplate session);
 	public int checkDate(Date checkDate, SqlSessionTemplate session);
 	public List<Date> getDate(SqlSessionTemplate session);
 	public int insertLocation(Location location, SqlSessionTemplate session);
@@ -33,4 +33,6 @@ public interface LocationDao {
 	public int insertReservation(LocationReservation reservation, SqlSessionTemplate session);
 	public List<LocationReservation> checkReservation(Map<String,Object> map, SqlSessionTemplate session);
 	public int insertReview(Map<String,Object> map, SqlSessionTemplate session);
+	public List<Location> locationListSplit(Map<String,Object> types, RowBounds rb, SqlSessionTemplate session);
+	public int locationCountSplit(Map<String,Object> types, SqlSessionTemplate session);
 }

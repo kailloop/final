@@ -15,8 +15,8 @@ import com.kh.couplism.location.model.vo.Review;
 
 public interface LocationService {
 
-	public List<Location> locationList (Map<String,String> types, RowBounds rb);
-	public int locationCount(Map<String,String> types);
+	public List<Location> locationList (Map<String,Object> types, RowBounds rb);
+	public int locationCount(Map<String,Object> types);
 	public int checkDate(Date checkDate);
 	public List<Date> getDate();
 	public int insertLocation(Location location);
@@ -33,4 +33,7 @@ public interface LocationService {
 	public int insertReservation(LocationReservation reservation);
 	public List<LocationReservation> checkReservation(Map<String,Object> map);
 	public int insertReview(Map<String,Object>map);
+	public List<Location> locationListSplit (Map<String,Object> types, RowBounds rb);
+	public int locationCountSplit(Map<String,Object> types);
+	
 }

@@ -250,12 +250,12 @@ function loadAddress() {
 					<td class="td-create"><label>타입</label></td>
 					<td><select id="locationType-one" onchange="selectType()"
 						style="width: 30%; height: 40px;">
-							<option value="N">영업점 주 테마를 정해주세요</option>
-							<option value="S">숙박</option>
-							<option value="L">명소</option>
-							<option value="F">음식</option>
-							<option value="A">스포츠/레저</option>
-							<option value="SH">가게</option>
+							<option value="n">영업점 주 테마를 정해주세요</option>
+							<option value="s">숙박</option>
+							<option value="l">명소</option>
+							<option value="f">음식</option>
+							<option value="a">스포츠/레저</option>
+							<option value="sh">가게</option>
 					</select> <select id="locationType-two" style="width: 30%; height: 40px;" onchange="selectTypeTwo()">
 							<option class="typeTwo" onchange="selectTypeTwo();" value="N">영업점 세부 테마를 정해주세요</option>
 					</select> <input type="hidden" id="locationType" name="locationType">
@@ -371,44 +371,51 @@ function loadAddress() {
 			
 		var filecount = 1;
 		function selectType(){
+			console.log("selectType실해안됌");
 			var typeVal=$("#locationType-one").val();
-			if(typeVal=="N"){
+			console.log(typeVal);
+			if(typeVal=="n"){
 				$("option").remove('.typeTwo');
 				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				return;
 			}
-			if(typeVal=="S"){
+			if(typeVal=="s"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>호텔</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>펜션</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>글램핑/캠핑</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>게스트하우스</option>");
 				return;
 			}
-			if(typeVal=="L"){
+			if(typeVal=="l"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>랜드마크</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>자연/공원</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>놀이동산</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>워터파크</option>");
 				return;
 			}
-			if(typeVal=="F"){
+			if(typeVal=="f"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>식당</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>카페</option>");
 				return;
 			}
-			if(typeVal=="A"){
+			if(typeVal=="a"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>스키/썰매</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>낚시</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>수상레저</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>바이크</option>");
 				return;
 			}
-			if(typeVal=="SH"){
+			if(typeVal=="sh"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>특산품가게</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>기념품가게</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>의류가게</option>");

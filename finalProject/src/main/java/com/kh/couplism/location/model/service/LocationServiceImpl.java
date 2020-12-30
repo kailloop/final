@@ -27,12 +27,12 @@ public class LocationServiceImpl implements LocationService {
 	private SqlSessionTemplate session;
 
 	@Override
-	public List<Location> locationList(Map<String,String> types, RowBounds rb) {
+	public List<Location> locationList(Map<String,Object> types, RowBounds rb) {
 		return dao.locationList(types, rb, session);
 	}
 
 	@Override
-	public int locationCount(Map<String, String> types) {
+	public int locationCount(Map<String, Object> types) {
 		return dao.locationCount(types,session);
 	}
 
@@ -114,6 +114,16 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public int insertReview(Map<String, Object> map) {
 		return dao.insertReview(map, session);
+	}
+
+	@Override
+	public List<Location> locationListSplit(Map<String, Object> types, RowBounds rb) {
+		return dao.locationListSplit(types,rb,session);
+	}
+
+	@Override
+	public int locationCountSplit(Map<String, Object> types) {
+		return dao.locationCountSplit(types,session);
 	}
 	
 	

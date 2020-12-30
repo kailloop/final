@@ -164,18 +164,18 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
          <table id="priceTable" border="1">
             <tr>
             	<td><div id="reservation-content" style="position: relative; top: 10%;">
-            		<div id="day-btns" style="z-index: 1;">
-								<button id="btn-Mon" type="button" class="day-btns">월요일</button>
-								<button id="btn-Tue" type="button" class="day-btns">화요일</button>
-								<button id="btn-Wen" type="button" class="day-btns">수요일</button>
-								<button id="btn-Thu" type="button" class="day-btns">목요일</button>
-								<button id="btn-Fri" type="button" class="day-btns">금요일</button>
-								<button id="btn-Sat" type="button" class="day-btns">토요일</button>
-								<button id="btn-Sun" type="button" class="day-btns">일요일</button>
+            		<div id="day-btns" style="z-index: 1; text-align: center;">
+								<button id="btn-Mon" type="button" class="day-btns btn btn-info">월요일</button>
+								<button id="btn-Tue" type="button" class="day-btns btn btn-info">화요일</button>
+								<button id="btn-Wen" type="button" class="day-btns btn btn-info">수요일</button>
+								<button id="btn-Thu" type="button" class="day-btns btn btn-info">목요일</button>
+								<button id="btn-Fri" type="button" class="day-btns btn btn-info">금요일</button>
+								<button id="btn-Sat" type="button" class="day-btns btn btn-info">토요일</button>
+								<button id="btn-Sun" type="button" class="day-btns btn btn-info">일요일</button>
 								<input id="show-div" type="hidden" value="#reservaiton-Mon">
 							</div>
-								<div id="reservaiton-Mon">
-									<table id="reservaiton-Mon-table">
+								<div id="reservaiton-Mon"style="text-align: center;">
+									<table id="reservaiton-Mon-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">월</td>
 										</tr>
@@ -187,8 +187,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Tue">
-									<table id="reservaiton-Tue-table">
+								<div id="reservaiton-Tue" style="text-align: center;">
+									<table id="reservaiton-Tue-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">화</td>
 										</tr>
@@ -200,8 +200,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Wen">
-									<table id="reservaiton-Wen-table">
+								<div id="reservaiton-Wen" style="text-align: center;">
+									<table id="reservaiton-Wen-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">수</td>
 										</tr>
@@ -213,8 +213,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Thu">
-									<table id="reservaiton-Thu-table">
+								<div id="reservaiton-Thu" style="text-align: center;">
+									<table id="reservaiton-Thu-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">목</td>
 										</tr>
@@ -226,8 +226,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Fri">
-									<table id="reservaiton-Fri-table">
+								<div id="reservaiton-Fri" style="text-align: center;">
+									<table id="reservaiton-Fri-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">금</td>
 										</tr>
@@ -239,8 +239,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Sat">
-									<table id="reservaiton-Sat-table">
+								<div id="reservaiton-Sat" style="text-align: center;">
+									<table id="reservaiton-Sat-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">토</td>
 										</tr>
@@ -252,8 +252,8 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 										</c:forEach>
 									</table>
 								</div>
-								<div id="reservaiton-Sun">
-									<table id="reservaiton-Sun-table">
+								<div id="reservaiton-Sun" style="text-align: center;">
+									<table id="reservaiton-Sun-table" style="text-align: center; margin:0 auto;">
 										<tr>
 											<td colspan="3">일</td>
 										</tr>
@@ -266,7 +266,11 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
 									</table>
 								</div>
 							</div>
+							<div style="text-align:center;margin:0 auto;">
+								<br><button style="text-align:center;margin:0 auto;" class="btn btn-outline-info" onclick="buy();">예약하기</button>
+							</div>
 						</td>
+						
             </tr>
             <c:if test="${anniversaryList!=null}">
                <tr>
@@ -413,13 +417,13 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
                <td style="text-align: center;">전화번호</td>
                <td><%-- 로케이션폰쓰는곳 --%>${location.locationPhone }</td>
             </tr>
-            
          </table>
+         <c:if test="${location.locationCreator eq logginedMember.id}"><button>수정</button><button>삭제</button></c:if>
       </div>
       
       
    </div><!--listViewDiv닫기  -->
-   <button onclick="location.replace('${path}/location/locationPayment?locationNo=${location.locationNo }&locationName=${location.locationName }');">결제하기</button>
+   
 </section>
 
 
@@ -435,6 +439,14 @@ geocoder.addressSearch('${mapPath}', function(result, status) {
       });
 
    });
+   
+	function buy(){
+		if(${logginedMember.id != null}){
+			location.replace('${path}/location/locationPayment?locationNo=${location.locationNo }&locationName=${location.locationName }');
+		}else{
+			alert("로그인후 이용해주세요.");
+		}
+	}
 
    function addReview(event){
       console.log($(event.target).parent().parent());

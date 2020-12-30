@@ -120,18 +120,52 @@ public class LocationController {
 		logger.debug("address : " + address);
 		logger.debug("keyword : " + keyword);
 		logger.debug("cPage : " + cPage);
-
-		Map<String, String> types = new HashMap();
+		String[] addressf = address.split(" ");
+		String[] addresss = null;
+		if(addressf.length>1) {
+			addresss = addressf[1].split("/");
+		}
+		
+		Map<String, Object> types = new HashMap();
 		types.put("category", "%" + category + "%");
 		types.put("address", "%" + address + "%");
 		types.put("keyword", "%" + keyword + "%");
+		int numPerPage = 15;
+		RowBounds rb = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		List<Location> locationList = null;
+		for(String a : addressf) {
+			logger.debug("addressf :"+a);
+		}
+		for(String a : addresss) {
+			logger.debug("addresss :"+a);
+		}
+		
+		
+		int totalData = 0;
+		if(addresss.length>1) {
+			String[] addresssChange = new String[addresss.length];
+			for(int i = 0; i>addresss.length; i++) {
+				addresssChange[i] = "%"+addresss[i]+"%";
+			}
+			types.put("addresss", addresssChange);
+			types.put("loopValue", "%"+addressf[0]+"%");
+			//types.put("loopCount",addresssChange.length);
+			locationList = service.locationListSplit(types,rb);
+			totalData = service.locationCountSplit(types);
+		}else {
+			locationList = service.locationList(types, rb);
+			totalData = service.locationCount(types);
+		}
+		
+		//타입 들어오는거 처리 
+		
+		
 
 		logger.debug("types : " + types);
 
-		int numPerPage = 15;
-		RowBounds rb = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
 
-		List<Location> locationList = service.locationList(types, rb);
+		
 		logger.debug("locatoin 갯수 : " + locationList.size());
 		logger.debug("locationList : " + locationList);
 
@@ -169,8 +203,6 @@ public class LocationController {
 			logger.debug("locationMap :" + locationMap);
 			list.add(locationMap);
 		}
-
-		int totalData = service.locationCount(types);
 		logger.debug("totalData : " + totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerPage);
 		int pageBarSize = 5;
@@ -434,7 +466,7 @@ public class LocationController {
 		logger.debug("mainFile : " + mainFile.getOriginalFilename());
 		logger.debug(
 				"========================================================================================================");
-
+		mv = location("","","",0,"",mv,request);
 		return mv;
 	}
 
@@ -567,8 +599,12 @@ public class LocationController {
 		mv.addObject("titleHan", "예약");
 		mv.addObject("titleEng", "Location");
 		mv.addObject("borderSize", "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
-
-		mv.setViewName("location/view");
+		if(location.getLocationStatus()==0) {
+			mv.setViewName("location/view");
+		}else {
+			mv.setViewName("location/Mview");
+		}
+		
 
 		// 리뷰 불러옴 !
 		// 리뷰 불러올려면 ! 결제 !@

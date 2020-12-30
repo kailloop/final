@@ -166,4 +166,31 @@
 		INSERT INTO REVIEW VALUES(SEQ_REVIEWNO.NEXTVAL,#{locationNo},1,#{id},#{content},#{grade},SYSDATE)
 	</insert>
 	
+	<select id="locationListSplit" parameterType="map" resultType="com.kh.couplism.location.model.vo.Location">
+		SELECT *
+		FROM LOCATION
+		WHERE
+		1=1
+		<foreach  collection="addresss" item="item" open="(" close=")" separator="OR">
+			AND (LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
+			AND LOCATIONTYPE LIKE #{category}
+	        AND (LOCATIONADDRESS LIKE #{loopValue} AND LOCATIONADDRESS LIKE #{item})
+	  		AND (LOCATIONSTATUS LIKE 1 OR LOCATIONSTATUS LIKE 0)
+  		</foreach>
+		ORDER BY LOCATIONNO DESC
+	</select>
+	
+	
+	<select id="locationCountSplit" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM LOCATION 
+		WHERE 
+		1=1
+		<foreach  collection="addresss" item="item" open="(" close=")" separator="OR">
+			AND (LOCATIONTITLE LIKE #{keyword} OR LOCATIONCONTENT LIKE #{keyword})
+			AND LOCATIONTYPE LIKE #{category}
+	        AND (LOCATIONADDRESS LIKE #{loopValue} AND LOCATIONADDRESS LIKE #{item})
+	  		AND (LOCATIONSTATUS LIKE 1 OR LOCATIONSTATUS LIKE 0)
+  		</foreach>
+	</select>
+	
 </mapper>
