@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.couplism.lism.model.dao.LismDao;
 import com.kh.couplism.lism.model.vo.Lism;
+import com.kh.couplism.lism.model.vo.LismDetail;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -50,6 +51,44 @@ public class LismServiceImpl implements LismService{
 		// TODO Auto-generated method stub
 		return dao.selectOneLism(session,param);
 	}
+
+	@Override
+	public Lism selectOneNo(Map param) {
+		// TODO Auto-generated method stub
+		return dao.selectOneNo(session,param);
+	}
+
+	@Override
+	public List<LismDetail> selectDetail(int lismNo) {
+		// TODO Auto-generated method stub
+		return dao.selectDetail(session,lismNo);
+	}
+
+	@Override
+	public int selectDetailCount(int no) {
+		// TODO Auto-generated method stub
+		return dao.selectDetailCount(session,no);
+	}
+
+	@Override
+	public LocationReservation getReservationOne(Map param) {
+		// TODO Auto-generated method stub
+		return dao.getReservationOne(session,param);
+	}
+
+	@Override
+	public Location getLocationOne(Map param) {
+		// TODO Auto-generated method stub
+		return dao.getLocationOne(session,param);
+	}
+	
+	
+
+	
+	
+	
+	
+	
 	
 	
 	

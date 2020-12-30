@@ -251,7 +251,7 @@
 						</tr>
 						<tr class="focus-content">
 							<td id="location-name" class="location-content"><label>+버튼을 눌러주세요</label>
-								<input type="hidden" id="tdName" name="locationNo">
+								<input type="hidden" id="tdName" name="locationName">
 								<input type="hidden" id="tdNo" name="locationNo">
 							</td>
 							<td id="location-time" class="location-content"><label>예약 시간</label>
@@ -401,6 +401,10 @@
 			var name=$("#pickerName"+movement).val();
 			var no=$("#pickerNo"+movement).val();
 			var time=$("#reserTime"+movement).val();
+			console.log("체크");
+			console.log(name);
+			console.log(time);
+			console.log(no);
 			$("#location-name").children('label').text("장소 이름 : "+name)
 			$("#location-time").children('label').text("예약시간 : "+time);
 			$("#tdNo").val(no);
@@ -415,6 +419,7 @@
 		});
 	</script>
 	<script>
+		var count=0;
 		function selectDate(){
 			console.log()
 			$.ajax({
@@ -442,14 +447,14 @@
 								$("#handle-container").append("<input class='reser' type='hidden' id='reserNo"+r+"' value='"+reser[r].no+"'>");
 								$("#handle-container").append("<input class='reser' type='hidden' id='reserTime"+r+"' value='"+reser[r].time+"'>");
 							}
-							/* $("#handle-container").append("<input type='hidden' id='reservationNo"+i+"' name='reservationNo"+i+"' value=''"); */
 						}
 					});
 					for(var i=0;i<parseData.length;i++){
 						var locationNo=parseData[i].locationNo;
 						var locationName=parseData[i].locationName;
+						console.log(locationNo);
 						console.log(locationName);
-						var count=0;
+						
 						console.log("확인"+i);
 						var img;
 						$("div").remove(".handle");
@@ -460,10 +465,13 @@
 							dataType:"html",
 							success:data=>{
 								img=data;
-								var a="";
-								var b="<input type='hidden' id='pickerName"+i+"' value='"+locationName+"'>";
+								var a=parseData[count].locationNo;
+								var b=parseData[count].locationName;
+								
 								console.log(img);
-								$("#handle-container").append("<div class='handle'><img id=picker"+count+" class='pickerImg' src='${path}/resources/upload/locationMain/"+img+"' alt='메인'><input type='hidden' id='pickerNo"+count+"' value='"+locationNo+"'><input type='hidden' id='pickerName"+count+"' value='"+locationName+"'></div>");
+								console.log(i);
+								console.log(count);
+								$("#handle-container").append("<div class='handle'><img id=picker"+count+" class='pickerImg' src='${path}/resources/upload/locationMain/"+img+"' alt='메인'><input type='hidden' id='pickerNo"+count+"' value='"+a+"'><input type='hidden' id='pickerName"+count+"' value='"+b+"'></div>");
 								
 								count++;
 								$("#picker0").parent().css("display","inline-block");

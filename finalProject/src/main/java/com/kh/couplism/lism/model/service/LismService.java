@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.couplism.lism.model.vo.Lism;
+import com.kh.couplism.lism.model.vo.LismDetail;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -18,4 +19,14 @@ public interface LismService {
 	int enrollPicker(Map param);
 	
 	Lism selectOneLism(Map param);
+	
+	Lism selectOneNo(Map param);
+	
+	List<LismDetail> selectDetail(int lismNo);
+	
+	int selectDetailCount(int no);
+	
+	LocationReservation getReservationOne(Map param);
+	
+	Location getLocationOne(Map param);
 }

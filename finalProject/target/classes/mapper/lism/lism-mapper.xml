@@ -20,4 +20,24 @@
 	<select id="selectOneLism" parameterType="map" resultType="lism">
 		SELECT * FROM LISM WHERE LISMTITLE=#{title} AND CREATOR=#{creator}
 	</select>
+	
+	<select id="selectOneNo" parameterType="map" resultType="lism">
+		SELECT * FROM LISM WHERE LISMNO=#{lismNo}
+	</select>
+	
+	<select id="selectDetail" parameterType="_int" resultType="lismDetail">
+		SELECT * FROM LISMDETAIL WHERE LISMNO=#{lismNo} ORDER BY SETTIME ASC
+	</select>
+	
+	<select id="selectDetailCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM LISMDETAIL WHERE LISMNO=#{no}
+	</select>
+	
+	<select id="getReservationOne" parameterType="map" resultType="reser">
+		SELECT * FROM LOCATION_RESERVATION WHERE REPLACE(SUBSTR(DAY,1,10),'/','-')=#{date} AND ID=#{id} AND TIME=#{time}
+	</select>
+	
+	<select id="getLocationOne" parameterType="map" resultType="location">
+		SELECT * FROM LOCATION WHERE LOCATIONNO=#{no}
+	</select>
 </mapper>

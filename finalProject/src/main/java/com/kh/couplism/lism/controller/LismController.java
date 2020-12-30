@@ -1,6 +1,7 @@
 package com.kh.couplism.lism.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.kh.couplism.lism.model.service.LismService;
 import com.kh.couplism.lism.model.vo.Lism;
+import com.kh.couplism.lism.model.vo.LismDetail;
 import com.kh.couplism.location.model.service.LocationService;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationMain;
@@ -73,6 +75,48 @@ public class LismController {
 		
 		return mv;
 	}
+	@RequestMapping("/lism/detail")
+	public ModelAndView lismDetail(ModelAndView mv,@RequestParam Map param) {
+		
+		mv.addObject("logoPath","/resources/lism/lism-detail.jpg");
+		mv.addObject("titleHan","코스로 보는 추억");
+		mv.addObject("titleEng","Detail your Lism");
+		mv.addObject("borderSize","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		Lism lism=service.selectOneNo(param);
+		
+		mv.addObject("lism",lism);
+		
+		System.out.println(lism);
+		
+		
+		int count=service.selectDetailCount(lism.getLismNo());
+		
+		mv.addObject("count",count);
+		
+		
+		mv.setViewName("lism/detail");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/lism/detailList")
+	@ResponseBody
+	public void lismDetailList(@RequestParam Map param,HttpServletRequest req,HttpServletResponse res) throws JsonIOException, IOException {
+		req.setCharacterEncoding("utf-8");
+		res.setCharacterEncoding("utf-8");
+		
+		int lismNo=Integer.parseInt(String.valueOf(param.get("lismNo")));
+		
+		List<LismDetail> list=service.selectDetail(lismNo);
+		System.out.println(list);
+		
+		new Gson().toJson(list,res.getWriter());
+	}
+	
 	@RequestMapping("/lism/createEnd")
 	public ModelAndView createEnd(ModelAndView mv,@RequestParam Map param) {
 		//lism
@@ -169,5 +213,33 @@ public class LismController {
 		
 		new Gson().toJson(list,resp.getWriter());
 	}
+	
+	@RequestMapping("/lism/getReservationOne")
+	@ResponseBody
+	public void getReservationOne(HttpServletRequest req,HttpServletResponse res,@RequestParam Map param) throws JsonIOException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		
+		System.out.println(param.get("date"));
+		System.out.println(param.get("id"));
+		System.out.println(param.get("time"));
+		LocationReservation lr=service.getReservationOne(param);
+		System.out.println(lr);
+		
+		new Gson().toJson(lr,res.getWriter());
+	}
+	
+	@RequestMapping("/lism/getLocationOne")
+	@ResponseBody
+	public void getLocationOne(HttpServletRequest req,HttpServletResponse res,@RequestParam Map param) throws JsonIOException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		
+		Location loc=service.getLocationOne(param);
+		
+		new Gson().toJson(loc,res.getWriter());
+	}
+	
+	
 	
 }

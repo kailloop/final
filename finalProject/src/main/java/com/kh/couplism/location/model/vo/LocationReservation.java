@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class LocationReservation {
 
 	private int no;
-	private int locationNo;
+	private int location_No;
 	private String id;
 	private String name;
 	private String time;

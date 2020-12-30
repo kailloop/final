@@ -533,6 +533,119 @@
 			</div>
 		</div>
 	</div>
+	<style>
+		#lism-container{
+			position:relative;
+			width:100%;
+			height:100%;
+			z-index:0;
+		}
+		#lism-close{
+			position:absolute;
+			font-size:42px;
+			transition:1s;
+			z-index:1;
+			cursor:pointer;
+			left:435px;
+		}
+		#lism-close:hover{
+			transform:rotate(360deg);
+		}
+		#lism-img{
+			position:relative;
+			width:60%;
+			height:45%;
+			left:0px;
+			top:0px;
+		}
+		#lism-img > img{
+			border:1px lighrgray solid;
+			box-shadow:3px 3px 5px lightgray;
+			transition:0.3s;
+		}
+		#lism-img> img:hover{
+			transform:scale(1.05);
+		}
+		#lism-content{
+			position:relative;
+			float:right;
+			width:38%;
+			height:32%;
+			text-align:right;
+			top:-36.5%;
+		}
+		#lism-content-detail{
+			width:100%;
+			height:10px;
+			color:black;
+		}
+		.lism-detail{
+			color:black;
+			width:100%;
+			height:10px;
+			font-size:20px;
+			font-family: 'Hi Melody', cursive;
+		}
+		#lism-content-all{
+			position:relative;
+			width:100%;
+			height:50%;
+			top:30px;
+			border:2px lightgray solid;
+			box-shadow:3px 3px 5px lightgray;
+			text-align:center;
+		}
+		#lism-title{
+			position:relative;
+			color:black;
+			font-size:42px;
+		}
+	</style>
+	<div id="lismModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<i id="lism-close" class="fas fa-times" aria-hidden="true"></i>
+					<div id="lism-container">
+						<div id="lism-img"></div>
+						<div id="lism-content">
+							<table id="lism-content-detail">
+								<tr class="lism-detail">
+									<td>예약한 인원 수</td>
+								</tr>
+								<tr class="lism-detail">
+									<td><label id="lism-person"></label></td>
+								</tr>
+								<tr class="lism-detail">
+									<td>예약 시간</td>
+								</tr>
+								<tr class="lism-detail">
+									<td><label id="lism-time"></label></td>
+								</tr>
+								<tr class="lism-detail">
+									<td>여행지 가격</td>
+								</tr>
+								<tr class="lism-detail">
+									<td><label id="lism-price"></label></td>
+								</tr>
+							</table>
+						</div>
+						<div id="lism-content-all">
+							<label id="lism-title"></label>
+						</div>
+					</div>
+					<div></div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$("#lism-close").click(function(e){
+			$("#lismModal").modal("hide");
+		});
+	</script>
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 		{

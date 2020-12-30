@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.couplism.lism.model.vo.Lism;
+import com.kh.couplism.lism.model.vo.LismDetail;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -20,4 +21,14 @@ public interface LismDao {
 	int enrollPicker(SqlSession session,Map param);
 	
 	Lism selectOneLism(SqlSession session,Map param);
+	
+	Lism selectOneNo(SqlSession session,Map param);
+	
+	List<LismDetail> selectDetail(SqlSession session,int lismNo);
+	
+	int selectDetailCount(SqlSession session,int no);
+	
+	LocationReservation getReservationOne(SqlSession session,Map param);
+	
+	Location getLocationOne(SqlSession session,Map param);
 }

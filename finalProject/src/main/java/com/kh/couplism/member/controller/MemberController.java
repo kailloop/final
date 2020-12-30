@@ -78,7 +78,6 @@ public class MemberController {
 				if(partner==null) {
 					path="redirect:/";
 					m.addAttribute("logginedMember",user);
-					//session.setAttribute("logginedMember", user);
 				}else {
 					path="redirect:/";
 					System.out.println(partner);

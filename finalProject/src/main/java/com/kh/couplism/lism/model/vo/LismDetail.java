@@ -9,5 +9,5 @@ public class LismDetail {
 	private int lismNo;
 	private int locationNo;
 	private String name;
-	private Date setTime;
+	private String setTime;
 }

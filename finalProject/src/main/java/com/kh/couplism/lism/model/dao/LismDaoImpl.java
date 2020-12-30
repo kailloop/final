@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.couplism.lism.model.vo.Lism;
+import com.kh.couplism.lism.model.vo.LismDetail;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -42,6 +43,45 @@ public class LismDaoImpl implements LismDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("lism.selectOneLism",param);
 	}
+
+	@Override
+	public Lism selectOneNo(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("lism.selectOneNo",param);
+	}
+	
+	@Override
+	public List<LismDetail> selectDetail(SqlSession session, int lismNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("lism.selectDetail",lismNo);
+	}
+
+	@Override
+	public int selectDetailCount(SqlSession session, int no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("lism.selectDetailCount",no);
+	}
+
+	@Override
+	public LocationReservation getReservationOne(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("lism.getReservationOne",param);
+	}
+
+	@Override
+	public Location getLocationOne(SqlSession session, Map param) {
+		// TODO Auto-generated method stub
+		return session.selectOne("lism.getLocationOne",param);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
