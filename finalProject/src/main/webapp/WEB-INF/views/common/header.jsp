@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- 로그인 API -->
@@ -295,7 +296,7 @@
 				<%-- <button onclick="location.replace('${path}/enrollLocation')">여행지만들기</button> --%>
 				
 				<div id="mypage" class="circle">
-	
+				<input type="hidden" id="id" name="id" value=<c:out value="${logginedMember.id }"/>>
 		        
            		<!--관리자  -->
 		        <c:if test="${logginedMember!=null }">

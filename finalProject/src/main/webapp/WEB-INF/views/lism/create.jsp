@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <style>
 	section{
-		height:1200px;
+		height:1300px;
 		text-align:center;
 	}
 	#page-title{
@@ -190,13 +190,48 @@
 	.focus-select{
 		width:10%;
 		font-size:42px;
+		z-index:1;
 	}
-	.focus-select > i{
-		
+	.focus-select-minus{
+		width:10%;
+		font-size:42px;
+		z-index:1;
+		color:red;
+	}
+	.minus{
+		z-index:3;
+		color:red;
+	}
+	#btns{
+		position:relative;
+		top:-400px;
+		width:400px;
+		height:auto;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	#createLism{
+		width:120px;
+		height:80px;
+		font-size:32px;
+		font-family: 'Hi Melody', cursive;
+		color:#F26A8D;
+		border:1px #F26A8D solid;
+		background-color:white;
+	}
+	#backLism{
+		float:right;
+		width:120px;
+		height:80px;
+		font-size:32px;
+		font-family: 'Hi Melody', cursive;
+		color:#050099;
+		border:1px #050099 solid;
+		background-color:white;
 	}
 </style>
 	<label id="page-title">Couplism</label>
-	<form action="/lism/createEnd" method="post" style="text-align:left;">
+	<form name="lismCreate" action="${path }/lism/createEnd" method="post" style="text-align:left;">
 		<label class="lism-name">제목</label>
 		<br/>
 		<div id="lism-title">
@@ -209,28 +244,28 @@
 		<br/>
 			<div id="focus-one" class="focus">
 			<img id="focus-one-back" src="${path }/resources/lism/focus-one.jpg" alt="배경">
-			<div id="focus-table">
-				<table id="picker-table">
-					<tr class="focus-title">
-						<td colspan="4">Time Picker</td>
-					</tr>
-					<tr class="focus-content">
-						<td id="location-name" class="location-content"><label>+버튼을 눌러주세요</label>
-							<input type="hidden" name="locationNo">
-						</td>
-						<td id="location-time" class="location-content"><label>예약 시간</label>
-						</td>
-						<td class="focus-select"><div class="plus" style="color:black;position:relative;margin-left:auto;margin-right:auto;cursor:pointer;"><i class="far fa-plus-square"></i></div></td>
-						<td class="focus-select"><div class="minus" style="color:black;position:relative;margin-left:auto;margin-right:auto;cursor:pointer;"><i class="far fa-minus-square"></i></div></td>
-					</tr>
+				<div id="focus-table">
+					<table id="picker-table">
+						<tr class="focus-title">
+							<td colspan="3">Time Picker</td>
+						</tr>
+						<tr class="focus-content">
+							<td id="location-name" class="location-content"><label>+버튼을 눌러주세요</label>
+								<input type="hidden" id="tdName" name="locationNo">
+								<input type="hidden" id="tdNo" name="locationNo">
+							</td>
+							<td id="location-time" class="location-content"><label>예약 시간</label>
+								<input type="hidden" id="tdTime" name="reservationNo">
+							</td>
+							<td class="focus-select"><div class="plus" style="color:black;position:relative;margin-left:auto;margin-right:auto;cursor:pointer;"><i class="far fa-plus-square"></i></div></td>
+							<!-- <td class="focus-select"><div class="minus" style="color:black;position:relative;margin-left:auto;margin-right:auto;cursor:pointer;"><i class="far fa-minus-square"></i></div></td> -->
+						</tr>
+					</table>
+					<input type="hidden" id="lism-table" name="lismTable">
+					<input type="hidden" id="creator" name="creator">
 					
-				</table>
+				</div>
 			</div>
-			
-			
-			
-			<label>${logginedMember.id }</label>
-		</div>
 		<div id="focus-two" class="focus">
 				<label id="angle-left" class="slideFont">〈</label>
 				<label id="angle-right" class="slideFont">〉</label>
@@ -242,19 +277,87 @@
 		<div id="focus-three" style="text-align:center;font-size:72px;">
 			<i id="plus"class="far fa-plus-square"></i>
 		</div>
+		<div id="btns">
+			<input id="createLism" type="button" value="만들기">
+			<input id="backLism" type="button" value="뒤로가기" onclick="location.replace('${path}/moveLism')">
+		</div>
 	</form>
 	<script>
+		$("#createLism").click(function(){
+			var title=$("#title").val();
+			var date=$("#lism-date").val();
+			var creator=$("#id").val();
+			$("#creator").val(creator);
+			if(title==""){
+				alert("Lism의 제목을 적어주세요");
+				return;
+			}
+			if(date==""){
+				alert("Lism의 해당 날짜를 정해주세요");
+				return;
+			}
+			if(creator==""){
+				alert("로그인 해주세요");
+				return;
+			}
+			$("form[name=lismCreate]").submit();
+		});
+		$("#createLism").hover(function(){
+			$("#createLism").css("color","white");
+			$("#createLism").css("background-color","#F26A8D");
+		},function(){
+			$("#createLism").css("color","#F26A8D");
+			$("#createLism").css("background-color","white");
+		});
+		$("#backLism").hover(function(){
+			$("#backLism").css("color","white");
+			$("#backLism").css("background-color","#050099");
+		},function(){
+			$("#backLism").css("color","#050099");
+			$("#backLism").css("background-color","white");
+		});
+		
+		var tdNo;
+		$(document).on('click','.minus',function(e){
+			remove(e);
+		});
+		function remove(e){
+			console.log($(e.target).parent('.minus').children('input').val());
+			tdNo=$(e.target).parent('.minus').children('input').val();
+			$(e.target).parent().parent().parent().remove('tr');
+			$("input").remove("#contentName"+(tdNo));
+			$("input").remove("#contentTime"+(tdNo));
+			$("input").remove("#contentNo"+(tdNo));
+		}
+		$(".focus-select-minus").click(function(){
+			console.log("확인");
+			
+		});
+		$("#minust").click(function(){
+			console.log("확인");
+		});
+		var check=0;
+		var table=0;
+		$('.plus').click(function(){
+			var name=$("#tdName").val();
+			var time=$("#tdTime").val();
+			var no=$("#tdNo").val();
+			if(check==1){
+				$("#picker-table").append("<tr class='focus-content'><td class='location-content'>"+name+"</td><td class='location-content'>"+time+"</td><td class='focus-select-minus'><div class='minus' style='color:red;position:relative;margin-left:auto;margin-right:auto;cursor:pointer;'><input type='hidden' class='picker-td' value='"+table+"'><i class='far fa-minus-square'></i></div></td></tr>");
+				$("#picker-table").append("<input type='hidden' id='contentName"+table+"' name='contentName"+table+"'value='"+name+"'>");
+				$("#picker-table").append("<input type='hidden' id='contentTime"+table+"' name='contentTime"+table+"'value='"+time+"'>");
+				$("#picker-table").append("<input type='hidden' id='contentNo"+table+"' name='contentNo"+table+"'value='"+no+"'>");
+				$("#lism-table").val(table);
+				table++;
+			}else{
+				alert("여행지를 선택해주세요");
+			}
+		})
 		$(".plus").hover(function(){
 			$(".plus").css("transition","0.3s");
 			$(".plus").css("color","lime");
 		},function(){
 			$(".plus").css("color","black");
-		});
-		$(".minus").hover(function(){
-			$(".minus").css("transition","0.3s");
-			$(".minus").css("color","red");
-		},function(){
-			$(".minus").css("color","black");
 		});
 		$(function(){
 			$("#angle-left").css("cursor","default");
@@ -294,15 +397,16 @@
 			}
 		});
 		$("#focus-three").click(function(e){
-			var value=$("#pickerNo"+count).val();
-			$.ajax({
-				url:"${path}/lism/getLocationMain",
-				data:{"parseData":value},
-				dataType:"html",
-				success:data=>{
-					//
-				}
-			})
+			console.log(movement);
+			var name=$("#pickerName"+movement).val();
+			var no=$("#pickerNo"+movement).val();
+			var time=$("#reserTime"+movement).val();
+			$("#location-name").children('label').text("장소 이름 : "+name)
+			$("#location-time").children('label').text("예약시간 : "+time);
+			$("#tdNo").val(no);
+			$("#tdName").val(name);
+			$("#tdTime").val(time);
+			check=1;
 		});
 		$("#focus-three").hover(function(e){
 			$("#focus-three").css("color","#F26A8D");
@@ -312,34 +416,60 @@
 	</script>
 	<script>
 		function selectDate(){
+			console.log()
 			$.ajax({
 				url:"${path}/lism/selectDate",
-				data:{"lismDate":$("#lism-date").val()},
+				data:{"lismDate":$("#lism-date").val(),
+						"id":$("#id").val()},
 				dataType:"html",
 				success:data=>{
 					var parseData = JSON.parse(data);
 					console.log(parseData);
 					limit=parseData.length-1;
+					$.ajax({
+						url:"${path}/lism/getReservationNo",
+						data:{"lismDate":$("#lism-date").val(),
+							"id":$("#id").val()},
+						dataType:"html",
+						success:data=>{
+							$("input").remove('.reser');
+							var reser = JSON.parse(data);
+							console.log(reser);
+							for(var r=0;r<reser.length;r++){
+								console.log(reser[r]);
+								console.log(reser[r].no);
+								
+								$("#handle-container").append("<input class='reser' type='hidden' id='reserNo"+r+"' value='"+reser[r].no+"'>");
+								$("#handle-container").append("<input class='reser' type='hidden' id='reserTime"+r+"' value='"+reser[r].time+"'>");
+							}
+							/* $("#handle-container").append("<input type='hidden' id='reservationNo"+i+"' name='reservationNo"+i+"' value=''"); */
+						}
+					});
 					for(var i=0;i<parseData.length;i++){
 						var locationNo=parseData[i].locationNo;
+						var locationName=parseData[i].locationName;
+						console.log(locationName);
 						var count=0;
+						console.log("확인"+i);
 						var img;
 						$("div").remove(".handle");
 						
 						$.ajax({
 							url:"${path}/lism/getLocationMain",
-							data:{"parseData":parseData[i].locationNo},
+							data:{"parseData":locationNo},
 							dataType:"html",
 							success:data=>{
 								img=data;
 								var a="";
-								var b="<input type='hidden' id='pickerNo"+i+"' value='"+locationNo+"'>";
+								var b="<input type='hidden' id='pickerName"+i+"' value='"+locationName+"'>";
 								console.log(img);
-								$("#handle-container").append("<div class='handle'><img id=picker"+count+" class='pickerImg' src='${path}/resources/upload/locationMain/"+img+"' alt='메인'><input type='hidden' id='pickerNo"+count+"' value='"+locationNo+"'></div>");
+								$("#handle-container").append("<div class='handle'><img id=picker"+count+" class='pickerImg' src='${path}/resources/upload/locationMain/"+img+"' alt='메인'><input type='hidden' id='pickerNo"+count+"' value='"+locationNo+"'><input type='hidden' id='pickerName"+count+"' value='"+locationName+"'></div>");
+								
 								count++;
 								$("#picker0").parent().css("display","inline-block");
 							}
 						});
+						
 						
 						console.log(parseData[i]);
 					}

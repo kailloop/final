@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class Lism {
 	private int lismNo;
+	private String lismTitle;
 	private String creator;
 	private int LikeCount;
 	private String openStatus;

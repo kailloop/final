@@ -128,7 +128,6 @@
 	#lism-list{
 		position:relative;
 		top:-500px;
-		border:1px red solid;
 	}
 	.pic-content{
 		font-family: 'Hi Melody', cursive;
@@ -177,13 +176,14 @@
 		overflow:hidden;
 		background-color:black;
 		opacity:0.7;
+		transition:0.3s;
+		user-select:none;
 	}
 	#back-path-img {
 		position:relative;
 		height:1400px;
 		transition:0.25s;
 		top:-200px;
-		background-color:transparent;
 		filter:grayscale(60%);
 	}
 	#second-page{
@@ -193,6 +193,14 @@
 		border:1px red solid;
 		left:-7%;
 		top:2500px;
+	}
+	#createLism{
+		position:absolute;
+		font-family: 'Hi Melody', cursive;
+		font-size:72px;
+		color:black;
+		left:38%;
+		top:200px;
 	}
 </style>
 	<div id="my-container">
@@ -232,6 +240,7 @@
 	</div>
 	<div id="back-path">
 		<img id="back-path-img" class="picture" src="${path }/resources/lism/lism-path.png">
+		<label for="back-path" id="createLism">나만의 Lism 만들기</label>
 	</div>
 	<div id="second-page">
 		
@@ -239,6 +248,20 @@
 	
 	
 <script>
+	$("#back-path").click(function(e){
+		location.replace('${path}/lism/create');
+	});
+	$("#back-path").hover(function(e){
+		$("#back-path").css("opacity","1");
+		$("#back-path").css("transform","scale(1.10)");
+		$("#back-path").css("cursor","pointer");
+		$("#createLism").css("cursor","pointer");
+	},function(){
+		$("#back-path").css("opacity","0.7");
+		$("#back-path").css("transform","scale(1.0)");
+		$("#back-path").css("cursor","default");
+		$("#createLism").css("cursor","default");
+	})
 	var move=1;
 	$(window).scroll(function(){
 		var height=$(document).scrollTop();

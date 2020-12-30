@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="lism">
-	<select id="selectDate" parameterType="string" resultType="location">
-		SELECT L.locationno, L.locationtype, L.locationtitle, L.locationcreator, L.locationcontent, L.locationphone, L.locationaddress, L.locationstatus, L.view_count, L.locationname FROM LOCATION_RESERVATION LR JOIN LOCATION L ON LR.location_no=L.locationno WHERE REPLACE(SUBSTR(DAY,1,10),'/','-')=#{date}
+	<select id="selectDate" parameterType="map" resultType="location">
+		SELECT L.locationno, L.locationtype, L.locationtitle, L.locationcreator, L.locationcontent, L.locationphone, L.locationaddress, L.locationstatus, L.view_count, L.locationname FROM LOCATION_RESERVATION LR JOIN LOCATION L ON LR.location_no=L.locationno WHERE REPLACE(SUBSTR(DAY,1,10),'/','-')=#{lismDate} AND LR.ID=#{id}
+	</select>
+	
+	<select id="getReservationNo" parameterType="map" resultType="reser">
+		SELECT * FROM LOCATION_RESERVATION WHERE REPLACE(SUBSTR(DAY,1,10),'/','-')=#{lismDate} AND ID=#{id}
+	</select>
+	
+	<insert id="createEnd" parameterType="map">
+		INSERT INTO LISM VALUES(SEQ_LISM_NO.NEXTVAL,#{title},#{creator},default,default,sysdate,#{lismDate})
+	</insert>
+	
+	<insert id="enrollPicker" parameterType="map">
+		INSERT INTO LISMDETAIL VALUES(#{lismNo},#{no},#{name},#{time})
+	</insert>
+	
+	<select id="selectOneLism" parameterType="map" resultType="lism">
+		SELECT * FROM LISM WHERE LISMTITLE=#{title} AND CREATOR=#{creator}
 	</select>
 </mapper>
