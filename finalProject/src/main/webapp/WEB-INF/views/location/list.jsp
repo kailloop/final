@@ -140,8 +140,8 @@
 		
 		<!--돌아가기 버튼  -->
 		<div id="backDiv">
-			<button class="btn btn-info">지역다시선택</button>
-			<button class="btn btn-info">카테고리다시선택</button>
+			<button class="btn btn-info" onclick="location.replace('${path}/moveLocation')">지역다시선택</button>
+			<button class="btn btn-info" onclick="location.replace('${path}/moveLocation/category?address=${address }')">카테고리다시선택</button>
 		</div>
 		
 		

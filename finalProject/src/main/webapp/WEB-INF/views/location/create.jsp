@@ -248,12 +248,12 @@ function loadAddress() {
 					<td class="td-create"><label>타입</label></td>
 					<td><select id="locationType-one" onchange="selectType()"
 						style="width: 30%; height: 40px;">
-							<option value="N">영업점 주 테마를 정해주세요</option>
-							<option value="S">숙박</option>
-							<option value="L">명소</option>
-							<option value="F">음식</option>
-							<option value="A">스포츠/레저</option>
-							<option value="SH">가게</option>
+							<option value="n">영업점 주 테마를 정해주세요</option>
+							<option value="s">숙박</option>
+							<option value="l">명소</option>
+							<option value="f">음식</option>
+							<option value="a">스포츠/레저</option>
+							<option value="sh">가게</option>
 					</select> <select id="locationType-two" style="width: 30%; height: 40px;" onchange="selectTypeTwo()">
 							<option class="typeTwo" onchange="selectTypeTwo();" value="N">영업점 세부 테마를 정해주세요</option>
 					</select> <input type="hidden" id="locationType" name="locationType">
