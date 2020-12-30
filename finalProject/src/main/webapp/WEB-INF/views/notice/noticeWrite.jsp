@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/logo.jsp"/>
 <script type="text/javascript" src="${path }/resources/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="${path }/resources/ckeditor/contents.css">
-	<div class="container" style="background: red; margin-top:100px;">
+	<div class="container" style=" margin-top:100px;">
 		<form action="${path }/notice/writeEnd" method="post" enctype="multipart/form-data">
 			<input type="text" name="noticeTitle" placeholder="제목" style="width: 100%;">
 			<div id="div-container-file">
@@ -30,7 +30,7 @@
             </div>
         </div>
 			<input type="hidden" name="userId" value="${logginedMember.id}">
-			<button class="float-right" type="submit">작성</button>
+			<button class="float-right btn btn-outline-secondary" type="submit">작성</button>
 		</form>
 		
 	</div>

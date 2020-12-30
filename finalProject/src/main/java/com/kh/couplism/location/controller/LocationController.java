@@ -307,8 +307,8 @@ public class LocationController {
 	}
 
 	@RequestMapping("location/createEnd")
-	public ModelAndView createLocationEnd(ModelAndView mv, MultipartFile mainFile, String[] locationPrice,
-			Location location, HttpServletRequest request) {
+	public void createLocationEnd( MultipartFile mainFile, String[] locationPrice,
+			Location location, HttpServletRequest request,HttpServletResponse resp) throws IOException {
 		logger.debug(
 				"=============================================LocationCreate=============================================");
 
@@ -479,8 +479,7 @@ public class LocationController {
 		logger.debug("mainFile : " + mainFile.getOriginalFilename());
 		logger.debug(
 				"========================================================================================================");
-		mv = location("","","",0,"",mv,request);
-		return mv;
+		resp.sendRedirect(request.getContextPath()+"/location/locationView?locationNo="+location.getLocationNo()+"&id="+location.getLocationCreator());
 	}
 
 	@RequestMapping("/location/checks")
@@ -984,7 +983,7 @@ public class LocationController {
 		
 		
 		logger.debug("==========================================================================================================================");
-		resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+		resp.sendRedirect(request.getContextPath()+"/location/locationView?locationNo="+location.getLocationNo()+"&id="+location.getLocationCreator());
 		
 	}
 	
@@ -1256,7 +1255,7 @@ public class LocationController {
 			int resultPrice = service.insertLocationPrice(price);
 			logger.debug("locationPrice 등록결과 : " + resultPrice);
 		}
-		resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+		resp.sendRedirect(request.getContextPath()+"/location/locationView?locationNo="+location.getLocationNo()+"&id="+location.getLocationCreator());
 		logger.debug("==================================================================================================================================");
 	}
 	
@@ -1360,7 +1359,7 @@ public class LocationController {
 		
 		//2. 로케이션 메인 처리하기
 		
-				resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+				resp.sendRedirect(request.getContextPath()+"/location/locationView?locationNo="+location.getLocationNo()+"&id="+location.getLocationCreator());
 		logger.debug("==================================================================================================================================");
 	}
 	

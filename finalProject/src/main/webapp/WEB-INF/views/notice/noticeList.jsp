@@ -153,7 +153,7 @@ td{
                     <c:out value="${pageBar }" escapeXml="false" />
                 </ul>
             </nav>
-		<c:if test="${logginedMember!=null }"><c:if test="${logginedMember.id eq 'cccc'}"><button type="button" onclick="noticeWrite()">글쓰기</button></c:if></c:if>
+		<c:if test="${logginedMember!=null }"><c:if test="${logginedMember.id eq 'cccc'}"><button class="btn btn-outline-dark" type="button" onclick="noticeWrite()">글쓰기</button></c:if></c:if>
 		</div>
 		</div>
 <script>
