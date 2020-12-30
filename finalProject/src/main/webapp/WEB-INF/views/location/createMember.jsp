@@ -28,7 +28,7 @@
 }
 
 section {
-	height: 3200px;
+	height: 1500px;
 }
 
 section table {
@@ -226,14 +226,16 @@ function loadAddress() {
     }).open();
 }
 </script>
-<img id="reservation-img" src="${path }/resources/images/frame.jpg">
+<img id="reservation-img" src="${path }/resources/images/white.jpg">
 <div id="create" style="background-color: transparent; ">
+	<p style="text-align: center; font-size: 30px;">Create Your Shop</p>
 	<form id="createForm" action="${path }/location/createMemberEnd" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="locationCreator"
 			value="${logginedMember.id}">
 		<table>
 			<tbody>
+				<tr style="border-top: 3px gray solid;"><td colspan="2"><br></td></tr>
 				<tr>
 					<td class="td-create"><label>제목</label></td>
 					<td><input class="location-input" type="text"
@@ -277,7 +279,7 @@ function loadAddress() {
 					<td class="td-create"
 						style="border-bottom: 3px gray solid; height: 100px;"><label>전화번호</label><br />
 					</td>
-					<td><input style="width: 10%;" class="location-input"
+					<td><input style="width: 30%;" class="location-input"
 						type="text" name="locationPhone" place-holder="000-0000-0000">
 				</tr>
 				<tr>
@@ -328,10 +330,10 @@ function loadAddress() {
 				<tr>
 					<td colspan="2"><textarea name="locationContent" id="locationContent" style="resize: none;"></textarea></td>
 				</tr>
+				<tr><td colspan="2"><button class='float-right' type="button" onclick="submitForm();">작성</button></td></tr>
 			</tbody>
 		</table>
 		<div id="inputTypeHidden"></div>
-		<button type="button" onclick="submitForm();">전송</button>
 	</form>
 </div>
 <script>

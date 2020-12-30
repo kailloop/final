@@ -127,7 +127,7 @@
 		<!--검색  -->
 		<div id="searchDiv">
 			<input type="text" id="searchInput" placeholder="키워드를 검색해주세요" >
-			<button id="searchBtn" class="btn btn-outline-info"><i class="fas fa-search"></i>검색</button>
+			<button id="searchBtn" onclick="search();" class="btn btn-outline-info"><i class="fas fa-search"></i>검색</button>
 		</div>
 		
 		
@@ -282,9 +282,54 @@
 				<p onclick="address_onclick();" style="cursor:pointer; font-size:12px; text-align: right; padding-right: 10px; background:#F8F8F8; margin-top:41px;"><i style= "color: #b4b4b4;" class="fas fa-map-marker-alt"></i>${map.locationAddress}</p>
 			</div>
 		</c:forEach>
-		
-				
-				
+			<!-- 일반회원 -->
+		        <c:if test="${logginedMember!=null }">
+                    <c:if test="${naverLogin==null }">
+                        <c:if test="${kakaoLogin==null }">
+                            <c:if test="${partnerMember==null}">
+                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            </c:if>
+                       </c:if>
+                   </c:if>
+                </c:if>
+                
+                <!--제휴회원 -->
+                <c:if test="${logginedMember!=null }">
+                    <c:if test="${naverLogin==null }">
+                        <c:if test="${kakaoLogin==null }">
+                            <c:if test="${partnerMember !=null}">
+                            	<button onclick="location.replace('${path}/location/create')">글쓰기</button>
+                            </c:if>
+                        </c:if>
+                    </c:if>
+                </c:if>
+                
+                <!--네이버회원  -->
+                <c:if test="${logginedMember!=null }">
+                    <c:if test="${naverLogin!=null }">
+                        <c:if test="${kakaoLogin==null }">
+                            <c:if test="${partnerMember==null}">
+                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            </c:if>
+                        </c:if>
+                     </c:if>
+                </c:if>
+				<!--카카오회원  -->
+                <c:if test="${logginedMember!=null }"> 
+                    <c:if test="${naverLogin==null }">
+                        <c:if test="${kakaoLogin!=null }">
+                            <c:if test="${partnerMember==null}">
+                            	<button onclick="location.replace('${path}/location/createMember')">글쓰기</button>
+                            </c:if>
+                        </c:if>
+                    </c:if>
+                </c:if>
+                
+               
+                
+                
+		<c:if test=""><button onclick="">글쓰기</button></c:if>
+		<c:if test=""><button onclick="">글쓰기</button></c:if>
 		<!--div정리용 스타일 (무시)  -->
 		<style>
      		div.clearfixed::after{display:block;content:"";clear:both}
@@ -363,6 +408,12 @@
 		event.stopPropagation();
 		alert("주소클릭");
 	}
+ 	
+ 	function search(){
+ 		var keyword = $("#searchInput").val();
+ 		console.log(keyword);
+ 		location.replace("${path}/location?address=${address}&category=${category}&keyword="+keyword);
+ 	}
 </script>
 
 

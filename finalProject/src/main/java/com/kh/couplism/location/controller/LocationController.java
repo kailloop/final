@@ -802,8 +802,16 @@ public class LocationController {
 	}
 	
 	@RequestMapping("/location/createMember")
-	public String createMember() {
-		return "/location/createMember";
+	public ModelAndView createMember(ModelAndView mv) {
+		mv.addObject("logoPath", "resources/images/create-location.jpg");
+		mv.addObject("borderSize",
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		mv.addObject("titleHan", "내 상점 만들기");
+		mv.addObject("titleEng", "Create Your Shop");
+
+		return mv;
 	}
 	
 	@RequestMapping("/location/createMemberEnd")

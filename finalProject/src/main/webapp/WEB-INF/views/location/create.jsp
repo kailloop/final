@@ -24,7 +24,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
-	top: -95%;
+	top: -98%;
 }
 
 section {
@@ -226,14 +226,16 @@ function loadAddress() {
     }).open();
 }
 </script>
-<img id="reservation-img" src="${path }/resources/images/frame.jpg">
-<div id="create" style="background-color: transparent; ">
+<img id="reservation-img" src="${path }/resources/images/white.jpg">
+<div id="create" style="background-color: transparent;">
+	<p style="text-align: center; font-size: 30px;">Creat Your Shop</p>
 	<form id="createForm" action="${path }/location/createEnd" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="locationCreator"
 			value="${logginedMember.id}">
 		<table>
 			<tbody>
+				<tr style="border-top: 3px gray solid;"><td colspan="2"><br></td></tr>
 				<tr>
 					<td class="td-create"><label>제목</label></td>
 					<td><input class="location-input" type="text"
@@ -246,7 +248,7 @@ function loadAddress() {
 				</tr>
 				<tr>
 					<td class="td-create"><label>타입</label></td>
-					<td><select id="locationType-one" onchange="selectType()"
+					<td><select id="locationType-one" onchange="selectType();"
 						style="width: 30%; height: 40px;">
 							<option value="n">영업점 주 테마를 정해주세요</option>
 							<option value="s">숙박</option>
@@ -277,7 +279,7 @@ function loadAddress() {
 					<td class="td-create"
 						style="border-bottom: 3px gray solid; height: 100px;"><label>전화번호</label><br />
 					</td>
-					<td><input style="width: 10%;" class="location-input"
+					<td><input style="width: 30%;" class="location-input"
 						type="text" name="locationPhone" place-holder="000-0000-0000">
 				</tr>
 				<tr>
@@ -325,7 +327,7 @@ function loadAddress() {
 						});
 				}
 		</script>
-				<tr>
+				<tr style="border-bottom: 3px gray solid;">
 					<td colspan="2" style="text-align: center;">
 						<div id="reservation-container">
 							<div id="day-btns" style="z-index: 1;">
@@ -367,63 +369,66 @@ function loadAddress() {
 								<div id="reservaiton-Mon">
 									<table id="reservaiton-Mon-table">
 										<tr>
-											<td>월</td>
+											<td colspan="3">월</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Tue">
 									<table id="reservaiton-Tue-table">
 										<tr>
-											<td>화</td>
+											<td colspan="3">화</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Wen">
 									<table id="reservaiton-Wen-table">
 										<tr>
-											<td>수</td>
+											<td colspan="3">수</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Thu">
 									<table id="reservaiton-Thu-table">
 										<tr>
-											<td>목</td>
+											<td colspan="3">목</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Fri">
 									<table id="reservaiton-Fri-table">
 										<tr>
-											<td>금</td>
+											<td colspan="3">금</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Sat">
 									<table id="reservaiton-Sat-table">
 										<tr>
-											<td>토</td>
+											<td colspan="3">토</td>
 										</tr>
 									</table>
 								</div>
 								<div id="reservaiton-Sun">
 									<table id="reservaiton-Sun-table">
 										<tr>
-											<td>일</td>
+											<td colspan="3">일</td>
 										</tr>
 									</table>
 								</div>
 							</div>
 						</div>
+						<br>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="locationContent" id="locationContent" style="resize: none;"></textarea></td>
+					<td colspan="2"><br><textarea name="locationContent" id="locationContent" style="resize: none;"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button class="float-right" type="button" onclick="submitForm();">작성</button></td>
 				</tr>
 			</tbody>
 		</table>
 		<div id="inputTypeHidden"></div>
-		<button type="button" onclick="submitForm();">전송</button>
 	</form>
 </div>
 <script>
@@ -511,44 +516,51 @@ function loadAddress() {
 			
 		var filecount = 1;
 		function selectType(){
+			console.log("selectType실해안됌");
 			var typeVal=$("#locationType-one").val();
-			if(typeVal=="N"){
+			console.log(typeVal);
+			if(typeVal=="n"){
 				$("option").remove('.typeTwo');
 				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				return;
 			}
-			if(typeVal=="S"){
+			if(typeVal=="s"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>호텔</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>펜션</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>글램핑/캠핑</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>게스트하우스</option>");
 				return;
 			}
-			if(typeVal=="L"){
+			if(typeVal=="l"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>랜드마크</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>자연/공원</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>놀이동산</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>워터파크</option>");
 				return;
 			}
-			if(typeVal=="F"){
+			if(typeVal=="f"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>식당</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>카페</option>");
 				return;
 			}
-			if(typeVal=="A"){
+			if(typeVal=="a"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>스키/썰매</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>낚시</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>수상레저</option>");
 				$("#locationType-two").append("<option value='4' class='typeTwo'>바이크</option>");
 				return;
 			}
-			if(typeVal=="SH"){
+			if(typeVal=="sh"){
 				$("option").remove('.typeTwo');
+				$("#locationType-two").append("<option value='N' class='typeTwo'>영업점 서브 테마를 정해주세요</option>");
 				$("#locationType-two").append("<option value='1' class='typeTwo'>특산품가게</option>");
 				$("#locationType-two").append("<option value='2' class='typeTwo'>기념품가게</option>");
 				$("#locationType-two").append("<option value='3' class='typeTwo'>의류가게</option>");
