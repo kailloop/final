@@ -138,6 +138,17 @@ public class LocationDaoImpl implements LocationDao {
 		return session.delete("location.deleteLocationLocation",locationNo);
 	}
 
+	@Override
+	public int updateLocation(Location location, SqlSessionTemplate session) {
+		return session.update("location.updateLocation", location);
+	}
+
+	@Override
+	public int updateLocationMap(Map<String, Object> map, SqlSessionTemplate session) {
+		return session.update("location.updateLocationMap",map);
+	}
+
+	
 	
 	
 	

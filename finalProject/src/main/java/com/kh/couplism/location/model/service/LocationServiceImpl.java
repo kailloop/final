@@ -146,6 +146,16 @@ public class LocationServiceImpl implements LocationService {
 	public int deleteLocationLocation(int locationNo) {
 		return dao.deleteLocationLocation(locationNo,session);
 	}
+
+	@Override
+	public int updateLocation(Location location) {
+		return dao.updateLocation(location, session);
+	}
+
+	@Override
+	public int updateLocationMap(Map<String, Object> map) {
+		return dao.updateLocationMap(map,session);
+	}
 	
 	
 	

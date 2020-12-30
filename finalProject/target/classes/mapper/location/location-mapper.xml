@@ -208,5 +208,11 @@
 		DELETE FROM LOCATION
 		WHERE LOCATIONNO LIKE #{locationNo}
 	</delete>
-	
+	<update id="updateLocation" parameterType="com.kh.couplism.location.model.vo.Location">
+		UPDATE LOCATION
+		SET LOCATIONTITLE =  #{locationTitle}, LOCATIONCONTENT = #{locationContent},
+		LOCATIONADDRESS = #{locationAddress}, LOCATIONTYPE = #{locationType},
+		LOCATIONNAME = #{locationName},LOCATIONPHONE = #{locationPhone}
+		WHERE LOCATIONNO = #{locationNo}
+	</update>
 </mapper>

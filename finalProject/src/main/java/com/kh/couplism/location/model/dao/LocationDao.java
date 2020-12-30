@@ -39,4 +39,6 @@ public interface LocationDao {
 	public int deleteLocationReservation(int locationNo, SqlSessionTemplate session);
 	public int deleteLocationPrice(int locationNo, SqlSessionTemplate session);
 	public int deleteLocationLocation(int locationNo, SqlSessionTemplate session);
+	public int updateLocation(Location location,SqlSessionTemplate session);
+	public int updateLocationMap(Map<String,Object> map,SqlSessionTemplate session);
 }

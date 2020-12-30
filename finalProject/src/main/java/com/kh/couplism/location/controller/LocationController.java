@@ -1073,19 +1073,295 @@ public class LocationController {
 		logger.debug("locationNo : "+locationNo);
 		Location location = service.getLocation(locationNo);
 		logger.debug("location : "+location);
-		if(location.getLocationStatus()==1) {//파트너 회원일때  1.locationMain 2.locationPrice
+		if(location.getLocationStatus()==0) {//파트너 회원일때  1.locationMain 2.locationPrice
 			LocationMain lm = service.getLocationMain(locationNo);
 			List<LocationPrice> lpl = service.getLocationPrice(locationNo);
+			Map<String,String> map = new HashMap();
+			
+			String Mon="";
+			String Tue="";
+			String Wed="";
+			String Thu="";
+			String Fri="";
+			String Sat="";
+			String Sun="";
+			
+			for(LocationPrice lp : lpl) {
+				String timeReplace = lp.getPriceTime().replace(":", "");
+				String html = "<tr class='trClass'id='rTimes"+lp.getPriceDay()+timeReplace+"'>"
+						+ "<td><h1 class='timess'>"+lp.getPriceTime()+"</h1></td>"
+						+"<td class='"+lp.getPriceDay()+"'><input type='hidden' value='"+lp.getPriceTime()+"'><h1>"+lp.getPrice()+"</h1></td>"
+						+"<td><h1>"+lp.getPricePeople()+"</h1></td>"
+						+"<td><input type='hidden' name='locationPrice' value='"+lp.getPriceTime()+"/"+lp.getPriceDay()+"/"+lp.getPrice()+"/"+lp.getPricePeople()+"'></td>"
+						+"<td><button onclick='removePrice(event);' type='button'>제거</td>"
+						+"</tr>";
+				switch(lp.getPriceDay()) {
+				case"reservaiton-Mon": Mon+=html;break;
+				case"reservaiton-Tue": Tue+=html;break;
+				case"reservaiton-Wed": Wed+=html;break;
+				case"reservaiton-Thu": Thu+=html;break;
+				case"reservaiton-Fri": Fri+=html;break;
+				case"reservaiton-Sat": Sat+=html;break;
+				case"reservaiton-Sun": Sun+=html;break;
+				}
+			}
+			
+			map.put("Mon", Mon);
+			map.put("Tue", Tue);
+			map.put("Wed", Wed);
+			map.put("Thu", Thu);
+			map.put("Fri", Fri);
+			map.put("Sat", Sat);
+			map.put("Sun", Sun);
+			
+			logger.debug("map : "+map);
+			
+			
+			
+			
 			mv.addObject("locationMain",lm);
-			mv.addObject("locationPrice", lpl);
+			mv.addObject("locationPrice", map);
 			mv.setViewName("/location/modify");
+			mv.addObject("logoPath", "resources/images/create-location.jpg");
+			mv.addObject("borderSize",
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			mv.addObject("titleHan", "내 상점 만들기");
+			mv.addObject("titleEng", "Create Your Shop");
 		}else {//일반회원이 등록한 것 가져와야할것 1.locationMain 2.location
 			LocationMain lm = service.getLocationMain(locationNo);
 			mv.addObject("locationMain",lm);
 			mv.setViewName("/location/Mmodify");
+			mv.addObject("logoPath", "resources/images/create-location.jpg");
+			mv.addObject("borderSize",
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			mv.addObject("titleHan", "내 상점 만들기");
+			mv.addObject("titleEng", "Create Your Shop");
 		}
+		mv.addObject("location",location);
 		logger.debug("================================================================================================================================");
 		return mv;
+	}
+	
+	@RequestMapping("/location/modifyEnd")
+	public void modifyEnd(ModelAndView mv, MultipartFile mainFile, String[] locationPrice,Location location, HttpServletRequest request,HttpServletResponse resp) throws IOException {
+		logger.debug("============================================================ modifyEnd ===========================================================");
+		logger.debug("location"+location);
+		
+		//로케이션 컨텐트 불러와서 수정 
+		String noticeContent = location.getLocationContent();// LocationContent가져옴
+		logger.debug("notcieContent : "+location.getLocationContent());
+		String[] contentSplit = noticeContent.split("src=");// 경로로 스플릿함
+		logger.debug("contentSplit : "+contentSplit);
+		logger.debug("contentSplit.length : "+contentSplit.length);
+		List<String> imgPath = new ArrayList();
+		for(int i = 1; i<contentSplit.length; i++) {
+			logger.debug("contentSplit["+i+"] : "+contentSplit[i]);
+			logger.debug("for문 정상적으로 작동");
+			logger.debug("contentSplit replace : "+contentSplit[i].replace("\"", "\\|"));
+			String splitPatha = contentSplit[i].replace("\"", "\\|");
+			String[] splitPath = splitPatha.split("\\|");
+			logger.debug("splitPath[1] : "+splitPath[1]);
+			String[] pathArr = splitPath[1].replace("\\", "").split("/");
+			int lastIndex = pathArr.length-1;
+			imgPath.add(pathArr[lastIndex]);
+			logger.debug("pathArr[lastIndex] : "+pathArr[lastIndex]);
+		}
+		logger.debug("imgPath Size : "+imgPath.size());
+		logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
+		
+		//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+		
+		for(String path : imgPath) {
+			logger.debug("path : "+path);
+			File moveFile = new File(request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile")+"/"+path);
+			if(moveFile.exists()) {
+				logger.debug("moveFile.getName() : "+moveFile.getName());
+				String[] newFilePath = moveFile.getName().split("_");//newFilePath[2]으로 저장하면됨
+				logger.debug("newFilePath length : "+newFilePath.length);
+				logger.debug("newFilePath : "+newFilePath);
+				
+				File newFile = new File(request.getServletContext().getRealPath("/resources/upload/location")+"/"+newFilePath[1]);
+				boolean isMoved =moveFile.renameTo(newFile); logger.debug("파일 이동여부 : "+isMoved); 
+			}
+		}
+		logger.debug("userId : "+location.getLocationCreator());
+		File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile"));
+		File[] imgFileList = imgFile.listFiles();
+		logger.debug("imgFileList.length() : "+imgFileList.length);
+		for(File f : imgFileList) {//이로직 로그인할때도 돌려줘야함 !!@#!@#
+			String[] fileName = f.getName().split("_");
+			logger.debug("fileName[0] : "+fileName[0]);
+			logger.debug("fileName[1] : "+fileName[1]);
+			if(fileName[0].equals(location.getLocationCreator())) {
+				f.delete();
+				logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+			}
+		}
+		
+		//이제 변경된경로로 noticeContent안에 src수정
+		
+		String pathReplace = location.getLocationContent().replace("location-Write-ContentFile", "location").replace(location.getLocationCreator()+"_","");
+		logger.debug("변경된 noticeContent : "+pathReplace);
+		location.setLocationContent(pathReplace);
+		int result = service.updateLocation(location);
+		int locationMainResult = 0;
+		boolean check = mainFile!=null;
+		//mainFile에 null이 들어옴
+		logger.debug("isEmpty() : "+check);
+		if(mainFile!=null) {
+			logger.debug("mainFileSize : "+mainFile.getSize());
+			int resultdeleteLocationMain = service.deleteLocationMain(location.getLocationNo());
+			logger.debug("이전에 있던 locaitonMain 삭제 : "+resultdeleteLocationMain);
+			String saveDirMain = request.getServletContext().getRealPath("/resources/upload/locationMain");
+			logger.debug("locationMain file명 : " + mainFile.getOriginalFilename());
+			logger.debug("locationMain file Size : " + mainFile.getSize());
+			String originalFileName = mainFile.getOriginalFilename();
+			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+			int randomNum = (int) (Math.random() * 1000);
+			String renamedFileName = "Couplism-Location-Main-" + sdf.format(new Date(System.currentTimeMillis())) + "_"
+					+ randomNum + "." + ext;
+			logger.debug("변경된 파일이름 " + renamedFileName);
+			try {
+				mainFile.transferTo(new File(saveDirMain + "/" + renamedFileName));// 파일을 저장
+				logger.debug("파일 등록성공!");
+				// 파일을 db에 등록하는 로직작성
+				LocationMain lm = new LocationMain(location.getLocationNo(), mainFile.getOriginalFilename(),
+						renamedFileName);
+				logger.debug("LocationMain : " + lm);
+				locationMainResult = service.insertLocationMain(lm);
+				String fileCheck = "실패";
+				if (locationMainResult > 0) {
+					fileCheck = "성공";
+				}
+				logger.debug("파일 등록결과 LocationMain : " + fileCheck);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//로케이션 프라이스 전부 삭제
+		int resultDeleteLocationPrice = service.deleteLocationPrice(location.getLocationNo());
+		logger.debug("locationPrice 삭제 결과 : "+resultDeleteLocationPrice);
+		//로케이션 프라이스 새로 등록 
+		for (String s : locationPrice) {
+			String[] split = s.split("/");
+			LocationPrice price = new LocationPrice(location.getLocationNo(), split[0], split[1],
+					Integer.parseInt(split[2]), Integer.parseInt(split[3]));
+			logger.debug("locationPrice : " + price);
+			int resultPrice = service.insertLocationPrice(price);
+			logger.debug("locationPrice 등록결과 : " + resultPrice);
+		}
+		resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+		logger.debug("==================================================================================================================================");
+	}
+	
+	@RequestMapping("/location/Mmodify")
+	public void mModifyEnd(Location location, MultipartFile mainFile, HttpServletRequest request, HttpServletResponse resp) throws IOException {
+		logger.debug("============================================================ mModifyEnd ==========================================================");
+		//1. 로케이션 수정하기
+		logger.debug("location : "+location);//수정된 내용  --> 제목,타입,내용,전화번호,주소
+		Map<String,Object> map = new HashMap();
+		//로케이션 컨텐트 불러와서 수정 
+				String noticeContent = location.getLocationContent();// LocationContent가져옴
+				logger.debug("notcieContent : "+location.getLocationContent());
+				String[] contentSplit = noticeContent.split("src=");// 경로로 스플릿함
+				logger.debug("contentSplit : "+contentSplit);
+				logger.debug("contentSplit.length : "+contentSplit.length);
+				List<String> imgPath = new ArrayList();
+				for(int i = 1; i<contentSplit.length; i++) {
+					logger.debug("contentSplit["+i+"] : "+contentSplit[i]);
+					logger.debug("for문 정상적으로 작동");
+					logger.debug("contentSplit replace : "+contentSplit[i].replace("\"", "\\|"));
+					String splitPatha = contentSplit[i].replace("\"", "\\|");
+					String[] splitPath = splitPatha.split("\\|");
+					logger.debug("splitPath[1] : "+splitPath[1]);
+					String[] pathArr = splitPath[1].replace("\\", "").split("/");
+					int lastIndex = pathArr.length-1;
+					imgPath.add(pathArr[lastIndex]);
+					logger.debug("pathArr[lastIndex] : "+pathArr[lastIndex]);
+				}
+				logger.debug("imgPath Size : "+imgPath.size());
+				logger.debug("imgPath List : "+imgPath);//이미지파일의 경로를 받아옴 
+				
+				//imgPath에 파일들을 삭제하고 로케이션 폴더에 새로등록하는 로직 생성
+				
+				for(String path : imgPath) {
+					logger.debug("path : "+path);
+					File moveFile = new File(request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile")+"/"+path);
+					if(moveFile.exists()) {
+						logger.debug("moveFile.getName() : "+moveFile.getName());
+						String[] newFilePath = moveFile.getName().split("_");//newFilePath[2]으로 저장하면됨
+						logger.debug("newFilePath length : "+newFilePath.length);
+						logger.debug("newFilePath : "+newFilePath);
+						
+						File newFile = new File(request.getServletContext().getRealPath("/resources/upload/location")+"/"+newFilePath[1]);
+						boolean isMoved =moveFile.renameTo(newFile); logger.debug("파일 이동여부 : "+isMoved); 
+					}
+				}
+				logger.debug("userId : "+location.getLocationCreator());
+				File imgFile = new File(request.getServletContext().getRealPath("/resources/upload/location-Write-ContentFile"));
+				File[] imgFileList = imgFile.listFiles();
+				logger.debug("imgFileList.length() : "+imgFileList.length);
+				for(File f : imgFileList) {//이로직 로그인할때도 돌려줘야함 !!@#!@#
+					String[] fileName = f.getName().split("_");
+					logger.debug("fileName[0] : "+fileName[0]);
+					logger.debug("fileName[1] : "+fileName[1]);
+					if(fileName[0].equals(location.getLocationCreator())) {
+						f.delete();
+						logger.debug("사용자 명으로 된 location 임시 파일 삭제 완료!");
+					}
+				}
+				
+				//이제 변경된경로로 noticeContent안에 src수정
+				
+				String pathReplace = location.getLocationContent().replace("location-Write-ContentFile", "location").replace(location.getLocationCreator()+"_","");
+				logger.debug("변경된 noticeContent : "+pathReplace);
+				location.setLocationContent(pathReplace);				
+				int locationMainResult = service.updateLocation(location);
+				boolean check = mainFile!=null;
+				//mainFile에 null이 들어옴
+				logger.debug("isEmpty() : "+check);
+				if(mainFile!=null) {
+					logger.debug("mainFileSize : "+mainFile.getSize());
+					int resultdeleteLocationMain = service.deleteLocationMain(location.getLocationNo());
+					logger.debug("이전에 있던 locaitonMain 삭제 : "+resultdeleteLocationMain);
+					String saveDirMain = request.getServletContext().getRealPath("/resources/upload/locationMain");
+					logger.debug("locationMain file명 : " + mainFile.getOriginalFilename());
+					logger.debug("locationMain file Size : " + mainFile.getSize());
+					String originalFileName = mainFile.getOriginalFilename();
+					String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
+					int randomNum = (int) (Math.random() * 1000);
+					String renamedFileName = "Couplism-Location-Main-" + sdf.format(new Date(System.currentTimeMillis())) + "_"
+							+ randomNum + "." + ext;
+					logger.debug("변경된 파일이름 " + renamedFileName);
+					try {
+						mainFile.transferTo(new File(saveDirMain + "/" + renamedFileName));// 파일을 저장
+						logger.debug("파일 등록성공!");
+						// 파일을 db에 등록하는 로직작성
+						LocationMain lm = new LocationMain(location.getLocationNo(), mainFile.getOriginalFilename(),
+								renamedFileName);
+						logger.debug("LocationMain : " + lm);
+						locationMainResult = service.insertLocationMain(lm);
+						String fileCheck = "실패";
+						if (locationMainResult > 0) {
+							fileCheck = "성공";
+						}
+						logger.debug("파일 등록결과 LocationMain : " + fileCheck);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+		
+		//2. 로케이션 메인 처리하기
+		
+				resp.sendRedirect(request.getContextPath()+"/location?address=&category=");
+		logger.debug("==================================================================================================================================");
 	}
 	
 }

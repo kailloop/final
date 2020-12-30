@@ -352,9 +352,9 @@ function loadAddress() {
 									<tr>
 										<td style="text-align: center;"><input id="rTime" type="time">
 										</td>
-										<td><input id="rPrice" class="location-input" type="text"
+										<td><input id="rPrice" class="location-input" type="text"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 											name="add-price"></td>
-										<td><input id="rPeople" class="location-input" type="text"
+										<td><input id="rPeople" class="location-input" type="text"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 											name="add-people"></td>
 									</tr>
 								</table>
@@ -583,6 +583,7 @@ function loadAddress() {
 		}
 		$(function(){
 			$("#reservation-plus").click(function(){
+				
 				var day =  $('#show-div').val();
 				var dayArr = day.split("#");
 				var dayClass = '.'+dayArr[1];
@@ -591,6 +592,23 @@ function loadAddress() {
 				console.log(rTimeReplace);
 				var rPrice = $('#rPrice').val();
 				var rPeople = $('#rPeople').val();
+				if($("#rTimes"+dayArr[1]+rTimeReplace).length>0){
+					console.log("이미존재 ");
+					alert('해당요일에 해당시간은 이미 존재합니다. 등록을 원하시면 제거후 다시 등록해주십시오');
+					return;
+				}
+				if(rTime == ""){
+					alert('시간을 입력해 주세요 .');
+					return;
+				}
+				if(rPrice == ""){
+					alert('가격을 입력해 주세요 .');
+					return;
+				}
+				if(rPeople == ""){
+					alert('인원수를 입력해 주세요 .');
+					return;
+				}
 				$(day+'-table').append("<tr class='trClass' id='rTimes"+dayArr[1]+rTimeReplace+"' ><td><h1 class='timess'>"+rTime+"</h1></td><td class='"+dayArr[1]+"'>"+"<input type='hidden' value='"+rTime+"'>"+"<h1>"+rPrice+"</h1></td><td><h1>"+rPeople+"</h1></td><td><input type='hidden' name='locationPrice' value='"+rTime+"/"+dayArr[1]+"/"+rPrice+"/"+rPeople+"'></td><td><button onclick='removePrice(event);' type='button'>제거</button></td></tr>");
 				
 				//여기에 인풋 타입 히든 만드는 로직 작성

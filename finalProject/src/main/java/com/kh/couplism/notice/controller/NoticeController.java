@@ -559,7 +559,7 @@ public class NoticeController {
 		return mv;
 	}
 	@RequestMapping("/notice/modifyNoticeEnd")
-	public ModelAndView modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, String[] deleteFileName, Notice notice, HttpServletRequest request, HttpSession session){
+	public void modifyNoticeEnd(ModelAndView mv, List<MultipartFile> noticeFile, String[] deleteFileName, Notice notice, HttpServletRequest request, HttpServletResponse resp, HttpSession session) throws IOException{
 		logger.debug("--------------------------------------------------modifyNoticeEnd--------------------------------------------------------");
 		logger.debug("Notiec : "+notice);
 		
@@ -679,13 +679,7 @@ public class NoticeController {
 		}
 		
 		
-		mv.setViewName("/notice/noticeList");
-		mv.addObject("titleHan","공지사항");
-		mv.addObject("titleEng","Notice");
-		mv.addObject("logoPath","resources/images/notice.jpg");
-		mv.addObject("borderSize","&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
-		logger.debug("-------------------------------------------------------------------------------------------------------------------------");
-		return mv;
+		resp.sendRedirect(request.getContextPath()+"/notice/noticeList");
 	}
 	
 	@RequestMapping("checkCk")

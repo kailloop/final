@@ -39,5 +39,7 @@ public interface LocationService {
 	public int deleteLocationReservation(int locationNo);
 	public int deleteLocationPrice(int locationNo);
 	public int deleteLocationLocation(int locationNo);
+	public int updateLocation(Location location);
+	public int updateLocationMap(Map<String,Object> map);
 	
 }
