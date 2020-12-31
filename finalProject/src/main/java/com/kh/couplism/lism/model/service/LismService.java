@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.couplism.lism.model.vo.Lism;
 import com.kh.couplism.lism.model.vo.LismDetail;
+import com.kh.couplism.lism.model.vo.LismLikeCount;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -29,4 +30,24 @@ public interface LismService {
 	LocationReservation getReservationOne(Map param);
 	
 	Location getLocationOne(Map param);
+	
+	LismLikeCount checkLike(Map param);
+	
+	int enrollLike(Map param);
+	
+	int updateLike(Map param);
+	
+	int selectLikeCount(Map param);
+	
+	int lismDelete(Map param);
+	
+	int lismPickerDelete(Map param);
+
+	void deletePickerOne(Map param);
+
+	int updateLismEnd(Map param);
+	
+	List<Lism> lismOpenList(int cPage,int numPerPage);
+
+	int lismOpenListCount();
 }

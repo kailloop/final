@@ -40,4 +40,44 @@
 	<select id="getLocationOne" parameterType="map" resultType="location">
 		SELECT * FROM LOCATION WHERE LOCATIONNO=#{no}
 	</select>
+	
+	<select id="checkLike" parameterType="map" resultType="like">
+		SELECT * FROM LISMLIKECOUNT WHERE PEOPLE=#{id} AND NO=#{lismNo}
+	</select>
+	
+	<insert id="enrollLike" parameterType="map">
+		INSERT INTO LISMLIKECOUNT VALUES(#{lismNo},#{id})
+	</insert>
+	
+	<update id="updateLike" parameterType="map">
+		UPDATE LISM SET LIKECOUNT=#{count}+1 WHERE LISMNO=#{lismNo}
+	</update>
+	
+	<select id="selectLikeCount" parameterType="map" resultType="_int">
+		SELECT LIKECOUNT FROM LISM WHERE LISMNO=#{lismNo}
+	</select>
+	
+	<delete id="lismDelete" parameterType="map">
+		DELETE FROM LISM WHERE LISMNO=#{lismNo}
+	</delete>
+	
+	<delete id="lismPickerDelete" parameterType="map">
+		DELETE FROM LISMDETAIL WHERE LISMNO=#{lismNo}
+	</delete>
+	
+	<delete id="deletePickerOne" parameterType="map">
+		DELETE FROM LISMDETAIL WHERE LISMNO=#{lismNo} AND LOCATIONNO=#{locationNo}
+	</delete>
+	
+	<update id="updateLismEnd" parameterType="map">
+		UPDATE LISM SET LISMTITLE=#{lismTitle},OPENSTATUS=#{openStatus},SETDATE=#{setDate} WHERE LISMNO=#{lismNo}
+	</update>
+	
+	
+	<select id="lismOpenList" resultType="lism">
+		SELECT * FROM LISM 
+	</select>
+	<select id="lismOpenListCount" resultType="_int">
+		SELECT COUNT(*) FROM LISM
+	</select>
 </mapper>

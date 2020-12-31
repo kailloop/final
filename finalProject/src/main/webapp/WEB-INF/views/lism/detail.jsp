@@ -86,6 +86,59 @@
 		.pick-img:hover{
 			transform:scale(1.05);
 		}
+		#like{
+			position:relative;
+			top:700px;
+			width:200px;
+			height:100px;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:center;
+		}
+		#like-icon{
+			font-size:64px;
+			color:#F26A8D;
+			transition:0.15s;
+		}
+		#like-btn{
+			position:relative;
+			margin-left:auto;
+			margin-right:auto;
+			width:70%;
+			height:100%;
+			transition:0.15s;
+			background-color:white;
+			border:3px #F26A8D solid;
+			outline:none;
+			
+		}
+		#manage-btns{
+			position:relative;
+			left:81%;
+			top:-220px;
+			width:200px;
+			height:70px;
+		}
+		#delete{
+			width:40%;
+			height:50%;
+			font-size:16px;
+			margin-right:10px;
+			border-radius:20px;
+		}
+		#update{
+			width:40%;
+			height:50%;
+			font-size:16px;
+			border-radius:20px;
+		}
+		#like-count{
+			position:relative;
+			left:45px;
+			top:8px;
+			z-index:3;
+			color:#F26A8D;
+		}
 	</style>
 	</br></br></br></br></br>
 	<label id="lismTitle"  name="lismTitle">${lism.lismTitle }</label>
@@ -113,9 +166,62 @@
 				<div class="picker">
 				</div>
 			</div>
-			
 		</div>
+		<c:if test="${logginedMember!=null }">
+			<div id="like"><label id="like-count">${lism.likeCount }</label><button id="like-btn" type="button"><i id="like-icon" class="far fa-hand-point-up"></i></button></div>
+		</c:if>
+		<c:if test="${logginedMember!=null }">
+			<c:if test="${logginedMember.id eq lism.creator }">
+				<div id="manage-btns">
+					<button id="update" class="btn btn-outline-info" type="button" onclick="updateLism();">수정</button>
+					<button id="delete" class="btn btn-outline-danger" type="button" onclick="deleteLism();">삭제</button>
+				</div>
+			</c:if>
+		</c:if>
 	</div>
+	<script>
+		function updateLism(){
+			location.replace('${path}/lism/update?lismNo='+${lism.lismNo});
+		}
+		function deleteLism(){
+			location.replace('${path}/lism/delete?lismNo='+${lism.lismNo});
+		}
+		function change(){
+			$.ajax({
+				url:"${path}/lism/selectLike",
+				data:{"id":$("#id").val(),
+					"lismNo":$("#lismNo").val()},
+				dataType:"html",
+				success:data=>{
+					console.log("추천수 : "+data);
+					$("#like-count").text(data);
+				}
+			});
+		};
+		$("#like-btn").click(function(e){
+			$.ajax({
+				url:"${path}/lism/Like",
+				data:{"id":$("#id").val(),
+					"lismNo":$("#lismNo").val()},
+				dataType:"html",
+				success:data=>{
+					alert(data);
+					change();
+				}
+			});
+		});
+		$("#like-btn").hover(function(){
+			$("#like-btn").css("border","none");
+			$("#like-btn").css("background-color","#F26A8D");
+			$("#like-icon").css("color","white");
+			$("#like-count").css("color","white");
+		},function(){
+			$("#like-btn").css("border","3px #F26A8D solid");
+			$("#like-btn").css("background-color","white");
+			$("#like-icon").css("color","#F26A8D");
+			$("#like-count").css("color","#F26A8D");
+		});
+	</script>
 <script>
 	var count=${count};
 	var click=0;
@@ -147,7 +253,12 @@
 						success:data=>{
 							var loc=JSON.parse(data);
 							console.log(loc);
-							$("#lism-title").text(loc.locationTitle);
+							$("#lism-location-title").text(loc.locationTitle);
+							$("#lism-phone").text(loc.locationPhone);
+							$("#lism-address").text(loc.locationAddress);
+							$("#lism-id").text(loc.locationCreator);
+							$("#lism-location-content").children('div').remove();
+							$("#lism-location-content").append("<div class='lism-contents'>"+loc.locationContent+"</div>");
 						}
 					});
 					$.ajax({
@@ -191,6 +302,30 @@
 							success:data=>{
 								var time=list[num].setTime;
 								var no=list[num].locationNo;
+								console.log(data);
+								
+								$('#pick'+(num+1)).append("<img class='pick-img' src='${path}/resources/upload/locationMain/"+data+"' alt='메인'>");
+								$('#pick'+(num+1)).append("<input type='hidden' class='locationNo' value='"+no+"'>");
+								$("#pick"+(num+1)).append("<input type='hidden' claas='reserTime' value='"+time+"'>");
+								$("#pick"+(num+1)).append("<label id='picker-time-1' class='picker-time'>"+time+"</label>");
+								num++;
+							}
+						});
+					}
+				}//if문끝
+			if(count>4){
+				var four=4;
+				for(var i=0;i<count;i++){
+					console.log(num);
+					console.log(i);
+					console.log(list[i].locationNo);
+						$.ajax({
+							url:"${path}/lism/getLocationMain",
+							data:{"parseData":list[i].locationNo},
+							dataType:"html",
+							success:data=>{
+								var time=list[num].setTime;
+								var no=list[num].locationNo;
 								
 								
 								$('#pick'+(num+1)).append("<img class='pick-img' src='${path}/resources/upload/locationMain/"+data+"' alt='메인'>");
@@ -201,7 +336,7 @@
 							}
 						});
 					}
-				}
+				}//if문끝
 			}
 		});
 	});

@@ -8,6 +8,7 @@
 		<typeAlias type="com.kh.couplism.member.model.vo.SNSMember" alias="SnsMember"/>
 		<typeAlias type="com.kh.couplism.lism.model.vo.Lism" alias="lism"/>
 		<typeAlias type="com.kh.couplism.lism.model.vo.LismDetail" alias="lismDetail"/>
+		<typeAlias type="com.kh.couplism.lism.model.vo.LismLikeCount" alias="like"/>
 		<typeAlias type="com.kh.couplism.anniversary.model.vo.Calendar" alias="calendar"/>
 		<typeAlias type="com.kh.couplism.location.model.vo.LocationReservation" alias="reser"/>
 		<typeAlias type="com.kh.couplism.location.model.vo.Location" alias="location"/>

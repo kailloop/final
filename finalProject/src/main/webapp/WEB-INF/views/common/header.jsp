@@ -584,7 +584,6 @@
 			width:100%;
 			height:10px;
 			font-size:20px;
-			font-family: 'Hi Melody', cursive;
 		}
 		#lism-content-all{
 			position:relative;
@@ -594,11 +593,29 @@
 			border:2px lightgray solid;
 			box-shadow:3px 3px 5px lightgray;
 			text-align:center;
+			border-radius:10px;
 		}
 		#lism-title{
 			position:relative;
 			color:black;
-			font-size:42px;
+			font-size:36px;
+			font-family: 'Hi Melody', cursive;
+		}
+		#lism-table-a{
+			position:relative;
+			width:100%;
+			height:80%;
+			top:-44.5%;
+			color:black;
+			font-size:24px;
+			font-family: 'Hi Melody', cursive;
+		}
+		.lism-table-title{
+			width:10%;
+		}
+		.lism-table-content{
+			width:90%;
+			text-align:left;
 		}
 	</style>
 	<div id="lismModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow:hidden;">
@@ -632,7 +649,26 @@
 							</table>
 						</div>
 						<div id="lism-content-all">
-							<label id="lism-title"></label>
+							<label id="lism-location-title"></label>
+							<table id="lism-table-a">
+								<tr>
+									<td class="lism-table-title"><i class="fas fa-map-marker-alt"></i></td>
+									<td class="lism-table-content"><label id="lism-address"></label></td>
+								</tr>
+								<tr>
+									<td class="lism-table-title"><i class="fas fa-phone-volume"></i></td>
+									<td class="lism-table-content"><label id="lism-phone"></label></td>
+								</tr>
+								<tr>
+									<td class="lism-table-title"><i class="fas fa-portrait"></i></td>
+									<td class="lism-table-content"><label id="lism-id"></label></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<div id="lism-location-content"></div>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 					<div></div>

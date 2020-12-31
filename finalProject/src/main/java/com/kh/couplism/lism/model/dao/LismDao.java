@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.couplism.lism.model.vo.Lism;
 import com.kh.couplism.lism.model.vo.LismDetail;
+import com.kh.couplism.lism.model.vo.LismLikeCount;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -31,4 +32,24 @@ public interface LismDao {
 	LocationReservation getReservationOne(SqlSession session,Map param);
 	
 	Location getLocationOne(SqlSession session,Map param);
+	
+	LismLikeCount checkLike(SqlSession session,Map param);
+	
+	int enrollLike(SqlSession session,Map param);
+	
+	int updateLike(SqlSession session,Map param);
+	
+	int selectLikeCount(SqlSession session,Map param);
+	
+	int lismDelete(SqlSession session,Map param);
+	
+	int lismPickerDelete(SqlSession session,Map param);
+	
+	void deletePickerOne(SqlSession session,Map param);
+	
+	int updateLismEnd(SqlSession session,Map param);
+	
+	List<Lism> lismOpenList(SqlSession session,int cPage,int numPerPage);
+
+	int lismOpenListCount(SqlSession session);
 }

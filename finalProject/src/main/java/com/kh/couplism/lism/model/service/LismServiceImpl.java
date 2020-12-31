@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.couplism.lism.model.dao.LismDao;
 import com.kh.couplism.lism.model.vo.Lism;
 import com.kh.couplism.lism.model.vo.LismDetail;
+import com.kh.couplism.lism.model.vo.LismLikeCount;
 import com.kh.couplism.location.model.vo.Location;
 import com.kh.couplism.location.model.vo.LocationReservation;
 
@@ -81,6 +82,85 @@ public class LismServiceImpl implements LismService{
 		// TODO Auto-generated method stub
 		return dao.getLocationOne(session,param);
 	}
+
+	@Override
+	public LismLikeCount checkLike(Map param) {
+		// TODO Auto-generated method stub
+		return dao.checkLike(session,param);
+	}
+
+	@Override
+	public int enrollLike(Map param) {
+		// TODO Auto-generated method stub
+		return dao.enrollLike(session,param);
+	}
+
+	@Override
+	public int updateLike(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateLike(session,param);
+	}
+
+	@Override
+	public int selectLikeCount(Map param) {
+		// TODO Auto-generated method stub
+		return dao.selectLikeCount(session,param);
+	}
+
+	@Override
+	public int lismDelete(Map param) {
+		// TODO Auto-generated method stub
+		return dao.lismDelete(session,param);
+	}
+
+	@Override
+	public int lismPickerDelete(Map param) {
+		// TODO Auto-generated method stub
+		return dao.lismPickerDelete(session,param);
+	}
+
+	@Override
+	public void deletePickerOne(Map param) {
+		// TODO Auto-generated method stub
+		dao.deletePickerOne(session,param);
+	}
+
+	@Override
+	public int updateLismEnd(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateLismEnd(session,param);
+	}
+
+	@Override
+	public List<Lism> lismOpenList(int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return dao.lismOpenList(session,cPage,numPerPage);
+	}
+
+	@Override
+	public int lismOpenListCount() {
+		// TODO Auto-generated method stub
+		return dao.lismOpenListCount(session);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

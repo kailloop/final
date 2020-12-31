@@ -188,11 +188,11 @@
 	}
 	#second-page{
 		position:relative;
-		width:112.5%;
+		width:100%;
 		height:400px;
-		border:1px red solid;
-		left:-7%;
+		left:0%;
 		top:2500px;
+		text-align:center;
 	}
 	#createLism{
 		position:absolute;
@@ -201,6 +201,14 @@
 		color:black;
 		left:38%;
 		top:200px;
+	}
+	#listTable{
+		position:relative;
+		margin-right:auto;
+		margin-left:auto;
+	}
+	tr{
+		cursor:pointer;
 	}
 </style>
 	<div id="my-container">
@@ -243,7 +251,25 @@
 		<label for="back-path" id="createLism">나만의 Lism 만들기</label>
 	</div>
 	<div id="second-page">
-		
+		<table id="listTable" width="100%;" class="table table-hover">
+            <tr class="danger">
+            	<th>Title</th>
+                <th>Creator</th>
+                <th>추천</th>
+                <th>Date</th>
+            </tr>
+            <c:forEach var="lism" items="${list }">
+            	<tr onclick="location.replace('${path}/lism/detail?lismNo=${lism.lismNo }')">
+            		<td><c:out value="${lism.lismTitle }"/></td>
+            		<td><c:out value="${lism.creator }"/></td>
+            		<td><c:out value="${lism.likeCount }"/></td>
+            		<td><c:out value="${lism.setDate }"/></td>
+            	</tr>
+            </c:forEach>
+        </table>
+		<div id="pageBar">
+            ${pageBar }
+        </div>
 	</div>
 	
 	
